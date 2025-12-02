@@ -1,12 +1,13 @@
 'use client';
 
 import { useEffect, useState } from 'react';
-import { supabase } from '@/lib/supabase';
+import { createClient } from '@/lib/supabase';
 import { questions } from '@/lib/questions';
 
 export default function AdminPage() {
   const [submissions, setSubmissions] = useState<any[]>([]);
   const [selectedSubmission, setSelectedSubmission] = useState<any>(null);
+  const supabase = createClient();
 
   useEffect(() => {
     const fetchSubmissions = async () => {
@@ -17,7 +18,7 @@ export default function AdminPage() {
       setSubmissions(data || []);
     };
     fetchSubmissions();
-  }, []);
+  }, [supabase]);
 
   const viewSubmission = (submission: any) => {
     setSelectedSubmission(submission);

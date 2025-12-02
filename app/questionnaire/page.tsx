@@ -2,8 +2,8 @@
 
 import { useEffect, useState } from 'react';
 import { useRouter } from 'next/navigation';
-import { supabase } from '@/lib/supabase';
-import { questions, Question } from '@/lib/questions';
+import { createClient } from '@/lib/supabase';
+import { questions } from '@/lib/questions';
 import QuestionInput from '@/components/QuestionInput';
 
 export default function QuestionnairePage() {
@@ -11,10 +11,15 @@ export default function QuestionnairePage() {
   const [answers, setAnswers] = useState<Record<string, string>>({});
   const [submissionId, setSubmissionId] = useState<string | null>(null);
   const [userId, setUserId] = useState<string | null>(null);
+  const [showMobileMenu, setShowMobileMenu] = useState(false);
   const router = useRouter();
+  const supabase = createClient();
+
+  // Get unique sections for sidebar
+  const sections = Array.from(new Set(questions.map(q => q.section)));
+  const currentSection = questions[currentIndex].section;
 
   useEffect(() => {
-    // Check auth + load existing submission
     const init = async () => {
       const { data: { user } } = await supabase.auth.getUser();
       if (!user) {
@@ -23,7 +28,6 @@ export default function QuestionnairePage() {
       }
       setUserId(user.id);
 
-      // Check for existing submission
       const { data: existingSubmission } = await supabase
         .from('submissions')
         .select('*')
@@ -34,7 +38,6 @@ export default function QuestionnairePage() {
         setSubmissionId(existingSubmission.id);
         setCurrentIndex(existingSubmission.current_question_index);
 
-        // Load existing answers
         const { data: existingAnswers } = await supabase
           .from('answers')
           .select('*')
@@ -46,7 +49,6 @@ export default function QuestionnairePage() {
         });
         setAnswers(answersMap);
       } else {
-        // Create new submission
         const { data: newSubmission } = await supabase
           .from('submissions')
           .insert({ user_id: user.id })
@@ -56,14 +58,11 @@ export default function QuestionnairePage() {
       }
     };
     init();
-  }, [router]);
+  }, [router, supabase]);
 
   const saveAnswer = async (questionId: string, value: string) => {
     if (!submissionId) return;
-
     setAnswers({ ...answers, [questionId]: value });
-
-    // Upsert answer
     await supabase.from('answers').upsert({
       submission_id: submissionId,
       question_id: questionId,
@@ -81,13 +80,11 @@ export default function QuestionnairePage() {
     if (currentIndex < questions.length - 1) {
       const newIndex = currentIndex + 1;
       setCurrentIndex(newIndex);
-      // Save progress
       await supabase
         .from('submissions')
         .update({ current_question_index: newIndex })
         .eq('id', submissionId);
     } else {
-      // Final submit
       await supabase
         .from('submissions')
         .update({ status: 'completed', submitted_at: new Date().toISOString() })
@@ -100,40 +97,79 @@ export default function QuestionnairePage() {
     if (currentIndex > 0) setCurrentIndex(currentIndex - 1);
   };
 
-  if (!submissionId) return <div>Loading...</div>;
+  if (!submissionId) {
+    return (
+      <div className="min-h-screen flex items-center justify-center">
+        <div className="text-lg">Loading...</div>
+      </div>
+    );
+  }
 
   const currentQuestion = questions[currentIndex];
+  const progress = ((currentIndex + 1) / questions.length) * 100;
 
   return (
-    <div className="min-h-screen flex flex-col items-center justify-center p-8">
-      <div className="w-full max-w-2xl">
-        <p className="text-sm text-gray-500 mb-4">
-          Question {currentIndex + 1} of {questions.length}
-        </p>
-        <h2 className="text-xl font-semibold mb-6">{currentQuestion.text}</h2>
-        
-        <QuestionInput
-          question={currentQuestion}
-          value={answers[currentQuestion.id] || ''}
-          onChange={(value) => saveAnswer(currentQuestion.id, value)}
-        />
+    <div className="min-h-screen bg-[#F5F5F5] md:flex">
+      {/* Sidebar - Desktop */}
+      <aside className="hidden md:block w-64 bg-white border-r border-[#E5E5E5] p-8">
+        <div className="mb-8">
+          <h3 className="text-sm font-semibold mb-2">Progress</h3>
+          <div className="w-full bg-gray-200 rounded-full h-2 mb-1">
+            <div
+              className="bg-black h-2 rounded-full transition-all duration-300"
+              style={{ width: `${progress}%` }}
+            />
+          </div>
+          <p className="text-xs text-[#999999]">{Math.round(progress)}%</p>
+        </div>
 
-        <div className="flex justify-between mt-8">
+        <nav className="space-y-2">
+          {sections.map((section, idx) => (
+            <div
+              key={section}
+              className={`text-sm p-2 rounded cursor-pointer transition-colors ${
+                section === currentSection
+                  ? 'bg-black text-white'
+                  : 'text-[#666666] hover:bg-gray-100'
+              }`}
+            >
+              {idx + 1}. {section}
+            </div>
+          ))}
+        </nav>
+      </aside>
+
+      {/* Main Content */}
+      <main className="flex-1 p-6 md:p-12 max-w-4xl mx-auto">
+        {/* Question Card */}
+        <div className="bg-white rounded-lg p-8 mb-6 shadow-sm">
+          <h2 className="text-lg md:text-xl font-heading font-semibold mb-6">
+            {currentQuestion.text}
+          </h2>
+          <QuestionInput
+            question={currentQuestion}
+            value={answers[currentQuestion.id] || ''}
+            onChange={(value) => saveAnswer(currentQuestion.id, value)}
+          />
+        </div>
+
+        {/* Navigation */}
+        <div className="flex justify-between">
           <button
             onClick={handlePrevious}
             disabled={currentIndex === 0}
-            className="px-6 py-2 bg-gray-300 rounded disabled:opacity-50"
+            className="px-6 py-3 border border-gray-300 text-gray-700 font-medium rounded-lg hover:bg-gray-50 disabled:opacity-50 disabled:cursor-not-allowed transition-colors"
           >
-            Previous
+            ← Previous
           </button>
           <button
             onClick={handleNext}
-            className="px-6 py-2 bg-blue-600 text-white rounded"
+            className="px-6 py-3 bg-black text-white font-semibold rounded-full hover:bg-gray-800 transition-colors"
           >
-            {currentIndex === questions.length - 1 ? 'Submit' : 'Next'}
+            {currentIndex === questions.length - 1 ? 'Submit →' : 'Next →'}
           </button>
         </div>
-      </div>
+      </main>
     </div>
   );
 }
