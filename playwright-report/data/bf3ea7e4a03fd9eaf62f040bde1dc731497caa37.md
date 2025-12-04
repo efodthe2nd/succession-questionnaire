@@ -1,0 +1,307 @@
+# Page snapshot
+
+```yaml
+- generic [ref=e1]:
+  - button "Open Next.js Dev Tools" [ref=e7] [cursor=pointer]:
+    - img [ref=e8]
+  - alert [ref=e11]
+  - generic [ref=e13]:
+    - complementary [ref=e14]:
+      - generic [ref=e17]:
+        - generic [ref=e18]:
+          - text: "01"
+          - paragraph [ref=e19]: Hours
+        - generic [ref=e20]: ":"
+        - generic [ref=e21]:
+          - text: "57"
+          - paragraph [ref=e22]: Minutes
+        - generic [ref=e23]: ":"
+        - generic [ref=e24]:
+          - text: "37"
+          - paragraph [ref=e25]: Seconds
+      - navigation [ref=e26]:
+        - button "1. First Things First" [ref=e27] [cursor=pointer]:
+          - generic [ref=e28]: 1. First Things First
+        - button "2. Guidance For Stewardship" [ref=e29] [cursor=pointer]:
+          - generic [ref=e30]: 2. Guidance For Stewardship
+        - button "3. My Beliefs and Values" [ref=e31] [cursor=pointer]:
+          - generic [ref=e32]: 3. My Beliefs and Values
+        - button "4. My Family" [ref=e33] [cursor=pointer]:
+          - generic [ref=e34]: 4. My Family
+        - button "5. Pivotal Experiences In My Life" [ref=e35] [cursor=pointer]:
+          - generic [ref=e36]: 5. Pivotal Experiences In My Life
+        - button "6. My Legacy" [ref=e37] [cursor=pointer]:
+          - generic [ref=e38]: 6. My Legacy
+        - button "7. Final Thoughts" [ref=e39] [cursor=pointer]:
+          - generic [ref=e40]: 7. Final Thoughts
+        - button "8. Tone & Voice of Questionnaire" [ref=e41] [cursor=pointer]:
+          - img [ref=e42]
+          - generic [ref=e44]: 8. Tone & Voice of Questionnaire
+    - main [ref=e45]:
+      - generic [ref=e46]:
+        - heading "Tone & Voice of Questionnaire" [level=1] [ref=e47]
+        - generic [ref=e48]:
+          - button [ref=e49] [cursor=pointer]:
+            - img [ref=e50]
+          - button "Save" [ref=e52] [cursor=pointer]
+          - button "Previous" [ref=e53] [cursor=pointer]
+      - generic [ref=e56]:
+        - generic [ref=e57]:
+          - generic [ref=e58]:
+            - paragraph [ref=e59]: Overall Feel
+            - paragraph [ref=e60]: Overall Feel
+          - generic [ref=e61]:
+            - button "Select" [ref=e62] [cursor=pointer]:
+              - generic [ref=e63]: Select
+              - img [ref=e64]
+            - generic:
+              - generic:
+                - button "Warm and personal"
+                - button "Formal and dignified"
+                - button "Conversational and casual"
+                - button "Reflective and thoughtful"
+                - button "Inspirational and uplifting"
+        - generic [ref=e66]:
+          - generic [ref=e67]:
+            - paragraph [ref=e68]: Emotional Expression
+            - paragraph [ref=e69]: Emotional Expression
+          - generic [ref=e70]:
+            - button "Select" [ref=e71] [cursor=pointer]:
+              - generic [ref=e72]: Select
+              - img [ref=e73]
+            - generic:
+              - generic:
+                - button "Openly emotional"
+                - button "Balanced emotions"
+                - button "Reserved and understated"
+                - button "Stoic and matter-of-fact"
+        - generic [ref=e75]:
+          - generic [ref=e76]:
+            - paragraph [ref=e77]: Sentence Style
+            - paragraph [ref=e78]: Sentence Style
+          - generic [ref=e79]:
+            - button "Select" [ref=e80] [cursor=pointer]:
+              - generic [ref=e81]: Select
+              - img [ref=e82]
+            - generic:
+              - generic:
+                - button "Short and punchy"
+                - button "Long and flowing"
+                - button "Mixed variety"
+                - button "Simple and clear"
+        - generic [ref=e84]:
+          - generic [ref=e85]:
+            - paragraph [ref=e86]: Warmth Level
+            - paragraph [ref=e87]: Warmth Level
+          - generic [ref=e88]:
+            - button "Select" [ref=e89] [cursor=pointer]:
+              - generic [ref=e90]: Select
+              - img [ref=e91]
+            - generic:
+              - generic:
+                - button "Very warm and affectionate"
+                - button "Moderately warm"
+                - button "Neutral"
+                - button "Cool and professional"
+        - generic [ref=e93]:
+          - generic [ref=e94]:
+            - paragraph [ref=e95]: Formality Level
+            - paragraph [ref=e96]: Formality Level
+          - generic [ref=e97]:
+            - button "Select" [ref=e98] [cursor=pointer]:
+              - generic [ref=e99]: Select
+              - img [ref=e100]
+            - generic:
+              - generic:
+                - button "Very formal"
+                - button "Somewhat formal"
+                - button "Casual"
+                - button "Very casual"
+        - generic [ref=e102]:
+          - generic [ref=e103]:
+            - paragraph [ref=e104]: Directness
+            - paragraph [ref=e105]: Directness
+          - generic [ref=e106]:
+            - button "Select" [ref=e107] [cursor=pointer]:
+              - generic [ref=e108]: Select
+              - img [ref=e109]
+            - generic:
+              - generic:
+                - button "Very direct"
+                - button "Somewhat direct"
+                - button "Gentle and indirect"
+                - button "Balanced"
+        - generic [ref=e111]:
+          - generic [ref=e112]:
+            - paragraph [ref=e113]: Religious / Spiritual Presence
+            - paragraph [ref=e114]: Religious / Spiritual Presence
+          - generic [ref=e115]:
+            - button "Select" [ref=e116] [cursor=pointer]:
+              - generic [ref=e117]: Select
+              - img [ref=e118]
+            - generic:
+              - generic:
+                - button "Strong religious presence"
+                - button "Moderate spiritual references"
+                - button "Light spiritual undertones"
+                - button "Secular / No religious content"
+        - generic [ref=e120]:
+          - generic [ref=e121]:
+            - paragraph [ref=e122]: Do you want faith-based or spiritual language included in the letter?
+            - paragraph [ref=e123]: Faith-based Language
+          - generic [ref=e124]:
+            - button "Select" [ref=e125] [cursor=pointer]:
+              - generic [ref=e126]: Select
+              - img [ref=e127]
+            - generic:
+              - generic:
+                - button "Yes, include faith-based language"
+                - button "Only subtle references"
+                - button "No, keep it secular"
+        - generic [ref=e129]:
+          - generic [ref=e130]:
+            - paragraph [ref=e131]: "Optional: If you want references from a specific faith tradition (Christian, Jewish, Buddhist, etc.),"
+            - paragraph [ref=e132]: type it here. Leave blank if you want it neutral.
+          - textbox "Type Here!" [ref=e133]
+        - generic [ref=e134]:
+          - generic [ref=e135]:
+            - paragraph [ref=e136]: "Optional: How explicitly should that tradition be referenced?"
+            - paragraph [ref=e137]: Faith Reference Level
+          - generic [ref=e138]:
+            - button "Select" [ref=e139] [cursor=pointer]:
+              - generic [ref=e140]: Select
+              - img [ref=e141]
+            - generic:
+              - generic:
+                - button "Very explicitly"
+                - button "Moderately"
+                - button "Subtly"
+                - button "Not at all"
+        - generic [ref=e143]:
+          - generic [ref=e144]:
+            - paragraph [ref=e145]: Personal Disclosure
+            - paragraph [ref=e146]: Personal Disclosure
+          - generic [ref=e147]:
+            - button "Select" [ref=e148] [cursor=pointer]:
+              - generic [ref=e149]: Select
+              - img [ref=e150]
+            - generic:
+              - generic:
+                - button "Very open and revealing"
+                - button "Moderately personal"
+                - button "Private and reserved"
+                - button "Minimal personal details"
+        - generic [ref=e152]:
+          - generic [ref=e153]:
+            - paragraph [ref=e154]: Use of Figurative / Poetic Language
+            - paragraph [ref=e155]: Figurative Language
+          - generic [ref=e156]:
+            - button "Select" [ref=e157] [cursor=pointer]:
+              - generic [ref=e158]: Select
+              - img [ref=e159]
+            - generic:
+              - generic:
+                - button "Heavy use of metaphors"
+                - button "Occasional poetic phrases"
+                - button "Minimal figurative language"
+                - button "Straightforward prose only"
+        - generic [ref=e161]:
+          - generic [ref=e162]:
+            - paragraph [ref=e163]: Tone Toward the Recipient
+            - paragraph [ref=e164]: Tone Toward Recipient
+          - generic [ref=e165]:
+            - button "Select" [ref=e166] [cursor=pointer]:
+              - generic [ref=e167]: Select
+              - img [ref=e168]
+            - generic:
+              - generic:
+                - button "Encouraging and supportive"
+                - button "Instructive and guiding"
+                - button "Loving and tender"
+                - button "Respectful and formal"
+        - generic [ref=e170]:
+          - generic [ref=e171]:
+            - paragraph [ref=e172]: Pace & Density
+            - paragraph [ref=e173]: Pace & Density
+          - generic [ref=e174]:
+            - button "Select" [ref=e175] [cursor=pointer]:
+              - generic [ref=e176]: Select
+              - img [ref=e177]
+            - generic:
+              - generic:
+                - button "Fast-paced and energetic"
+                - button "Moderate and balanced"
+                - button "Slow and deliberate"
+                - button "Dense with information"
+        - generic [ref=e179]:
+          - generic [ref=e180]:
+            - paragraph [ref=e181]: Contractions (I'm / I'll / don't)
+            - paragraph [ref=e182]: Contractions
+          - generic [ref=e183]:
+            - button "Select" [ref=e184] [cursor=pointer]:
+              - generic [ref=e185]: Select
+              - img [ref=e186]
+            - generic:
+              - generic:
+                - button "Use contractions freely (I'm, I'll, don't)"
+                - button "Use some contractions"
+                - button "Avoid contractions (I am, I will, do not)"
+        - generic [ref=e188]:
+          - generic [ref=e189]:
+            - paragraph [ref=e190]: Avoided Tones
+            - paragraph [ref=e191]: Avoided Tones
+          - generic [ref=e192]:
+            - button "Select" [ref=e193] [cursor=pointer]:
+              - generic [ref=e194]: Select
+              - img [ref=e195]
+            - generic:
+              - generic:
+                - button "Avoid humor"
+                - button "Avoid sadness"
+                - button "Avoid preachiness"
+                - button "Avoid regret"
+                - button "No restrictions"
+        - generic [ref=e197]:
+          - generic [ref=e198]:
+            - paragraph [ref=e199]: Which font would you like to use?
+            - paragraph [ref=e200]: Font Choice
+          - generic [ref=e201]:
+            - button "Select" [ref=e202] [cursor=pointer]:
+              - generic [ref=e203]: Select
+              - img [ref=e204]
+            - generic:
+              - generic:
+                - button "Classic Serif (Times New Roman)"
+                - button "Modern Sans-Serif (Arial)"
+                - button "Elegant Script"
+                - button "Traditional Typewriter"
+                - button "Handwritten Style"
+      - button "Submit" [active] [ref=e207] [cursor=pointer]:
+        - text: Submit
+        - img [ref=e208]
+    - complementary [ref=e210]:
+      - generic [ref=e212]:
+        - generic [ref=e213]:
+          - paragraph [ref=e214]: "Title: Succession Story Questionaire"
+          - paragraph [ref=e215]: "Subtitle: A short guide to help you express your values, intentions, and legacy."
+          - generic [ref=e216]:
+            - paragraph [ref=e217]: Key experiences that shaped you (Textarea)
+            - paragraph [ref=e218]: Values that guide your decisions (Textarea)
+            - paragraph [ref=e219]: A memory or tradition you want preserved (Textarea)
+            - paragraph [ref=e220]: Key experiences that shaped you (Textarea)
+            - paragraph [ref=e221]: Values that guide your decisions (Textarea)
+        - button "Preview Soon" [disabled] [ref=e222]:
+          - img [ref=e223]
+          - text: Preview
+          - generic [ref=e226]: Soon
+      - button [ref=e228] [cursor=pointer]:
+        - img [ref=e229]
+    - contentinfo [ref=e232]:
+      - generic [ref=e233]: Succession Story
+      - link "Terms" [ref=e234] [cursor=pointer]:
+        - /url: "#"
+      - link "Policy" [ref=e235] [cursor=pointer]:
+        - /url: "#"
+      - link "Privacy" [ref=e236] [cursor=pointer]:
+        - /url: "#"
+```
