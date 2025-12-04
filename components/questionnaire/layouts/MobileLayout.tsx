@@ -22,6 +22,7 @@ interface MobileLayoutProps {
   onToggleDarkMode: () => void;
   onToggleProgressModal: () => void;
   onBack: () => void;
+  onAddStory?: (questionId: string) => void;
 }
 
 export default function MobileLayout({
@@ -40,6 +41,7 @@ export default function MobileLayout({
   onToggleDarkMode,
   onToggleProgressModal,
   onBack,
+  onAddStory,
 }: MobileLayoutProps) {
   return (
     <div className="lg:hidden flex flex-col min-h-screen">
@@ -70,6 +72,7 @@ export default function MobileLayout({
             answers={answers}
             onAnswerChange={onAnswerChange}
             isDarkMode={isDarkMode}
+            onAddStory={onAddStory}
           />
         </div>
       </div>

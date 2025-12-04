@@ -7,15 +7,27 @@ import DropdownInput from '../inputs/DropdownInput';
 import MultiselectInput from '../inputs/MultiselectInput';
 import VoiceInput from '../inputs/VoiceInput';
 import MultiDropdownInput from '../inputs/MultiDropdownInput';
+import StoryInput from '../inputs/StoryInput';
 
 interface QuestionInputProps {
   question: Question;
   value: string | string[];
   onChange: (value: string | string[]) => void;
   isDarkMode: boolean;
+  answers?: Record<string, string | string[]>;
+  onAddStory?: (questionId: string) => void;
+  onAnswerChange?: (questionId: string, value: string | string[]) => void;
 }
 
-export default function QuestionInput({ question, value, onChange, isDarkMode }: QuestionInputProps) {
+export default function QuestionInput({
+  question,
+  value,
+  onChange,
+  isDarkMode,
+  answers,
+  onAddStory,
+  onAnswerChange,
+}: QuestionInputProps) {
   switch (question.type) {
     case 'text':
       return (
@@ -74,6 +86,19 @@ export default function QuestionInput({ question, value, onChange, isDarkMode }:
           value={value as string}
           onChange={onChange as (value: string) => void}
           isDarkMode={isDarkMode}
+        />
+      );
+
+    case 'story':
+      return (
+        <StoryInput
+          question={question}
+          value={value as string}
+          onChange={onChange as (value: string) => void}
+          isDarkMode={isDarkMode}
+          answers={answers}
+          onAddStory={onAddStory}
+          onAnswerChange={onAnswerChange as (questionId: string, value: string) => void}
         />
       );
 

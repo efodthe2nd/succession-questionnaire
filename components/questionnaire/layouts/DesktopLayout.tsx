@@ -21,6 +21,7 @@ interface DesktopLayoutProps {
   onPrevious: () => void;
   onSave: () => void;
   onToggleDarkMode: () => void;
+  onAddStory?: (questionId: string) => void;
 }
 
 export default function DesktopLayout({
@@ -38,6 +39,7 @@ export default function DesktopLayout({
   onPrevious,
   onSave,
   onToggleDarkMode,
+  onAddStory,
 }: DesktopLayoutProps) {
   return (
     <div className="hidden lg:flex min-h-screen">
@@ -71,6 +73,7 @@ export default function DesktopLayout({
               answers={answers}
               onAnswerChange={onAnswerChange}
               isDarkMode={isDarkMode}
+              onAddStory={onAddStory}
             />
           </div>
         </div>

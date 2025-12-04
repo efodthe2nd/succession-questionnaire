@@ -8,9 +8,16 @@ interface QuestionListProps {
   answers: Record<string, string | string[]>;
   onAnswerChange: (questionId: string, value: string | string[]) => void;
   isDarkMode: boolean;
+  onAddStory?: (questionId: string) => void;
 }
 
-export default function QuestionList({ questions, answers, onAnswerChange, isDarkMode }: QuestionListProps) {
+export default function QuestionList({
+  questions,
+  answers,
+  onAnswerChange,
+  isDarkMode,
+  onAddStory,
+}: QuestionListProps) {
   return (
     <div className="space-y-8">
       {questions.map((question) => (
@@ -20,6 +27,9 @@ export default function QuestionList({ questions, answers, onAnswerChange, isDar
           value={answers[question.id] || (question.type === 'multiselect' ? [] : '')}
           onChange={(value) => onAnswerChange(question.id, value)}
           isDarkMode={isDarkMode}
+          answers={answers}
+          onAddStory={onAddStory}
+          onAnswerChange={onAnswerChange}
         />
       ))}
     </div>

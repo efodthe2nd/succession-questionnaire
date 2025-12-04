@@ -1,10 +1,11 @@
-export type QuestionType = 
-  | 'text' 
-  | 'textarea' 
-  | 'dropdown' 
-  | 'multiselect' 
+export type QuestionType =
+  | 'text'
+  | 'textarea'
+  | 'dropdown'
+  | 'multiselect'
   | 'voice'
-  | 'multi-dropdown';
+  | 'multi-dropdown'
+  | 'story';
 
 export interface Question {
   id: string;
@@ -20,6 +21,11 @@ export interface Question {
   maxLength?: number;
   helpText?: string;
   allowCustom?: boolean;
+  // Story-specific fields
+  subtitle?: string;
+  storyPrompts?: string[];
+  storyTitle?: string;
+  allowAddMore?: boolean;
 }
 
 export interface Section {
@@ -201,42 +207,44 @@ export const questions: Question[] = [
     section: 'My Beliefs and Values',
     sectionIndex: 3,
     text: 'Favorite stories',
-    label: 'Your Stories',
-    type: 'voice',
+    label: 'Favorite stories',
+    type: 'story',
     voiceEnabled: true,
     required: false,
     placeholder: 'Type Here!',
-    helpText: 'Stories untold tend to fade. Let\'s capture one now, while it\'s still vivid. This moment is the youngest you\'ll ever be again. What story do you want remembered? You don\'t need to write a novel. Just respond like you\'re talking to someone you love. Answer the first two that resonate with you.',
+    subtitle: 'Stories untold tend to fade. Let\'s capture one now, while it\'s still vivid.\n\nThis moment is the youngest you\'ll ever be again. What story do you want remembered? You don\'t need to write a novel. Just respond like you\'re talking to someone you love.\n\nAnswer the first two that resonate with you.',
+    storyTitle: 'Story 1',
+    storyPrompts: [
+      'What\'s a story you\'ve noticed you repeat a lot?',
+      'What did Sunday mornings smell like when you were growing up?',
+      'What\'s the best financial decision you ever made?',
+      'What song instantly takes you back to your childhood?',
+      'One thing I\'ve always wanted you to know about me is...',
+      'What was the kitchen like in the house where you spent most of your childhood?',
+    ],
+    allowAddMore: false,
   },
   {
-    id: 'q2_5',
+    id: 'q2_4b',
     section: 'My Beliefs and Values',
     sectionIndex: 3,
-    text: 'Which of these speak to you?',
-    label: 'Values That Resonate',
-    type: 'multiselect',
+    text: 'Story 2',
+    label: 'Story 2',
+    type: 'story',
+    voiceEnabled: true,
     required: false,
-    placeholder: 'Select all that apply',
-    options: [
-      'Kindness: Treat people gently.',
-      'Gratitude: Be thankful for small moments.',
-      'Patience: Good things take time.',
-      'Simplicity: Happiness doesn\'t come from things.',
-      'Humility: No one knows everything.',
-      'Faith: Belief in something larger guides life.',
-      'Integrity: Do what\'s right, even when hard.',
-      'Honesty: Speak truthfully, with compassion.',
-      'Family bonds: Relationships are treasures.',
-      'Forgiveness: Resentment weighs you down.',
-      'Loyalty: Stand by those you love.',
-      'Service: Give back to others in need.',
-      'Perseverance: Keep going when life gets hard.',
-      'Respect: Treat all with dignity.',
-      'Generosity: Share your blessings.',
-      'Hard work: Strong ethic builds character.',
-      'Hope: Believe in brighter days.',
-      'Love: Love deeply and express it freely.',
+    placeholder: 'Type Here!',
+    storyTitle: 'Story 2',
+    storyPrompts: [
+      'What\'s a tradition you hope your family never forgets?',
+      'What advice would you give someone starting their first real job?',
+      'People always ask me how I got rich and here\'s the real answer...',
+      'Have you ever been in a fist fight? What did you learn?',
+      'What do you remember about your first paycheck?',
+      'Who is the first person you called after the birth of your child?',
+      'Tell me about your first big win — in life, business, or love.',
     ],
+    allowAddMore: true,
   },
 
   // ============================================

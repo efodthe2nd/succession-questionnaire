@@ -178,6 +178,25 @@ export default function QuestionnairePage() {
     setShowProgressModal(!showProgressModal);
   };
 
+  const handleAddStory = (baseQuestionId: string) => {
+    // Find the next available index for additional stories
+    const prefix = `${baseQuestionId}_additional_`;
+    let nextIndex = 0;
+
+    Object.keys(answers).forEach((key) => {
+      if (key.startsWith(prefix)) {
+        const index = parseInt(key.replace(prefix, ''), 10);
+        if (!isNaN(index) && index >= nextIndex) {
+          nextIndex = index + 1;
+        }
+      }
+    });
+
+    // Create a new story entry with empty value
+    const newStoryId = `${prefix}${nextIndex}`;
+    saveAnswer(newStoryId, '');
+  };
+
   // Loading state
   if (isLoading) {
     return <LoadingScreen isDarkMode={isDarkMode} />;
@@ -205,6 +224,7 @@ export default function QuestionnairePage() {
         onPrevious={handlePrevious}
         onSave={handleSave}
         onToggleDarkMode={toggleDarkMode}
+        onAddStory={handleAddStory}
       />
 
       {/* Mobile Layout */}
@@ -224,6 +244,7 @@ export default function QuestionnairePage() {
         onToggleDarkMode={toggleDarkMode}
         onToggleProgressModal={toggleProgressModal}
         onBack={handleBack}
+        onAddStory={handleAddStory}
       />
     </div>
   );

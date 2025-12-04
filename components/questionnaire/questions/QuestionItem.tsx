@@ -8,9 +8,35 @@ interface QuestionItemProps {
   value: string | string[];
   onChange: (value: string | string[]) => void;
   isDarkMode: boolean;
+  answers?: Record<string, string | string[]>;
+  onAddStory?: (questionId: string) => void;
+  onAnswerChange?: (questionId: string, value: string | string[]) => void;
 }
 
-export default function QuestionItem({ question, value, onChange, isDarkMode }: QuestionItemProps) {
+export default function QuestionItem({
+  question,
+  value,
+  onChange,
+  isDarkMode,
+  answers,
+  onAddStory,
+  onAnswerChange,
+}: QuestionItemProps) {
+  // Story type handles its own headline rendering
+  if (question.type === 'story') {
+    return (
+      <QuestionInput
+        question={question}
+        value={value}
+        onChange={onChange}
+        isDarkMode={isDarkMode}
+        answers={answers}
+        onAddStory={onAddStory}
+        onAnswerChange={onAnswerChange}
+      />
+    );
+  }
+
   return (
     <div className="space-y-3">
       {/* Question text */}
