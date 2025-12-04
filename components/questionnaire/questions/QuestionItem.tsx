@@ -22,8 +22,8 @@ export default function QuestionItem({
   onAddStory,
   onAnswerChange,
 }: QuestionItemProps) {
-  // Story type handles its own headline rendering
-  if (question.type === 'story') {
+  // These types handle their own headline rendering
+  if (question.type === 'story' || question.type === 'child-section' || question.type === 'spouse-section') {
     return (
       <QuestionInput
         question={question}

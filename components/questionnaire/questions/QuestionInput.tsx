@@ -8,6 +8,8 @@ import MultiselectInput from '../inputs/MultiselectInput';
 import VoiceInput from '../inputs/VoiceInput';
 import MultiDropdownInput from '../inputs/MultiDropdownInput';
 import StoryInput from '../inputs/StoryInput';
+import ChildSectionInput from '../inputs/ChildSectionInput';
+import SpouseSectionInput from '../inputs/SpouseSectionInput';
 
 interface QuestionInputProps {
   question: Question;
@@ -99,6 +101,26 @@ export default function QuestionInput({
           answers={answers}
           onAddStory={onAddStory}
           onAnswerChange={onAnswerChange as (questionId: string, value: string) => void}
+        />
+      );
+
+    case 'child-section':
+      return (
+        <ChildSectionInput
+          question={question}
+          isDarkMode={isDarkMode}
+          answers={answers || {}}
+          onAnswerChange={onAnswerChange as (questionId: string, value: string | string[]) => void}
+        />
+      );
+
+    case 'spouse-section':
+      return (
+        <SpouseSectionInput
+          question={question}
+          isDarkMode={isDarkMode}
+          answers={answers || {}}
+          onAnswerChange={onAnswerChange as (questionId: string, value: string | string[]) => void}
         />
       );
 
