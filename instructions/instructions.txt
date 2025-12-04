@@ -1,0 +1,2 @@
+in instructions/images/guidance/ I have images from figma, containing the design and expected questions for the guidance and stewardship section, your job is to update this app's guidance and stewardship section to match the questions and text in the figma files.
+understand that we have already done the design correctly for the page, there is no need for any design modifications, all i need is text, questions, content should be same as figma screenshots.
