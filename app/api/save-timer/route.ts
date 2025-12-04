@@ -1,5 +1,5 @@
 // /app/api/save-timer/route.ts
-import { createClient } from '@/lib/supabase-server';
+import { createClient } from '@/lib/supabase';
 import { NextRequest, NextResponse } from 'next/server';
 
 export async function POST(request: NextRequest) {

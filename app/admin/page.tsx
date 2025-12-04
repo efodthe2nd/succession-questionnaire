@@ -34,7 +34,7 @@ export default function AdminPage() {
         {questions.map((q) => (
           <div key={q.id} className="mb-6 border-b pb-4">
             <p className="font-semibold">{q.text}</p>
-            <p className="text-gray-700">{answerMap.get(q.id) || '(No answer)'}</p>
+            <p className="text-gray-700">{String(answerMap.get(q.id) || '(No answer)')}</p>
           </div>
         ))}
       </div>
