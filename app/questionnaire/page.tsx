@@ -77,15 +77,19 @@ export default function QuestionnairePage() {
         });
         setAnswers(answersMap);
       } else {
-        const { data: newSubmission } = await supabase
+        const { data: newSubmission, error } = await supabase
           .from('submissions')
           .insert({
             user_id: user.id,
             current_section_index: 1,
-            time_remaining: INITIAL_TIME_SECONDS
+            time_remaining: INITIAL_TIME_SECONDS,
+            status: 'in_progress'
           })
           .select()
           .single();
+        if (error) {
+          console.error('Failed to create submission:', error.message, error.code, error.details, error.hint);
+        }
         setSubmissionId(newSubmission?.id);
       }
       setIsLoading(false);
@@ -107,11 +111,18 @@ export default function QuestionnairePage() {
     }
 
     const answerText = typeof value === 'string' ? value : JSON.stringify(value);
-    await supabase.from('answers').upsert({
-      submission_id: submissionId,
-      question_id: questionId,
-      answer_text: answerText,
-    });
+    const { error } = await supabase.from('answers').upsert(
+      {
+        submission_id: submissionId,
+        question_id: questionId,
+        answer_text: answerText,
+      },
+      { onConflict: 'submission_id,question_id' }
+    );
+
+    if (error) {
+      console.error('Failed to save answer:', error.message, error.code, error.details, error.hint);
+    }
   };
 
   const handleSave = async () => {
@@ -129,16 +140,27 @@ export default function QuestionnairePage() {
     if (currentSectionIndex < sections.length) {
       const newIndex = currentSectionIndex + 1;
       setCurrentSectionIndex(newIndex);
-      await supabase
+      const { error } = await supabase
         .from('submissions')
         .update({ current_section_index: newIndex, time_remaining: timeRemaining })
         .eq('id', submissionId);
+      if (error) {
+        console.error('Failed to update section:', error.message, error.code, error.details, error.hint);
+      }
       window.scrollTo({ top: 0, behavior: 'smooth' });
     } else {
-      await supabase
+      // Final submission
+      const { error } = await supabase
         .from('submissions')
         .update({ status: 'completed', submitted_at: new Date().toISOString() })
         .eq('id', submissionId);
+
+      if (error) {
+        console.error('Submission failed:', error.message, error.code, error.details, error.hint);
+        alert('Failed to submit. Please try again.');
+        return;
+      }
+
       router.push('/thank-you');
     }
   };

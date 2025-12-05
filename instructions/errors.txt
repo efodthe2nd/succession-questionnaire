@@ -1,12 +1,14 @@
-when i click my beliefs section, i get this error -
-Encountered two children with the same key, `Patient`. Keys should be unique so that components maintain their identity across updates. Non-unique keys may cause children to be duplicated and/or omitted — the behavior is unsupported and could change in a future version.
-components/questionnaire/inputs/MultiselectInput.tsx (90:15) @ <unknown>
+Console Error
 
 
-  88 |             const isSelected = currentValues.includes(option);
-  89 |             return (
-> 90 |               <button
-     |               ^
-  91 |                 key={option}
-  92 |                 type="button"
-  93 |                 onClick={() => handleToggleOption(option)}
+Failed to create submission: "Could not find the 'current_section_index' column of 'submissions' in the schema cache" "PGRST204" null null
+app/questionnaire/page.tsx (91:19) @ QuestionnairePage.useEffect.init
+
+
+  89 |           .single();
+  90 |         if (error) {
+> 91 |           console.error('Failed to create submission:', error.message, error.code, error.details, error.hint);
+     |                   ^
+  92 |         }
+  93 |         setSubmissionId(newSubmission?.id);
+  94 |       }

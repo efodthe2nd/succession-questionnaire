@@ -1,2 +1,5 @@
-in instructions/images/[input]/ I have images from figma, containing the design and expected questions for the [input] section, your job is to update this app's [input] section to match the questions and text in the figma files.
-understand that we have already done the design correctly for the page, there is no need for any design modifications, all i need is text, questions, content, subtitle the way it as arranged in the figma screenshots. ensure you start from [input]_1 image then [input]_2 image, then [input]_3 image and continue if more are seen, ensure you follow the flow of questions.
+The admin panel should have a login, so not just anyone can here.
+ 
+And in the modal that shows the whole letter(also admin side), it has an ugly white scrollbar that’s off brand, can we remove it, make the scroll-in, border radius all the edges, add box shadow to modal.
+There should be a button in the modal that’s also clickable when it’s not expanded to export this letter maybe in txt or pdf whatever works best.
+Right now if you clip expert all it just downloads an empty array and saves it in .json, fix this.
