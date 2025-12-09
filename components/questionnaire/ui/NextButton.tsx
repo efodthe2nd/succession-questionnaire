@@ -3,16 +3,22 @@ interface NextButtonProps {
   isLastSection: boolean;
   isDesktop: boolean;
   isDarkMode: boolean;
+  disabled?: boolean;
 }
 
-export default function NextButton({ onClick, isLastSection, isDesktop, isDarkMode }: NextButtonProps) {
+export default function NextButton({ onClick, isLastSection, isDesktop, isDarkMode, disabled = false }: NextButtonProps) {
   if (isDesktop) {
     // Desktop: Fixed button in bottom right
     return (
       <div className="fixed bottom-8 right-96 z-20">
         <button
           onClick={onClick}
-          className="px-8 py-3 rounded-full font-semibold flex items-center gap-2 transition-colors shadow-lg bg-black text-white hover:bg-gray-900"
+          disabled={disabled}
+          className={`px-8 py-3 rounded-full font-semibold flex items-center gap-2 transition-colors shadow-lg ${
+            disabled
+              ? 'bg-gray-600 text-gray-400 cursor-not-allowed'
+              : 'bg-black text-white hover:bg-gray-900'
+          }`}
         >
           {isLastSection ? 'Submit' : 'Next'}
           <svg className="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
@@ -28,10 +34,13 @@ export default function NextButton({ onClick, isLastSection, isDesktop, isDarkMo
     <div className="px-4 pb-6">
       <button
         onClick={onClick}
+        disabled={disabled}
         className={`w-full py-4 rounded-full font-semibold flex items-center justify-center gap-2 transition-colors ${
-          isDarkMode
-            ? 'bg-[#E8E4DC] text-black hover:bg-[#D8D4CC]'
-            : 'bg-black text-white hover:bg-gray-800'
+          disabled
+            ? 'bg-gray-600 text-gray-400 cursor-not-allowed'
+            : isDarkMode
+              ? 'bg-[#E8E4DC] text-black hover:bg-[#D8D4CC]'
+              : 'bg-black text-white hover:bg-gray-800'
         }`}
       >
         {isLastSection ? 'Submit' : 'Next'}

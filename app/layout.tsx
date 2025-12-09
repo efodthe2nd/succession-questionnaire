@@ -1,4 +1,5 @@
 import { Lora, Poppins } from 'next/font/google';
+import type { Metadata } from 'next';
 import './globals.css';
 
 const lora = Lora({
@@ -12,6 +13,14 @@ const poppins = Poppins({
   variable: '--font-poppins',
   weight: ['400', '500', '600'],
 });
+
+export const metadata: Metadata = {
+  title: 'Succession Questionnaire',
+  description: 'Create your legacy letter',
+  icons: {
+    icon: '/favicon.png',
+  },
+};
 
 export default function RootLayout({
   children,

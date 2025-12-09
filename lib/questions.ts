@@ -1307,3 +1307,71 @@ export const getQuestionsBySection = (sectionIndex: number): Question[] => {
 export const getSectionByIndex = (index: number): Section | undefined => {
   return sections.find(s => s.id === index);
 };
+
+// IDs of questions that are explicitly optional (user doesn't need to answer to proceed)
+// These include: secondary stories, child/spouse sections, optional fields marked in text
+const OPTIONAL_QUESTION_IDS = [
+  'q2_4b',              // Story 2 (secondary story)
+  'q3_children_section', // Children section (not everyone has children)
+  'q3_spouse_section',   // Spouse section (not everyone has a spouse)
+  'q5_8',               // Gift Story (voice/optional story)
+  'q8_9',               // Optional faith tradition text
+  'q8_10',              // Optional faith reference level
+];
+
+// Check if a question is optional
+export const isQuestionOptional = (question: Question): boolean => {
+  // Explicitly optional questions
+  if (OPTIONAL_QUESTION_IDS.includes(question.id)) {
+    return true;
+  }
+
+  // Story type questions with storyTitle containing "Story 2", "Story 3", etc. are optional
+  if (question.type === 'story' && question.storyTitle) {
+    const storyNum = question.storyTitle.match(/Story (\d+)/);
+    if (storyNum && parseInt(storyNum[1]) > 1) {
+      return true;
+    }
+  }
+
+  // Additional stories (dynamically added) are optional
+  if (question.id.includes('_additional_')) {
+    return true;
+  }
+
+  return false;
+};
+
+// Get required questions for a section (questions that must be answered to proceed)
+export const getRequiredQuestionsForSection = (sectionIndex: number): Question[] => {
+  return getQuestionsBySection(sectionIndex).filter(q => !isQuestionOptional(q));
+};
+
+// Check if all required questions in a section are answered
+export const isSectionComplete = (
+  sectionIndex: number,
+  answers: Record<string, string | string[]>
+): boolean => {
+  const requiredQuestions = getRequiredQuestionsForSection(sectionIndex);
+
+  return requiredQuestions.every(question => {
+    const answer = answers[question.id];
+
+    // Check if answer exists and is not empty
+    if (answer === undefined || answer === null) {
+      return false;
+    }
+
+    // Handle array answers (multiselect)
+    if (Array.isArray(answer)) {
+      return answer.length > 0;
+    }
+
+    // Handle string answers
+    if (typeof answer === 'string') {
+      return answer.trim() !== '';
+    }
+
+    return false;
+  });
+};
