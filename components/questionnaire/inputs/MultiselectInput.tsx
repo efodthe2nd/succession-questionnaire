@@ -12,6 +12,8 @@ interface MultiselectInputProps {
 
 export default function MultiselectInput({ question, value, onChange, isDarkMode }: MultiselectInputProps) {
   const [isOpen, setIsOpen] = useState(false);
+  const [customText, setCustomText] = useState('');
+  const [showCustomInput, setShowCustomInput] = useState(false);
   const dropdownRef = useRef<HTMLDivElement>(null);
 
   // Close dropdown when clicking outside
@@ -33,6 +35,17 @@ export default function MultiselectInput({ question, value, onChange, isDarkMode
 
   const currentValues = value || [];
 
+  // Check if any current values are custom (not in options)
+  const customValues = currentValues.filter(v => !question.options?.includes(v));
+
+  // Initialize custom input if there are custom values
+  useEffect(() => {
+    if (customValues.length > 0) {
+      setShowCustomInput(true);
+      setCustomText(customValues[0] || '');
+    }
+  }, []);
+
   const handleToggleOption = (option: string) => {
     const isSelected = currentValues.includes(option);
     if (isSelected) {
@@ -43,7 +56,29 @@ export default function MultiselectInput({ question, value, onChange, isDarkMode
   };
 
   const handleRemoveTag = (optionToRemove: string) => {
+    // If removing a custom value, also clear the custom input
+    if (!question.options?.includes(optionToRemove)) {
+      setCustomText('');
+    }
     onChange(currentValues.filter(v => v !== optionToRemove));
+  };
+
+  const handleCustomTextChange = (text: string) => {
+    if (text.length <= 140) {
+      // Remove the old custom value if it exists
+      const newValues = currentValues.filter(v => question.options?.includes(v));
+      setCustomText(text);
+      if (text.trim()) {
+        onChange([...newValues, text]);
+      } else {
+        onChange(newValues);
+      }
+    }
+  };
+
+  const handleSelectCustomOption = () => {
+    setShowCustomInput(true);
+    setIsOpen(false);
   };
 
   return (
@@ -81,9 +116,9 @@ export default function MultiselectInput({ question, value, onChange, isDarkMode
             ? 'bg-[#2a2a2a] border border-gray-700 shadow-lg shadow-black/30'
             : 'bg-white border border-gray-200 shadow-lg shadow-black/10'
         }`}
-        style={{ maxHeight: '200px' }}
+        style={{ maxHeight: '250px' }}
       >
-        <div className="overflow-y-auto max-h-[200px] py-1">
+        <div className="overflow-y-auto max-h-[250px] py-1">
           {question.options?.map((option) => {
             const isSelected = currentValues.includes(option);
             return (
@@ -116,6 +151,33 @@ export default function MultiselectInput({ question, value, onChange, isDarkMode
               </button>
             );
           })}
+          {/* Custom text option - always last */}
+          <button
+            type="button"
+            onClick={handleSelectCustomOption}
+            className={`w-full px-4 py-3 text-left flex items-center gap-3 transition-colors duration-150 border-t ${
+              showCustomInput
+                ? isDarkMode
+                  ? 'bg-[#B5A692]/20 text-[#B5A692] border-gray-700'
+                  : 'bg-[#B5A692]/20 text-[#8B7355] border-gray-200'
+                : isDarkMode
+                  ? 'text-[#B5A692] hover:bg-[#3a3a3a] border-gray-700'
+                  : 'text-[#8B7355] hover:bg-gray-100 border-gray-200'
+            }`}
+          >
+            <span className={`w-5 h-5 rounded border flex items-center justify-center transition-colors ${
+              showCustomInput && customText.trim()
+                ? 'bg-[#B5A692] border-[#B5A692]'
+                : isDarkMode ? 'border-gray-600' : 'border-gray-300'
+            }`}>
+              {showCustomInput && customText.trim() && (
+                <svg className="w-3 h-3 text-black" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                  <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={3} d="M5 13l4 4L19 7" />
+                </svg>
+              )}
+            </span>
+            Enter your own answer...
+          </button>
         </div>
       </div>
 
@@ -141,6 +203,27 @@ export default function MultiselectInput({ question, value, onChange, isDarkMode
               </button>
             </span>
           ))}
+        </div>
+      )}
+
+      {/* Custom text input field */}
+      {showCustomInput && (
+        <div className="mt-3">
+          <textarea
+            value={customText}
+            onChange={(e) => handleCustomTextChange(e.target.value)}
+            placeholder="Type your own answer (you can copy & paste from options above)"
+            maxLength={140}
+            rows={2}
+            className={`w-full px-4 py-3 rounded-xl transition-all duration-200 resize-none ${
+              isDarkMode
+                ? 'bg-[#2a2a2a] text-white border border-gray-700 hover:border-gray-600 placeholder-gray-500'
+                : 'bg-white text-black border border-gray-300 hover:border-gray-400 placeholder-gray-400'
+            } focus:outline-none focus:border-[#B5A692]`}
+          />
+          <div className={`text-xs mt-1 text-right ${isDarkMode ? 'text-gray-500' : 'text-gray-400'}`}>
+            {customText.length}/140 characters
+          </div>
         </div>
       )}
     </div>

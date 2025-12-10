@@ -2,7 +2,6 @@ import { Section, Question } from '@/lib/questions';
 import MobileHeader from '../headers/MobileHeader';
 import SectionIndicator from '../ui/SectionIndicator';
 import QuestionList from '../questions/QuestionList';
-import PreviewCard from '../ui/PreviewCard';
 import NextButton from '../ui/NextButton';
 import ProgressModal from '../ui/ProgressModal';
 
@@ -77,10 +76,7 @@ export default function MobileLayout({
         </div>
       </div>
 
-      {/* Preview Card */}
-      <div className="mx-4 mb-4">
-        <PreviewCard isDarkMode={isDarkMode} />
-      </div>
+      {/* Preview Card - temporarily removed until AI is connected */}
 
       {/* Next Button */}
       <NextButton

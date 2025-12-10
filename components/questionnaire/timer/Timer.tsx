@@ -88,5 +88,5 @@ export default function Timer({ submissionId, initialTime, onTimeUpdate }: Timer
     return () => window.removeEventListener('beforeunload', handleBeforeUnload);
   }, [submissionId, timeRemaining]);
 
-  return <TimerDisplay hours={time.hours} minutes={time.minutes} seconds={time.seconds} />;
+  return <TimerDisplay hours={time.hours} minutes={time.minutes} seconds={time.seconds} timeRemaining={timeRemaining} />;
 }

@@ -48,11 +48,15 @@ export default function QuestionnairePage() {
       }
       setUserId(user.id);
 
-      const { data: existingSubmission } = await supabase
+      // Get the most recent submission for this user (could be in_progress or completed)
+      const { data: submissions } = await supabase
         .from('submissions')
         .select('*')
         .eq('user_id', user.id)
-        .single();
+        .order('created_at', { ascending: false })
+        .limit(1);
+
+      const existingSubmission = submissions?.[0] || null;
 
       if (existingSubmission) {
         setSubmissionId(existingSubmission.id);

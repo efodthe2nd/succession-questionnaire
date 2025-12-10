@@ -12,7 +12,20 @@ interface DropdownInputProps {
 
 export default function DropdownInput({ question, value, onChange, isDarkMode }: DropdownInputProps) {
   const [isOpen, setIsOpen] = useState(false);
+  const [customText, setCustomText] = useState('');
+  const [showCustomInput, setShowCustomInput] = useState(false);
   const dropdownRef = useRef<HTMLDivElement>(null);
+
+  // Check if current value is a custom value (not in options)
+  const isCustomValue = value && !question.options?.includes(value);
+
+  // Initialize custom text if value is custom
+  useEffect(() => {
+    if (isCustomValue) {
+      setCustomText(value);
+      setShowCustomInput(true);
+    }
+  }, []);
 
   // Close dropdown when clicking outside
   useEffect(() => {
@@ -37,6 +50,29 @@ export default function DropdownInput({ question, value, onChange, isDarkMode }:
                       '';
   const hasAnswer = Boolean(displayValue);
 
+  const handleCustomTextChange = (text: string) => {
+    if (text.length <= 140) {
+      setCustomText(text);
+      onChange(text);
+    }
+  };
+
+  const handleSelectCustomOption = () => {
+    setShowCustomInput(true);
+    setIsOpen(false);
+    // If there's already custom text, use it; otherwise clear the value
+    if (customText) {
+      onChange(customText);
+    }
+  };
+
+  const handleSelectOption = (option: string) => {
+    setShowCustomInput(false);
+    setCustomText('');
+    onChange(option);
+    setIsOpen(false);
+  };
+
   return (
     <div className="relative" ref={dropdownRef}>
       <button
@@ -49,7 +85,7 @@ export default function DropdownInput({ question, value, onChange, isDarkMode }:
         } focus:outline-none focus:border-[#B5A692]`}
       >
         <span className={hasAnswer ? (isDarkMode ? 'text-white' : 'text-black') : (isDarkMode ? 'text-gray-500' : 'text-gray-400')}>
-          {hasAnswer ? displayValue : (question.placeholder || 'Select')}
+          {hasAnswer ? (displayValue.length > 50 ? displayValue.substring(0, 50) + '...' : displayValue) : (question.placeholder || 'Select')}
         </span>
         <svg
           className={`w-5 h-5 transition-transform duration-200 ${isOpen ? 'rotate-180' : ''} ${isDarkMode ? 'text-gray-400' : 'text-gray-500'}`}
@@ -72,17 +108,14 @@ export default function DropdownInput({ question, value, onChange, isDarkMode }:
             ? 'bg-[#2a2a2a] border border-gray-700 shadow-lg shadow-black/30'
             : 'bg-white border border-gray-200 shadow-lg shadow-black/10'
         }`}
-        style={{ maxHeight: '200px' }}
+        style={{ maxHeight: '250px' }}
       >
-        <div className="overflow-y-auto max-h-[200px] py-1">
+        <div className="overflow-y-auto max-h-[250px] py-1">
           {question.options?.map((option) => (
             <button
               key={option}
               type="button"
-              onClick={() => {
-                onChange(option);
-                setIsOpen(false);
-              }}
+              onClick={() => handleSelectOption(option)}
               className={`w-full px-4 py-3 text-left transition-colors duration-150 ${
                 value === option
                   ? isDarkMode
@@ -96,8 +129,45 @@ export default function DropdownInput({ question, value, onChange, isDarkMode }:
               {option}
             </button>
           ))}
+          {/* Custom text option - always last */}
+          <button
+            type="button"
+            onClick={handleSelectCustomOption}
+            className={`w-full px-4 py-3 text-left transition-colors duration-150 border-t ${
+              showCustomInput
+                ? isDarkMode
+                  ? 'bg-[#B5A692]/20 text-[#B5A692] border-gray-700'
+                  : 'bg-[#B5A692]/20 text-[#8B7355] border-gray-200'
+                : isDarkMode
+                  ? 'text-[#B5A692] hover:bg-[#3a3a3a] border-gray-700'
+                  : 'text-[#8B7355] hover:bg-gray-100 border-gray-200'
+            }`}
+          >
+            Enter your own answer...
+          </button>
         </div>
       </div>
+
+      {/* Custom text input field */}
+      {showCustomInput && (
+        <div className="mt-3">
+          <textarea
+            value={customText}
+            onChange={(e) => handleCustomTextChange(e.target.value)}
+            placeholder="Type your own answer (you can copy & paste from options above)"
+            maxLength={140}
+            rows={2}
+            className={`w-full px-4 py-3 rounded-xl transition-all duration-200 resize-none ${
+              isDarkMode
+                ? 'bg-[#2a2a2a] text-white border border-gray-700 hover:border-gray-600 placeholder-gray-500'
+                : 'bg-white text-black border border-gray-300 hover:border-gray-400 placeholder-gray-400'
+            } focus:outline-none focus:border-[#B5A692]`}
+          />
+          <div className={`text-xs mt-1 text-right ${isDarkMode ? 'text-gray-500' : 'text-gray-400'}`}>
+            {customText.length}/140 characters
+          </div>
+        </div>
+      )}
     </div>
   );
 }

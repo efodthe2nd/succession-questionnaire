@@ -37,6 +37,9 @@ export default function QuestionItem({
     );
   }
 
+  // Hide labels for "First Things First" section (sectionIndex 1)
+  const hideLabel = question.sectionIndex === 1;
+
   return (
     <div className="space-y-3">
       {/* Question text */}
@@ -44,7 +47,7 @@ export default function QuestionItem({
         <p className={`text-base font-medium ${isDarkMode ? 'text-white' : 'text-black'}`}>
           {question.text}
         </p>
-        {question.label && (
+        {question.label && !hideLabel && (
           <p className="text-[#B5A692] text-sm mt-1">{question.label}</p>
         )}
       </div>

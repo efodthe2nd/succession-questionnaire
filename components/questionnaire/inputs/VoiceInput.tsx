@@ -152,10 +152,22 @@ export default function VoiceInput({ question, value, onChange, isDarkMode }: Vo
         </p>
       )}
 
-      {question.helpText && (
-        <p className={`text-xs ${isDarkMode ? 'text-gray-500' : 'text-gray-400'}`}>
-          {question.helpText}
+      {/* Subtitle - main instruction text */}
+      {question.subtitle && (
+        <p className={`text-sm ${isDarkMode ? 'text-gray-300' : 'text-gray-600'}`}>
+          {question.subtitle}
         </p>
+      )}
+
+      {/* Help text - examples with proper formatting */}
+      {question.helpText && (
+        <div className={`text-xs space-y-3 mt-3 ${isDarkMode ? 'text-gray-500' : 'text-gray-400'}`}>
+          {question.helpText.split('\n\n').map((paragraph, index) => (
+            <p key={index} className="leading-relaxed">
+              {paragraph}
+            </p>
+          ))}
+        </div>
       )}
 
       {/* Voice record button */}

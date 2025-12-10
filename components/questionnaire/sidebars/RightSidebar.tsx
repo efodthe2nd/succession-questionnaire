@@ -1,5 +1,3 @@
-import PreviewCard from '../ui/PreviewCard';
-
 interface RightSidebarProps {
   isDarkMode: boolean;
 }
@@ -7,8 +5,9 @@ interface RightSidebarProps {
 export default function RightSidebar({ isDarkMode }: RightSidebarProps) {
   return (
     <aside className={`w-80 fixed right-0 top-0 bottom-0 flex flex-col p-6 ${isDarkMode ? 'bg-[#1a1a1a] border-l border-gray-800' : 'bg-[#F5F5F5] border-l border-gray-200'}`}>
+      {/* Preview section temporarily removed - will be restored when AI is connected */}
       <div className="mt-16">
-        <PreviewCard isDesktop isDarkMode={isDarkMode} />
+        {/* Preview card will go here */}
       </div>
 
       {/* Settings Icon */}
