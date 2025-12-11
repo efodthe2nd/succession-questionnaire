@@ -10,6 +10,7 @@ import MultiDropdownInput from '../inputs/MultiDropdownInput';
 import StoryInput from '../inputs/StoryInput';
 import ChildSectionInput from '../inputs/ChildSectionInput';
 import SpouseSectionInput from '../inputs/SpouseSectionInput';
+import AssetSectionInput from '../inputs/AssetSectionInput';
 
 interface QuestionInputProps {
   question: Question;
@@ -117,6 +118,16 @@ export default function QuestionInput({
     case 'spouse-section':
       return (
         <SpouseSectionInput
+          question={question}
+          isDarkMode={isDarkMode}
+          answers={answers || {}}
+          onAnswerChange={onAnswerChange as (questionId: string, value: string | string[]) => void}
+        />
+      );
+
+    case 'asset-section':
+      return (
+        <AssetSectionInput
           question={question}
           isDarkMode={isDarkMode}
           answers={answers || {}}

@@ -7,7 +7,8 @@ export type QuestionType =
   | 'multi-dropdown'
   | 'story'
   | 'child-section'
-  | 'spouse-section';
+  | 'spouse-section'
+  | 'asset-section';
 
 export interface Question {
   id: string;
@@ -120,9 +121,10 @@ export const questions: Question[] = [
     sectionIndex: 3,
     text: 'I fundamentally believe:',
     label: 'Core Beliefs',
-    type: 'dropdown',
+    type: 'multiselect',
     required: false,
     placeholder: 'Select',
+    helpText: 'Select up to 3 beliefs that resonate with you',
     allowCustom: true,
     options: [
       'that kindness always matters.',
@@ -248,13 +250,13 @@ export const questions: Question[] = [
     id: 'q2_4',
     section: 'My Beliefs and Values',
     sectionIndex: 3,
-    text: 'Favorite stories',
-    label: 'Favorite stories',
+    text: 'Favorite Stories',
+    label: 'Favorite Stories',
     type: 'story',
     voiceEnabled: true,
     required: false,
     placeholder: 'Type Here!',
-    subtitle: 'Stories untold tend to fade. Let\'s capture one now, while it\'s still vivid.\n\nThis moment is the youngest you\'ll ever be again. What story do you want remembered? You don\'t need to write a novel. Just respond like you\'re talking to someone you love.\n\nAnswer the first two that resonate with you.',
+    subtitle: 'Stories untold tend to fade. Let\'s capture one now, while it\'s still vivid.',
     storyTitle: 'Story 1',
     storyPrompts: [
       'What\'s a story you\'ve noticed you repeat a lot?',
@@ -869,66 +871,13 @@ export const questions: Question[] = [
     ],
   },
   {
-    id: 'q5_9_asset',
+    id: 'q5_asset_section',
     section: 'Guidance For Stewardship',
     sectionIndex: 2,
-    text: 'As for:',
+    text: 'Your Assets & Gifts',
     label: 'What becomes yours after I\'m gone',
-    type: 'dropdown',
+    type: 'asset-section',
     required: false,
-    placeholder: 'Select',
-    helpText: 'Now is your chance to tell the story behind each gift.',
-    options: [
-      'any real property',
-      'any cash',
-      'the house',
-      'the family house',
-      'the rental property',
-      'commercial properties',
-      'my business',
-      'my retirement account',
-      'liquid assets',
-      'my stock account',
-      'my family heirloom',
-      'my car',
-      'my gold and silver',
-    ],
-  },
-  {
-    id: 'q5_9_guidance',
-    section: 'Guidance For Stewardship',
-    sectionIndex: 2,
-    text: 'What I want you to know is:',
-    label: 'I\'m placing this in your hands, in hopes that',
-    type: 'dropdown',
-    required: false,
-    placeholder: 'Select',
-    options: [
-      'it remain in the family and never be sold.',
-      'it be passed down to your children.',
-      'it be used as a family vacation home.',
-      'it be rented out for family expenses.',
-      'it be sold and proceeds divided among heirs.',
-      'it be sold only if financially necessary.',
-      'it be preserved as a legacy property.',
-      'it be maintained and kept in good condition.',
-      'it be held in trust for future family use.',
-      'it be donated to a cause I care about.',
-      'it be the setting for annual family reunions.',
-    ],
-  },
-  {
-    id: 'q5_8',
-    section: 'Guidance For Stewardship',
-    sectionIndex: 2,
-    text: '',
-    label: 'The story behind this gift',
-    type: 'voice',
-    voiceEnabled: true,
-    required: false,
-    placeholder: 'Type or Talk Here',
-    subtitle: 'Use this space to share any guidance you want to offer about the asset, the story of how you acquired it, or a memory from the time you owned it.',
-    helpText: 'One Succession Story writer said, "As for the rental property, what I want you to know is that they are a business and if you\'re not good at the business either partner with someone who is, or sell them smart and move on. Don\'t let those houses become a burden. If they\'re too much to manage, sell and invest the money. I once missed Thanksgiving dinner cleaning out a tenant\'s drain. Don\'t repeat that."\n\nAnother said, "As for the commercial property, what I want you to know is that your mother and I touched and improved every inch of it ourselves. We had an agent but we ended up negotiating the deal ourselves. We talked the sellers into financing it for us, and ended up being life-long partners and friends with them. We spent more time there than we did at home. Make the most of it."\n\nAnother said, "As for our home, what I want you to know is that the water shutoff is just under the hose on the left side of the house."\n\nAnother said, "As for my brokerage account, what I want you to know is that there is enough in there for you to invest most of it, and still buy yourself something nice. I noticed that you never did this. Spend $5,000 of it and splurge on something that makes you feel good. A nice piece of art, or a first class ticket, whatever you want. I want that for you."',
   },
 
   // ============================================

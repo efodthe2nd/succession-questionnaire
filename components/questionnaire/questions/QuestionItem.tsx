@@ -23,7 +23,7 @@ export default function QuestionItem({
   onAnswerChange,
 }: QuestionItemProps) {
   // These types handle their own headline rendering
-  if (question.type === 'story' || question.type === 'child-section' || question.type === 'spouse-section') {
+  if (question.type === 'story' || question.type === 'child-section' || question.type === 'spouse-section' || question.type === 'asset-section') {
     return (
       <QuestionInput
         question={question}

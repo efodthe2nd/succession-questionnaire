@@ -1,5 +1,24 @@
-The admin panel should have a login, so not just anyone can here.
- 
-And in the modal that shows the whole letter(also admin side), it has an ugly white scrollbar that’s off brand, can we remove it, make the scroll-in, border radius all the edges, add box shadow to modal.
-There should be a button in the modal that’s also clickable when it’s not expanded to export this letter maybe in txt or pdf whatever works best.
-Right now if you clip expert all it just downloads an empty array and saves it in .json, fix this.
+My Family
+
+1. Re-Order the drop down menu for Elder Family Member to have grandparents first
+2.Delete all subtext
+3. For Their Qualities, allow user to select more than one quality and enter text up to 140 characters
+4. Delete the “!” from “Type Here” throughout the questionnaire
+
+Pivotal Experiences
+1.The first prompt says “select up to three” but only one can be selected. Correct to allow 3 to be selected.
+2.Delete all subtext
+
+
+My Legacy
+
+1. Allow multiple options to be selected
+2.Delete all subtext
+
+Tone & Voice
+
+1. Handwriting styles shown, like the sample I sent. check image in public/Handwriting.png
+
+Submitted Page
+Instead of “ThankYou” it should say “Your Part is Done.” With “Your Part is” in color 1 and “Done” in color 2. The subtext is: “Your words are now being crafted into your Succession Story
+and will be delivered to your email within 24 hours.”
