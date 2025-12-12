@@ -112,11 +112,16 @@ export default function DropdownInput({ question, value, onChange, isDarkMode }:
       >
         <div className="overflow-y-auto max-h-[250px] py-1">
           {question.options?.map((option) => (
-            <button
+            <div
               key={option}
-              type="button"
-              onClick={() => handleSelectOption(option)}
-              className={`w-full px-4 py-3 text-left transition-colors duration-150 ${
+              onClick={(e) => {
+                // Only select if user isn't highlighting text
+                const selection = window.getSelection();
+                if (!selection || selection.toString().length === 0) {
+                  handleSelectOption(option);
+                }
+              }}
+              className={`w-full px-4 py-3 text-left transition-colors duration-150 select-text cursor-text ${
                 value === option
                   ? isDarkMode
                     ? 'bg-[#B5A692]/20 text-[#B5A692]'
@@ -127,13 +132,12 @@ export default function DropdownInput({ question, value, onChange, isDarkMode }:
               }`}
             >
               {option}
-            </button>
+            </div>
           ))}
           {/* Custom text option - always last */}
-          <button
-            type="button"
+          <div
             onClick={handleSelectCustomOption}
-            className={`w-full px-4 py-3 text-left transition-colors duration-150 border-t ${
+            className={`w-full px-4 py-3 text-left transition-colors duration-150 border-t cursor-pointer ${
               showCustomInput
                 ? isDarkMode
                   ? 'bg-[#B5A692]/20 text-[#B5A692] border-gray-700'
@@ -144,7 +148,7 @@ export default function DropdownInput({ question, value, onChange, isDarkMode }:
             }`}
           >
             Enter your own answer...
-          </button>
+          </div>
         </div>
       </div>
 
