@@ -250,7 +250,7 @@ export default function StoryInput({
         </h2>
       )}
 
-      {/* Subtitle - Long descriptive text (only for first story) */}
+      {/* Subtitle - Intro text before prompts */}
       {question.subtitle && (
         <div className={`space-y-4 ${isDarkMode ? 'text-gray-300' : 'text-gray-600'}`}>
           {question.subtitle.split('\n\n').map((paragraph, index) => (
@@ -261,15 +261,7 @@ export default function StoryInput({
         </div>
       )}
 
-      {/* Main Story Input */}
-      {renderStoryInput(
-        question.id,
-        question.storyTitle || question.text,
-        value,
-        onChange
-      )}
-
-      {/* Prompts as bullet list */}
+      {/* Prompts as bullet list - BEFORE the text box */}
       {question.storyPrompts && question.storyPrompts.length > 0 && (
         <ul className={`space-y-2 text-sm ${isDarkMode ? 'text-gray-400' : 'text-gray-500'}`}>
           {question.storyPrompts.map((prompt, index) => (
@@ -279,6 +271,14 @@ export default function StoryInput({
             </li>
           ))}
         </ul>
+      )}
+
+      {/* Main Story Input - AFTER the prompts */}
+      {renderStoryInput(
+        question.id,
+        question.storyTitle || question.text,
+        value,
+        onChange
       )}
 
       {/* Additional Stories */}

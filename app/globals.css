@@ -30,3 +30,20 @@ html {
 .animate-fadeIn {
   animation: fadeIn 0.3s ease-out;
 }
+
+/* Handwriting font families */
+.font-caveat {
+  font-family: var(--font-caveat), cursive;
+}
+
+.font-dancing-script {
+  font-family: var(--font-dancing-script), cursive;
+}
+
+.font-indie-flower {
+  font-family: var(--font-indie-flower), cursive;
+}
+
+.font-satisfy {
+  font-family: var(--font-satisfy), cursive;
+}

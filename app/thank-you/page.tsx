@@ -32,19 +32,15 @@ export default function ThankYouPage() {
           </div>
         </div>
 
-        {/* Main Title - "Succession" in white, "Story" in tan */}
+        {/* Main Title - "Your Part is" in white, "Done." in tan */}
         <h1 className="text-4xl md:text-5xl font-heading font-bold mb-4 leading-tight">
-          <span className="text-white">Thank </span>
-          <span className="text-[#B5A692]">You</span>
+          <span className="text-white">Your Part is </span>
+          <span className="text-[#B5A692]">Done.</span>
         </h1>
 
         {/* Confirmation Message */}
-        <p className="text-white/80 text-lg md:text-xl mb-4 max-w-md mx-auto leading-relaxed">
-          Your story has been submitted successfully.
-        </p>
-
-        <p className="text-white/60 text-base mb-10 max-w-md mx-auto leading-relaxed">
-          We will carefully craft your legacy letter and reach out to you soon.
+        <p className="text-white/80 text-lg md:text-xl mb-10 max-w-md mx-auto leading-relaxed">
+          Your words are now being crafted into your Succession Story and will be delivered to your email within 24 hours.
         </p>
 
         {/* Return Home Button - Outlined rounded pill */}

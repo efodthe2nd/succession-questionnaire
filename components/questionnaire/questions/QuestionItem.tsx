@@ -52,6 +52,17 @@ export default function QuestionItem({
         )}
       </div>
 
+      {/* Image for visual questions (like handwriting samples) */}
+      {question.imageUrl && (
+        <div className="my-4">
+          <img
+            src={question.imageUrl}
+            alt="Sample options"
+            className="w-full rounded-lg border border-gray-300 dark:border-gray-700"
+          />
+        </div>
+      )}
+
       {/* Input based on type */}
       <QuestionInput
         question={question}

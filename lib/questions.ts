@@ -8,7 +8,8 @@ export type QuestionType =
   | 'story'
   | 'child-section'
   | 'spouse-section'
-  | 'asset-section';
+  | 'asset-section'
+  | 'handwriting-style';
 
 export interface Question {
   id: string;
@@ -29,6 +30,8 @@ export interface Question {
   storyPrompts?: string[];
   storyTitle?: string;
   allowAddMore?: boolean;
+  // Image for visual questions
+  imageUrl?: string;
 }
 
 export interface Section {
@@ -45,7 +48,7 @@ export const sections: Section[] = [
   { id: 5, title: 'Pivotal Experiences In My Life', totalQuestions: 3 },
   { id: 6, title: 'My Legacy', totalQuestions: 5 },
   { id: 7, title: 'Final Thoughts', totalQuestions: 7 },
-  { id: 8, title: 'Tone & Voice of Questionnaire', totalQuestions: 17 },
+  { id: 8, title: 'Tone & Voice of Questionnaire', totalQuestions: 18 },
 ];
 
 export const questions: Question[] = [
@@ -255,8 +258,8 @@ export const questions: Question[] = [
     type: 'story',
     voiceEnabled: true,
     required: false,
-    placeholder: 'Type Here!',
-    subtitle: 'Stories untold tend to fade. Let\'s capture one now, while it\'s still vivid.',
+    placeholder: 'Type Here',
+    subtitle: 'Stories untold tend to fade. Let\'s capture one now, while it\'s still vivid.\n\nAnswer the first of the prompts that resonates with you.',
     storyTitle: 'Story 1',
     storyPrompts: [
       'What\'s a story you\'ve noticed you repeat a lot?',
@@ -277,7 +280,8 @@ export const questions: Question[] = [
     type: 'story',
     voiceEnabled: true,
     required: false,
-    placeholder: 'Type Here!',
+    placeholder: 'Type Here',
+    subtitle: 'This moment is the youngest you\'ll ever be again. What story do you want remembered? You don\'t need to write a novel. Just respond like you\'re talking to someone you love.\n\nIf one of these prompts makes you smile, start with that one.',
     storyTitle: 'Story 2',
     storyPrompts: [
       'What\'s a tradition you hope your family never forgets?',
@@ -300,7 +304,6 @@ export const questions: Question[] = [
     section: 'My Family',
     sectionIndex: 4,
     text: 'Family is important to me because:',
-    label: 'Family Importance',
     type: 'dropdown',
     required: false,
     placeholder: 'Select',
@@ -356,15 +359,14 @@ export const questions: Question[] = [
     section: 'My Family',
     sectionIndex: 4,
     text: 'Think of a Family Member who is older than you or a Family Member who passed away. Someone special to you. We\'ll ask you to tell us a little about them on the next page.',
-    label: 'Elder Family Member',
     type: 'dropdown',
     required: false,
     placeholder: 'Select',
-    helpText: 'This is an opportunity to make sure stories don\'t get through the generations.',
     options: [
-      'Spouse', 'Partner', 'Mother', 'Father',
       'Maternal Grandmother', 'Maternal Grandfather',
       'Paternal Grandmother', 'Paternal Grandfather',
+      'Mother', 'Father',
+      'Spouse', 'Partner',
       'Uncle', 'Aunt', 'Child', 'Sibling', 'Friend',
     ],
   },
@@ -374,10 +376,9 @@ export const questions: Question[] = [
     section: 'My Family',
     sectionIndex: 4,
     text: 'Enter your Family Member\'s name.',
-    label: 'Their Name',
     type: 'text',
     required: false,
-    placeholder: 'Type Here!',
+    placeholder: 'Type Here',
   },
   // family_1.PNG - Question 4
   {
@@ -385,8 +386,7 @@ export const questions: Question[] = [
     section: 'My Family',
     sectionIndex: 4,
     text: 'If you had to describe your Family Member in a few words, it would be that they were:',
-    label: 'Their Qualities',
-    type: 'dropdown',
+    type: 'multiselect',
     required: false,
     placeholder: 'Select',
     allowCustom: true,
@@ -419,11 +419,10 @@ export const questions: Question[] = [
     section: 'My Family',
     sectionIndex: 4,
     text: 'Tell us a short story about your elder Family Member',
-    label: 'Elder Family Member Story',
     type: 'story',
     voiceEnabled: true,
     required: false,
-    placeholder: 'Type Here!',
+    placeholder: 'Type Here',
     subtitle: 'Here are ideas for stories about elder Family Members to share. Remember, any story is better than no story.\n\nSelect any 2 to answer. Skip any that don\'t spark anything for you.',
     storyTitle: 'Story 1',
     storyPrompts: [
@@ -448,8 +447,7 @@ export const questions: Question[] = [
     section: 'My Family',
     sectionIndex: 4,
     text: 'If you had to describe my Family Member in a few words, it would be that they are',
-    label: 'Their Qualities',
-    type: 'dropdown',
+    type: 'multiselect',
     required: false,
     placeholder: 'Select',
     allowCustom: true,
@@ -482,11 +480,10 @@ export const questions: Question[] = [
     section: 'My Family',
     sectionIndex: 4,
     text: 'Tell us a short story about your current Family Member',
-    label: 'Current Family Member Story',
     type: 'story',
     voiceEnabled: true,
     required: false,
-    placeholder: 'Type Here!',
+    placeholder: 'Type Here',
     subtitle: 'Select any 2. Now click record and start talking.\n\nHere are ideas for something to share. Remember, any story is better than no story.',
     storyTitle: 'Story 1',
     storyPrompts: [
@@ -533,10 +530,10 @@ export const questions: Question[] = [
     section: 'Pivotal Experiences In My Life',
     sectionIndex: 5,
     text: 'This event had the greatest impact on my life.',
-    label: 'Select up to three.',
     type: 'multiselect',
     required: false,
     placeholder: 'Select',
+    helpText: 'Select up to three',
     options: [
       'what I did to make money.',
       'falling in love.',
@@ -582,7 +579,6 @@ export const questions: Question[] = [
     section: 'Pivotal Experiences In My Life',
     sectionIndex: 5,
     text: 'I am most proud of...',
-    label: 'Greatest Pride',
     type: 'dropdown',
     required: false,
     placeholder: 'Select',
@@ -626,7 +622,6 @@ export const questions: Question[] = [
     section: 'Pivotal Experiences In My Life',
     sectionIndex: 5,
     text: 'Give a short example or story about a pivotal moment in your life. This is probably a story that you find yourself repeating.',
-    label: 'Pivotal Story',
     type: 'story',
     voiceEnabled: true,
     required: false,
@@ -888,8 +883,7 @@ export const questions: Question[] = [
     section: 'My Legacy',
     sectionIndex: 6,
     text: 'I hope to be remembered for...',
-    label: 'Remembered For',
-    type: 'dropdown',
+    type: 'multiselect',
     required: false,
     placeholder: 'Select',
     options: [
@@ -932,8 +926,7 @@ export const questions: Question[] = [
     section: 'My Legacy',
     sectionIndex: 6,
     text: 'The causes that have always been important to me are...',
-    label: 'Important Causes',
-    type: 'dropdown',
+    type: 'multiselect',
     required: false,
     placeholder: 'Select',
     options: [
@@ -976,8 +969,7 @@ export const questions: Question[] = [
     section: 'My Legacy',
     sectionIndex: 6,
     text: 'I hope that my family will carry forward this guiding purpose or legacy',
-    label: 'Family Purpose',
-    type: 'dropdown',
+    type: 'multiselect',
     required: false,
     placeholder: 'Select',
     options: [
@@ -1009,8 +1001,7 @@ export const questions: Question[] = [
     section: 'My Legacy',
     sectionIndex: 6,
     text: 'What does it mean to be part of this family?',
-    label: 'Select up to 5.',
-    helpText: 'If you had a vote in your Family Core Values after you are gone, which would you choose?',
+    helpText: 'If you had a vote in your Family Core Values after you are gone, which would you choose? Select up to 5.',
     type: 'multiselect',
     required: false,
     placeholder: 'Select',
@@ -1026,8 +1017,7 @@ export const questions: Question[] = [
     section: 'My Legacy',
     sectionIndex: 6,
     text: 'If my family created a physical memorial in my honor, what appeals to me most is',
-    label: 'Memorial Preference',
-    type: 'dropdown',
+    type: 'multiselect',
     required: false,
     placeholder: 'Select',
     options: [
@@ -1250,7 +1240,7 @@ export const questions: Question[] = [
     label: 'Signature Name',
     type: 'text',
     required: false,
-    placeholder: 'Type Here!',
+    placeholder: 'Type Here',
   },
   {
     id: 'q7_6',
@@ -1460,7 +1450,7 @@ export const questions: Question[] = [
     label: 'type it here. Leave blank if you want it neutral.',
     type: 'text',
     required: false,
-    placeholder: 'Type Here!',
+    placeholder: 'Type Here',
   },
   {
     id: 'q8_10',
@@ -1580,7 +1570,6 @@ export const questions: Question[] = [
     section: 'Tone & Voice of Questionnaire',
     sectionIndex: 8,
     text: 'Which font would you like to use?',
-    label: 'Font Choice',
     type: 'dropdown',
     required: false,
     placeholder: 'Select',
@@ -1590,6 +1579,21 @@ export const questions: Question[] = [
       'Elegant Script',
       'Traditional Typewriter',
       'Handwritten Style',
+    ],
+  },
+  {
+    id: 'q8_18',
+    section: 'Tone & Voice of Questionnaire',
+    sectionIndex: 8,
+    text: 'If you selected Handwritten Style, which handwriting do you prefer?',
+    type: 'handwriting-style',
+    required: false,
+    placeholder: 'Select a handwriting style',
+    options: [
+      'Style 1 - Casual Script',
+      'Style 2 - Elegant Cursive',
+      'Style 3 - Modern Handwriting',
+      'Style 4 - Classic Penmanship',
     ],
   },
 ];

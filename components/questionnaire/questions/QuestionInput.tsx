@@ -11,6 +11,7 @@ import StoryInput from '../inputs/StoryInput';
 import ChildSectionInput from '../inputs/ChildSectionInput';
 import SpouseSectionInput from '../inputs/SpouseSectionInput';
 import AssetSectionInput from '../inputs/AssetSectionInput';
+import HandwritingStyleInput from '../inputs/HandwritingStyleInput';
 
 interface QuestionInputProps {
   question: Question;
@@ -132,6 +133,16 @@ export default function QuestionInput({
           isDarkMode={isDarkMode}
           answers={answers || {}}
           onAnswerChange={onAnswerChange as (questionId: string, value: string | string[]) => void}
+        />
+      );
+
+    case 'handwriting-style':
+      return (
+        <HandwritingStyleInput
+          question={question}
+          value={value as string}
+          onChange={onChange as (value: string) => void}
+          isDarkMode={isDarkMode}
         />
       );
 
