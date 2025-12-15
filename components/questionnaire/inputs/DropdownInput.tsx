@@ -147,7 +147,7 @@ export default function DropdownInput({ question, value, onChange, isDarkMode }:
                   : 'text-[#8B7355] hover:bg-gray-100 border-gray-200'
             }`}
           >
-            Enter your own answer...
+            {question.placeholder || 'Say it in your own words'}
           </div>
         </div>
       </div>

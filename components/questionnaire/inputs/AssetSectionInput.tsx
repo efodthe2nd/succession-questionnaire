@@ -28,6 +28,8 @@ const assetOptions = [
 ];
 
 // Guidance options
+const CUSTOM_GUIDANCE = '__custom__';
+
 const guidanceOptions = [
   'it remain in the family and never be sold.',
   'it be passed down to your children.',
@@ -155,7 +157,22 @@ export default function AssetSectionInput({
             {guidanceOptions.map((option) => (
               <option key={option} value={option}>{option}</option>
             ))}
+            <option value={CUSTOM_GUIDANCE}>Say it in your own words...</option>
           </select>
+          {/* Custom guidance input */}
+          {guidanceValue === CUSTOM_GUIDANCE && (
+            <textarea
+              value={(answers[guidanceId + '_custom'] as string) || ''}
+              onChange={(e) => onAnswerChange(guidanceId + '_custom', e.target.value)}
+              placeholder="Type your own guidance..."
+              rows={2}
+              className={`w-full mt-2 px-4 py-3 rounded-xl transition-all duration-200 resize-none ${
+                isDarkMode
+                  ? 'bg-[#2a2a2a] text-white border border-gray-700 hover:border-gray-600 placeholder-gray-500'
+                  : 'bg-white text-black border border-gray-300 hover:border-gray-400 placeholder-gray-400'
+              } focus:outline-none focus:border-[#B5A692]`}
+            />
+          )}
         </div>
 
         {/* Story */}

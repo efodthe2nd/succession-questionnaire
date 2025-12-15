@@ -3,8 +3,6 @@
 import { useState, useEffect } from 'react';
 import { Question } from '@/lib/questions';
 
-
-
 interface MultiselectInputProps {
   question: Question;
   value: string[];
@@ -12,23 +10,11 @@ interface MultiselectInputProps {
   isDarkMode: boolean;
 }
 
-// Questions that should be expanded by default (not collapsible)
-const EXPANDED_BY_DEFAULT = ['q2_2', 'q2_3'];
-const MAX_SELECTIONS = 5;
-
 export default function MultiselectInput({ question, value, onChange, isDarkMode }: MultiselectInputProps) {
   const [customText, setCustomText] = useState('');
   const [showCustomInput, setShowCustomInput] = useState(false);
 
-  // Collapsible state - some questions start expanded
-  const shouldExpandByDefault = EXPANDED_BY_DEFAULT.includes(question.id);
-  const [isExpanded, setIsExpanded] = useState(shouldExpandByDefault);
-
   const currentValues = value || [];
-
-  // Count selections from predefined options only (not custom text)
-  const selectionCount = currentValues.filter(v => question.options?.includes(v)).length;
-  const isAtLimit = selectionCount >= MAX_SELECTIONS;
 
   // Check if any current values are custom (not in options)
   const customValues = currentValues.filter(v => !question.options?.includes(v));
@@ -39,10 +25,6 @@ export default function MultiselectInput({ question, value, onChange, isDarkMode
       setShowCustomInput(true);
       setCustomText(customValues[0] || '');
     }
-    // Auto-expand if there are already selections
-    if (currentValues.length > 0) {
-      setIsExpanded(true);
-    }
   }, []);
 
   const handleToggleOption = (option: string) => {
@@ -50,10 +32,7 @@ export default function MultiselectInput({ question, value, onChange, isDarkMode
     if (isSelected) {
       onChange(currentValues.filter(v => v !== option));
     } else {
-      // Only allow adding if not at limit
-      if (!isAtLimit) {
-        onChange([...currentValues, option]);
-      }
+      onChange([...currentValues, option]);
     }
   };
 
@@ -80,70 +59,25 @@ export default function MultiselectInput({ question, value, onChange, isDarkMode
     setShowCustomInput(!showCustomInput);
   };
 
-  
-  // Collapsed view - show expand button
-  if (!isExpanded) {
-    return (
-      <div>
-        <button
-          type="button"
-          onClick={() => setIsExpanded(true)}
-          className={`w-full py-3 px-4 rounded-xl text-sm font-medium transition-all duration-200 border flex items-center justify-between ${
-            isDarkMode
-              ? 'border-gray-700 text-gray-400 bg-transparent hover:border-gray-600 hover:text-gray-300'
-              : 'border-gray-300 text-gray-500 bg-transparent hover:border-gray-400 hover:text-gray-600'
-          }`}
-        >
-          <span>Click to select options (max {MAX_SELECTIONS})</span>
-          <svg className="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-            <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M19 9l-7 7-7-7" />
-          </svg>
-        </button>
-      </div>
-    );
-  }
-
-return (
+  return (
     <div>
-      {/* Selection counter */}
-      <div className={`flex justify-between items-center mb-3`}>
-        <span className={`text-xs ${isDarkMode ? 'text-gray-500' : 'text-gray-400'}`}>
-          {selectionCount}/{MAX_SELECTIONS} selected
-        </span>
-        {!shouldExpandByDefault && (
-          <button
-            type="button"
-            onClick={() => setIsExpanded(false)}
-            className={`text-xs ${isDarkMode ? 'text-gray-500 hover:text-gray-400' : 'text-gray-400 hover:text-gray-500'}`}
-          >
-            Collapse
-          </button>
-        )}
-      </div>
-
       {/* Chip/Pill Grid - All options visible at once */}
       <div className="flex flex-wrap gap-2">
         {question.options?.map((option) => {
           const isSelected = currentValues.includes(option);
-          const isDisabled = !isSelected && isAtLimit;
           return (
             <button
               key={option}
               type="button"
               onClick={() => handleToggleOption(option)}
-              disabled={isDisabled}
               className={`px-4 py-2 rounded-full text-sm font-medium transition-all duration-150 border ${
                 isSelected
                   ? isDarkMode
                     ? 'bg-[#B5A692] text-black border-[#B5A692]'
                     : 'bg-[#1a1a1a] text-white border-[#1a1a1a]'
-                  : isDisabled
-                    ? isDarkMode
-                      ? 'bg-transparent text-gray-600 border-gray-700 cursor-not-allowed opacity-50'
-                      : 'bg-transparent text-gray-400 border-gray-200 cursor-not-allowed opacity-50'
-                    : isDarkMode
-                      ? 'bg-transparent text-white border-gray-600 hover:border-gray-400'
-                      : 'bg-transparent text-black border-gray-300 hover:border-gray-500'
+                  : isDarkMode
+                    ? 'bg-transparent text-white border-gray-600 hover:border-gray-400'
+                    : 'bg-transparent text-black border-gray-300 hover:border-gray-500'
               }`}
             >
               {option}
