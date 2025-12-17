@@ -16,7 +16,7 @@ export default function QuestionnairePage() {
   const [submissionId, setSubmissionId] = useState<string | null>(null);
   const [userId, setUserId] = useState<string | null>(null);
   const [showProgressModal, setShowProgressModal] = useState(false);
-  const [isDarkMode, setIsDarkMode] = useState(true);
+  const [isDarkMode, setIsDarkMode] = useState(false);
   const [isLoading, setIsLoading] = useState(true);
   const [timeRemaining, setTimeRemaining] = useState(INITIAL_TIME_SECONDS);
   const router = useRouter();

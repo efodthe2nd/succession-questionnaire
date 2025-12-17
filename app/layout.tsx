@@ -53,7 +53,7 @@ export default function RootLayout({
   children: React.ReactNode;
 }) {
   return (
-    <html lang="en" className={`${lora.variable} ${poppins.variable} ${caveat.variable} ${dancingScript.variable} ${indieFlower.variable} ${satisfy.variable}`}>
+    <html lang="en" suppressHydrationWarning className={`${lora.variable} ${poppins.variable} ${caveat.variable} ${dancingScript.variable} ${indieFlower.variable} ${satisfy.variable}`}>
       <body className="font-body">{children}</body>
     </html>
   );
