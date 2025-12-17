@@ -1,7 +1,8 @@
 'use client';
 
-import { useState } from 'react';
+import { useState, useRef, useEffect, useCallback } from 'react';
 import { Question } from '@/lib/questions';
+import { useWhisper } from '@/hooks/useWhisper';
 
 interface AssetSectionInputProps {
   question: Question;
@@ -50,7 +51,40 @@ export default function AssetSectionInput({
   answers,
   onAnswerChange,
 }: AssetSectionInputProps) {
-  const [isRecording, setIsRecording] = useState<string | null>(null);
+  const [activeFieldId, setActiveFieldId] = useState<string | null>(null);
+  const pendingChangeRef = useRef<{ fieldId: string; currentValue: string } | null>(null);
+
+  // Whisper hook
+  const {
+    isRecording,
+    isTranscribing,
+    isModelLoading,
+    isModelReady,
+    modelLoadProgress,
+    error,
+    startRecording,
+    stopRecording,
+    loadModel,
+  } = useWhisper({
+    onTranscript: (transcript) => {
+      if (pendingChangeRef.current) {
+        const { fieldId, currentValue } = pendingChangeRef.current;
+        // Append to existing text
+        const newValue = currentValue.trim()
+          ? `${currentValue.trim()} ${transcript}`
+          : transcript;
+        onAnswerChange(fieldId, newValue);
+      }
+    },
+  });
+
+  // Preload model on mount
+  useEffect(() => {
+    const timer = setTimeout(() => {
+      loadModel();
+    }, 2000);
+    return () => clearTimeout(timer);
+  }, [loadModel]);
 
   // Derive number of assets from answers
   const getAssetCount = () => {
@@ -80,25 +114,16 @@ export default function AssetSectionInput({
     setAssetCount(assetCount + 1);
   };
 
-  const startVoiceRecording = (fieldId: string, currentValue: string) => {
-    if (!('webkitSpeechRecognition' in window)) {
-      alert('Voice input not supported in this browser');
-      return;
-    }
+  const handleStartRecording = useCallback(async (fieldId: string, currentValue: string) => {
+    setActiveFieldId(fieldId);
+    pendingChangeRef.current = { fieldId, currentValue };
+    await startRecording();
+  }, [startRecording]);
 
-    const recognition = new (window as any).webkitSpeechRecognition();
-    recognition.continuous = false;
-    recognition.interimResults = false;
-
-    recognition.onstart = () => setIsRecording(fieldId);
-    recognition.onend = () => setIsRecording(null);
-    recognition.onresult = (event: any) => {
-      const transcript = event.results[0][0].transcript;
-      onAnswerChange(fieldId, currentValue + ' ' + transcript);
-    };
-
-    recognition.start();
-  };
+  const handleStopRecording = useCallback(async () => {
+    await stopRecording();
+    setActiveFieldId(null);
+  }, [stopRecording]);
 
   const renderAssetEntry = (index: number) => {
     const typeId = `q5_asset_${index}_type`;
@@ -108,6 +133,9 @@ export default function AssetSectionInput({
     const typeValue = (answers[typeId] as string) || '';
     const guidanceValue = (answers[guidanceId] as string) || '';
     const storyValue = (answers[storyId] as string) || '';
+
+    const isCurrentlyRecording = isRecording && activeFieldId === storyId;
+    const isCurrentlyTranscribing = isTranscribing && activeFieldId === storyId;
 
     return (
       <div key={index} className={`space-y-6 ${index > 0 ? 'pt-8 border-t ' + (isDarkMode ? 'border-gray-700' : 'border-gray-200') : ''}`}>
@@ -197,20 +225,66 @@ export default function AssetSectionInput({
             />
             <button
               type="button"
-              onClick={() => startVoiceRecording(storyId, storyValue)}
+              onClick={() =>
+                isCurrentlyRecording
+                  ? handleStopRecording()
+                  : handleStartRecording(storyId, storyValue)
+              }
+              disabled={isModelLoading || isCurrentlyTranscribing}
               className={`absolute right-3 top-3.5 p-2 rounded-full transition-all duration-200 ${
-                isRecording === storyId
-                  ? 'bg-red-500 text-white'
-                  : isDarkMode
-                    ? 'text-gray-400 hover:text-white hover:bg-[#3a3a3a]'
-                    : 'text-gray-400 hover:text-black hover:bg-gray-100'
+                isCurrentlyRecording
+                  ? 'bg-red-500 text-white animate-pulse'
+                  : isCurrentlyTranscribing
+                    ? 'bg-yellow-500 text-white'
+                    : isModelLoading
+                      ? 'text-gray-500 cursor-wait'
+                      : isDarkMode
+                        ? 'text-gray-400 hover:text-white hover:bg-[#3a3a3a]'
+                        : 'text-gray-400 hover:text-black hover:bg-gray-100'
               }`}
+              title={
+                isCurrentlyRecording
+                  ? 'Stop recording'
+                  : isCurrentlyTranscribing
+                    ? 'Transcribing...'
+                    : isModelLoading
+                      ? `Loading speech model (${modelLoadProgress}%)`
+                      : 'Start recording'
+              }
             >
-              <svg className="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M19 11a7 7 0 01-7 7m0 0a7 7 0 01-7-7m7 7v4m0 0H8m4 0h4m-4-8a3 3 0 01-3-3V5a3 3 0 116 0v6a3 3 0 01-3 3z" />
-              </svg>
+              {isCurrentlyRecording ? (
+                <svg className="w-5 h-5" fill="currentColor" viewBox="0 0 24 24">
+                  <rect x="6" y="6" width="12" height="12" rx="2" />
+                </svg>
+              ) : isCurrentlyTranscribing ? (
+                <svg className="w-5 h-5 animate-spin" fill="none" viewBox="0 0 24 24">
+                  <circle className="opacity-25" cx="12" cy="12" r="10" stroke="currentColor" strokeWidth="4"></circle>
+                  <path className="opacity-75" fill="currentColor" d="M4 12a8 8 0 018-8V0C5.373 0 0 5.373 0 12h4zm2 5.291A7.962 7.962 0 014 12H0c0 3.042 1.135 5.824 3 7.938l3-2.647z"></path>
+                </svg>
+              ) : (
+                <svg className="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                  <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M19 11a7 7 0 01-7 7m0 0a7 7 0 01-7-7m7 7v4m0 0H8m4 0h4m-4-8a3 3 0 01-3-3V5a3 3 0 116 0v6a3 3 0 01-3 3z" />
+                </svg>
+              )}
             </button>
           </div>
+          {/* Status messages */}
+          {isCurrentlyRecording && (
+            <p className={`text-sm flex items-center gap-2 ${isDarkMode ? 'text-red-400' : 'text-red-500'}`}>
+              <span className="w-2 h-2 bg-red-500 rounded-full animate-pulse"></span>
+              Recording... Click stop when finished.
+            </p>
+          )}
+          {isCurrentlyTranscribing && (
+            <p className={`text-sm ${isDarkMode ? 'text-yellow-400' : 'text-yellow-600'}`}>
+              Transcribing your audio...
+            </p>
+          )}
+          {error && activeFieldId === storyId && (
+            <p className={`text-sm ${isDarkMode ? 'text-red-400' : 'text-red-500'}`}>
+              {error}
+            </p>
+          )}
         </div>
       </div>
     );
@@ -227,6 +301,17 @@ export default function AssetSectionInput({
           Now is your chance to tell the story behind each gift.
         </p>
       </div>
+
+      {/* Model loading indicator */}
+      {isModelLoading && (
+        <div className={`text-xs flex items-center gap-2 ${isDarkMode ? 'text-gray-500' : 'text-gray-400'}`}>
+          <svg className="w-4 h-4 animate-spin" fill="none" viewBox="0 0 24 24">
+            <circle className="opacity-25" cx="12" cy="12" r="10" stroke="currentColor" strokeWidth="4"></circle>
+            <path className="opacity-75" fill="currentColor" d="M4 12a8 8 0 018-8V0C5.373 0 0 5.373 0 12h4zm2 5.291A7.962 7.962 0 014 12H0c0 3.042 1.135 5.824 3 7.938l3-2.647z"></path>
+          </svg>
+          Loading speech recognition ({modelLoadProgress}%)...
+        </div>
+      )}
 
       {/* Example quotes */}
       <div className={`text-xs space-y-3 ${isDarkMode ? 'text-gray-500' : 'text-gray-400'}`}>

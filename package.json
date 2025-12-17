@@ -13,6 +13,7 @@
     "test:headed": "playwright test --headed"
   },
   "dependencies": {
+    "@huggingface/transformers": "^3.8.1",
     "@supabase/ssr": "^0.8.0",
     "@supabase/supabase-js": "^2.86.0",
     "next": "16.0.6",
