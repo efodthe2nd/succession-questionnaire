@@ -164,7 +164,7 @@ export default function AssetSectionInput({
             <textarea
               value={(answers[guidanceId + '_custom'] as string) || ''}
               onChange={(e) => onAnswerChange(guidanceId + '_custom', e.target.value)}
-              placeholder="Type your own guidance..."
+              placeholder="Say it in your own words."
               rows={2}
               className={`w-full mt-2 px-4 py-3 rounded-xl transition-all duration-200 resize-none ${
                 isDarkMode
@@ -187,7 +187,7 @@ export default function AssetSectionInput({
             <textarea
               value={storyValue}
               onChange={(e) => onAnswerChange(storyId, e.target.value)}
-              placeholder="Type or Talk Here"
+              placeholder="Say it in your own words. Voice-to-Text highly recommended."
               rows={4}
               className={`w-full px-4 py-3.5 pr-12 rounded-xl resize-none transition-all duration-200 ${
                 isDarkMode

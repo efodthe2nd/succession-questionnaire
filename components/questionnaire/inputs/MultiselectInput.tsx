@@ -94,7 +94,7 @@ export default function MultiselectInput({ question, value, onChange, isDarkMode
               : 'border-gray-300 text-gray-500 bg-transparent hover:border-gray-400 hover:text-gray-600'
           }`}
         >
-          <span>Click to select options (max {MAX_SELECTIONS})</span>
+          <span>Select up to {MAX_SELECTIONS}</span>
           <svg className="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
             <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M19 9l-7 7-7-7" />
           </svg>
@@ -175,7 +175,7 @@ return (
           <textarea
             value={customText}
             onChange={(e) => handleCustomTextChange(e.target.value)}
-            placeholder="Type your own answer..."
+            placeholder="Say it in your own words."
             maxLength={140}
             rows={2}
             className={`w-full px-4 py-3 rounded-xl transition-all duration-200 resize-none ${

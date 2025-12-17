@@ -158,7 +158,7 @@ export default function DropdownInput({ question, value, onChange, isDarkMode }:
           <textarea
             value={customText}
             onChange={(e) => handleCustomTextChange(e.target.value)}
-            placeholder="Type your own answer (you can copy & paste from options above)"
+            placeholder="Say it in your own words."
             maxLength={140}
             rows={2}
             className={`w-full px-4 py-3 rounded-xl transition-all duration-200 resize-none ${

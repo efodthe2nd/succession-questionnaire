@@ -193,7 +193,7 @@ export default function StoryInput({
           <textarea
             value={storyValue}
             onChange={(e) => onStoryChange(e.target.value)}
-            placeholder={question.placeholder || 'Type Here!'}
+            placeholder={question.placeholder || 'Say it in your own words. Voice-to-Text highly recommended.'}
             rows={3}
             className={`w-full px-4 py-3.5 pr-12 rounded-xl resize-none transition-all duration-200 ${
               isDarkMode
