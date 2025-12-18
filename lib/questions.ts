@@ -425,7 +425,7 @@ export const questions: Question[] = [
     id: 'q3_spouse_section',
     section: 'My Family',
     sectionIndex: 5,
-    text: 'Your Spouse/Partner',
+    text: 'Your Spouse',
     label: 'Spouse',
     type: 'spouse-section',
     required: false,

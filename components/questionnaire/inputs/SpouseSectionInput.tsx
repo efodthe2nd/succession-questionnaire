@@ -20,10 +20,10 @@ export default function SpouseSectionInput({
 
   // Spouse type options
   const spouseTypeOptions = [
-    'Current Spouse',
-    'Former Spouse',
-    'Late Spouse',
-    'Partner',
+    'Soulmate',
+    'Dear Friend',
+    'Boyfriend',
+    'Girlfriend',
   ];
 
   // Derive number of spouses from answers
@@ -87,19 +87,11 @@ export default function SpouseSectionInput({
 
     return (
       <div key={index} className={`space-y-6 ${index > 0 ? 'pt-8 border-t ' + (isDarkMode ? 'border-gray-700' : 'border-gray-200') : ''}`}>
-        {/* Spouse Header */}
-        <h3 className={`text-lg font-semibold ${isDarkMode ? 'text-white' : 'text-black'}`}>
-          {index === 0 ? 'Spouse' : `Spouse ${index + 1}`}
-        </h3>
-
         {/* Spouse Type Select */}
         <div className="space-y-2">
           <label className={`block text-sm font-medium ${isDarkMode ? 'text-white' : 'text-black'}`}>
-            Which spouse would you like to mention in your letter:
+            Who would you like to mention in your letter:
           </label>
-          <p className={`text-sm ${isDarkMode ? 'text-[#B5A692]' : 'text-[#B5A692]'}`}>
-            Your Spouse
-          </p>
           <select
             value={selectValue}
             onChange={(e) => onAnswerChange(selectId, e.target.value)}
@@ -109,7 +101,7 @@ export default function SpouseSectionInput({
                 : 'bg-white text-black border border-gray-300 hover:border-gray-400'
             } focus:outline-none focus:border-[#B5A692]`}
           >
-            <option value="">Select</option>
+            <option value="">Select the best answer</option>
             {spouseTypeOptions.map((option) => (
               <option key={option} value={option}>{option}</option>
             ))}
@@ -121,14 +113,11 @@ export default function SpouseSectionInput({
           <label className={`block text-sm font-medium ${isDarkMode ? 'text-white' : 'text-black'}`}>
             Spouse's name:
           </label>
-          <p className={`text-sm ${isDarkMode ? 'text-[#B5A692]' : 'text-[#B5A692]'}`}>
-            Your Spouse
-          </p>
           <input
             type="text"
             value={nameValue}
             onChange={(e) => onAnswerChange(nameId, e.target.value)}
-            placeholder="Type Here!"
+            placeholder="say it in your own words"
             className={`w-full px-4 py-3 rounded-xl transition-all duration-200 ${
               isDarkMode
                 ? 'bg-[#2a2a2a] text-white border border-gray-700 placeholder-gray-500 hover:border-gray-600'
@@ -147,7 +136,7 @@ export default function SpouseSectionInput({
               type="text"
               value={storyValue}
               onChange={(e) => onAnswerChange(storyId, e.target.value)}
-              placeholder="Voice to text"
+              placeholder="say it in your own words. Voice-to-text highly recommended."
               className={`w-full px-4 py-3 pr-12 rounded-xl transition-all duration-200 ${
                 isDarkMode
                   ? 'bg-[#2a2a2a] text-white border border-gray-700 placeholder-gray-500 hover:border-gray-600'
@@ -184,7 +173,7 @@ export default function SpouseSectionInput({
             <textarea
               value={messageValue}
               onChange={(e) => onAnswerChange(messageId, e.target.value)}
-              placeholder="Type Here!"
+              placeholder="say it in your own words"
               rows={3}
               className={`w-full px-4 py-3.5 pr-12 rounded-xl resize-none transition-all duration-200 ${
                 isDarkMode
@@ -218,11 +207,8 @@ export default function SpouseSectionInput({
       {/* Section Header */}
       <div>
         <h2 className={`text-xl font-bold ${isDarkMode ? 'text-white' : 'text-black'}`}>
-          Your Spouse/Partner
+          Your Spouse
         </h2>
-        <p className={`text-sm mt-1 ${isDarkMode ? 'text-gray-400' : 'text-gray-500'}`}>
-          Tell us about your spouse or partner
-        </p>
       </div>
 
       {/* Render all spouses */}
