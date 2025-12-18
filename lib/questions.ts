@@ -25,6 +25,7 @@ export interface Question {
   maxLength?: number;
   helpText?: string;
   allowCustom?: boolean;
+  maxSelections?: number;
   // Story-specific fields
   subtitle?: string;
   storyPrompts?: string[];
@@ -127,7 +128,7 @@ export const questions: Question[] = [
     label: 'Select up to 5',
     type: 'multiselect',
     required: false,
-    placeholder: 'Select',
+    placeholder: 'Select the best answer',
     helpText: 'Select up to four values that describe you best',
     allowCustom: true,
     options: [
@@ -157,7 +158,7 @@ export const questions: Question[] = [
     label: 'How Others See Me',
     type: 'multiselect',
     required: false,
-    placeholder: 'Select',
+    placeholder: 'Select the best answer',
     helpText: 'Select up to four values that describe you best',
     allowCustom: true,
     options: [
@@ -187,7 +188,7 @@ export const questions: Question[] = [
     label: 'Values That Speak To Me',
     type: 'dropdown',
     required: false,
-    placeholder: 'Select',
+    placeholder: 'Select the best answer',
     options: [
       'Kindness: Treat people gently; everyone is fighting unseen battles.',
       'Gratitude: Be thankful for the small, everyday moments.',
@@ -280,7 +281,7 @@ export const questions: Question[] = [
     text: 'Family is important to me because:',
     type: 'dropdown',
     required: false,
-    placeholder: 'Select',
+    placeholder: 'Select the best answer',
     options: [
       'it provided a foundation for identity, belonging, emotional support, and well-being.',
       'it felt like home, wherever we were.',
@@ -335,7 +336,7 @@ export const questions: Question[] = [
     text: 'Think of a Family Member who is older than you or a Family Member who passed away. Someone special to you. We will ask you to tell us a little about them below.',
     type: 'dropdown',
     required: false,
-    placeholder: 'Select',
+    placeholder: 'Select the best answer',
     options: [
       'Maternal Grandmother', 'Maternal Grandfather',
       'Paternal Grandmother', 'Paternal Grandfather',
@@ -440,7 +441,7 @@ export const questions: Question[] = [
     text: 'This event had the greatest impact on my life.',
     type: 'dropdown',
     required: false,
-    placeholder: 'Select',
+    placeholder: 'Select the best answer',
     helpText: 'Select up to three',
     options: [
       'what I did to make money.',
@@ -489,7 +490,7 @@ export const questions: Question[] = [
     text: 'I am most proud of...',
     type: 'dropdown',
     required: false,
-    placeholder: 'Select',
+    placeholder: 'Select the best answer',
     options: [
       'the family I raised.',
       'my professional achievements.',
@@ -561,7 +562,7 @@ export const questions: Question[] = [
     text: 'It\'s important to me that my family understands the following about my financial intentions and values...',
     type: 'dropdown',
     required: false,
-    placeholder: 'Select the best answer',
+    placeholder: 'Say it in your own words.',
     options: [
       'I value education over material wealth.',
       'Wealth is a tool, not an identity.',
@@ -645,7 +646,7 @@ export const questions: Question[] = [
     text: 'When it comes to personal finance, here is the advice I want to pass on based on what I\'ve learned over the years:',
     type: 'dropdown',
     required: false,
-    placeholder: 'Select the best answer',
+    placeholder: 'Say it in your own words.',
     options: [
       'Spend less than you earn and save the difference consistently.',
       'Live on a written budget and give every dollar a job.',
@@ -686,7 +687,7 @@ export const questions: Question[] = [
     text: 'I wish to provide the following general guidance for my heirs to make the most of their inheritance:',
     type: 'dropdown',
     required: false,
-    placeholder: 'Select the best answer',
+    placeholder: 'Say it in your own words.',
     options: [
       'Use this inheritance to build a strong foundation for your future.',
       'Invest thoughtfully and with a long-term perspective.',
@@ -741,9 +742,11 @@ export const questions: Question[] = [
     section: 'My Legacy',
     sectionIndex: 7,
     text: 'I hope to be remembered for...',
+    label: 'Select up to 3',
     type: 'multiselect',
     required: false,
-    placeholder: 'Select',
+    placeholder: 'Select the best answer',
+    maxSelections: 3,
     options: [
       'how deeply I loved.',
       'the way I showed up for others.',
@@ -784,9 +787,9 @@ export const questions: Question[] = [
     section: 'My Legacy',
     sectionIndex: 7,
     text: 'The causes that have always been important to me are...',
-    type: 'dropdown',
+    type: 'multi-dropdown',
     required: false,
-    placeholder: 'Select',
+    placeholder: 'Select the best answer',
     options: [
       'advancing social justice.',
       'protecting the environment.',
@@ -829,7 +832,7 @@ export const questions: Question[] = [
     text: 'I hope that my family will carry forward this guiding purpose or legacy',
     type: 'multiselect',
     required: false,
-    placeholder: 'Select',
+    placeholder: 'Select the best answer',
     options: [
       'Build generational wealth',
       'Be wealthier as a family than we are today, 100 years from now',
@@ -858,11 +861,12 @@ export const questions: Question[] = [
     id: 'q6_4',
     section: 'My Legacy',
     sectionIndex: 7,
-    text: 'What does it mean to be part of this family?',
-    helpText: 'If you had a vote in your Family Core Values after you are gone, which would you choose? Select up to 5.',
-    type: 'dropdown',
+    text: 'What does it mean to be part of this family? If you had a vote to choose your Family Core Values after you are gone, which would you choose?',
+    label: 'Select up to 3',
+    type: 'multiselect',
     required: false,
-    placeholder: 'Select',
+    placeholder: 'Select the best answer',
+    maxSelections: 3,
     options: [
       'Faith', 'Family', 'Integrity', 'Hard Work', 'Love',
       'Loyalty', 'Service', 'Education', 'Generosity', 'Humility',
@@ -877,7 +881,7 @@ export const questions: Question[] = [
     text: 'If my family created a physical memorial in my honor, what appeals to me most is',
     type: 'multiselect',
     required: false,
-    placeholder: 'Select',
+    placeholder: 'Select the best answer',
     options: [
       'my ashes scattered in a beautiful location that you enjoy visiting with family',
       'a park bench beneath the trees',
@@ -926,7 +930,7 @@ export const questions: Question[] = [
     text: 'Above all, I want you to know...',
     type: 'dropdown',
     required: false,
-    placeholder: 'Select',
+    placeholder: 'Select the best answer',
     options: [
       'how much I love you.',
       'that I\'ve always been proud of you.',
@@ -967,7 +971,7 @@ export const questions: Question[] = [
     text: 'If you ever find yourself in a hard season, I hope you will remember',
     type: 'dropdown',
     required: false,
-    placeholder: 'Select',
+    placeholder: 'Select the best answer',
     options: [
       'you\'ve made it through hard times before.',
       'you are stronger than you think.',
@@ -1009,7 +1013,7 @@ export const questions: Question[] = [
     text: 'My advice for how to handle challenges in life is...',
     type: 'dropdown',
     required: false,
-    placeholder: 'Select',
+    placeholder: 'Select the best answer',
     options: [
       'to stay calm and take things one step at a time.',
       'to lean on family and friends when you need help.',
@@ -1052,7 +1056,7 @@ export const questions: Question[] = [
     text: 'One message I want to pass on to the next generation is...',
     type: 'dropdown',
     required: false,
-    placeholder: 'Select',
+    placeholder: 'Select the best answer',
     options: [
       'You are loved — always, and without condition.',
       'Keep going — your life has purpose.',
@@ -1093,7 +1097,7 @@ export const questions: Question[] = [
     text: 'One last thing I\'d like to say is...',
     type: 'dropdown',
     required: false,
-    placeholder: 'Select',
+    placeholder: 'Select the best answer',
     options: [
       'thank you for loving me.',
       'thank you for letting me love you.',
@@ -1134,7 +1138,7 @@ export const questions: Question[] = [
     text: 'Closing for your letter',
     type: 'dropdown',
     required: false,
-    placeholder: 'Select',
+    placeholder: 'Select the best answer',
     options: [
       'With all my love',
       'Love always',
@@ -1188,7 +1192,7 @@ export const questions: Question[] = [
     text: 'Overall Feel',
     type: 'dropdown',
     required: false,
-    placeholder: 'Select',
+    placeholder: 'Select the best answer',
     options: [
       'Calm and reflective',
       'Warm and affectionate',
@@ -1204,7 +1208,7 @@ export const questions: Question[] = [
     text: 'Emotional Expression',
     type: 'dropdown',
     required: false,
-    placeholder: 'Select',
+    placeholder: 'Select the best answer',
     options: [
       'Strong emotional warmth',
       'Moderate emotion, controlled',
@@ -1219,7 +1223,7 @@ export const questions: Question[] = [
     text: 'Sentence Style',
     type: 'dropdown',
     required: false,
-    placeholder: 'Select',
+    placeholder: 'Select the best answer',
     options: [
       'Short, clean sentences — "say it simply"',
       'Medium-length, natural paragraphs',
@@ -1233,7 +1237,7 @@ export const questions: Question[] = [
     text: 'Warmth Level',
     type: 'dropdown',
     required: false,
-    placeholder: 'Select',
+    placeholder: 'Select the best answer',
     options: [
       'Very warm and personal',
       'Warm but measured',
@@ -1248,7 +1252,7 @@ export const questions: Question[] = [
     text: 'Formality Level',
     type: 'dropdown',
     required: false,
-    placeholder: 'Select',
+    placeholder: 'Select the best answer',
     options: [
       'Casual, everyday language',
       'Professional but friendly',
@@ -1263,7 +1267,7 @@ export const questions: Question[] = [
     text: 'Directness',
     type: 'dropdown',
     required: false,
-    placeholder: 'Select',
+    placeholder: 'Select the best answer',
     options: [
       'Blunt and direct — no extra words',
       'Clear and matter-of-fact',
@@ -1278,7 +1282,7 @@ export const questions: Question[] = [
     text: 'Do you want faith-based or spiritual language included in the letter?',
     type: 'dropdown',
     required: false,
-    placeholder: 'Select',
+    placeholder: 'Select the best answer',
     options: [
       'Yes, prominently',
       'Yes, but subtle references only',
@@ -1302,7 +1306,7 @@ export const questions: Question[] = [
     text: 'Optional: How explicitly should that tradition be referenced?',
     type: 'dropdown',
     required: false,
-    placeholder: 'Select',
+    placeholder: 'Select the best answer',
     options: [
       'Light references only (values, worldview, not scripture)',
       'Moderate (beliefs and God-language acceptable)',
@@ -1316,7 +1320,7 @@ export const questions: Question[] = [
     text: 'How personally revealing should the letter be?',
     type: 'dropdown',
     required: false,
-    placeholder: 'Select',
+    placeholder: 'Select the best answer',
     options: [
       'High — share candid feelings and vulnerabilities',
       'Medium — some openness but not deep',
@@ -1330,7 +1334,7 @@ export const questions: Question[] = [
     text: 'Use of Figurative / Poetic Language',
     type: 'dropdown',
     required: false,
-    placeholder: 'Select',
+    placeholder: 'Select the best answer',
     options: [
       'I like expressive wording and gentle imagery',
       'I like language with warmth but not poetic',
@@ -1344,7 +1348,7 @@ export const questions: Question[] = [
     text: 'How do you want to sound in relation to the recipients?',
     type: 'dropdown',
     required: false,
-    placeholder: 'Select',
+    placeholder: 'Select the best answer',
     options: [
       'Loving parent or grandparent — "I am so proud of you."',
       'Wise mentor or advisor — "Here is what experience taught me."',
@@ -1362,7 +1366,7 @@ export const questions: Question[] = [
     text: 'How "dense" should the writing feel?',
     type: 'dropdown',
     required: false,
-    placeholder: 'Select',
+    placeholder: 'Select the best answer',
     options: [
       'Light and spacious — more white space, fewer words',
       'Moderate — balanced length',
@@ -1376,7 +1380,7 @@ export const questions: Question[] = [
     text: 'Should we use contractions?',
     type: 'dropdown',
     required: false,
-    placeholder: 'Select',
+    placeholder: 'Select the best answer',
     options: [
       'Yes — natural and conversational',
       'No — write out full words (I am, I will)',
@@ -1389,7 +1393,7 @@ export const questions: Question[] = [
     text: 'Which tones should we absolutely avoid?',
     type: 'multiselect',
     required: false,
-    placeholder: 'Select',
+    placeholder: 'Select the best answer',
     options: [
       'Flowery or poetic',
       'Cold or mechanical',
@@ -1408,7 +1412,7 @@ export const questions: Question[] = [
     text: 'Which font would you like to use?',
     type: 'dropdown',
     required: false,
-    placeholder: 'Select',
+    placeholder: 'Select the best answer',
     options: [
       'Classic Serif (Times New Roman)',
       'Modern Sans-Serif (Arial)',

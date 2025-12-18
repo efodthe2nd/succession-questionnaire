@@ -14,21 +14,25 @@ interface MultiselectInputProps {
 
 // Questions that should be expanded by default (not collapsible)
 const EXPANDED_BY_DEFAULT = ['q2_2', 'q2_3'];
-const MAX_SELECTIONS = 5;
+const DEFAULT_MAX_SELECTIONS = 5;
 
 export default function MultiselectInput({ question, value, onChange, isDarkMode }: MultiselectInputProps) {
   const [customText, setCustomText] = useState('');
   const [showCustomInput, setShowCustomInput] = useState(false);
 
+  // Use question-specific maxSelections or default
+  const maxSelections = question.maxSelections || DEFAULT_MAX_SELECTIONS;
+
   // Collapsible state - some questions start expanded
   const shouldExpandByDefault = EXPANDED_BY_DEFAULT.includes(question.id);
   const [isExpanded, setIsExpanded] = useState(shouldExpandByDefault);
 
-  const currentValues = value || [];
+  // Handle both array and string values (for backwards compatibility with dropdown->multiselect conversion)
+  const currentValues = Array.isArray(value) ? value : (value ? [value as unknown as string] : []);
 
   // Count selections from predefined options only (not custom text)
   const selectionCount = currentValues.filter(v => question.options?.includes(v)).length;
-  const isAtLimit = selectionCount >= MAX_SELECTIONS;
+  const isAtLimit = selectionCount >= maxSelections;
 
   // Check if any current values are custom (not in options)
   const customValues = currentValues.filter(v => !question.options?.includes(v));
@@ -94,7 +98,7 @@ export default function MultiselectInput({ question, value, onChange, isDarkMode
               : 'border-gray-300 text-gray-500 bg-transparent hover:border-gray-400 hover:text-gray-600'
           }`}
         >
-          <span>Select up to {MAX_SELECTIONS}</span>
+          <span>Select up to {maxSelections}</span>
           <svg className="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
             <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M19 9l-7 7-7-7" />
           </svg>
@@ -108,7 +112,7 @@ return (
       {/* Selection counter */}
       <div className={`flex justify-between items-center mb-3`}>
         <span className={`text-xs ${isDarkMode ? 'text-gray-500' : 'text-gray-400'}`}>
-          {selectionCount}/{MAX_SELECTIONS} selected
+          {selectionCount}/{maxSelections} selected
         </span>
         {!shouldExpandByDefault && (
           <button
@@ -165,7 +169,7 @@ return (
                 : 'bg-transparent text-[#8B7355] border-[#8B7355] hover:bg-[#8B7355]/10'
           }`}
         >
-          + Other
+          Say it in your own words.
         </button>
       </div>
 

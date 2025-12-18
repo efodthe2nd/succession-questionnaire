@@ -1,9 +1,10 @@
 /** @type {import('next').NextConfig} */
 const nextConfig = {
-  // Force webpack instead of turbopack for now
   experimental: {
     forceSwcTransforms: true,
   },
+  // Empty turbopack config to use Turbopack without webpack
+  turbopack: {},
 }
 
 module.exports = nextConfig
