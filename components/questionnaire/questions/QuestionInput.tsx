@@ -87,8 +87,8 @@ export default function QuestionInput({
       return (
         <MultiDropdownInput
           question={question}
-          value={value as string}
-          onChange={onChange as (value: string) => void}
+          value={value as string[]}
+          onChange={onChange as (value: string[]) => void}
           isDarkMode={isDarkMode}
         />
       );

@@ -863,7 +863,7 @@ export const questions: Question[] = [
     sectionIndex: 7,
     text: 'What does it mean to be part of this family? If you had a vote to choose your Family Core Values after you are gone, which would you choose?',
     label: 'Select up to 3',
-    type: 'multiselect',
+    type: 'multi-dropdown',
     required: false,
     placeholder: 'Select the best answer',
     maxSelections: 3,
