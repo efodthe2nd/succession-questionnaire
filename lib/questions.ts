@@ -420,13 +420,13 @@ export const questions: Question[] = [
     type: 'child-section',
     required: false,
   },
-  // family_5.PNG - Spouse Section (consolidated into single repeatable section)
+  // family_5.PNG - Significant Other Section (consolidated into single repeatable section)
   {
     id: 'q3_spouse_section',
     section: 'My Family',
     sectionIndex: 5,
-    text: 'Your Spouse',
-    label: 'Spouse',
+    text: 'Your Significant Other',
+    label: 'Significant Other',
     type: 'spouse-section',
     required: false,
   },
@@ -1430,10 +1430,12 @@ export const questions: Question[] = [
     required: false,
     placeholder: 'Select a handwriting style',
     options: [
-      'Style 1 - Casual Script',
-      'Style 2 - Elegant Cursive',
-      'Style 3 - Modern Handwriting',
-      'Style 4 - Classic Penmanship',
+      'Style 1 - Times New Roman',
+      'Style 2 - Antic',
+      'Style 3 - Over The Rainbow',
+      'Style 4 - Handsome',
+      'Style 5 - Biro Script Plus',
+      'Style 6 - Canva Student Font',
     ],
   },
 ];

@@ -14,26 +14,38 @@ interface HandwritingStyleInputProps {
 const handwritingStyles = [
   {
     id: 'style-1',
-    label: 'Style 1 - Casual Script',
-    fontClass: 'font-caveat',
+    label: 'Style 1 - Times New Roman',
+    fontClass: 'font-times-new-roman',
     example: 'With all my love, always',
   },
   {
     id: 'style-2',
-    label: 'Style 2 - Elegant Cursive',
-    fontClass: 'font-dancing-script',
+    label: 'Style 2 - Antic',
+    fontClass: 'font-antic',
     example: 'With all my love, always',
   },
   {
     id: 'style-3',
-    label: 'Style 3 - Modern Handwriting',
-    fontClass: 'font-indie-flower',
+    label: 'Style 3 - Over The Rainbow',
+    fontClass: 'font-over-the-rainbow',
     example: 'With all my love, always',
   },
   {
     id: 'style-4',
-    label: 'Style 4 - Classic Penmanship',
-    fontClass: 'font-satisfy',
+    label: 'Style 4 - Handsome',
+    fontClass: 'font-handlee',
+    example: 'With all my love, always',
+  },
+  {
+    id: 'style-5',
+    label: 'Style 5 - Biro Script Plus',
+    fontClass: 'font-caveat',
+    example: 'With all my love, always',
+  },
+  {
+    id: 'style-6',
+    label: 'Style 6 - Canva Student Font',
+    fontClass: 'font-kalam',
     example: 'With all my love, always',
   },
 ];

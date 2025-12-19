@@ -1,4 +1,4 @@
-import { Lora, Poppins, Caveat, Dancing_Script, Indie_Flower, Satisfy } from 'next/font/google';
+import { Lora, Poppins, Antic, Over_the_Rainbow, Handlee, Caveat, Kalam } from 'next/font/google';
 import type { Metadata } from 'next';
 import './globals.css';
 
@@ -15,27 +15,33 @@ const poppins = Poppins({
 });
 
 // Handwriting style fonts
+const antic = Antic({
+  subsets: ['latin'],
+  variable: '--font-antic',
+  weight: ['400'],
+});
+
+const overTheRainbow = Over_the_Rainbow({
+  subsets: ['latin'],
+  variable: '--font-over-the-rainbow',
+  weight: ['400'],
+});
+
+const handlee = Handlee({
+  subsets: ['latin'],
+  variable: '--font-handlee',
+  weight: ['400'],
+});
+
 const caveat = Caveat({
   subsets: ['latin'],
   variable: '--font-caveat',
   weight: ['400', '700'],
 });
 
-const dancingScript = Dancing_Script({
+const kalam = Kalam({
   subsets: ['latin'],
-  variable: '--font-dancing-script',
-  weight: ['400', '700'],
-});
-
-const indieFlower = Indie_Flower({
-  subsets: ['latin'],
-  variable: '--font-indie-flower',
-  weight: ['400'],
-});
-
-const satisfy = Satisfy({
-  subsets: ['latin'],
-  variable: '--font-satisfy',
+  variable: '--font-kalam',
   weight: ['400'],
 });
 
@@ -53,7 +59,7 @@ export default function RootLayout({
   children: React.ReactNode;
 }) {
   return (
-    <html lang="en" suppressHydrationWarning className={`${lora.variable} ${poppins.variable} ${caveat.variable} ${dancingScript.variable} ${indieFlower.variable} ${satisfy.variable}`}>
+    <html lang="en" suppressHydrationWarning className={`${lora.variable} ${poppins.variable} ${antic.variable} ${overTheRainbow.variable} ${handlee.variable} ${caveat.variable} ${kalam.variable}`}>
       <body className="font-body">{children}</body>
     </html>
   );

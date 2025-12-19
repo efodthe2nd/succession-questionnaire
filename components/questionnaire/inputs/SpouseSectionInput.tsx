@@ -20,6 +20,10 @@ export default function SpouseSectionInput({
 
   // Spouse type options
   const spouseTypeOptions = [
+    'Husband',
+    'Wife',
+    'Partner',
+    'Spouse',
     'Soulmate',
     'Dear Friend',
     'Boyfriend',
@@ -108,10 +112,10 @@ export default function SpouseSectionInput({
           </select>
         </div>
 
-        {/* Spouse's Name */}
+        {/* Significant Other's Name */}
         <div className="space-y-2">
           <label className={`block text-sm font-medium ${isDarkMode ? 'text-white' : 'text-black'}`}>
-            Spouse's name:
+            Their name:
           </label>
           <input
             type="text"
@@ -129,7 +133,7 @@ export default function SpouseSectionInput({
         {/* How You Met */}
         <div className="space-y-2">
           <label className={`block text-sm font-medium ${isDarkMode ? 'text-white' : 'text-black'}`}>
-            What is memorable about how you met your spouse?
+            What is memorable about how you met your significant other?
           </label>
           <div className="relative">
             <input
@@ -161,10 +165,10 @@ export default function SpouseSectionInput({
           </div>
         </div>
 
-        {/* Message to Spouse */}
+        {/* Message to Significant Other */}
         <div className="space-y-2">
           <label className={`block text-sm font-medium ${isDarkMode ? 'text-white' : 'text-black'}`}>
-            What do you want for your spouse to know, whether you've told them before or not?
+            What do you want for your significant other to know, whether you've told them before or not?
           </label>
           <p className={`text-sm ${isDarkMode ? 'text-gray-400' : 'text-gray-500'}`}>
             One Succession Story writer shared, "I wasn't always great at expressing it, but you were my home. That night we sat on the couch doing nothing, not talking, just together...that's when I realized how safe I felt with you."
@@ -207,14 +211,14 @@ export default function SpouseSectionInput({
       {/* Section Header */}
       <div>
         <h2 className={`text-xl font-bold ${isDarkMode ? 'text-white' : 'text-black'}`}>
-          Your Spouse
+          Your Significant Other
         </h2>
       </div>
 
       {/* Render all spouses */}
       {Array.from({ length: spouseCount }, (_, index) => renderSpouseEntry(index))}
 
-      {/* Add Another Spouse Button */}
+      {/* Add Another Significant Other Button */}
       <button
         type="button"
         onClick={addSpouse}
@@ -224,7 +228,7 @@ export default function SpouseSectionInput({
             : 'border-gray-300 text-gray-400 bg-transparent hover:border-gray-400 hover:text-gray-500'
         }`}
       >
-        + Add another spouse/partner
+        + Add another significant other
       </button>
     </div>
   );
