@@ -55,3 +55,81 @@ html {
 .font-kalam {
   font-family: var(--font-kalam), cursive;
 }
+
+/* Landing page styles */
+.landing-page ::-webkit-scrollbar {
+  display: none;
+}
+
+.landing-page #i7zf4 {
+  color: rgb(137, 140, 135);
+  max-width: 100%;
+  width: 100%;
+}
+
+.landing-page #ixvq04 {
+  color: rgb(25, 26, 25);
+}
+
+.landing-page #ioduf {
+  justify-content: flex-start;
+}
+
+.landing-page #iwo5l {
+  font-size: 21px;
+}
+
+.landing-page #imbei {
+  font-size: 19px;
+  font-weight: 700;
+}
+
+.landing-page #ixmkx4 {
+  font-size: 21px;
+}
+
+.landing-page #ibuq8l {
+  font-size: 20px;
+}
+
+.landing-page #i8mphk {
+  font-size: 20px;
+}
+
+.landing-page #iab4qi {
+  font-size: 20px;
+}
+
+.landing-page #i08rma {
+  font-size: 20px;
+  font-weight: 400;
+}
+
+.landing-page #in64sy {
+  font-size: 18px;
+}
+
+.landing-page #i7g94o {
+  font-size: 22px;
+}
+
+.landing-page .fa-solid.fa-check-circle.text-taupe.mr-3 {
+  width: 18px;
+  height: 17px;
+}
+
+@media (max-width: 768px) {
+  .landing-page #iwo5l,
+  .landing-page #ixmkx4 {
+    font-size: 18px;
+  }
+  .landing-page #ibuq8l,
+  .landing-page #i8mphk,
+  .landing-page #iab4qi,
+  .landing-page #i08rma {
+    font-size: 17px;
+  }
+  .landing-page #imbei {
+    font-size: 17px;
+  }
+}

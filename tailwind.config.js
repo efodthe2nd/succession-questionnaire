@@ -24,10 +24,17 @@ module.exports = {
           dark: '#000000',
         },
         border: '#E5E5E5',
+        // Landing page colors
+        ivory: '#F8F6F2',
+        taupe: '#D1C7B8',
+        charcoal: '#373A36',
+        'soft-gray': '#A9A9A9',
       },
       fontFamily: {
         heading: ['Lora', 'serif'],
         body: ['Poppins', 'sans-serif'],
+        serif: ['Lora', 'serif'],
+        sans: ['Poppins', 'sans-serif'],
       },
       fontSize: {
         'h1': ['32px', { lineHeight: '1.2', fontWeight: '700' }],
