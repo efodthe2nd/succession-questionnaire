@@ -19,6 +19,7 @@ export default function QuestionnairePage() {
   const [isDarkMode, setIsDarkMode] = useState(false);
   const [isLoading, setIsLoading] = useState(true);
   const [timeRemaining, setTimeRemaining] = useState(INITIAL_TIME_SECONDS);
+  const [saveStatus, setSaveStatus] = useState<'idle' | 'saving' | 'saved'>('idle');
   const router = useRouter();
   const supabase = createClient();
 
@@ -131,6 +132,7 @@ export default function QuestionnairePage() {
 
   const handleSave = async () => {
     if (!submissionId) return;
+    setSaveStatus('saving');
     await supabase
       .from('submissions')
       .update({
@@ -138,6 +140,9 @@ export default function QuestionnairePage() {
         time_remaining: timeRemaining
       })
       .eq('id', submissionId);
+    setSaveStatus('saved');
+    // Reset to idle after 2 seconds
+    setTimeout(() => setSaveStatus('idle'), 2000);
   };
 
   const handleNext = async () => {
@@ -251,6 +256,7 @@ export default function QuestionnairePage() {
         onSave={handleSave}
         onToggleDarkMode={toggleDarkMode}
         onAddStory={handleAddStory}
+        saveStatus={saveStatus}
       />
 
       {/* Mobile Layout */}
@@ -271,6 +277,7 @@ export default function QuestionnairePage() {
         onToggleProgressModal={toggleProgressModal}
         onBack={handleBack}
         onAddStory={handleAddStory}
+        saveStatus={saveStatus}
       />
     </div>
   );

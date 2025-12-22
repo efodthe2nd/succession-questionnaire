@@ -26,6 +26,7 @@ const assetOptions = [
   'my family heirloom',
   'my car',
   'my gold and silver',
+  'Say it in your own words',
 ];
 
 // Guidance options
@@ -313,22 +314,6 @@ export default function AssetSectionInput({
         </div>
       )}
 
-      {/* Example quotes */}
-      <div className={`text-xs space-y-3 ${isDarkMode ? 'text-gray-500' : 'text-gray-400'}`}>
-        <p className="leading-relaxed">
-          One Succession Story writer said, "As for the rental property, what I want you to know is that they are a business and if you're not good at the business either partner with someone who is, or sell them smart and move on. Don't let those houses become a burden. If they're too much to manage, sell and invest the money. I once missed Thanksgiving dinner cleaning out a tenant's drain. Don't repeat that."
-        </p>
-        <p className="leading-relaxed">
-          Another said, "As for the commercial property, what I want you to know is that your mother and I touched and improved every inch of it ourselves. We had an agent but we ended up negotiating the deal ourselves. We talked the sellers into financing it for us, and ended up being life-long partners and friends with them. We spent more time there than we did at home. Make the most of it."
-        </p>
-        <p className="leading-relaxed">
-          Another said, "As for our home, what I want you to know is that the water shutoff is just under the hose on the left side of the house."
-        </p>
-        <p className="leading-relaxed">
-          Another said, "As for my brokerage account, what I want you to know is that there is enough in there for you to invest most of it, and still buy yourself something nice. I noticed that you never did this. Spend $5,000 of it and splurge on something that makes you feel good. A nice piece of art, or a first class ticket, whatever you want. I want that for you."
-        </p>
-      </div>
-
       {/* Render all assets */}
       {Array.from({ length: assetCount }, (_, index) => renderAssetEntry(index))}
 
@@ -344,6 +329,22 @@ export default function AssetSectionInput({
       >
         + Add another asset
       </button>
+
+      {/* Example quotes */}
+      <div className={`text-xs space-y-3 ${isDarkMode ? 'text-gray-500' : 'text-gray-400'}`}>
+        <p className="leading-relaxed">
+          One Succession Story writer said, "As for the rental property, what I want you to know is that they are a business and if you're not good at the business either partner with someone who is, or sell them smart and move on. Don't let those houses become a burden. If they're too much to manage, sell and invest the money. I once missed Thanksgiving dinner cleaning out a tenant's drain. Don't repeat that."
+        </p>
+        <p className="leading-relaxed">
+          Another said, "As for the commercial property, what I want you to know is that your mother and I touched and improved every inch of it ourselves. We had an agent but we ended up negotiating the deal ourselves. We talked the sellers into financing it for us, and ended up being life-long partners and friends with them. We spent more time there than we did at home. Make the most of it."
+        </p>
+        <p className="leading-relaxed">
+          Another said, "As for our home, what I want you to know is that the water shutoff is just under the hose on the left side of the house."
+        </p>
+        <p className="leading-relaxed">
+          Another said, "As for my brokerage account, what I want you to know is that there is enough in there for you to invest most of it, and still buy yourself something nice. I noticed that you never did this. Spend $5,000 of it and splurge on something that makes you feel good. A nice piece of art, or a first class ticket, whatever you want. I want that for you."
+        </p>
+      </div>
     </div>
   );
 }

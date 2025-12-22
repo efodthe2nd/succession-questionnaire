@@ -225,7 +225,7 @@ export default function StoryInput({
       {question.subtitle && (
         <div className={`space-y-4 ${isDarkMode ? 'text-gray-300' : 'text-gray-600'}`}>
           {question.subtitle.split('\n\n').map((paragraph, index) => (
-            <p key={index} className="text-sm leading-relaxed">
+            <p key={index} className="text-sm leading-relaxed font-semibold">
               {paragraph}
             </p>
           ))}

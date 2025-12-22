@@ -198,10 +198,8 @@ export default function LoginPage() {
 
       {/* Footer links */}
       <div className="fixed bottom-8 left-0 right-0 flex justify-center gap-8 text-white text-sm z-20">
-        <a href="#" className="hover:text-[#B5A692] transition-colors">Succession Story</a>
-        <a href="#" className="hover:text-[#B5A692] transition-colors">Terms</a>
-        <a href="#" className="hover:text-[#B5A692] transition-colors">Policy</a>
-        <a href="#" className="hover:text-[#B5A692] transition-colors">Privacy</a>
+        <a href="/terms" className="hover:text-[#B5A692] transition-colors">Terms</a>
+        <a href="/privacy" className="hover:text-[#B5A692] transition-colors">Privacy</a>
       </div>
 
       {/* Settings icon - Fixed bottom right */}

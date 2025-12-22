@@ -50,7 +50,7 @@ export const sections: Section[] = [
   { id: 6, title: 'Pivotal Experiences In My Life', totalQuestions: 3 },
   { id: 7, title: 'My Legacy', totalQuestions: 5 },
   { id: 8, title: 'Final Thoughts', totalQuestions: 7 },
-  { id: 9, title: 'Tone & Voice of Questionnaire', totalQuestions: 18 },
+  { id: 9, title: 'Tone & Voice of Questionnaire', totalQuestions: 17 },
 ];
 
 export const questions: Question[] = [
@@ -1414,28 +1414,12 @@ export const questions: Question[] = [
     required: false,
     placeholder: 'Select the best answer',
     options: [
-      'Classic Serif (Times New Roman)',
-      'Modern Sans-Serif (Arial)',
-      'Elegant Script',
-      'Traditional Typewriter',
-      'Handwritten Style',
-    ],
-  },
-  {
-    id: 'q8_18',
-    section: 'Tone & Voice of Questionnaire',
-    sectionIndex: 9,
-    text: 'If you selected Handwritten Style, which handwriting do you prefer?',
-    type: 'handwriting-style',
-    required: false,
-    placeholder: 'Select a handwriting style',
-    options: [
-      'Style 1 - Times New Roman',
-      'Style 2 - Antic',
-      'Style 3 - Over The Rainbow',
-      'Style 4 - Handsome',
-      'Style 5 - Biro Script Plus',
-      'Style 6 - Canva Student Font',
+      'Serif',
+      'Sans',
+      'Freestyle',
+      'Cursive',
+      'Quick',
+      'Clean',
     ],
   },
 ];

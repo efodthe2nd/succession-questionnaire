@@ -122,22 +122,35 @@ export default function LandingPage() {
         {/* Hero Section */}
         <section
           id="hero"
-          className="min-h-[600px] md:h-[720px] text-center flex flex-col items-center justify-center bg-ivory px-4 py-12"
+          className="relative min-h-[600px] md:h-[720px] text-center flex flex-col items-center justify-center px-4 py-12 overflow-hidden"
         >
-          <div id="hero-content" className="max-w-4xl mx-auto">
+          {/* Background Video */}
+          <video
+            autoPlay
+            muted
+            loop
+            playsInline
+            className="absolute inset-0 w-full h-full object-cover"
+          >
+            <source src="/Hero Background.mp4" type="video/mp4" />
+          </video>
+          {/* Dark Overlay for readability */}
+          <div className="absolute inset-0 bg-black/50" />
+
+          <div id="hero-content" className="relative z-10 max-w-4xl mx-auto">
             <h1
               id="i7zf4"
-              className="font-serif text-3xl sm:text-4xl md:text-5xl lg:text-7xl font-medium text-charcoal leading-tight"
+              className="font-serif text-3xl sm:text-4xl md:text-5xl lg:text-7xl font-medium text-white leading-tight"
             >
               Your Will explains the&nbsp;<i id="i4nbr">What</i>.<br />
             </h1>
             <h1
               id="ixvq04"
-              className="font-serif text-3xl sm:text-4xl md:text-5xl lg:text-7xl font-medium text-charcoal leading-tight mt-2"
+              className="font-serif text-3xl sm:text-4xl md:text-5xl lg:text-7xl font-medium text-white leading-tight mt-2"
             >
               Your Succession Story explains the <i id="iuf45e">Why</i>.
             </h1>
-            <p className="mt-6 max-w-2xl mx-auto text-base md:text-lg text-charcoal/80">
+            <p className="mt-6 max-w-2xl mx-auto text-base md:text-lg text-white/90">
               A priceless companion to your will or trust. Create a legacy letter
               to tell your family what they need to hear when you&apos;re not here to
               answer their questions. We write your heartfelt message in minutes,

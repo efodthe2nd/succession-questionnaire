@@ -22,6 +22,7 @@ interface MobileLayoutProps {
   onToggleProgressModal: () => void;
   onBack: () => void;
   onAddStory?: (questionId: string) => void;
+  saveStatus?: 'idle' | 'saving' | 'saved';
 }
 
 export default function MobileLayout({
@@ -41,6 +42,7 @@ export default function MobileLayout({
   onToggleProgressModal,
   onBack,
   onAddStory,
+  saveStatus = 'idle',
 }: MobileLayoutProps) {
   return (
     <div className="lg:hidden flex flex-col min-h-screen">
@@ -52,6 +54,7 @@ export default function MobileLayout({
         onToggleDarkMode={onToggleDarkMode}
         onSave={onSave}
         onBack={onBack}
+        saveStatus={saveStatus}
       />
 
       {/* Section Indicator / Progress Dropdown */}

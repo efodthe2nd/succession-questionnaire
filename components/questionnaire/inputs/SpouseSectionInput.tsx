@@ -121,7 +121,7 @@ export default function SpouseSectionInput({
             type="text"
             value={nameValue}
             onChange={(e) => onAnswerChange(nameId, e.target.value)}
-            placeholder="say it in your own words"
+            placeholder="Type here."
             className={`w-full px-4 py-3 rounded-xl transition-all duration-200 ${
               isDarkMode
                 ? 'bg-[#2a2a2a] text-white border border-gray-700 placeholder-gray-500 hover:border-gray-600'
@@ -140,7 +140,7 @@ export default function SpouseSectionInput({
               type="text"
               value={storyValue}
               onChange={(e) => onAnswerChange(storyId, e.target.value)}
-              placeholder="say it in your own words. Voice-to-text highly recommended."
+              placeholder="Say it in your own words. Voice-to-text highly recommended."
               className={`w-full px-4 py-3 pr-12 rounded-xl transition-all duration-200 ${
                 isDarkMode
                   ? 'bg-[#2a2a2a] text-white border border-gray-700 placeholder-gray-500 hover:border-gray-600'
@@ -177,7 +177,7 @@ export default function SpouseSectionInput({
             <textarea
               value={messageValue}
               onChange={(e) => onAnswerChange(messageId, e.target.value)}
-              placeholder="say it in your own words"
+              placeholder="Say it in your own words. Voice-to-text highly recommended."
               rows={3}
               className={`w-full px-4 py-3.5 pr-12 rounded-xl resize-none transition-all duration-200 ${
                 isDarkMode

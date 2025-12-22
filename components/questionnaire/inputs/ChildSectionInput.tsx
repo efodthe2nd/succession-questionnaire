@@ -144,7 +144,7 @@ export default function ChildSectionInput({
             <textarea
               value={messageValue}
               onChange={(e) => onAnswerChange(messageId, e.target.value)}
-              placeholder="Type Here!"
+              placeholder="Say it in your own words."
               rows={3}
               className={`w-full px-4 py-3.5 pr-12 rounded-xl resize-none transition-all duration-200 ${
                 isDarkMode

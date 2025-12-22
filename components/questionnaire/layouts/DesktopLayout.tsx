@@ -22,6 +22,7 @@ interface DesktopLayoutProps {
   onSave: () => void;
   onToggleDarkMode: () => void;
   onAddStory?: (questionId: string) => void;
+  saveStatus?: 'idle' | 'saving' | 'saved';
 }
 
 export default function DesktopLayout({
@@ -40,6 +41,7 @@ export default function DesktopLayout({
   onSave,
   onToggleDarkMode,
   onAddStory,
+  saveStatus = 'idle',
 }: DesktopLayoutProps) {
   return (
     <div className="hidden lg:flex min-h-screen">
@@ -63,6 +65,7 @@ export default function DesktopLayout({
           onSave={onSave}
           onPrevious={onPrevious}
           canGoPrevious={currentSectionIndex > 1}
+          saveStatus={saveStatus}
         />
 
         {/* Questions Area */}
