@@ -60,7 +60,9 @@ export default function AuthCallbackHandler() {
         // Redirect to set-password page immediately
         // The tokens in the hash will be processed by Supabase on the new page
         // We pass the hash along so Supabase can process it
-        router.push('/set-password' + hash);
+        console.log('[AuthCallbackHandler] BEFORE redirect to /set-password');
+        window.location.href = '/set-password' + hash;
+        console.log('[AuthCallbackHandler] AFTER redirect to /set-password');
         return;
       }
     };
@@ -71,7 +73,7 @@ export default function AuthCallbackHandler() {
     // Listen for auth state changes (backup mechanism)
     const { data: { subscription } } = supabase.auth.onAuthStateChange(
       async (event, session) => {
-        console.log('[AuthCallbackHandler] Auth state change:', event);
+        console.log('[AuthCallbackHandler] Full event:', event, session);
         // Check if this is a PASSWORD_RECOVERY event
         if (event === 'PASSWORD_RECOVERY' && session) {
           console.log('[AuthCallbackHandler] PASSWORD_RECOVERY event, redirecting');
