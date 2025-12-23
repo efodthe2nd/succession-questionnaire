@@ -182,6 +182,14 @@ export async function sendWelcomeEmail({
     subject: 'Welcome to Succession Story - Set Your Password',
     text: generateWelcomeEmailText(passwordResetLink),
     html: generateWelcomeEmailHTML(passwordResetLink),
+    // Disable click tracking to prevent SendGrid from wrapping/encoding the magic link URL
+    // This is critical because URL encoding breaks Supabase auth tokens
+    trackingSettings: {
+      clickTracking: {
+        enable: false,
+        enableText: false,
+      },
+    },
   }
 
   try {
