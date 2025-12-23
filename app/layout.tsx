@@ -1,6 +1,7 @@
 import { Lora, Poppins, Antic, Over_the_Rainbow, Handlee, Caveat, Kalam } from 'next/font/google';
 import type { Metadata } from 'next';
 import './globals.css';
+import AuthCallbackHandler from '@/components/AuthCallbackHandler';
 
 const lora = Lora({
   subsets: ['latin'],
@@ -60,7 +61,10 @@ export default function RootLayout({
 }) {
   return (
     <html lang="en" suppressHydrationWarning className={`${lora.variable} ${poppins.variable} ${antic.variable} ${overTheRainbow.variable} ${handlee.variable} ${caveat.variable} ${kalam.variable}`}>
-      <body className="font-body">{children}</body>
+      <body className="font-body">
+        <AuthCallbackHandler />
+        {children}
+      </body>
     </html>
   );
 }

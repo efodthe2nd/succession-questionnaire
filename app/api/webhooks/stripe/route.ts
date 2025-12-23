@@ -104,12 +104,13 @@ export async function POST(request: NextRequest) {
       }
 
       // Generate password reset link (magic link for setting password)
+      // Redirect to homepage where AuthCallbackHandler will intercept and redirect to /set-password
       const { data: linkData, error: linkError } =
         await supabaseAdmin.auth.admin.generateLink({
           type: 'recovery',
           email: customerEmail,
           options: {
-            redirectTo: `${process.env.NEXT_PUBLIC_SITE_URL || 'https://successionstory.com'}/login`,
+            redirectTo: `${process.env.NEXT_PUBLIC_SITE_URL || 'https://successionstory.com'}`,
           },
         })
 
