@@ -110,7 +110,7 @@ export async function POST(request: NextRequest) {
           type: 'recovery',
           email: customerEmail,
           options: {
-            redirectTo: `${process.env.NEXT_PUBLIC_SITE_URL || 'https://successionstory.com'}`,
+            redirectTo: `${process.env.NEXT_PUBLIC_SITE_URL || 'https://www.successionstory.now'}`,
           },
         })
 
