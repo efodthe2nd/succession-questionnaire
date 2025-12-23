@@ -29,6 +29,49 @@ export default function SetPasswordPage() {
   // Check for valid session on mount
   useEffect(() => {
     const checkSession = async () => {
+      // First, check if there are tokens in the URL hash that need to be processed
+      const hash = window.location.hash;
+
+      if (hash && hash.includes('access_token')) {
+        console.log('[SetPassword] Hash detected, waiting for Supabase to process tokens...');
+
+        // Wait for Supabase to process the tokens from the hash
+        // Listen for auth state change
+        const { data: { subscription } } = supabase.auth.onAuthStateChange(
+          (event, session) => {
+            console.log('[SetPassword] Auth state change:', event);
+            if (event === 'PASSWORD_RECOVERY' || event === 'SIGNED_IN') {
+              if (session) {
+                // Clear the hash from URL
+                window.history.replaceState(null, '', '/set-password');
+                setHasValidSession(true);
+                setCheckingSession(false);
+              }
+            } else if (event === 'TOKEN_REFRESHED' && session) {
+              setHasValidSession(true);
+              setCheckingSession(false);
+            }
+          }
+        );
+
+        // Also set a timeout fallback - if no event fires within 5 seconds, check session directly
+        setTimeout(async () => {
+          const { data: { session } } = await supabase.auth.getSession();
+          if (session) {
+            window.history.replaceState(null, '', '/set-password');
+            setHasValidSession(true);
+          } else {
+            // No session established - token might be invalid
+            router.push('/');
+          }
+          setCheckingSession(false);
+          subscription.unsubscribe();
+        }, 5000);
+
+        return;
+      }
+
+      // No hash - just check for existing session
       const { data: { session } } = await supabase.auth.getSession();
 
       if (session) {

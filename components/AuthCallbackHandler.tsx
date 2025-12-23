@@ -28,6 +28,8 @@ export default function AuthCallbackHandler() {
       const hash = window.location.hash;
       if (!hash) return;
 
+      console.log('[AuthCallbackHandler] Detected hash:', hash);
+
       // Parse hash parameters
       const hashParams = new URLSearchParams(hash.substring(1));
 
@@ -36,6 +38,7 @@ export default function AuthCallbackHandler() {
       const errorDescription = hashParams.get('error_description');
 
       if (errorCode) {
+        console.log('[AuthCallbackHandler] Error detected:', errorCode);
         // Clear the hash from URL
         window.history.replaceState(null, '', pathname);
 
@@ -48,31 +51,30 @@ export default function AuthCallbackHandler() {
       }
 
       // Check if this is a recovery flow
-      if (hash.includes('type=recovery')) {
-        // Supabase client will automatically process the hash and establish a session
-        // We just need to wait for it and then redirect to set-password
+      const type = hashParams.get('type');
+      const accessToken = hashParams.get('access_token');
 
-        // Give Supabase a moment to process the tokens
-        const { data: { session }, error } = await supabase.auth.getSession();
+      if (type === 'recovery' && accessToken) {
+        console.log('[AuthCallbackHandler] Recovery flow detected, redirecting to /set-password');
 
-        if (session && !error) {
-          // Clear the hash from the URL
-          window.history.replaceState(null, '', pathname);
-
-          // Redirect to set-password page
-          router.push('/set-password');
-        }
+        // Redirect to set-password page immediately
+        // The tokens in the hash will be processed by Supabase on the new page
+        // We pass the hash along so Supabase can process it
+        router.push('/set-password' + hash);
+        return;
       }
     };
 
     // Run on mount
     handleHashChange();
 
-    // Listen for auth state changes (backup in case hash processing is async)
+    // Listen for auth state changes (backup mechanism)
     const { data: { subscription } } = supabase.auth.onAuthStateChange(
       async (event, session) => {
+        console.log('[AuthCallbackHandler] Auth state change:', event);
         // Check if this is a PASSWORD_RECOVERY event
         if (event === 'PASSWORD_RECOVERY' && session) {
+          console.log('[AuthCallbackHandler] PASSWORD_RECOVERY event, redirecting');
           // Clear hash and redirect to set-password
           if (typeof window !== 'undefined') {
             window.history.replaceState(null, '', pathname);
