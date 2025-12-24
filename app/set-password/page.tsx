@@ -45,32 +45,46 @@ export default function SetPasswordPage() {
           hasRefreshToken: !!refreshToken
         });
 
-        if (accessToken && refreshToken) {
-          // Manually set the session since @supabase/ssr doesn't auto-process hash
-          console.log('[SetPassword] Calling setSession with tokens...');
-          const { data, error } = await supabase.auth.setSession({
-            access_token: accessToken,
-            refresh_token: refreshToken,
-          });
+        if (!accessToken) {
+          console.log('[SetPassword] No access_token in hash, redirecting...');
+          router.push('/');
+          setCheckingSession(false);
+          return;
+        }
 
-          console.log('[SetPassword] setSession result:', {
-            hasSession: !!data.session,
-            error: error?.message
-          });
+        if (!refreshToken) {
+          console.log('[SetPassword] ERROR: refresh_token missing from hash! Cannot establish session.');
+          console.log('[SetPassword] This may be a test link or invalid recovery link.');
+          // Can't call setSession without refresh_token
+          router.push('/');
+          setCheckingSession(false);
+          return;
+        }
 
-          if (data.session) {
-            // Clear the hash from URL
-            window.history.replaceState(null, '', '/set-password');
-            setHasValidSession(true);
-            setCheckingSession(false);
-            return;
-          } else {
-            console.log('[SetPassword] setSession failed:', error);
-            // Token might be invalid/expired
-            router.push('/');
-            setCheckingSession(false);
-            return;
-          }
+        // Manually set the session since @supabase/ssr doesn't auto-process hash
+        console.log('[SetPassword] Calling setSession with tokens...');
+        const { data, error } = await supabase.auth.setSession({
+          access_token: accessToken,
+          refresh_token: refreshToken,
+        });
+
+        console.log('[SetPassword] setSession result:', {
+          hasSession: !!data.session,
+          error: error?.message
+        });
+
+        if (data.session) {
+          // Clear the hash from URL
+          window.history.replaceState(null, '', '/set-password');
+          setHasValidSession(true);
+          setCheckingSession(false);
+          return;
+        } else {
+          console.log('[SetPassword] setSession failed:', error);
+          // Token might be invalid/expired
+          router.push('/');
+          setCheckingSession(false);
+          return;
         }
       }
 

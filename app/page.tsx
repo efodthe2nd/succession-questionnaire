@@ -3,6 +3,7 @@
 import { useEffect } from "react";
 import Script from "next/script";
 import Image from "next/image";
+import EmbeddedCheckoutSection from "@/components/EmbeddedCheckout";
 
 export default function LandingPage() {
   useEffect(() => {
@@ -170,6 +171,9 @@ export default function LandingPage() {
             </a>
           </div>
         </section>
+
+        {/* Embedded Checkout Section */}
+        <EmbeddedCheckoutSection />
 
         {/* Why it Matters Section */}
         <section id="why-it-matters" className="py-16 md:py-24 bg-white">
