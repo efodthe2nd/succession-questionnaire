@@ -18,7 +18,7 @@ export async function POST() {
         },
       ],
       mode: 'payment',
-      return_url: `${process.env.NEXT_PUBLIC_SITE_URL || 'https://www.successionstory.now'}/purchase-success?session_id={CHECKOUT_SESSION_ID}`,
+      return_url: `${process.env.NEXT_PUBLIC_SITE_URL || 'https://www.successionstory.now'}/questionnaire`,
     })
 
     return NextResponse.json({ clientSecret: session.client_secret })
