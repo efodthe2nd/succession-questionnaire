@@ -33,42 +33,45 @@ export default function SetPasswordPage() {
       const hash = window.location.hash;
 
       if (hash && hash.includes('access_token')) {
-        console.log('[SetPassword] Hash detected, waiting for Supabase to process tokens...');
+        console.log('[SetPassword] Hash detected, manually extracting tokens...');
 
-        // Wait for Supabase to process the tokens from the hash
-        // Listen for auth state change
-        const { data: { subscription } } = supabase.auth.onAuthStateChange(
-          (event, session) => {
-            console.log('[SetPassword] Auth state change:', event);
-            if (event === 'PASSWORD_RECOVERY' || event === 'SIGNED_IN') {
-              if (session) {
-                // Clear the hash from URL
-                window.history.replaceState(null, '', '/set-password');
-                setHasValidSession(true);
-                setCheckingSession(false);
-              }
-            } else if (event === 'TOKEN_REFRESHED' && session) {
-              setHasValidSession(true);
-              setCheckingSession(false);
-            }
-          }
-        );
+        // Parse the hash to extract tokens
+        const hashParams = new URLSearchParams(hash.substring(1));
+        const accessToken = hashParams.get('access_token');
+        const refreshToken = hashParams.get('refresh_token');
 
-        // Also set a timeout fallback - if no event fires within 5 seconds, check session directly
-        setTimeout(async () => {
-          const { data: { session } } = await supabase.auth.getSession();
-          if (session) {
+        console.log('[SetPassword] Tokens extracted:', {
+          hasAccessToken: !!accessToken,
+          hasRefreshToken: !!refreshToken
+        });
+
+        if (accessToken && refreshToken) {
+          // Manually set the session since @supabase/ssr doesn't auto-process hash
+          console.log('[SetPassword] Calling setSession with tokens...');
+          const { data, error } = await supabase.auth.setSession({
+            access_token: accessToken,
+            refresh_token: refreshToken,
+          });
+
+          console.log('[SetPassword] setSession result:', {
+            hasSession: !!data.session,
+            error: error?.message
+          });
+
+          if (data.session) {
+            // Clear the hash from URL
             window.history.replaceState(null, '', '/set-password');
             setHasValidSession(true);
+            setCheckingSession(false);
+            return;
           } else {
-            // No session established - token might be invalid
+            console.log('[SetPassword] setSession failed:', error);
+            // Token might be invalid/expired
             router.push('/');
+            setCheckingSession(false);
+            return;
           }
-          setCheckingSession(false);
-          subscription.unsubscribe();
-        }, 5000);
-
-        return;
+        }
       }
 
       // No hash - just check for existing session
