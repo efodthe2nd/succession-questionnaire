@@ -17,6 +17,12 @@ export default function EmbeddedCheckoutSection() {
       method: 'POST',
     })
     const data = await response.json()
+
+    if (data.error) {
+      console.error('[EmbeddedCheckout] Error:', data.error)
+      throw new Error(data.error)
+    }
+
     return data.clientSecret
   }, [])
 

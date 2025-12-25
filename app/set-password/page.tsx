@@ -132,13 +132,12 @@ export default function SetPasswordPage() {
         return;
       }
 
-      // Success - show message and redirect
+      // Success - show message and redirect to questionnaire
       setSuccess(true);
 
-      // Sign out and redirect to login after a short delay
-      setTimeout(async () => {
-        await supabase.auth.signOut();
-        router.push('/login');
+      // Redirect to questionnaire after a short delay (keep them signed in)
+      setTimeout(() => {
+        router.push('/questionnaire');
       }, 2000);
     } catch {
       setError('An unexpected error occurred');
@@ -196,7 +195,7 @@ export default function SetPasswordPage() {
             <span className="text-white">Password </span>
             <span className="text-[#B5A692]">Set!</span>
           </h1>
-          <p className="text-white/70 text-lg mb-8">Redirecting you to login...</p>
+          <p className="text-white/70 text-lg mb-8">Taking you to your questionnaire...</p>
           <div className="flex justify-center">
             <div className="relative w-12 h-12">
               <div className="absolute inset-0 border-2 border-white/20 rounded-full"></div>

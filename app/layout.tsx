@@ -47,7 +47,7 @@ const kalam = Kalam({
 });
 
 export const metadata: Metadata = {
-  title: 'Succession Questionnaire',
+  title: 'Your wealth has a story.',
   description: 'Create your legacy letter',
   icons: {
     icon: '/favicon.png',
