@@ -46,21 +46,24 @@ function generateWelcomeEmailHTML(email: string, password: string): string {
                 Welcome to Succession Story
               </h2>
 
-              <p style="margin: 0 0 20px; font-size: 16px; line-height: 1.6; color: #4a4a4a;">
-                Thank you for your purchase. You now have access to create your personal legacy letter - a meaningful companion to your estate plan that shares your values, wisdom, and love with your family.
+              <p style="margin: 0 0 16px; font-size: 16px; line-height: 1.6; color: #4a4a4a;">
+                Thank you for your purchase. You're all set. From here, we'll begin writing your Succession Story for you. All we need is your input through a simple, guided experience.
               </p>
 
-              <p style="margin: 0 0 20px; font-size: 16px; line-height: 1.6; color: #4a4a4a;">
-                Here are your login credentials:
+              <p style="margin: 0 0 30px; font-size: 16px; line-height: 1.6; color: #4a4a4a;">
+                This is a companion to your estate plan. It captures the meaning, values, and intentions behind what you've built, in your own voice, without the work of writing a letter yourself.
               </p>
 
-              <!-- Credentials Box -->
+              <!-- Login Details Box -->
               <div style="background-color: #f8f6f2; padding: 24px; border-radius: 8px; margin: 20px 0;">
-                <p style="margin: 0 0 12px; font-size: 15px; color: #4a4a4a;">
+                <h3 style="margin: 0 0 16px; font-size: 18px; color: #1a1a1a; font-weight: 600;">
+                  Your Login Details
+                </h3>
+                <p style="margin: 0 0 8px; font-size: 15px; color: #4a4a4a;">
                   <strong>Email:</strong> ${email}
                 </p>
                 <p style="margin: 0; font-size: 15px; color: #4a4a4a;">
-                  <strong>Password:</strong> ${password}
+                  <strong>Temporary Password:</strong> ${password}
                 </p>
               </div>
 
@@ -69,45 +72,76 @@ function generateWelcomeEmailHTML(email: string, password: string): string {
                 <tr>
                   <td align="center" style="padding: 20px 0;">
                     <a href="https://www.successionstory.now/login"
-                       style="display: inline-block; padding: 16px 40px; background-color: #1a1a1a; color: #ffffff; text-decoration: none; font-size: 16px; font-weight: 500; border-radius: 30px; transition: background-color 0.3s;">
+                       style="display: inline-block; padding: 16px 40px; background-color: #1a1a1a; color: #ffffff; text-decoration: none; font-size: 16px; font-weight: 500; border-radius: 30px;">
                       Log In Now
                     </a>
                   </td>
                 </tr>
               </table>
 
-              <p style="margin: 30px 0 20px; font-size: 16px; line-height: 1.6; color: #4a4a4a;">
-                Once logged in, you can begin answering our guided questions. Your responses will be crafted into a beautiful, personalized letter in your own voice.
+              <p style="margin: 0 0 30px; font-size: 14px; color: #888888; text-align: center;">
+                We recommend changing your password after your first login.
+              </p>
+
+              <!-- How It Works Section -->
+              <h3 style="margin: 30px 0 16px; font-size: 18px; color: #1a1a1a; font-weight: 600;">
+                How It Works
+              </h3>
+              <p style="margin: 0 0 16px; font-size: 16px; line-height: 1.6; color: #4a4a4a;">
+                Once you log in, you'll move through an easy, guided questionnaire. Most prompts are multiple choice, with a few short reflections where you can type or speak your thoughts. You don't need to worry about structure, tone, or wording. We handle that for you.
+              </p>
+              <p style="margin: 0 0 16px; font-size: 16px; line-height: 1.6; color: #4a4a4a;">
+                <strong>You simply share what matters.</strong><br />
+                <strong>We turn it into a polished Succession Story.</strong>
               </p>
 
               <!-- What to Expect Section -->
+              <h3 style="margin: 30px 0 16px; font-size: 18px; color: #1a1a1a; font-weight: 600;">
+                Here's what to expect:
+              </h3>
+              <ul style="margin: 0 0 20px; padding-left: 20px; font-size: 15px; line-height: 1.8; color: #4a4a4a;">
+                <li>A guided experience that you can finish in less than a couple of hours</li>
+                <li>A timer that counts down two hours, to encourage you to finish quickly</li>
+                <li>Multiple choice prompts and optional voice-to-text for ease</li>
+                <li>Your completed Succession Story written for you and delivered within 24 hours</li>
+              </ul>
+              <p style="margin: 0 0 30px; font-size: 16px; line-height: 1.6; color: #4a4a4a;">
+                No blank pages.<br />
+                No long workbooks.<br />
+                No pressure to get it perfect.
+              </p>
+
+              <!-- Gift Section -->
               <div style="background-color: #f8f6f2; padding: 24px; border-radius: 8px; margin: 30px 0;">
-                <h3 style="margin: 0 0 16px; font-size: 18px; color: #1a1a1a; font-weight: 600;">
-                  What to Expect
+                <h3 style="margin: 0 0 12px; font-size: 18px; color: #1a1a1a; font-weight: 600;">
+                  Giving This as a Gift?
                 </h3>
-                <ul style="margin: 0; padding-left: 20px; font-size: 15px; line-height: 1.8; color: #4a4a4a;">
-                  <li>A guided questionnaire that takes about 30-60 minutes</li>
-                  <li>Voice-to-text options for easier storytelling</li>
-                  <li>Your completed Succession Story delivered within 24 hours</li>
-                </ul>
+                <p style="margin: 0 0 16px; font-size: 15px; line-height: 1.6; color: #4a4a4a;">
+                  If this purchase is a gift, you can download a printable digital gift certificate directly from this email. Just click the "Print Gift Certificate" button below and share it when the moment feels right.
+                </p>
+                <table role="presentation" style="width: 100%; border-collapse: collapse;">
+                  <tr>
+                    <td align="center" style="padding: 10px 0 0;">
+                      <a href="https://www.successionstory.now/gift-certificate"
+                         style="display: inline-block; padding: 12px 30px; background-color: #B5A692; color: #ffffff; text-decoration: none; font-size: 14px; font-weight: 500; border-radius: 30px;">
+                        Print Gift Certificate
+                      </a>
+                    </td>
+                  </tr>
+                </table>
               </div>
 
-              <p style="margin: 0; font-size: 14px; color: #888888;">
-                We recommend changing your password after your first login for security.
-              </p>
-            </td>
-          </tr>
-
-          <!-- Support Section -->
-          <tr>
-            <td style="padding: 0 40px 40px;">
-              <div style="border-top: 1px solid #e5e5e5; padding-top: 30px;">
+              <!-- Support Section -->
+              <div style="border-top: 1px solid #e5e5e5; padding-top: 30px; margin-top: 30px;">
                 <h3 style="margin: 0 0 12px; font-size: 16px; color: #1a1a1a; font-weight: 600;">
-                  Need Help?
+                  Need a Hand?
                 </h3>
                 <p style="margin: 0; font-size: 14px; line-height: 1.6; color: #4a4a4a;">
-                  If you have any questions or need assistance, please don't hesitate to reach out to our support team at
-                  <a href="mailto:successionstory.now@gmail.com" style="color: #B5A692; text-decoration: none;">successionstory.now@gmail.com</a>
+                  If you have questions or want help getting started, we're here. Simply send us an email at
+                  <a href="mailto:successionstory.now@gmail.com" style="color: #B5A692; text-decoration: none;">successionstory.now@gmail.com</a>.
+                </p>
+                <p style="margin: 16px 0 0; font-size: 14px; line-height: 1.6; color: #4a4a4a;">
+                  We're glad you chose Succession Story. We'll take it from here.
                 </p>
               </div>
             </td>
@@ -115,12 +149,15 @@ function generateWelcomeEmailHTML(email: string, password: string): string {
 
           <!-- Footer -->
           <tr>
-            <td style="padding: 30px 40px; background-color: #f8f6f2; border-radius: 0 0 12px 12px; text-align: center;">
-              <p style="margin: 0 0 10px; font-size: 14px; color: #888888;">
-                Succession Story - Your legacy, in your words.
+            <td style="padding: 30px 40px; background-color: #1a1a1a; border-radius: 0 0 12px 12px; text-align: center;">
+              <p style="margin: 0 0 8px; font-size: 18px; color: #ffffff; font-family: 'Georgia', serif;">
+                Succession <span style="color: #B5A692;">Story</span>
               </p>
-              <p style="margin: 0; font-size: 12px; color: #aaaaaa;">
-                This email was sent because you purchased access to Succession Story.
+              <p style="margin: 0 0 16px; font-size: 14px; color: #ffffff; font-style: italic;">
+                Your legacy, written for you.
+              </p>
+              <p style="margin: 0; font-size: 12px; color: #888888;">
+                You're receiving this email because you purchased access to Succession Story.
               </p>
             </td>
           </tr>
@@ -138,32 +175,68 @@ function generateWelcomeEmailHTML(email: string, password: string): string {
  */
 function generateWelcomeEmailText(email: string, password: string): string {
   return `
-Welcome to Succession Story
+WELCOME TO SUCCESSION STORY
 
-Thank you for your purchase. You now have access to create your personal legacy letter - a meaningful companion to your estate plan that shares your values, wisdom, and love with your family.
+Thank you for your purchase. You're all set. From here, we'll begin writing your Succession Story for you. All we need is your input through a simple, guided experience.
 
-Here are your login credentials:
+This is a companion to your estate plan. It captures the meaning, values, and intentions behind what you've built, in your own voice, without the work of writing a letter yourself.
+
+---
+
+YOUR LOGIN DETAILS
 
 Email: ${email}
-Password: ${password}
+Temporary Password: ${password}
 
 Log in at: https://www.successionstory.now/login
 
-Once logged in, you can begin answering our guided questions. Your responses will be crafted into a beautiful, personalized letter in your own voice.
-
-What to Expect:
-- A guided questionnaire that takes about 30-60 minutes
-- Voice-to-text options for easier storytelling
-- Your completed Succession Story delivered within 24 hours
-
-We recommend changing your password after your first login for security.
-
-Need Help?
-If you have any questions or need assistance, please don't hesitate to reach out to our support team at successionstory.now@gmail.com
+We recommend changing your password after your first login.
 
 ---
-Succession Story - Your legacy, in your words.
-This email was sent because you purchased access to Succession Story.
+
+HOW IT WORKS
+
+Once you log in, you'll move through an easy, guided questionnaire. Most prompts are multiple choice, with a few short reflections where you can type or speak your thoughts. You don't need to worry about structure, tone, or wording. We handle that for you.
+
+You simply share what matters.
+We turn it into a polished Succession Story.
+
+---
+
+HERE'S WHAT TO EXPECT:
+
+- A guided experience that you can finish in less than a couple of hours
+- A timer that counts down two hours, to encourage you to finish quickly
+- Multiple choice prompts and optional voice-to-text for ease
+- Your completed Succession Story written for you and delivered within 24 hours
+
+No blank pages.
+No long workbooks.
+No pressure to get it perfect.
+
+---
+
+GIVING THIS AS A GIFT?
+
+If this purchase is a gift, you can download a printable digital gift certificate at:
+https://www.successionstory.now/gift-certificate
+
+Share it when the moment feels right.
+
+---
+
+NEED A HAND?
+
+If you have questions or want help getting started, we're here. Simply send us an email at successionstory.now@gmail.com.
+
+We're glad you chose Succession Story. We'll take it from here.
+
+---
+
+Succession Story
+Your legacy, written for you.
+
+You're receiving this email because you purchased access to Succession Story.
 `
 }
 
@@ -203,7 +276,7 @@ export async function sendWelcomeEmail({
       email: SENDGRID_FROM_EMAIL,
       name: 'Succession Story',
     },
-    subject: 'Welcome to Succession Story - Your Login Credentials',
+    subject: "You're in. Let us write your Succession Story.",
     text: generateWelcomeEmailText(to, password),
     html: generateWelcomeEmailHTML(to, password),
   }
