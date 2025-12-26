@@ -1,12 +1,13 @@
 'use client'
 
 export default function GiftCertificatePage() {
-  const pdfUrl = '/Succession Story Gift.pdf'
+  const giftPdfUrl = '/Succession Story Gift.pdf'
+  const holidayPdfUrl = '/Succession Story Holiday Gift.pdf'
 
-  const handleDownload = () => {
+  const handleDownload = (url: string, filename: string) => {
     const link = document.createElement('a')
-    link.href = pdfUrl
-    link.download = 'Succession Story Gift Certificate.pdf'
+    link.href = url
+    link.download = filename
     document.body.appendChild(link)
     link.click()
     document.body.removeChild(link)
@@ -33,41 +34,88 @@ export default function GiftCertificatePage() {
       <main className="flex-1 py-12 px-4">
         <div className="max-w-4xl mx-auto text-center">
           <h2 className="font-serif text-3xl md:text-4xl text-charcoal mb-4">
-            Gift Certificate
+            Gift Certificates
           </h2>
-          <p className="text-charcoal/70 mb-8 max-w-xl mx-auto">
+          <p className="text-charcoal/70 mb-12 max-w-xl mx-auto">
             Download your printable gift certificate below. Share it with someone special when the moment feels right.
           </p>
 
-          {/* PDF Viewer */}
-          <div className="bg-white rounded-lg shadow-lg overflow-hidden mb-8">
-            <iframe
-              src={pdfUrl}
-              className="w-full h-[600px] md:h-[800px]"
-              title="Succession Story Gift Certificate"
-            />
-          </div>
+          {/* Standard Gift Certificate */}
+          <section className="mb-16">
+            <h3 className="font-serif text-2xl md:text-3xl text-charcoal mb-6">
+              Gift Certificate
+            </h3>
 
-          {/* Download Button */}
-          <button
-            onClick={handleDownload}
-            className="inline-flex items-center gap-2 bg-charcoal text-ivory font-medium px-8 py-4 rounded-full text-lg hover:bg-opacity-90 transition-all"
-          >
-            <svg
-              className="w-5 h-5"
-              fill="none"
-              stroke="currentColor"
-              viewBox="0 0 24 24"
-            >
-              <path
-                strokeLinecap="round"
-                strokeLinejoin="round"
-                strokeWidth={2}
-                d="M12 10v6m0 0l-3-3m3 3l3-3m2 8H7a2 2 0 01-2-2V5a2 2 0 012-2h5.586a1 1 0 01.707.293l5.414 5.414a1 1 0 01.293.707V19a2 2 0 01-2 2z"
+            {/* PDF Viewer */}
+            <div className="bg-white rounded-lg shadow-lg overflow-hidden mb-8">
+              <iframe
+                src={giftPdfUrl}
+                className="w-full h-[600px] md:h-[800px]"
+                title="Succession Story Gift Certificate"
               />
-            </svg>
-            Download Gift Certificate
-          </button>
+            </div>
+
+            {/* Download Button */}
+            <button
+              onClick={() => handleDownload(giftPdfUrl, 'Succession Story Gift Certificate.pdf')}
+              className="inline-flex items-center gap-2 bg-charcoal text-ivory font-medium px-8 py-4 rounded-full text-lg hover:bg-opacity-90 transition-all"
+            >
+              <svg
+                className="w-5 h-5"
+                fill="none"
+                stroke="currentColor"
+                viewBox="0 0 24 24"
+              >
+                <path
+                  strokeLinecap="round"
+                  strokeLinejoin="round"
+                  strokeWidth={2}
+                  d="M12 10v6m0 0l-3-3m3 3l3-3m2 8H7a2 2 0 01-2-2V5a2 2 0 012-2h5.586a1 1 0 01.707.293l5.414 5.414a1 1 0 01.293.707V19a2 2 0 01-2 2z"
+                />
+              </svg>
+              Download Gift Certificate
+            </button>
+          </section>
+
+          {/* Divider */}
+          <div className="border-t border-taupe/30 my-12"></div>
+
+          {/* Holiday Gift Certificate */}
+          <section className="mb-12">
+            <h3 className="font-serif text-2xl md:text-3xl text-charcoal mb-6">
+              Holiday Gift
+            </h3>
+
+            {/* PDF Viewer */}
+            <div className="bg-white rounded-lg shadow-lg overflow-hidden mb-8">
+              <iframe
+                src={holidayPdfUrl}
+                className="w-full h-[600px] md:h-[800px]"
+                title="Succession Story Holiday Gift Certificate"
+              />
+            </div>
+
+            {/* Download Button */}
+            <button
+              onClick={() => handleDownload(holidayPdfUrl, 'Succession Story Holiday Gift Certificate.pdf')}
+              className="inline-flex items-center gap-2 bg-charcoal text-ivory font-medium px-8 py-4 rounded-full text-lg hover:bg-opacity-90 transition-all"
+            >
+              <svg
+                className="w-5 h-5"
+                fill="none"
+                stroke="currentColor"
+                viewBox="0 0 24 24"
+              >
+                <path
+                  strokeLinecap="round"
+                  strokeLinejoin="round"
+                  strokeWidth={2}
+                  d="M12 10v6m0 0l-3-3m3 3l3-3m2 8H7a2 2 0 01-2-2V5a2 2 0 012-2h5.586a1 1 0 01.707.293l5.414 5.414a1 1 0 01.293.707V19a2 2 0 01-2 2z"
+                />
+              </svg>
+              Download Holiday Gift Certificate
+            </button>
+          </section>
 
           <p className="mt-6 text-sm text-charcoal/50">
             Need help? Contact us at{' '}
