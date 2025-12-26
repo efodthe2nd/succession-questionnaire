@@ -147,7 +147,7 @@ export default function LandingPage() {
           <div id="hero-content" className="relative z-10 max-w-4xl mx-auto">
             <h1
               id="i7zf4"
-              className="font-serif text-3xl sm:text-4xl md:text-5xl lg:text-7xl font-medium text-white/60 leading-tight"
+              className="font-serif text-3xl sm:text-4xl md:text-5xl lg:text-7xl font-medium text-gray-400 leading-tight"
             >
               Your Will explains the&nbsp;<i id="i4nbr">What</i>.<br />
             </h1>

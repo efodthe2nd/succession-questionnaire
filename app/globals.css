@@ -62,13 +62,13 @@ html {
 }
 
 .landing-page #i7zf4 {
-  color: rgb(137, 140, 135);
+  color: rgb(156, 163, 175); /* lighter gray */
   max-width: 100%;
   width: 100%;
 }
 
 .landing-page #ixvq04 {
-  color: rgb(25, 26, 25);
+  color: rgb(255, 255, 255); /* white - stands out */
 }
 
 .landing-page #ioduf {
