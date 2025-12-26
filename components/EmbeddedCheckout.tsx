@@ -36,6 +36,11 @@ export default function EmbeddedCheckoutSection() {
           <p className="mt-4 text-base md:text-lg text-charcoal/80 max-w-2xl mx-auto">
             Start your Succession Story today and give your family the clarity they deserve.
           </p>
+          <p className="mt-4 text-lg text-charcoal/70">Founder Price:</p>
+          <p className="text-5xl font-bold text-charcoal">
+            <span className="line-through text-3xl text-charcoal/50 mr-2">$197</span>
+            $97
+          </p>
         </div>
 
         <div id="checkout" className="bg-white rounded-lg shadow-lg overflow-hidden">
