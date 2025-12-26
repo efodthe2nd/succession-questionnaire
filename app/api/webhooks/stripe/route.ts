@@ -1,7 +1,7 @@
 import { NextRequest, NextResponse } from 'next/server'
 import Stripe from 'stripe'
 import { createAdminClient } from '@/lib/supabase-admin'
-import { sendWelcomeEmail } from '@/lib/email'
+import { sendWelcomeEmail, generatePassword } from '@/lib/email'
 
 // Initialize Stripe
 const stripe = new Stripe(process.env.STRIPE_SECRET_KEY!, {
@@ -75,19 +75,35 @@ export async function POST(request: NextRequest) {
       )
 
       let userId: string
+      let userPassword: string
 
       if (existingUser) {
-        // User already exists - just generate a new password reset link
+        // User already exists - generate a new password for them
         console.log('[Stripe Webhook] User already exists:', customerEmail)
         userId = existingUser.id
+        userPassword = generatePassword()
+
+        // Update existing user's password
+        const { error: updateError } = await supabaseAdmin.auth.admin.updateUserById(
+          userId,
+          { password: userPassword }
+        )
+
+        if (updateError) {
+          console.error('[Stripe Webhook] Failed to update user password:', updateError)
+          return NextResponse.json(
+            { error: 'Failed to update user password' },
+            { status: 500 }
+          )
+        }
       } else {
-        // Create new user with a random password (they'll set their own via magic link)
-        const tempPassword = crypto.randomUUID() + crypto.randomUUID()
+        // Create new user with a readable password
+        userPassword = generatePassword()
 
         const { data: newUser, error: createError } =
           await supabaseAdmin.auth.admin.createUser({
             email: customerEmail,
-            password: tempPassword,
+            password: userPassword,
             email_confirm: true, // Mark email as confirmed since they paid
           })
 
@@ -103,36 +119,12 @@ export async function POST(request: NextRequest) {
         userId = newUser.user.id
       }
 
-      // Generate password reset link (magic link for setting password)
-      // Redirect directly to /set-password
-      const { data: linkData, error: linkError } =
-        await supabaseAdmin.auth.admin.generateLink({
-          type: 'recovery',
-          email: customerEmail,
-          options: {
-            redirectTo: 'https://www.successionstory.now/set-password',
-          },
-        })
+      console.log('[Stripe Webhook] Generated credentials for:', customerEmail)
 
-      if (linkError) {
-        console.error(
-          '[Stripe Webhook] Failed to generate password reset link:',
-          linkError
-        )
-        return NextResponse.json(
-          { error: 'Failed to generate password reset link' },
-          { status: 500 }
-        )
-      }
-
-      const passwordResetLink = linkData.properties.action_link
-
-      console.log('[Stripe Webhook] Generated password reset link for:', customerEmail)
-
-      // Send welcome email
+      // Send welcome email with credentials
       const emailSent = await sendWelcomeEmail({
         to: customerEmail,
-        passwordResetLink,
+        password: userPassword,
       })
 
       if (!emailSent) {

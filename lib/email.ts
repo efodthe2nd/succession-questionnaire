@@ -10,13 +10,13 @@ if (SENDGRID_API_KEY) {
 
 interface WelcomeEmailParams {
   to: string
-  passwordResetLink: string
+  password: string
 }
 
 /**
- * Generates the HTML content for the welcome email
+ * Generates the HTML content for the welcome email with credentials
  */
-function generateWelcomeEmailHTML(passwordResetLink: string): string {
+function generateWelcomeEmailHTML(email: string, password: string): string {
   return `
 <!DOCTYPE html>
 <html lang="en">
@@ -50,24 +50,34 @@ function generateWelcomeEmailHTML(passwordResetLink: string): string {
                 Thank you for your purchase. You now have access to create your personal legacy letter - a meaningful companion to your estate plan that shares your values, wisdom, and love with your family.
               </p>
 
-              <p style="margin: 0 0 30px; font-size: 16px; line-height: 1.6; color: #4a4a4a;">
-                To get started, please set your password by clicking the button below:
+              <p style="margin: 0 0 20px; font-size: 16px; line-height: 1.6; color: #4a4a4a;">
+                Here are your login credentials:
               </p>
+
+              <!-- Credentials Box -->
+              <div style="background-color: #f8f6f2; padding: 24px; border-radius: 8px; margin: 20px 0;">
+                <p style="margin: 0 0 12px; font-size: 15px; color: #4a4a4a;">
+                  <strong>Email:</strong> ${email}
+                </p>
+                <p style="margin: 0; font-size: 15px; color: #4a4a4a;">
+                  <strong>Password:</strong> ${password}
+                </p>
+              </div>
 
               <!-- CTA Button -->
               <table role="presentation" style="width: 100%; border-collapse: collapse;">
                 <tr>
                   <td align="center" style="padding: 20px 0;">
-                    <a href="${passwordResetLink}"
+                    <a href="https://www.successionstory.now/login"
                        style="display: inline-block; padding: 16px 40px; background-color: #1a1a1a; color: #ffffff; text-decoration: none; font-size: 16px; font-weight: 500; border-radius: 30px; transition: background-color 0.3s;">
-                      Set Your Password
+                      Log In Now
                     </a>
                   </td>
                 </tr>
               </table>
 
               <p style="margin: 30px 0 20px; font-size: 16px; line-height: 1.6; color: #4a4a4a;">
-                Once you've set your password, you can log in and begin answering our guided questions. Your responses will be crafted into a beautiful, personalized letter in your own voice.
+                Once logged in, you can begin answering our guided questions. Your responses will be crafted into a beautiful, personalized letter in your own voice.
               </p>
 
               <!-- What to Expect Section -->
@@ -82,11 +92,8 @@ function generateWelcomeEmailHTML(passwordResetLink: string): string {
                 </ul>
               </div>
 
-              <p style="margin: 0 0 10px; font-size: 14px; color: #888888;">
-                If the button doesn't work, copy and paste this link into your browser:
-              </p>
-              <p style="margin: 0 0 30px; font-size: 14px; color: #B5A692; word-break: break-all;">
-                ${passwordResetLink}
+              <p style="margin: 0; font-size: 14px; color: #888888;">
+                We recommend changing your password after your first login for security.
               </p>
             </td>
           </tr>
@@ -129,22 +136,27 @@ function generateWelcomeEmailHTML(passwordResetLink: string): string {
 /**
  * Generates plain text version of the welcome email
  */
-function generateWelcomeEmailText(passwordResetLink: string): string {
+function generateWelcomeEmailText(email: string, password: string): string {
   return `
 Welcome to Succession Story
 
 Thank you for your purchase. You now have access to create your personal legacy letter - a meaningful companion to your estate plan that shares your values, wisdom, and love with your family.
 
-To get started, please set your password by clicking the link below:
+Here are your login credentials:
 
-${passwordResetLink}
+Email: ${email}
+Password: ${password}
 
-Once you've set your password, you can log in and begin answering our guided questions. Your responses will be crafted into a beautiful, personalized letter in your own voice.
+Log in at: https://www.successionstory.now/login
+
+Once logged in, you can begin answering our guided questions. Your responses will be crafted into a beautiful, personalized letter in your own voice.
 
 What to Expect:
 - A guided questionnaire that takes about 30-60 minutes
 - Voice-to-text options for easier storytelling
 - Your completed Succession Story delivered within 24 hours
+
+We recommend changing your password after your first login for security.
 
 Need Help?
 If you have any questions or need assistance, please don't hesitate to reach out to our support team at successionstory.now@gmail.com
@@ -156,19 +168,31 @@ This email was sent because you purchased access to Succession Story.
 }
 
 /**
- * Sends a welcome email with password setup link
+ * Generates a readable random password
+ */
+export function generatePassword(): string {
+  const adjectives = ['Happy', 'Bright', 'Swift', 'Calm', 'Bold', 'Kind', 'Wise', 'Pure']
+  const nouns = ['Star', 'Moon', 'Tree', 'Lake', 'Bird', 'Rose', 'Wind', 'Wave']
+  const adj = adjectives[Math.floor(Math.random() * adjectives.length)]
+  const noun = nouns[Math.floor(Math.random() * nouns.length)]
+  const num = Math.floor(Math.random() * 900) + 100 // 100-999
+  return `${adj}${noun}${num}`
+}
+
+/**
+ * Sends a welcome email with login credentials
  *
  * @returns true if email was sent successfully, false otherwise
  */
 export async function sendWelcomeEmail({
   to,
-  passwordResetLink,
+  password,
 }: WelcomeEmailParams): Promise<boolean> {
   // Check if SendGrid is configured
   if (!SENDGRID_API_KEY) {
     console.warn(
       '[Email] SendGrid API key not configured. Skipping welcome email.',
-      { to, passwordResetLink }
+      { to }
     )
     return false
   }
@@ -179,17 +203,9 @@ export async function sendWelcomeEmail({
       email: SENDGRID_FROM_EMAIL,
       name: 'Succession Story',
     },
-    subject: 'Welcome to Succession Story - Set Your Password',
-    text: generateWelcomeEmailText(passwordResetLink),
-    html: generateWelcomeEmailHTML(passwordResetLink),
-    // Disable click tracking to prevent SendGrid from wrapping/encoding the magic link URL
-    // This is critical because URL encoding breaks Supabase auth tokens
-    trackingSettings: {
-      clickTracking: {
-        enable: false,
-        enableText: false,
-      },
-    },
+    subject: 'Welcome to Succession Story - Your Login Credentials',
+    text: generateWelcomeEmailText(to, password),
+    html: generateWelcomeEmailHTML(to, password),
   }
 
   try {

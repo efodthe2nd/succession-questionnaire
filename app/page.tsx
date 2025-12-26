@@ -855,10 +855,8 @@ export default function LandingPage() {
                 Founder Price:
               </p>
               <p className="text-5xl md:text-5xl font-bold text-charcoal">
+                <span className="line-through text-3xl text-charcoal/50 mr-2">$197</span>
                 $97
-              </p>
-              <p id="in64sy" className="text-base md:text-lg text-charcoal/60">
-                <span className="line-through">Regular price $197</span>
               </p>
             </div>
 
