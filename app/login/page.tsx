@@ -5,7 +5,6 @@ import { useRouter } from 'next/navigation';
 import { createClient } from '@/lib/supabase';
 
 export default function LoginPage() {
-  const [showForm, setShowForm] = useState(false);
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
   const [error, setError] = useState('');
@@ -100,18 +99,9 @@ export default function LoginPage() {
           Level up your estate plan.
         </p>
 
-        {!showForm ? (
-          /* Start Button - Outlined rounded pill */
-          <button
-            onClick={() => setShowForm(true)}
-            className="px-16 py-3.5 bg-transparent border border-white text-white rounded-full font-medium hover:bg-white hover:text-black transition-all duration-300"
-          >
-            Start
-          </button>
-        ) : (
-          /* Form Card with dark gradient background */
-          <div className="bg-gradient-to-b from-black/80 to-black/90 backdrop-blur-sm rounded-2xl p-8 pt-6 max-w-md mx-auto animate-fadeIn border border-white/10">
-            <form onSubmit={handleLogin} className="space-y-4">
+        {/* Form Card with dark gradient background */}
+        <div className="bg-gradient-to-b from-black/80 to-black/90 backdrop-blur-sm rounded-2xl p-8 pt-6 max-w-md mx-auto border border-white/10">
+          <form onSubmit={handleLogin} className="space-y-4">
               {error && (
                 <div className="bg-red-500/20 border border-red-500 text-white text-sm p-3 rounded-lg">
                   {error}
@@ -183,7 +173,6 @@ export default function LoginPage() {
               </button>
             </form>
           </div>
-        )}
       </div>
 
       {/* Footer links */}

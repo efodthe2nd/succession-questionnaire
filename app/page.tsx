@@ -112,21 +112,21 @@ export default function LandingPage() {
 
       <header
         id="header"
-        className="w-full py-4 px-4 md:py-6 md:px-8 lg:px-16 flex justify-between items-center bg-ivory/80 backdrop-blur-sm sticky top-0 z-50"
+        className="w-full py-3 px-3 md:py-6 md:px-8 lg:px-16 flex justify-between items-center bg-ivory/80 backdrop-blur-sm sticky top-0 z-50"
       >
-        <h1 className="text-xl md:text-2xl font-serif font-semibold text-charcoal">
+        <h1 className="text-base sm:text-xl md:text-2xl font-serif font-semibold text-charcoal whitespace-nowrap">
           Succession Story
         </h1>
-        <div className="flex items-center gap-3">
+        <div className="flex items-center gap-1 sm:gap-3">
           <a
             href="/login"
-            className="text-charcoal font-sans text-xs md:text-sm font-medium px-4 md:px-6 py-2 md:py-3 hover:text-charcoal/70 transition-colors duration-300"
+            className="text-charcoal font-sans text-[10px] sm:text-xs md:text-sm font-medium px-2 sm:px-4 md:px-6 py-2 md:py-3 hover:text-charcoal/70 transition-colors duration-300 whitespace-nowrap"
           >
             Login
           </a>
           <a
             href="#founder-offer"
-            className="bg-charcoal text-ivory font-sans text-xs md:text-sm font-medium px-4 md:px-6 py-2 md:py-3 rounded-full hover:bg-opacity-90 transition-colors duration-300"
+            className="bg-charcoal text-ivory font-sans text-[10px] sm:text-xs md:text-sm font-medium px-3 sm:px-4 md:px-6 py-2 md:py-3 rounded-full hover:bg-opacity-90 transition-colors duration-300 whitespace-nowrap"
           >
             Write My Story
           </a>
@@ -665,7 +665,7 @@ export default function LandingPage() {
                 <img
                   src="https://storage.googleapis.com/uxpilot-auth.appspot.com/b6928b1ff3-5f14b58975b1d2ee8653.png"
                   alt="handwritten letter excerpt on cream paper showing personal message about family values and business legacy, elegant script font, warm lighting"
-                  className="w-full h-48 md:h-64 object-cover rounded-lg mb-4"
+                  className="w-full h-48 md:h-64 object-cover rounded-lg mb-4 blur-[1.5px]"
                 />
                 <p className="text-xs md:text-sm text-charcoal/70 italic">
                   &quot;To my children: The business was never about the money.
@@ -682,7 +682,7 @@ export default function LandingPage() {
                 <img
                   src="https://storage.googleapis.com/uxpilot-auth.appspot.com/edfa5d937f-76da4d6ffa1e2ba295bf.png"
                   alt="typewritten letter excerpt on vintage paper about life lessons and wisdom, classic serif font, soft natural lighting"
-                  className="w-full h-48 md:h-64 object-cover rounded-lg mb-4"
+                  className="w-full h-48 md:h-64 object-cover rounded-lg mb-4 blur-[1.5px]"
                 />
                 <p className="text-xs md:text-sm text-charcoal/70 italic">
                   When I was pregnant, I often saw bright red cardinals by my
@@ -699,7 +699,7 @@ export default function LandingPage() {
                 <img
                   src="https://storage.googleapis.com/uxpilot-auth.appspot.com/78f547d41e-360d242a7e8bd017efb5.png"
                   alt="elegant handwritten note on quality stationery about charitable giving and community values, flowing script, warm ambient light"
-                  className="w-full h-48 md:h-64 object-cover rounded-lg mb-4"
+                  className="w-full h-48 md:h-64 object-cover rounded-lg mb-4 blur-[1.5px]"
                 />
                 <p className="text-xs md:text-sm text-charcoal/70 italic">
                   &quot;I can hear the sweet sound of my aunt&apos;s voice
@@ -718,7 +718,7 @@ export default function LandingPage() {
                 <img
                   src="https://storage.googleapis.com/uxpilot-auth.appspot.com/65d8b3b6e3-08a7c89f663e9d7d2c99.png"
                   alt="personal letter excerpt on fine paper about family traditions and memories, handwritten style, gentle lighting"
-                  className="w-full h-48 md:h-64 object-cover rounded-lg mb-4"
+                  className="w-full h-48 md:h-64 object-cover rounded-lg mb-4 blur-[1.5px]"
                 />
                 <p className="text-xs md:text-sm text-charcoal/70 italic">
                   &quot;Remember the summers at the lake house and the peace we
