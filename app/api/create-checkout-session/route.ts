@@ -34,6 +34,7 @@ export async function POST() {
       ],
       mode: 'payment',
       return_url: 'https://www.successionstory.now/questionnaire',
+      allow_promotion_codes: true,
     })
 
     return NextResponse.json({ clientSecret: session.client_secret })
