@@ -882,8 +882,8 @@ export default function LandingPage() {
               className="flex justify-center"
               dangerouslySetInnerHTML={{
                 __html: `<stripe-buy-button
-  buy-button-id="buy_btn_1ShWK7IydlpWz9IkUP5Yz56f"
-  publishable-key="pk_test_51SVYrzIydlpWz9IkkgvN6WDYyONRcpTGz3F1GAb9Wd1RzIsaugke6WqsKj3ijbXYZPlfeYvydfqu7jhyNisQQpbR00DbpwsCTW"
+  buy-button-id="buy_btn_1SXZmBIydlpWz9Ik1sHbpA0e"
+  publishable-key="pk_live_51SVYrzIydlpWz9IkhtVpwFvq0KSioT9AsgIrghb5YS4JA1kBpTy1wAOVTbNdf9g8G3SEC9DrGpNXhoUSizE3R6Gq00X4MLFfw4"
 >
 </stripe-buy-button>`,
               }}
