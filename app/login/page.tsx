@@ -89,6 +89,12 @@ export default function LoginPage() {
 
       {/* Main Content */}
       <div className="relative z-10 w-full max-w-lg text-center">
+        {/* Main Title - "Succession" in white, "Story" in tan */}
+        <h1 className="text-5xl md:text-6xl font-heading font-bold mb-2 leading-tight">
+          <span className="text-white">Succession </span>
+          <span className="text-[#B5A692]">Story</span>
+        </h1>
+
         {/* Description */}
         <p className="text-white text-base md:text-lg mb-10 max-w-md mx-auto leading-relaxed">
           Level up your estate plan.
