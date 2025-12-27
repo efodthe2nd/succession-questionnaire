@@ -117,12 +117,20 @@ export default function LandingPage() {
         <h1 className="text-xl md:text-2xl font-serif font-semibold text-charcoal">
           Succession Story
         </h1>
-        <a
-          href="#founder-offer"
-          className="bg-charcoal text-ivory font-sans text-xs md:text-sm font-medium px-4 md:px-6 py-2 md:py-3 rounded-full hover:bg-opacity-90 transition-colors duration-300"
-        >
-          Create My Story
-        </a>
+        <div className="flex items-center gap-3">
+          <a
+            href="/login"
+            className="text-charcoal font-sans text-xs md:text-sm font-medium px-4 md:px-6 py-2 md:py-3 hover:text-charcoal/70 transition-colors duration-300"
+          >
+            Login
+          </a>
+          <a
+            href="#founder-offer"
+            className="bg-charcoal text-ivory font-sans text-xs md:text-sm font-medium px-4 md:px-6 py-2 md:py-3 rounded-full hover:bg-opacity-90 transition-colors duration-300"
+          >
+            Write My Story
+          </a>
+        </div>
       </header>
 
       <main>

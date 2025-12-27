@@ -87,22 +87,11 @@ export default function LoginPage() {
       {/* Dark overlay */}
       <div className="absolute inset-0 bg-black opacity-60" />
 
-      {/* Logo - Fixed top left */}
-      <div className="fixed top-8 left-8 z-20">
-        <p className="text-white text-sm tracking-wide font-medium">Succession Story</p>
-      </div>
-
       {/* Main Content */}
       <div className="relative z-10 w-full max-w-lg text-center">
-        {/* Main Title - "Succession" in white, "Story" in tan */}
-        <h1 className="text-5xl md:text-6xl font-heading font-bold mb-2 leading-tight">
-          <span className="text-white">Succession </span>
-          <span className="text-[#B5A692]">Story</span>
-        </h1>
-        
         {/* Description */}
         <p className="text-white text-base md:text-lg mb-10 max-w-md mx-auto leading-relaxed">
-          Level up your estate plan
+          Level up your estate plan.
         </p>
 
         {!showForm ? (
@@ -116,11 +105,6 @@ export default function LoginPage() {
         ) : (
           /* Form Card with dark gradient background */
           <div className="bg-gradient-to-b from-black/80 to-black/90 backdrop-blur-sm rounded-2xl p-8 pt-6 max-w-md mx-auto animate-fadeIn border border-white/10">
-            {/* Succession Story text inside card */}
-            <p className="text-white/60 text-xs tracking-widest uppercase mb-6">
-              Succession Story
-            </p>
-            
             <form onSubmit={handleLogin} className="space-y-4">
               {error && (
                 <div className="bg-red-500/20 border border-red-500 text-white text-sm p-3 rounded-lg">
