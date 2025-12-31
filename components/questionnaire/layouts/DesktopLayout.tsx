@@ -78,16 +78,16 @@ export default function DesktopLayout({
               isDarkMode={isDarkMode}
               onAddStory={onAddStory}
             />
+
+            {/* Next Button - Placed at bottom of content */}
+            <NextButton
+              onClick={onNext}
+              isLastSection={currentSectionIndex === sections.length}
+              isDesktop
+              isDarkMode={isDarkMode}
+            />
           </div>
         </div>
-
-        {/* Next Button - Fixed at bottom of content area */}
-        <NextButton
-          onClick={onNext}
-          isLastSection={currentSectionIndex === sections.length}
-          isDesktop
-          isDarkMode={isDarkMode}
-        />
       </main>
 
       {/* Right Sidebar - Preview */}

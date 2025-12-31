@@ -8,9 +8,9 @@ interface NextButtonProps {
 
 export default function NextButton({ onClick, isLastSection, isDesktop, isDarkMode, disabled = false }: NextButtonProps) {
   if (isDesktop) {
-    // Desktop: Fixed button in bottom right
+    // Desktop: Inline button at bottom of content
     return (
-      <div className="fixed bottom-8 right-96 z-20">
+      <div className="pt-8">
         <button
           onClick={onClick}
           disabled={disabled}
