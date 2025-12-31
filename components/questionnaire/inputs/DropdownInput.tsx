@@ -10,6 +10,16 @@ interface DropdownInputProps {
   isDarkMode: boolean;
 }
 
+// Font sample mapping for the font selection question (q8_17)
+const FONT_SAMPLES: Record<string, { fontClass: string; sample: string }> = {
+  'Serif': { fontClass: 'font-serif', sample: 'The quick brown fox jumps over the lazy dog.' },
+  'Sans': { fontClass: 'font-sans', sample: 'The quick brown fox jumps over the lazy dog.' },
+  'Freestyle': { fontClass: 'font-over-the-rainbow', sample: 'The quick brown fox jumps over the lazy dog.' },
+  'Cursive': { fontClass: 'font-caveat', sample: 'The quick brown fox jumps over the lazy dog.' },
+  'Quick': { fontClass: 'font-kalam', sample: 'The quick brown fox jumps over the lazy dog.' },
+  'Clean': { fontClass: 'font-handlee', sample: 'The quick brown fox jumps over the lazy dog.' },
+};
+
 export default function DropdownInput({ question, value, onChange, isDarkMode }: DropdownInputProps) {
   const [isOpen, setIsOpen] = useState(false);
   const [customText, setCustomText] = useState('');
@@ -99,7 +109,7 @@ export default function DropdownInput({ question, value, onChange, isDarkMode }:
 
       {/* Custom Dropdown Menu */}
       <div
-        className={`absolute left-0 right-0 mt-2 rounded-xl overflow-hidden z-20 transition-all duration-200 ease-out origin-top ${
+        className={`absolute left-0 mt-2 rounded-xl overflow-hidden z-20 transition-all duration-200 ease-out origin-top ${
           isOpen
             ? 'opacity-100 scale-y-100 translate-y-0'
             : 'opacity-0 scale-y-95 -translate-y-2 pointer-events-none'
@@ -107,48 +117,66 @@ export default function DropdownInput({ question, value, onChange, isDarkMode }:
           isDarkMode
             ? 'bg-[#2a2a2a] border border-gray-700 shadow-lg shadow-black/30'
             : 'bg-white border border-gray-200 shadow-lg shadow-black/10'
+        } ${
+          question.id === 'q8_17' ? 'min-w-[500px]' : 'right-0'
         }`}
         style={{ maxHeight: '250px' }}
       >
         <div className="overflow-y-auto max-h-[250px] py-1">
-          {question.options?.map((option) => (
+          {question.options?.map((option) => {
+            const isFontQuestion = question.id === 'q8_17';
+            const fontSample = isFontQuestion ? FONT_SAMPLES[option] : null;
+
+            return (
+              <div
+                key={option}
+                onClick={(e) => {
+                  // Only select if user isn't highlighting text
+                  const selection = window.getSelection();
+                  if (!selection || selection.toString().length === 0) {
+                    handleSelectOption(option);
+                  }
+                }}
+                className={`w-full px-4 py-3 text-left transition-colors duration-150 cursor-pointer ${
+                  value === option
+                    ? isDarkMode
+                      ? 'bg-[#B5A692]/20 text-[#B5A692]'
+                      : 'bg-[#B5A692]/20 text-[#8B7355]'
+                    : isDarkMode
+                      ? 'text-white hover:bg-[#3a3a3a]'
+                      : 'text-black hover:bg-gray-100'
+                }`}
+              >
+                {fontSample ? (
+                  <div className="flex items-center justify-between gap-4">
+                    <span className="font-medium whitespace-nowrap">{option}</span>
+                    <span className={`${fontSample.fontClass} text-sm truncate opacity-70`}>
+                      {fontSample.sample}
+                    </span>
+                  </div>
+                ) : (
+                  option
+                )}
+              </div>
+            );
+          })}
+          {/* Custom text option - always last (hidden for font question) */}
+          {question.id !== 'q8_17' && (
             <div
-              key={option}
-              onClick={(e) => {
-                // Only select if user isn't highlighting text
-                const selection = window.getSelection();
-                if (!selection || selection.toString().length === 0) {
-                  handleSelectOption(option);
-                }
-              }}
-              className={`w-full px-4 py-3 text-left transition-colors duration-150 select-text cursor-text ${
-                value === option
+              onClick={handleSelectCustomOption}
+              className={`w-full px-4 py-3 text-left transition-colors duration-150 border-t cursor-pointer ${
+                showCustomInput
                   ? isDarkMode
-                    ? 'bg-[#B5A692]/20 text-[#B5A692]'
-                    : 'bg-[#B5A692]/20 text-[#8B7355]'
+                    ? 'bg-[#B5A692]/20 text-[#B5A692] border-gray-700'
+                    : 'bg-[#B5A692]/20 text-[#8B7355] border-gray-200'
                   : isDarkMode
-                    ? 'text-white hover:bg-[#3a3a3a]'
-                    : 'text-black hover:bg-gray-100'
+                    ? 'text-[#B5A692] hover:bg-[#3a3a3a] border-gray-700'
+                    : 'text-[#8B7355] hover:bg-gray-100 border-gray-200'
               }`}
             >
-              {option}
+              Say it in your own words.
             </div>
-          ))}
-          {/* Custom text option - always last */}
-          <div
-            onClick={handleSelectCustomOption}
-            className={`w-full px-4 py-3 text-left transition-colors duration-150 border-t cursor-pointer ${
-              showCustomInput
-                ? isDarkMode
-                  ? 'bg-[#B5A692]/20 text-[#B5A692] border-gray-700'
-                  : 'bg-[#B5A692]/20 text-[#8B7355] border-gray-200'
-                : isDarkMode
-                  ? 'text-[#B5A692] hover:bg-[#3a3a3a] border-gray-700'
-                  : 'text-[#8B7355] hover:bg-gray-100 border-gray-200'
-            }`}
-          >
-            Say it in your own words.
-          </div>
+          )}
         </div>
       </div>
 

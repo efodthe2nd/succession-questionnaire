@@ -908,7 +908,7 @@ export default function LandingPage() {
             </p>
           </div>
           <div className="text-center mt-6 md:mt-8 text-xs">
-            <p>&copy; 2025 Succession Story. All rights reserved.</p>
+            <p>&copy; 2026 Succession Story. All rights reserved.</p>
           </div>
         </div>
       </footer>
