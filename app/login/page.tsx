@@ -51,7 +51,7 @@ export default function LoginPage() {
         {/* Loading Content */}
         <div className="relative z-10 text-center">
           {/* Animated logo */}
-          <h1 className="text-4xl md:text-5xl font-heading font-bold mb-4 animate-pulse">
+          <h1 className="text-4xl md:text-5xl font-serif font-bold mb-4 animate-pulse">
             <span className="text-white">Succession </span>
             <span className="text-[#B5A692]">Story</span>
           </h1>
@@ -89,7 +89,7 @@ export default function LoginPage() {
       {/* Main Content */}
       <div className="relative z-10 w-full max-w-lg text-center">
         {/* Main Title - "Succession" in white, "Story" in tan */}
-        <h1 className="text-5xl md:text-6xl font-heading font-bold mb-2 leading-tight">
+        <h1 className="text-5xl md:text-6xl font-serif font-semibold mb-2 leading-tight">
           <span className="text-white">Succession </span>
           <span className="text-[#B5A692]">Story</span>
         </h1>
