@@ -180,9 +180,6 @@ export default function LandingPage() {
           </div>
         </section>
 
-        {/* Embedded Checkout Section */}
-        <EmbeddedCheckoutSection />
-
         {/* Why it Matters Section */}
         <section id="why-it-matters" className="py-16 md:py-24 bg-white">
           <div
@@ -213,6 +210,9 @@ export default function LandingPage() {
             </p>
           </div>
         </section>
+
+        {/* Embedded Checkout Section */}
+        <EmbeddedCheckoutSection />
 
         {/* The Missing Piece Section */}
         <section id="the-missing-piece" className="py-16 md:py-24 bg-ivory">
@@ -821,12 +821,12 @@ export default function LandingPage() {
               id="offer-details"
               className="mt-8 text-left max-w-sm mx-auto space-y-3"
             >
-              <p className="flex items-center text-sm md:text-base">
+              <p className="flex items-center text-sm md:text-base whitespace-nowrap">
                 <i
                   className="fa-solid fa-check-circle text-taupe mr-3 flex-shrink-0"
                   style={{ width: "18px", height: "17px" }}
                 ></i>
-                Lifetime access to your Succession Story
+                Your Succession Story, a legacy letter written for you
               </p>
               <p className="flex items-center text-sm md:text-base">
                 <i
@@ -842,7 +842,7 @@ export default function LandingPage() {
                 ></i>
                 Upgraded to a handwritten font ($20 value)
               </p>
-              <p className="flex items-center text-sm md:text-base">
+              <p className="flex items-center text-sm md:text-base whitespace-nowrap">
                 <i
                   className="fa-solid fa-check-circle text-taupe mr-3 flex-shrink-0"
                   style={{ width: "18px", height: "17px" }}
