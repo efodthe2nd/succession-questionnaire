@@ -97,6 +97,39 @@ export default function LandingPage() {
     };
   }, []);
 
+  useEffect(() => {
+    // Bottom video autoplay with sound when 10% visible
+    const video = document.getElementById("bottom-video") as HTMLVideoElement;
+    if (!video) return;
+
+    const observerOptions = {
+      root: null,
+      rootMargin: "0px",
+      threshold: 0.1,
+    };
+
+    const observer = new IntersectionObserver((entries) => {
+      entries.forEach((entry) => {
+        if (entry.isIntersecting) {
+          video.muted = false;
+          video.play().catch(() => {
+            // Fallback: play muted if autoplay with sound is blocked by browser
+            video.muted = true;
+            video.play().catch(() => {});
+          });
+        } else {
+          video.pause();
+        }
+      });
+    }, observerOptions);
+
+    observer.observe(video);
+
+    return () => {
+      observer.disconnect();
+    };
+  }, []);
+
   return (
     <div className="landing-page bg-ivory text-charcoal font-sans antialiased">
       {/* FontAwesome Script */}
@@ -800,6 +833,24 @@ export default function LandingPage() {
                   gave them.&quot;
                 </p>
               </div>
+            </div>
+          </div>
+        </section>
+
+        {/* Bottom Video Section */}
+        <section id="video-section" className="bg-ivory">
+          <div className="max-w-5xl mx-auto px-4 py-12 md:py-16">
+            <div className="relative w-full aspect-video rounded-2xl overflow-hidden shadow-xl">
+              <video
+                id="bottom-video"
+                loop
+                playsInline
+                controls
+                preload="auto"
+                className="absolute inset-0 w-full h-full object-cover"
+              >
+                <source src="/video_bottom.mp4" type="video/mp4" />
+              </video>
             </div>
           </div>
         </section>

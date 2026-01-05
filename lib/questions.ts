@@ -50,7 +50,7 @@ export const sections: Section[] = [
   { id: 6, title: 'Pivotal Experiences In My Life', totalQuestions: 3 },
   { id: 7, title: 'My Legacy', totalQuestions: 5 },
   { id: 8, title: 'Final Thoughts', totalQuestions: 7 },
-  { id: 9, title: 'Tone & Voice of Questionnaire', totalQuestions: 17 },
+  { id: 9, title: 'Tone & Voice of Questionnaire', totalQuestions: 18 },
 ];
 
 export const questions: Question[] = [
@@ -1421,6 +1421,15 @@ export const questions: Question[] = [
       'Quick',
       'Clean',
     ],
+  },
+  {
+    id: 'q8_18',
+    section: 'Tone & Voice of Questionnaire',
+    sectionIndex: 9,
+    text: 'To what email address would you like for us to send your letter?',
+    type: 'text',
+    required: false,
+    placeholder: 'Enter your email address',
   },
 ];
 
