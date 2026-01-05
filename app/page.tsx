@@ -837,108 +837,114 @@ export default function LandingPage() {
           </div>
         </section>
 
-        {/* Bottom Video Section */}
-        <section id="video-section" className="bg-ivory">
-          <div className="max-w-5xl mx-auto px-4 py-12 md:py-16">
-            <div className="relative w-full aspect-video rounded-2xl overflow-hidden shadow-xl">
-              <video
-                id="bottom-video"
-                loop
-                playsInline
-                controls
-                preload="auto"
-                className="absolute inset-0 w-full h-full object-cover"
-              >
-                <source src="/video_bottom.mp4" type="video/mp4" />
-              </video>
-            </div>
-          </div>
-        </section>
-
         {/* Founder Offer Section */}
         <section id="founder-offer" className="py-16 md:py-24 bg-white">
-          <div
-            id="founder-offer-content"
-            className="max-w-3xl mx-auto text-center border-4 border-taupe rounded-lg p-6 md:p-8 lg:p-12"
-          >
-            <h2 className="font-serif text-3xl md:text-4xl lg:text-5xl text-charcoal">
-              Founder&apos;s Invitation
-            </h2>
-            <p className="mt-4 text-base md:text-lg text-charcoal/80">
-              For a limited time, early users can join as founding members.
-            </p>
+          <div className="max-w-6xl mx-auto px-4">
+            <div className="grid md:grid-cols-2 gap-8 items-center">
+              {/* Video on the left (desktop) / bottom (mobile) */}
+              <div className="flex flex-col order-2 md:order-1">
+                <h3 className="font-serif text-2xl md:text-3xl text-charcoal mb-4 text-center font-bold">
+                  What Happens Next?
+                </h3>
+                <div className="relative w-full aspect-video rounded-2xl overflow-hidden shadow-xl">
+                  <video
+                    id="bottom-video"
+                    loop
+                    playsInline
+                    controls
+                    preload="auto"
+                    className="absolute inset-0 w-full h-full object-cover"
+                  >
+                    <source src="/video_bottom.mp4" type="video/mp4" />
+                  </video>
+                </div>
+              </div>
 
-            <div
-              id="offer-details"
-              className="mt-8 text-left max-w-sm mx-auto space-y-3"
-            >
-              <p className="flex items-center text-sm md:text-base whitespace-nowrap">
-                <i
-                  className="fa-solid fa-check-circle text-taupe mr-3 flex-shrink-0"
-                  style={{ width: "18px", height: "17px" }}
-                ></i>
-                Your Succession Story, a legacy letter written for you
-              </p>
-              <p className="flex items-center text-sm md:text-base">
-                <i
-                  className="fa-solid fa-check-circle text-taupe mr-3 flex-shrink-0"
-                  style={{ width: "18px", height: "17px" }}
-                ></i>
-                Founder pricing
-              </p>
-              <p className="flex items-center text-sm md:text-base">
-                <i
-                  className="fa-solid fa-check-circle text-taupe mr-3 flex-shrink-0"
-                  style={{ width: "18px", height: "17px" }}
-                ></i>
-                Upgraded to a handwritten font ($20 value)
-              </p>
-              <p className="flex items-center text-sm md:text-base whitespace-nowrap">
-                <i
-                  className="fa-solid fa-check-circle text-taupe mr-3 flex-shrink-0"
-                  style={{ width: "18px", height: "17px" }}
-                ></i>
-                The opportunity to help shape the final version
-              </p>
-              <p className="flex items-center text-sm md:text-base">
-                <i
-                  className="fa-solid fa-check-circle text-taupe mr-3 flex-shrink-0"
-                  style={{ width: "18px", height: "17px" }}
-                ></i>
-                A private and secure experience
-              </p>
-            </div>
+              {/* Stripe card on the right (desktop) / top (mobile) */}
+              <div
+                id="founder-offer-content"
+                className="text-center border-4 border-taupe rounded-lg p-6 md:p-8 lg:p-12 order-1 md:order-2"
+              >
+                <h2 className="font-serif text-3xl md:text-4xl lg:text-5xl text-charcoal">
+                  Founder&apos;s Invitation
+                </h2>
+                <p className="mt-4 text-base md:text-lg text-charcoal/80">
+                  For a limited time, early users can join as founding members.
+                </p>
 
-            <div id="price-block" className="my-8">
-              <p id="i7g94o" className="text-lg md:text-xl text-charcoal/70">
-                Founder Price:
-              </p>
-              <p className="text-5xl md:text-5xl font-bold text-charcoal">
-                <span className="line-through text-3xl text-charcoal/50 mr-2">$197</span>
-                $97
-              </p>
-            </div>
+                <div
+                  id="offer-details"
+                  className="mt-8 text-left max-w-sm mx-auto space-y-3"
+                >
+                  <p className="flex items-center text-sm md:text-base whitespace-nowrap">
+                    <i
+                      className="fa-solid fa-check-circle text-taupe mr-3 flex-shrink-0"
+                      style={{ width: "18px", height: "17px" }}
+                    ></i>
+                    Your Succession Story, a legacy letter written for you
+                  </p>
+                  <p className="flex items-center text-sm md:text-base">
+                    <i
+                      className="fa-solid fa-check-circle text-taupe mr-3 flex-shrink-0"
+                      style={{ width: "18px", height: "17px" }}
+                    ></i>
+                    Founder pricing
+                  </p>
+                  <p className="flex items-center text-sm md:text-base">
+                    <i
+                      className="fa-solid fa-check-circle text-taupe mr-3 flex-shrink-0"
+                      style={{ width: "18px", height: "17px" }}
+                    ></i>
+                    Upgraded to a handwritten font ($20 value)
+                  </p>
+                  <p className="flex items-center text-sm md:text-base whitespace-nowrap">
+                    <i
+                      className="fa-solid fa-check-circle text-taupe mr-3 flex-shrink-0"
+                      style={{ width: "18px", height: "17px" }}
+                    ></i>
+                    The opportunity to help shape the final version
+                  </p>
+                  <p className="flex items-center text-sm md:text-base">
+                    <i
+                      className="fa-solid fa-check-circle text-taupe mr-3 flex-shrink-0"
+                      style={{ width: "18px", height: "17px" }}
+                    ></i>
+                    A private and secure experience
+                  </p>
+                </div>
 
-            <div
-              id="urgency-block"
-              className="bg-taupe/20 text-charcoal py-3 md:py-4 px-4 md:px-6 rounded-lg mb-8"
-            >
-              <p className="text-base md:text-lg font-semibold">
-                ⏰ Only 20 early access spots remaining
-              </p>
-            </div>
+                <div id="price-block" className="my-8">
+                  <p id="i7g94o" className="text-lg md:text-xl text-charcoal/70">
+                    Founder Price:
+                  </p>
+                  <p className="text-5xl md:text-5xl font-bold text-charcoal">
+                    <span className="line-through text-3xl text-charcoal/50 mr-2">$197</span>
+                    $97
+                  </p>
+                </div>
 
-            {/* Stripe Buy Button */}
-            <div
-              className="flex justify-center"
-              dangerouslySetInnerHTML={{
-                __html: `<stripe-buy-button
+                <div
+                  id="urgency-block"
+                  className="bg-taupe/20 text-charcoal py-3 md:py-4 px-4 md:px-6 rounded-lg mb-8"
+                >
+                  <p className="text-base md:text-lg font-semibold">
+                    ⏰ Only 20 early access spots remaining
+                  </p>
+                </div>
+
+                {/* Stripe Buy Button */}
+                <div
+                  className="flex justify-center"
+                  dangerouslySetInnerHTML={{
+                    __html: `<stripe-buy-button
   buy-button-id="buy_btn_1SXZmBIydlpWz9Ik1sHbpA0e"
   publishable-key="pk_live_51SVYrzIydlpWz9IkhtVpwFvq0KSioT9AsgIrghb5YS4JA1kBpTy1wAOVTbNdf9g8G3SEC9DrGpNXhoUSizE3R6Gq00X4MLFfw4"
 >
 </stripe-buy-button>`,
-              }}
-            />
+                  }}
+                />
+              </div>
+            </div>
           </div>
         </section>
       </main>
