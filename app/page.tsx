@@ -863,7 +863,7 @@ export default function LandingPage() {
               {/* Stripe card on the right (desktop) / bottom (mobile) */}
               <div
                 id="founder-offer-content"
-                className="text-center border-4 border-taupe rounded-lg p-6 md:p-8 lg:p-12 order-2 max-w-md md:max-w-none mx-auto md:mx-0"
+                className="text-center border-4 border-taupe rounded-lg p-6 md:p-8 lg:p-12 order-2 w-full"
               >
                 <h2 className="font-serif text-3xl md:text-4xl lg:text-5xl text-charcoal">
                   Founder&apos;s Invitation
@@ -876,9 +876,9 @@ export default function LandingPage() {
                   id="offer-details"
                   className="mt-8 text-left max-w-sm mx-auto space-y-3"
                 >
-                  <p className="flex items-center text-sm md:text-base whitespace-nowrap">
+                  <p className="flex items-start text-sm md:text-base">
                     <i
-                      className="fa-solid fa-check-circle text-taupe mr-3 flex-shrink-0"
+                      className="fa-solid fa-check-circle text-taupe mr-3 flex-shrink-0 mt-1"
                       style={{ width: "18px", height: "17px" }}
                     ></i>
                     Your Succession Story, a legacy letter written for you
@@ -897,9 +897,9 @@ export default function LandingPage() {
                     ></i>
                     Upgraded to a handwritten font ($20 value)
                   </p>
-                  <p className="flex items-center text-sm md:text-base whitespace-nowrap">
+                  <p className="flex items-start text-sm md:text-base">
                     <i
-                      className="fa-solid fa-check-circle text-taupe mr-3 flex-shrink-0"
+                      className="fa-solid fa-check-circle text-taupe mr-3 flex-shrink-0 mt-1"
                       style={{ width: "18px", height: "17px" }}
                     ></i>
                     The opportunity to help shape the final version
