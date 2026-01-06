@@ -841,8 +841,8 @@ export default function LandingPage() {
         <section id="founder-offer" className="py-16 md:py-24 bg-white">
           <div className="max-w-6xl mx-auto px-4">
             <div className="grid md:grid-cols-2 gap-8 items-center">
-              {/* Video on the left (desktop) / bottom (mobile) */}
-              <div className="flex flex-col order-2 md:order-1">
+              {/* Video on the left (desktop) / top (mobile) */}
+              <div className="flex flex-col items-center order-1">
                 <h3 className="font-serif text-2xl md:text-3xl text-charcoal mb-4 text-center font-bold">
                   What Happens Next?
                 </h3>
@@ -860,10 +860,10 @@ export default function LandingPage() {
                 </div>
               </div>
 
-              {/* Stripe card on the right (desktop) / top (mobile) */}
+              {/* Stripe card on the right (desktop) / bottom (mobile) */}
               <div
                 id="founder-offer-content"
-                className="text-center border-4 border-taupe rounded-lg p-6 md:p-8 lg:p-12 order-1 md:order-2"
+                className="text-center border-4 border-taupe rounded-lg p-6 md:p-8 lg:p-12 order-2 max-w-md md:max-w-none mx-auto md:mx-0"
               >
                 <h2 className="font-serif text-3xl md:text-4xl lg:text-5xl text-charcoal">
                   Founder&apos;s Invitation
