@@ -6,7 +6,7 @@ import { createClient } from '@/lib/supabase';
 import { questions } from '@/lib/questions';
 
 // Admin credentials - in production, use environment variables
-const ADMIN_EMAIL = 'admin@successionstory.com';
+const ADMIN_EMAIL = 'admin@successionstory.nom';
 const ADMIN_PASSWORD = 'admin123';
 
 // Helper to generate initials from name
