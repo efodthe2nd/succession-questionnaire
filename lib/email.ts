@@ -257,6 +257,148 @@ export function generatePassword(): string {
  *
  * @returns true if email was sent successfully, false otherwise
  */
+interface SubmissionNotificationParams {
+  submitterName: string
+  submitterEmail: string
+  submissionId: string
+}
+
+/**
+ * Sends an email notification when someone submits the questionnaire
+ */
+export async function sendSubmissionNotificationEmail({
+  submitterName,
+  submitterEmail,
+  submissionId,
+}: SubmissionNotificationParams): Promise<boolean> {
+  // Check if SendGrid is configured
+  if (!SENDGRID_API_KEY) {
+    console.warn(
+      '[Email] SendGrid API key not configured. Skipping submission notification.'
+    )
+    return false
+  }
+
+  const notificationEmail = process.env.SUBMISSION_NOTIFICATION_EMAIL || 'successionstory.now@gmail.com'
+
+  const msg = {
+    to: notificationEmail,
+    from: {
+      email: SENDGRID_FROM_EMAIL,
+      name: 'Succession Story',
+    },
+    subject: `New Submission: ${submitterName} just completed their questionnaire`,
+    text: `
+NEW QUESTIONNAIRE SUBMISSION
+
+${submitterName} has just submitted their Succession Story questionnaire.
+
+Submitter Details:
+- Name: ${submitterName}
+- Email: ${submitterEmail}
+- Submission ID: ${submissionId}
+- Submitted at: ${new Date().toLocaleString()}
+
+You can view the full submission in the admin dashboard:
+https://www.successionstory.now/admin
+
+---
+Succession Story
+Automated Notification
+`,
+    html: `
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>New Submission</title>
+</head>
+<body style="margin: 0; padding: 0; font-family: 'Georgia', serif; background-color: #f8f6f2;">
+  <table role="presentation" style="width: 100%; border-collapse: collapse;">
+    <tr>
+      <td align="center" style="padding: 40px 20px;">
+        <table role="presentation" style="max-width: 600px; width: 100%; border-collapse: collapse; background-color: #ffffff; border-radius: 12px; box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);">
+          <!-- Header -->
+          <tr>
+            <td style="padding: 30px 40px; background-color: #1a1a1a; border-radius: 12px 12px 0 0;">
+              <h1 style="margin: 0; font-size: 24px; font-weight: normal; color: #ffffff;">
+                Succession <span style="color: #B5A692;">Story</span>
+              </h1>
+            </td>
+          </tr>
+
+          <!-- Main Content -->
+          <tr>
+            <td style="padding: 40px;">
+              <h2 style="margin: 0 0 20px; font-size: 22px; color: #1a1a1a; font-weight: normal;">
+                New Questionnaire Submission
+              </h2>
+
+              <p style="margin: 0 0 24px; font-size: 16px; line-height: 1.6; color: #4a4a4a;">
+                <strong>${submitterName}</strong> has just submitted their Succession Story questionnaire.
+              </p>
+
+              <!-- Details Box -->
+              <div style="background-color: #f8f6f2; padding: 24px; border-radius: 8px; margin: 20px 0;">
+                <h3 style="margin: 0 0 16px; font-size: 16px; color: #1a1a1a; font-weight: 600;">
+                  Submitter Details
+                </h3>
+                <p style="margin: 0 0 8px; font-size: 15px; color: #4a4a4a;">
+                  <strong>Name:</strong> ${submitterName}
+                </p>
+                <p style="margin: 0 0 8px; font-size: 15px; color: #4a4a4a;">
+                  <strong>Email:</strong> ${submitterEmail}
+                </p>
+                <p style="margin: 0 0 8px; font-size: 15px; color: #4a4a4a;">
+                  <strong>Submission ID:</strong> ${submissionId}
+                </p>
+                <p style="margin: 0; font-size: 15px; color: #4a4a4a;">
+                  <strong>Submitted at:</strong> ${new Date().toLocaleString()}
+                </p>
+              </div>
+
+              <!-- CTA Button -->
+              <table role="presentation" style="width: 100%; border-collapse: collapse;">
+                <tr>
+                  <td align="center" style="padding: 20px 0;">
+                    <a href="https://www.successionstory.now/admin"
+                       style="display: inline-block; padding: 14px 32px; background-color: #1a1a1a; color: #ffffff; text-decoration: none; font-size: 15px; font-weight: 500; border-radius: 30px;">
+                      View in Admin Dashboard
+                    </a>
+                  </td>
+                </tr>
+              </table>
+            </td>
+          </tr>
+
+          <!-- Footer -->
+          <tr>
+            <td style="padding: 24px 40px; background-color: #1a1a1a; border-radius: 0 0 12px 12px; text-align: center;">
+              <p style="margin: 0; font-size: 12px; color: #888888;">
+                Automated notification from Succession Story
+              </p>
+            </td>
+          </tr>
+        </table>
+      </td>
+    </tr>
+  </table>
+</body>
+</html>
+`,
+  }
+
+  try {
+    await sgMail.send(msg)
+    console.log('[Email] Submission notification sent successfully', { submitterName, submitterEmail })
+    return true
+  } catch (error) {
+    console.error('[Email] Failed to send submission notification:', error)
+    return false
+  }
+}
+
 export async function sendWelcomeEmail({
   to,
   password,

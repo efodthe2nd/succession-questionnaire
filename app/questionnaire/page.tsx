@@ -170,6 +170,13 @@ export default function QuestionnairePage() {
         return;
       }
 
+      // Send notification email (fire and forget - don't block navigation)
+      fetch('/api/notify-submission', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({ submissionId }),
+      }).catch((err) => console.error('Failed to send notification:', err));
+
       router.push('/thank-you');
     }
   };
