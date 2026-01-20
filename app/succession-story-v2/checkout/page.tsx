@@ -1,6 +1,6 @@
 "use client";
 
-import { useCallback, useEffect, useState } from "react";
+import { Suspense, useCallback, useState } from "react";
 import { useSearchParams } from "next/navigation";
 import Link from "next/link";
 import { loadStripe } from "@stripe/stripe-js";
@@ -13,10 +13,9 @@ const stripePromise = loadStripe(
   process.env.NEXT_PUBLIC_STRIPE_PUBLISHABLE_KEY!
 );
 
-export default function CheckoutPage() {
+function CheckoutContent() {
   const searchParams = useSearchParams();
   const email = searchParams.get("email") || "";
-  const [isLoading, setIsLoading] = useState(true);
 
   const fetchClientSecret = useCallback(async () => {
     const response = await fetch("/api/create-checkout-session-v2", {
@@ -31,10 +30,28 @@ export default function CheckoutPage() {
       throw new Error(data.error);
     }
 
-    setIsLoading(false);
     return data.clientSecret;
   }, [email]);
 
+  return (
+    <EmbeddedCheckoutProvider
+      stripe={stripePromise}
+      options={{ fetchClientSecret }}
+    >
+      <EmbeddedCheckout />
+    </EmbeddedCheckoutProvider>
+  );
+}
+
+function CheckoutLoading() {
+  return (
+    <div className="flex items-center justify-center py-12">
+      <div className="animate-spin rounded-full h-8 w-8 border-b-2 border-purple-600"></div>
+    </div>
+  );
+}
+
+export default function CheckoutPage() {
   return (
     <div className="min-h-screen bg-gradient-to-br from-purple-50 via-white to-pink-50 font-sans">
       {/* Header */}
@@ -230,12 +247,9 @@ export default function CheckoutPage() {
                 </p>
               </div>
               <div className="p-1">
-                <EmbeddedCheckoutProvider
-                  stripe={stripePromise}
-                  options={{ fetchClientSecret }}
-                >
-                  <EmbeddedCheckout />
-                </EmbeddedCheckoutProvider>
+                <Suspense fallback={<CheckoutLoading />}>
+                  <CheckoutContent />
+                </Suspense>
               </div>
             </div>
           </div>
