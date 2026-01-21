@@ -345,7 +345,7 @@ export default function SuccessionStoryV2Page() {
 
   const faqs = [
     { question: "Is this a legal document?", answer: "No. Succession Story is a personal letter to accompany your legal estate plan — not replace it. It has no legal effect. Think of it as the heart behind the paperwork." },
-    { question: "I&apos;m not a good writer. Can I really do this?", answer: "Absolutely. You don't write anything — we do. You just answer simple questions, choose from curated options, and share short reflections. Our system transforms your answers into a polished letter that sounds like you." },
+    { question: "I'm not a good writer. Can I really do this?", answer: "Absolutely. You don't write anything — we do. You just answer simple questions, choose from curated options, and share short reflections. Our system transforms your answers into a polished letter that sounds like you." },
     { question: "How long does it take?", answer: "Most people complete their Succession Story in 20-30 minutes. Some spend longer because they want to reflect more deeply. There's no rush — you can save your progress and return anytime." },
     { question: "What if I want to update it later?", answer: "Life changes. So can your letter. Your Secure Cloud Backup means you can access and update your Succession Story anytime." },
     { question: "Is my information private?", answer: "Completely. We use bank-level encryption. Your responses and your letter are never shared with anyone. This is your story — it stays yours." },
