@@ -71,21 +71,25 @@ export default function AdminPage() {
 
   // Fetch submissions when authenticated
   useEffect(() => {
-    if (!isAuthenticated) return;
+  if (!isAuthenticated) return;
 
-    const fetchSubmissions = async () => {
-      const { data, error } = await supabase
-        .from('submissions')
-        .select('*, answers(*)')
-        .order('created_at', { ascending: false });
-
-      if (error) {
-        console.error('Failed to fetch submissions:', error);
+  const fetchSubmissions = async () => {
+    try {
+      const response = await fetch('/api/admin/submissions')
+      const result = await response.json()
+      
+      if (response.ok) {
+        setSubmissions(result.submissions || [])
+      } else {
+        console.error('Failed to fetch submissions:', result.error)
       }
-      setSubmissions(data || []);
-    };
-    fetchSubmissions();
-  }, [isAuthenticated, supabase]);
+    } catch (error) {
+      console.error('Failed to fetch submissions:', error)
+    }
+  }
+  
+  fetchSubmissions()
+}, [isAuthenticated]);
 
   const handleLogin = (e: React.FormEvent) => {
     e.preventDefault();

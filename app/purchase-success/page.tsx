@@ -13,9 +13,9 @@ function PurchaseSuccessContent() {
     if (sessionId) {
       // The webhook will handle user creation and email sending
       // We just show a success message here
-      setStatus('success')
+      setTimeout(() => setStatus('success'), 0)
     } else {
-      setStatus('error')
+      setTimeout(() => setStatus('error'), 0)
     }
   }, [sessionId])
 
