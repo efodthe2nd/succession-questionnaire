@@ -61,6 +61,7 @@ interface DynamicGroup {
 
 const groupDynamicAnswers = (answerMap: Map<string, any>, staticQuestionIds: Set<string>): DynamicGroup[] => {
   const unmatchedKeys = Array.from(answerMap.keys()).filter(key => !staticQuestionIds.has(key));
+  console.log('[groupDynamicAnswers] Unmatched keys found:', unmatchedKeys);
   const groups: Record<string, DynamicGroup> = {};
 
   unmatchedKeys.forEach(key => {
@@ -68,11 +69,16 @@ const groupDynamicAnswers = (answerMap: Map<string, any>, staticQuestionIds: Set
     let groupTitle = '';
     let fieldLabel = '';
     const value = answerMap.get(key);
-    if (!value || value.toString().trim() === '') return;
+    
+    if (!value || value.toString().trim() === '') {
+      console.log(`[groupDynamicAnswers] Skipping key "${key}" because value is empty or null`);
+      return;
+    }
 
     // Pattern: q3_child_{index}_{field}
     const childMatch = key.match(/^q3_child_(\d+)_(.+)$/);
     if (childMatch) {
+      console.log(`[groupDynamicAnswers] Key "${key}" matched Child pattern: index=${childMatch[1]}, field=${childMatch[2]}`);
       const index = parseInt(childMatch[1], 10);
       groupKey = `child_${index}`;
       groupTitle = `Child ${index + 1}`;
@@ -82,30 +88,38 @@ const groupDynamicAnswers = (answerMap: Map<string, any>, staticQuestionIds: Set
     else if (key.match(/^q3_spouse_/)) {
       const spouseMatch = key.match(/^q3_spouse_(\d+)_(.+)$/);
       if (spouseMatch) {
+        console.log(`[groupDynamicAnswers] Key "${key}" matched Spouse pattern: index=${spouseMatch[1]}, field=${spouseMatch[2]}`);
         const index = parseInt(spouseMatch[1], 10);
         groupKey = `spouse_${index}`;
         groupTitle = spouseMatch[1] === '0' ? 'Significant Other' : `Significant Other ${index + 1}`;
         fieldLabel = spouseMatch[2].charAt(0).toUpperCase() + spouseMatch[2].slice(1).replace(/_/g, ' ');
+      } else {
+        console.log(`[groupDynamicAnswers] Key "${key}" contains q3_spouse but failed regex match`);
       }
     }
     // Pattern: q5_asset_{index}_{field}
     else if (key.match(/^q5_asset_/)) {
       const assetMatch = key.match(/^q5_asset_(\d+)_(.+)$/);
       if (assetMatch) {
+        console.log(`[groupDynamicAnswers] Key "${key}" matched Asset pattern: index=${assetMatch[1]}, field=${assetMatch[2]}`);
         const index = parseInt(assetMatch[1], 10);
         groupKey = `asset_${index}`;
         groupTitle = `Asset ${index + 1}`;
         fieldLabel = assetMatch[2].charAt(0).toUpperCase() + assetMatch[2].slice(1).replace(/_/g, ' ');
+      } else {
+        console.log(`[groupDynamicAnswers] Key "${key}" contains q5_asset but failed regex match`);
       }
     }
     // Pattern: q{any}_additional_{index}
     else if (key.includes('_additional_')) {
+      console.log(`[groupDynamicAnswers] Key "${key}" matched Additional Story pattern`);
       groupKey = 'additional_stories';
       groupTitle = 'Additional Stories';
       fieldLabel = 'Story';
     }
     // Fallback for any other unmatched keys
     else {
+      console.log(`[groupDynamicAnswers] Key "${key}" falling through to "Additional Information"`);
       groupKey = 'other';
       groupTitle = 'Additional Information';
       fieldLabel = key.replace(/_/g, ' ');
@@ -224,7 +238,9 @@ export default function AdminPage() {
 
     // Add Dynamic Groups
     const staticIds = new Set(questions.map(q => q.id));
+    console.log('[Admin Export] All answer keys:', Array.from(answerMap.keys()));
     const dynamicGroups = groupDynamicAnswers(answerMap, staticIds);
+    console.log('[Admin Export] Dynamic groups result:', dynamicGroups);
 
     if (dynamicGroups.length > 0) {
       text += `DYNAMIC DATA\n`;
@@ -536,7 +552,9 @@ export default function AdminPage() {
                 });
 
                 const staticIds = new Set(questions.map(q => q.id));
+                console.log('[Admin Modal] Answer keys for this submission:', Array.from(answerMap.keys()));
                 const dynamicGroups = groupDynamicAnswers(answerMap, staticIds);
+                console.log('[Admin Modal] Final dynamic groups:', dynamicGroups);
 
                 return (
                   <>
