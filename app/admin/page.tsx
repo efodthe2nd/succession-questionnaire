@@ -81,7 +81,8 @@ const groupDynamicAnswers = (answerMap: Map<string, any>, staticQuestionIds: Set
       console.log(`[groupDynamicAnswers] Key "${key}" matched Child pattern: index=${childMatch[1]}, field=${childMatch[2]}`);
       const index = parseInt(childMatch[1], 10);
       groupKey = `child_${index}`;
-      groupTitle = `Child ${index + 1}`;
+      const childName = answerMap.get(`q3_child_${index}_name`);
+      groupTitle = childName ? `Child: ${childName}` : `Child ${index + 1}`;
       fieldLabel = childMatch[2].charAt(0).toUpperCase() + childMatch[2].slice(1).replace(/_/g, ' ');
     }
     // Pattern: q3_spouse_{index}_{field}
@@ -91,7 +92,8 @@ const groupDynamicAnswers = (answerMap: Map<string, any>, staticQuestionIds: Set
         console.log(`[groupDynamicAnswers] Key "${key}" matched Spouse pattern: index=${spouseMatch[1]}, field=${spouseMatch[2]}`);
         const index = parseInt(spouseMatch[1], 10);
         groupKey = `spouse_${index}`;
-        groupTitle = spouseMatch[1] === '0' ? 'Significant Other' : `Significant Other ${index + 1}`;
+        const spouseName = answerMap.get(`q3_spouse_${index}_name`);
+        groupTitle = spouseName ? `Spouse: ${spouseName}` : `Significant Other ${index + 1}`;
         fieldLabel = spouseMatch[2].charAt(0).toUpperCase() + spouseMatch[2].slice(1).replace(/_/g, ' ');
       } else {
         console.log(`[groupDynamicAnswers] Key "${key}" contains q3_spouse but failed regex match`);
@@ -104,7 +106,8 @@ const groupDynamicAnswers = (answerMap: Map<string, any>, staticQuestionIds: Set
         console.log(`[groupDynamicAnswers] Key "${key}" matched Asset pattern: index=${assetMatch[1]}, field=${assetMatch[2]}`);
         const index = parseInt(assetMatch[1], 10);
         groupKey = `asset_${index}`;
-        groupTitle = `Asset ${index + 1}`;
+        const assetName = answerMap.get(`q5_asset_${index}_name`);
+        groupTitle = assetName ? `Asset: ${assetName}` : `Asset ${index + 1}`;
         fieldLabel = assetMatch[2].charAt(0).toUpperCase() + assetMatch[2].slice(1).replace(/_/g, ' ');
       } else {
         console.log(`[groupDynamicAnswers] Key "${key}" contains q5_asset but failed regex match`);
