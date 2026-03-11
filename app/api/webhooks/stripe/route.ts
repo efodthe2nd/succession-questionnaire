@@ -135,6 +135,18 @@ export async function POST(request: NextRequest) {
         // Don't fail the webhook - the user was still created
       }
 
+      // Update the submissions table to mark as paid
+      const { error: submissionError } = await supabaseAdmin
+        .from('submissions')
+        .update({ paid: true })
+        .eq('user_id', userId)
+        .eq('status', 'completed')
+
+      if (submissionError) {
+        console.error('[Stripe Webhook] Failed to update submission:', submissionError)
+        // Non-fatal, but good to log
+      }
+
       console.log('[Stripe Webhook] Successfully processed payment for:', customerEmail)
 
       return NextResponse.json({
