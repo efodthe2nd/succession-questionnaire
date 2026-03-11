@@ -154,13 +154,14 @@ function generateWelcomeEmailHTML(email: string, password: string): string {
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Welcome to Succession Story</title>
+  <title>You're in — Succession Story</title>
 </head>
 <body style="margin: 0; padding: 0; font-family: 'Georgia', serif; background-color: #f8f6f2;">
   <table role="presentation" style="width: 100%; border-collapse: collapse;">
     <tr>
       <td align="center" style="padding: 40px 20px;">
         <table role="presentation" style="max-width: 600px; width: 100%; border-collapse: collapse; background-color: #ffffff; border-radius: 12px; box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);">
+
           <!-- Header -->
           <tr>
             <td style="padding: 40px 40px 20px; text-align: center; background-color: #1a1a1a; border-radius: 12px 12px 0 0;">
@@ -173,108 +174,110 @@ function generateWelcomeEmailHTML(email: string, password: string): string {
           <!-- Main Content -->
           <tr>
             <td style="padding: 40px;">
+
               <h2 style="margin: 0 0 20px; font-size: 24px; color: #1a1a1a; font-weight: normal;">
-                Welcome to Succession Story
+                You're in. Your account is ready.
               </h2>
 
               <p style="margin: 0 0 16px; font-size: 16px; line-height: 1.6; color: #4a4a4a;">
-                Thank you for your purchase. You're all set. From here, we'll begin writing your Succession Story for you. All we need is your input through a simple, guided experience.
+                Most people think about writing a letter like this for years. You actually did something about it. That already puts you ahead.
               </p>
 
               <p style="margin: 0 0 30px; font-size: 16px; line-height: 1.6; color: #4a4a4a;">
-                This is a companion to your estate plan. It captures the meaning, values, and intentions behind what you've built, in your own voice, without the work of writing a letter yourself.
+                Here's how this works: you answer a short guided questionnaire — 30 minutes, mostly multiple choice. We take your answers and write your Succession Story in your voice. You only pay when it's ready and you're happy with it.
               </p>
 
               <!-- Login Details Box -->
-              <div style="background-color: #f8f6f2; padding: 24px; border-radius: 8px; margin: 20px 0;">
+              <div style="background-color: #f8f6f2; padding: 24px; border-radius: 8px; margin: 0 0 30px;">
                 <h3 style="margin: 0 0 16px; font-size: 18px; color: #1a1a1a; font-weight: 600;">
                   Your Login Details
                 </h3>
                 <p style="margin: 0 0 8px; font-size: 15px; color: #4a4a4a;">
                   <strong>Email:</strong> ${email}
                 </p>
-                <p style="margin: 0; font-size: 15px; color: #4a4a4a;">
+                <p style="margin: 0 0 16px; font-size: 15px; color: #4a4a4a;">
                   <strong>Temporary Password:</strong> ${password}
+                </p>
+                <p style="margin: 0; font-size: 13px; color: #8a7f78;">
+                  We recommend changing your password after your first login.
                 </p>
               </div>
 
               <!-- CTA Button -->
               <table role="presentation" style="width: 100%; border-collapse: collapse;">
                 <tr>
-                  <td align="center" style="padding: 20px 0;">
+                  <td align="center" style="padding: 0 0 30px;">
                     <a href="https://www.successionstory.now/login"
-                       style="display: inline-block; padding: 16px 40px; background-color: #1a1a1a; color: #ffffff; text-decoration: none; font-size: 16px; font-weight: 500; border-radius: 30px;">
-                      Log In Now
+                       style="display: inline-block; padding: 16px 40px; background-color: #1a1a1a; color: #B5A692; text-decoration: none; font-size: 16px; font-weight: 500; border-radius: 30px;">
+                      Log In &amp; Start Now →
                     </a>
                   </td>
                 </tr>
               </table>
 
-              <p style="margin: 0 0 30px; font-size: 14px; color: #888888; text-align: center;">
-                We recommend changing your password after your first login.
-              </p>
-
-              <!-- How It Works Section -->
-              <h3 style="margin: 30px 0 16px; font-size: 18px; color: #1a1a1a; font-weight: 600;">
-                How It Works
+              <!-- What Happens Next -->
+              <h3 style="margin: 0 0 16px; font-size: 18px; color: #1a1a1a; font-weight: 600;">
+                What happens next
               </h3>
-              <p style="margin: 0 0 16px; font-size: 16px; line-height: 1.6; color: #4a4a4a;">
-                Once you log in, you'll move through an easy, guided questionnaire. Most prompts are multiple choice, with a few short reflections where you can type or speak your thoughts. You don't need to worry about structure, tone, or wording. We handle that for you.
-              </p>
-              <p style="margin: 0 0 16px; font-size: 16px; line-height: 1.6; color: #4a4a4a;">
-                <strong>You simply share what matters.</strong><br />
-                <strong>We turn it into a polished Succession Story.</strong>
-              </p>
 
-              <!-- What to Expect Section -->
-              <h3 style="margin: 30px 0 16px; font-size: 18px; color: #1a1a1a; font-weight: 600;">
-                Here's what to expect:
-              </h3>
-              <ul style="margin: 0 0 20px; padding-left: 20px; font-size: 15px; line-height: 1.8; color: #4a4a4a;">
-                <li>A guided experience that you can finish in less than a couple of hours</li>
-                <li>A timer that counts down two hours, to encourage you to finish quickly</li>
-                <li>Multiple choice prompts and optional voice-to-text for ease</li>
-                <li>Your completed Succession Story written for you and delivered within 24 hours</li>
-              </ul>
-              <p style="margin: 0 0 30px; font-size: 16px; line-height: 1.6; color: #4a4a4a;">
-                No blank pages.<br />
-                No long workbooks.<br />
-                No pressure to get it perfect.
-              </p>
-
-              <!-- Gift Section -->
-              <div style="background-color: #f8f6f2; padding: 24px; border-radius: 8px; margin: 30px 0;">
-                <h3 style="margin: 0 0 12px; font-size: 18px; color: #1a1a1a; font-weight: 600;">
-                  Giving This as a Gift?
-                </h3>
-                <p style="margin: 0 0 16px; font-size: 15px; line-height: 1.6; color: #4a4a4a;">
-                  If this purchase is a gift, you can download a printable digital gift certificate directly from this email. Just click the "Print Gift Certificate" button below and share it when the moment feels right.
-                </p>
-                <table role="presentation" style="width: 100%; border-collapse: collapse;">
-                  <tr>
-                    <td align="center" style="padding: 10px 0 0;">
-                      <a href="https://www.successionstory.now/gift-certificate"
-                         style="display: inline-block; padding: 12px 30px; background-color: #B5A692; color: #ffffff; text-decoration: none; font-size: 14px; font-weight: 500; border-radius: 30px;">
-                        Print Gift Certificate
-                      </a>
-                    </td>
-                  </tr>
-                </table>
+              <div style="margin: 0 0 30px;">
+                <div style="display: flex; margin-bottom: 16px;">
+                  <table role="presentation" style="width: 100%; border-collapse: collapse;">
+                    <tr>
+                      <td style="width: 28px; vertical-align: top; padding-top: 2px;">
+                        <span style="font-size: 13px; color: #B5A692; font-weight: 600;">01</span>
+                      </td>
+                      <td style="vertical-align: top; padding-bottom: 16px;">
+                        <p style="margin: 0; font-size: 15px; line-height: 1.6; color: #4a4a4a;">
+                          <strong style="color: #1a1a1a;">Log in with the details above.</strong> Your email will be prefilled on the login page.
+                        </p>
+                      </td>
+                    </tr>
+                    <tr>
+                      <td style="width: 28px; vertical-align: top; padding-top: 2px;">
+                        <span style="font-size: 13px; color: #B5A692; font-weight: 600;">02</span>
+                      </td>
+                      <td style="vertical-align: top; padding-bottom: 16px;">
+                        <p style="margin: 0; font-size: 15px; line-height: 1.6; color: #4a4a4a;">
+                          <strong style="color: #1a1a1a;">Answer the guided questionnaire.</strong> 30 minutes. Mostly multiple choice. Voice-to-text available. Your progress saves automatically — you can stop and come back anytime.
+                        </p>
+                      </td>
+                    </tr>
+                    <tr>
+                      <td style="width: 28px; vertical-align: top; padding-top: 2px;">
+                        <span style="font-size: 13px; color: #B5A692; font-weight: 600;">03</span>
+                      </td>
+                      <td style="vertical-align: top; padding-bottom: 16px;">
+                        <p style="margin: 0; font-size: 15px; line-height: 1.6; color: #4a4a4a;">
+                          <strong style="color: #1a1a1a;">We write your letter.</strong> Once you submit, we write your Succession Story in your voice. You'll be asked to pay $97 at this point — only after you've seen what we've built from your answers.
+                        </p>
+                      </td>
+                    </tr>
+                    <tr>
+                      <td style="width: 28px; vertical-align: top; padding-top: 2px;">
+                        <span style="font-size: 13px; color: #B5A692; font-weight: 600;">04</span>
+                      </td>
+                      <td style="vertical-align: top;">
+                        <p style="margin: 0; font-size: 15px; line-height: 1.6; color: #4a4a4a;">
+                          <strong style="color: #1a1a1a;">Your letter arrives by email.</strong> A finished PDF — your values, your stories, your message — written for the people you love. Ready to share whenever the moment feels right.
+                        </p>
+                      </td>
+                    </tr>
+                  </table>
+                </div>
               </div>
 
-              <!-- Support Section -->
-              <div style="border-top: 1px solid #e5e5e5; padding-top: 30px; margin-top: 30px;">
-                <h3 style="margin: 0 0 12px; font-size: 16px; color: #1a1a1a; font-weight: 600;">
-                  Need a Hand?
-                </h3>
-                <p style="margin: 0; font-size: 14px; line-height: 1.6; color: #4a4a4a;">
-                  If you have questions or want help getting started, we're here. Simply send us an email at
-                  <a href="mailto:successionstory.now@gmail.com" style="color: #B5A692; text-decoration: none;">successionstory.now@gmail.com</a>.
-                </p>
-                <p style="margin: 16px 0 0; font-size: 14px; line-height: 1.6; color: #4a4a4a;">
-                  We're glad you chose Succession Story. We'll take it from here.
-                </p>
-              </div>
+              <!-- Divider -->
+              <div style="border-top: 1px solid #e8e4de; margin: 10px 0 30px;"></div>
+
+              <!-- Closing -->
+              <p style="margin: 0 0 8px; font-size: 16px; line-height: 1.6; color: #4a4a4a; font-style: italic;">
+                No blank pages. No long workbooks. No pressure to find the right words.
+              </p>
+              <p style="margin: 0; font-size: 16px; line-height: 1.6; color: #4a4a4a; font-style: italic;">
+                You simply share what matters. We'll take it from here.
+              </p>
+
             </td>
           </tr>
 
@@ -284,14 +287,19 @@ function generateWelcomeEmailHTML(email: string, password: string): string {
               <p style="margin: 0 0 8px; font-size: 18px; color: #ffffff; font-family: 'Georgia', serif;">
                 Succession <span style="color: #B5A692;">Story</span>
               </p>
-              <p style="margin: 0 0 16px; font-size: 14px; color: #ffffff; font-style: italic;">
+              <p style="margin: 0 0 16px; font-size: 14px; color: #B5A692; font-style: italic;">
                 Your legacy, written for you.
               </p>
-              <p style="margin: 0; font-size: 12px; color: #888888;">
-                You're receiving this email because you purchased access to Succession Story.
+              <p style="margin: 0 0 12px; font-size: 12px; color: #888888;">
+                You're receiving this email because you created a free account at Succession Story.
+              </p>
+              <p style="margin: 0; font-size: 11px; line-height: 1.4; color: #555555;">
+                Succession Story does not provide legal or tax advice and does not create or modify any estate plan.
+                Your letter is for personal expression only and has no legal effect.
               </p>
             </td>
           </tr>
+
         </table>
       </td>
     </tr>

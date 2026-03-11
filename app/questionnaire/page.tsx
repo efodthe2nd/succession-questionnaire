@@ -7,8 +7,9 @@ import { sections, getQuestionsBySection, getSectionByIndex } from '@/lib/questi
 import LoadingScreen from '@/components/questionnaire/ui/LoadingScreen';
 import DesktopLayout from '@/components/questionnaire/layouts/DesktopLayout';
 import MobileLayout from '@/components/questionnaire/layouts/MobileLayout';
+import PaywallModal from '@/components/PaywallModal';
 
-const INITIAL_TIME_SECONDS = 2 * 60 * 60; // 2 hours in seconds
+const INITIAL_TIME_SECONDS = 2 * 60 * 60;
 
 export default function QuestionnairePage() {
   const [currentSectionIndex, setCurrentSectionIndex] = useState(1);
@@ -20,10 +21,10 @@ export default function QuestionnairePage() {
   const [isLoading, setIsLoading] = useState(true);
   const [timeRemaining, setTimeRemaining] = useState(INITIAL_TIME_SECONDS);
   const [saveStatus, setSaveStatus] = useState<'idle' | 'saving' | 'saved'>('idle');
+  const [showPaywall, setShowPaywall] = useState(false);
   const router = useRouter();
   const supabase = createClient();
 
-  // Format time as HH:MM:SS
   const formatTime = (seconds: number) => {
     const hrs = Math.floor(seconds / 3600);
     const mins = Math.floor((seconds % 3600) / 60);
@@ -39,7 +40,6 @@ export default function QuestionnairePage() {
   const currentSection = getSectionByIndex(currentSectionIndex);
   const currentQuestions = getQuestionsBySection(currentSectionIndex);
 
-  // Initialize user session and load data
   useEffect(() => {
     const init = async () => {
       const { data: { user } } = await supabase.auth.getUser();
@@ -49,7 +49,6 @@ export default function QuestionnairePage() {
       }
       setUserId(user.id);
 
-      // Get the most recent submission for this user (could be in_progress or completed)
       const { data: submissions } = await supabase
         .from('submissions')
         .select('*')
@@ -62,7 +61,6 @@ export default function QuestionnairePage() {
       if (existingSubmission) {
         setSubmissionId(existingSubmission.id);
         setCurrentSectionIndex(existingSubmission.current_section_index || 1);
-        // Restore saved timer
         if (existingSubmission.time_remaining !== null && existingSubmission.time_remaining !== undefined) {
           setTimeRemaining(existingSubmission.time_remaining);
         }
@@ -103,13 +101,8 @@ export default function QuestionnairePage() {
   }, [router, supabase]);
 
   const saveAnswer = async (questionId: string, value: string | string[]) => {
-    // Always update local state immediately
-    setAnswers(prevAnswers => ({
-      ...prevAnswers,
-      [questionId]: value
-    }));
+    setAnswers(prevAnswers => ({ ...prevAnswers, [questionId]: value }));
 
-    // Only save to DB if we have a submission
     if (!submissionId) {
       console.warn('No submissionId available, answer saved locally only');
       return;
@@ -117,11 +110,7 @@ export default function QuestionnairePage() {
 
     const answerText = typeof value === 'string' ? value : JSON.stringify(value);
     const { error } = await supabase.from('answers').upsert(
-      {
-        submission_id: submissionId,
-        question_id: questionId,
-        answer_text: answerText,
-      },
+      { submission_id: submissionId, question_id: questionId, answer_text: answerText },
       { onConflict: 'submission_id,question_id' }
     );
 
@@ -135,13 +124,9 @@ export default function QuestionnairePage() {
     setSaveStatus('saving');
     await supabase
       .from('submissions')
-      .update({
-        current_section_index: currentSectionIndex,
-        time_remaining: timeRemaining
-      })
+      .update({ current_section_index: currentSectionIndex, time_remaining: timeRemaining })
       .eq('id', submissionId);
     setSaveStatus('saved');
-    // Reset to idle after 2 seconds
     setTimeout(() => setSaveStatus('idle'), 2000);
   };
 
@@ -158,7 +143,7 @@ export default function QuestionnairePage() {
       }
       window.scrollTo({ top: 0, behavior: 'smooth' });
     } else {
-      // Final submission
+      // Mark completed, save progress, then show paywall
       const { error } = await supabase
         .from('submissions')
         .update({ status: 'completed', submitted_at: new Date().toISOString() })
@@ -170,14 +155,16 @@ export default function QuestionnairePage() {
         return;
       }
 
-      // Send notification email (fire and forget - don't block navigation)
+      // Fire notification (non-blocking)
       fetch('/api/notify-submission', {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
         body: JSON.stringify({ submissionId }),
       }).catch((err) => console.error('Failed to send notification:', err));
 
-      router.push('/thank-you');
+      // Show paywall instead of redirecting
+      await handleSave();
+      setShowPaywall(true);
     }
   };
 
@@ -208,45 +195,26 @@ export default function QuestionnairePage() {
     window.scrollTo({ top: 0, behavior: 'smooth' });
   };
 
-  const toggleDarkMode = () => {
-    setIsDarkMode(!isDarkMode);
-  };
-
-  const toggleProgressModal = () => {
-    setShowProgressModal(!showProgressModal);
-  };
+  const toggleDarkMode = () => setIsDarkMode(!isDarkMode);
+  const toggleProgressModal = () => setShowProgressModal(!showProgressModal);
 
   const handleAddStory = (baseQuestionId: string) => {
-    // Find the next available index for additional stories
     const prefix = `${baseQuestionId}_additional_`;
     let nextIndex = 0;
-
     Object.keys(answers).forEach((key) => {
       if (key.startsWith(prefix)) {
         const index = parseInt(key.replace(prefix, ''), 10);
-        if (!isNaN(index) && index >= nextIndex) {
-          nextIndex = index + 1;
-        }
+        if (!isNaN(index) && index >= nextIndex) nextIndex = index + 1;
       }
     });
-
-    // Create a new story entry with empty value
-    const newStoryId = `${prefix}${nextIndex}`;
-    saveAnswer(newStoryId, '');
+    saveAnswer(`${prefix}${nextIndex}`, '');
   };
 
-  // Loading state
-  if (isLoading) {
-    return <LoadingScreen isDarkMode={isDarkMode} />;
-  }
-
-  if (!currentSection) {
-    return <LoadingScreen isDarkMode={isDarkMode} />;
-  }
+  if (isLoading) return <LoadingScreen isDarkMode={isDarkMode} />;
+  if (!currentSection) return <LoadingScreen isDarkMode={isDarkMode} />;
 
   return (
     <div className={`min-h-screen ${isDarkMode ? 'bg-[#1a1a1a]' : 'bg-[#F5F5F5]'}`}>
-      {/* Desktop Layout */}
       <DesktopLayout
         sections={sections}
         currentSection={currentSection}
@@ -266,7 +234,6 @@ export default function QuestionnairePage() {
         saveStatus={saveStatus}
       />
 
-      {/* Mobile Layout */}
       <MobileLayout
         sections={sections}
         currentSection={currentSection}
@@ -285,6 +252,12 @@ export default function QuestionnairePage() {
         onBack={handleBack}
         onAddStory={handleAddStory}
         saveStatus={saveStatus}
+      />
+
+      <PaywallModal
+        isOpen={showPaywall}
+        onClose={() => setShowPaywall(false)}
+        submissionId={submissionId ?? undefined}
       />
     </div>
   );
