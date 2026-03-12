@@ -222,7 +222,7 @@ export const SEQUENCE_A_STEPS = [
     step: 1,
     delayHours: 24,
     subject: (p_: SequenceAPersonalisation) =>
-      `Your Succession Story is waiting — your answers are saved.`,
+      `Your legacy letter is waiting and your answers are saved.`,
     getHTML: email1,
   },
   {
