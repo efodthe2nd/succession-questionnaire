@@ -1,6 +1,6 @@
 'use client'
 
-import { useState } from 'react'
+import React, { useState } from 'react'
 import { useRouter } from 'next/navigation'
 
 export default function SqueezePageVariant2() {
@@ -35,49 +35,186 @@ export default function SqueezePageVariant2() {
     }
   }
 
-  return (
-    <main className="min-h-screen bg-[#1a1a1a] flex flex-col">
-      <div className="w-full h-1 bg-[#B5A692]" />
+  const comparisons = [
+    {
+      will: 'Who gets the house.',
+      letter: 'Why you bought it in the first place.',
+    },
+    {
+      will: 'Who gets the money.',
+      letter: 'What you hope they do with it.',
+    },
+    {
+      will: 'Who gets custody.',
+      letter: 'What kind of person you hope they become.',
+    },
+  ]
 
-      <nav className="px-6 py-4 flex items-center justify-between max-w-6xl mx-auto w-full">
-        <p className="text-white text-sm font-medium tracking-wide">
-          Succession <span className="text-[#B5A692]">Story</span>
+  return (
+    <main className="min-h-screen bg-[#f9f6f1] flex flex-col">
+      <style>{`
+        @import url('https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,400;0,500;0,600;1,400;1,500&family=DM+Sans:wght@300;400;500&display=swap');
+
+        .font-cormorant { font-family: 'Cormorant Garamond', Georgia, serif; }
+        .font-dm        { font-family: 'DM Sans', sans-serif; }
+
+        @keyframes fadeUp {
+          from { opacity: 0; transform: translateY(18px); }
+          to   { opacity: 1; transform: translateY(0); }
+        }
+        @keyframes fadeIn {
+          from { opacity: 0; }
+          to   { opacity: 1; }
+        }
+
+        .fade-1 { animation: fadeUp 0.7s ease forwards; animation-delay: 0.05s; opacity: 0; }
+        .fade-2 { animation: fadeUp 0.7s ease forwards; animation-delay: 0.2s;  opacity: 0; }
+        .fade-3 { animation: fadeUp 0.7s ease forwards; animation-delay: 0.35s; opacity: 0; }
+        .fade-4 { animation: fadeUp 0.7s ease forwards; animation-delay: 0.5s;  opacity: 0; }
+        .fade-5 { animation: fadeUp 0.7s ease forwards; animation-delay: 0.65s; opacity: 0; }
+        .fade-6 { animation: fadeIn 0.9s ease forwards; animation-delay: 0.75s; opacity: 0; }
+
+        .divider-line {
+          width: 40px; height: 1px;
+          background: #B5A692;
+          display: inline-block;
+          vertical-align: middle;
+          margin-right: 10px;
+        }
+
+        .input-field {
+          width: 100%;
+          padding: 15px 20px;
+          border: 1.5px solid #d4c8bb;
+          background: #fff;
+          color: #1a1a1a;
+          border-radius: 10px;
+          font-size: 15px;
+          font-family: 'DM Sans', sans-serif;
+          transition: border-color 0.2s;
+          outline: none;
+          box-sizing: border-box;
+        }
+        .input-field::placeholder { color: #b0a89e; }
+        .input-field:focus { border-color: #B5A692; }
+        .input-field:disabled { opacity: 0.5; }
+
+        .cta-btn {
+          width: 100%;
+          padding: 16px;
+          background: #1a1a1a;
+          color: #B5A692;
+          font-family: 'DM Sans', sans-serif;
+          font-weight: 600;
+          font-size: 15px;
+          border: none;
+          border-radius: 10px;
+          cursor: pointer;
+          transition: background 0.2s, transform 0.15s;
+          letter-spacing: 0.02em;
+        }
+        .cta-btn:hover:not(:disabled) {
+          background: #2d2d2d;
+          transform: translateY(-1px);
+        }
+        .cta-btn:disabled { opacity: 0.5; cursor: not-allowed; }
+
+        .spin {
+          display: inline-block;
+          width: 15px; height: 15px;
+          border: 2px solid rgba(181,166,146,0.3);
+          border-top-color: #B5A692;
+          border-radius: 50%;
+          animation: spin 0.7s linear infinite;
+          vertical-align: middle;
+          margin-right: 8px;
+        }
+        @keyframes spin { to { transform: rotate(360deg); } }
+
+        .comparison-row {
+          display: grid;
+          grid-template-columns: 1fr 1fr;
+          gap: 0;
+          border-bottom: 1px solid #e8e4de;
+        }
+        .comparison-row:last-child { border-bottom: none; }
+
+        .comparison-cell {
+          padding: 18px 20px;
+        }
+        .comparison-cell.will-cell {
+          border-right: 1px solid #e8e4de;
+        }
+
+        .stat-divider {
+          width: 1px; height: 28px;
+          background: #d4c8bb;
+        }
+
+        .texture-overlay {
+          position: fixed; inset: 0;
+          pointer-events: none; z-index: 0;
+          opacity: 0.025;
+          background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='300' height='300'%3E%3Cfilter id='noise'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='300' height='300' filter='url(%23noise)' opacity='1'/%3E%3C/svg%3E");
+        }
+      `}</style>
+
+      <div className="texture-overlay" />
+
+      {/* Top accent bar */}
+      <div style={{ width: '100%', height: '3px', background: 'linear-gradient(90deg, #B5A692 0%, #d4c8bb 50%, #B5A692 100%)', position: 'relative', zIndex: 1 }} />
+
+      {/* Nav */}
+      <nav style={{ position: 'relative', zIndex: 1, padding: '18px 24px', display: 'flex', alignItems: 'center', justifyContent: 'space-between', maxWidth: '1100px', margin: '0 auto', width: '100%', boxSizing: 'border-box' }}>
+        <p className="font-cormorant" style={{ color: '#1a1a1a', fontSize: '17px', fontWeight: 500, letterSpacing: '0.04em' }}>
+          Succession <span style={{ color: '#B5A692' }}>Story</span>
         </p>
-        <p className="text-[#4a4a4a] text-xs hidden sm:block">Trusted by 2,800+ families</p>
+        <p className="font-dm" style={{ color: '#8a7f78', fontSize: '12px', letterSpacing: '0.08em' }}>
+          Trusted by 2,800+ families
+        </p>
       </nav>
 
-      <section className="flex-1 flex items-center justify-center px-4 py-12 sm:py-16">
-        <div className="max-w-5xl w-full mx-auto grid grid-cols-1 lg:grid-cols-2 gap-12 lg:gap-20 items-center">
+      {/* Main content */}
+      <section style={{ flex: 1, display: 'flex', alignItems: 'center', justifyContent: 'center', padding: '32px 20px 48px', position: 'relative', zIndex: 1 }}>
+        <div style={{ maxWidth: '1100px', width: '100%', margin: '0 auto', display: 'grid', gridTemplateColumns: 'repeat(auto-fit, minmax(320px, 1fr))', gap: '64px', alignItems: 'start' }}>
 
+          {/* LEFT — Emotional copy + form */}
           <div>
-            <p className="text-[#B5A692] text-xs font-bold tracking-[0.2em] uppercase mb-4">
-              Free Access
-            </p>
+            {/* Eyebrow */}
+            <div className="fade-1 font-dm" style={{ display: 'flex', alignItems: 'center', marginBottom: '20px' }}>
+              <span className="divider-line" />
+              <span style={{ color: '#B5A692', fontSize: '11px', fontWeight: 600, letterSpacing: '0.2em', textTransform: 'uppercase' }}>Free to start</span>
+            </div>
 
-            <h1 className="text-white text-4xl sm:text-5xl leading-tight mb-6" style={{ fontFamily: 'Georgia, serif' }}>
-              Your will is signed.
-              <br />
-              <em className="text-[#B5A692]">Something still feels incomplete.</em>
+            {/* Headline — continues the why thread from the ad */}
+            <h1 className="fade-2 font-cormorant" style={{ color: '#1a1a1a', fontSize: 'clamp(34px, 5vw, 50px)', lineHeight: 1.15, marginBottom: '16px', fontWeight: 500 }}>
+              Your will is signed.<br />
+              <em style={{ color: '#B5A692' }}>Your why isn&apos;t written yet.</em>
             </h1>
 
-            <p className="text-[#8a7f78] text-xl sm:text-2xl mb-8" style={{ fontFamily: 'Georgia, serif' }}>
-              Start your legacy letter free — pay only when it&apos;s written.
+            {/* Sub — names the gap. Makes them feel what's still missing. */}
+            <p className="fade-3 font-dm" style={{ color: '#5a5450', fontSize: '17px', lineHeight: 1.7, marginBottom: '28px', maxWidth: '440px' }}>
+              Assets go to the right people. But your kids still won&apos;t know
+              why you worked so hard, what you actually believe, or what you
+              want them to remember when life gets hard.
             </p>
 
-            <ul className="space-y-3 mb-10">
+            {/* Benefits — reframed around ease, not process */}
+            <ul className="fade-4" style={{ listStyle: 'none', padding: 0, margin: '0 0 32px', display: 'flex', flexDirection: 'column', gap: '12px' }}>
               {[
                 'Legal documents transfer assets. They don\'t transfer meaning.',
-                'Answer 9 questions in your own words — takes 30 minutes.',
-                'We write the finished letter. You pay only at the end.',
+                'Answer guided questions in your own words — at your own pace.',
+                'We write the finished letter. You pay only when it\'s ready.',
               ].map((item) => (
-                <li key={item} className="flex items-start gap-3 text-[#706860] text-base">
-                  <span className="text-[#B5A692] mt-0.5 shrink-0">✦</span>
+                <li key={item} className="font-dm" style={{ display: 'flex', alignItems: 'flex-start', gap: '12px', color: '#3a3530', fontSize: '15px', lineHeight: 1.6 }}>
+                  <span style={{ color: '#B5A692', marginTop: '3px', flexShrink: 0, fontSize: '14px' }}>✦</span>
                   {item}
                 </li>
               ))}
             </ul>
 
-            <div className="space-y-3 max-w-md">
+            {/* Email capture */}
+            <div className="fade-5" style={{ maxWidth: '420px', display: 'flex', flexDirection: 'column', gap: '10px' }}>
               <input
                 type="email"
                 placeholder="Enter your email address"
@@ -85,64 +222,81 @@ export default function SqueezePageVariant2() {
                 onChange={(e) => { setEmail(e.target.value); setError('') }}
                 onKeyDown={(e) => e.key === 'Enter' && handleSubmit()}
                 disabled={loading}
-                className="w-full px-5 py-4 border border-[#2a2a2a] bg-[#111] text-white rounded-lg text-base placeholder-[#4a4a4a] focus:outline-none focus:border-[#B5A692] transition-colors disabled:opacity-50"
+                className="input-field"
               />
-              {error && <p className="text-red-400 text-sm">{error}</p>}
-              <button
-                onClick={handleSubmit}
-                disabled={loading}
-                className="w-full py-4 bg-[#B5A692] hover:bg-[#a59682] disabled:opacity-50 disabled:cursor-not-allowed text-[#1a1a1a] font-semibold text-base rounded-lg transition-colors"
-              >
+              {error && (
+                <p className="font-dm" style={{ color: '#c0392b', fontSize: '13px' }}>{error}</p>
+              )}
+              <button onClick={handleSubmit} disabled={loading} className="cta-btn">
                 {loading ? (
-                  <span className="flex items-center justify-center gap-2">
-                    <span className="w-4 h-4 border-2 border-[#1a1a1a]/30 border-t-[#1a1a1a] rounded-full animate-spin" />
+                  <>
+                    <span className="spin" />
                     Creating your account...
-                  </span>
-                ) : 'Start for Free →'}
+                  </>
+                ) : 'Write my letter →'}
               </button>
-              <p className="text-[#4a4a4a] text-xs text-center">
+              <p className="font-dm" style={{ color: '#b0a89e', fontSize: '12px', textAlign: 'center', marginTop: '2px' }}>
                 Free to start. No credit card required.
               </p>
             </div>
           </div>
 
-          <div className="hidden lg:flex flex-col items-center justify-center">
-            <div className="w-full max-w-sm bg-[#111] border border-[#2a2a2a] rounded-2xl p-8">
-              <div className="w-full h-px bg-[#2a2a2a] mb-8" />
-              <p className="text-[#B5A692] text-xs font-bold tracking-[0.2em] uppercase mb-6">
-                What legal documents can&apos;t say
-              </p>
-              <div className="space-y-6">
-                {[
-                  ['Your will says...', 'Who gets the house.', 'Your letter says...', 'Why you bought it in the first place.'],
-                  ['Your will says...', 'Who gets the money.', 'Your letter says...', 'What you hope they do with it.'],
-                  ['Your will says...', 'Who gets custody.', 'Your letter says...', 'What kind of person you hope they become.'],
-                ].map(([label1, val1, label2, val2], i) => (
-                  <div key={i} className="grid grid-cols-2 gap-3">
-                    <div className="bg-[#1a1a1a] rounded-lg p-3">
-                      <p className="text-[#4a4a4a] text-xs mb-1">{label1}</p>
-                      <p className="text-[#706860] text-sm">{val1}</p>
-                    </div>
-                    <div className="bg-[#1a1a1a] border border-[#B5A692]/20 rounded-lg p-3">
-                      <p className="text-[#B5A692] text-xs mb-1">{label2}</p>
-                      <p className="text-white text-sm">{val2}</p>
-                    </div>
-                  </div>
-                ))}
+          {/* RIGHT — Will vs Letter comparison table */}
+          <div className="fade-6">
+
+            {/* Table header */}
+            <div style={{ display: 'grid', gridTemplateColumns: '1fr 1fr', marginBottom: '0', borderRadius: '16px 16px 0 0', overflow: 'hidden', border: '1px solid #e8e4de', borderBottom: 'none' }}>
+              <div style={{ background: '#ede9e3', padding: '14px 20px', borderRight: '1px solid #e8e4de' }}>
+                <p className="font-dm" style={{ color: '#8a7f78', fontSize: '11px', fontWeight: 600, letterSpacing: '0.16em', textTransform: 'uppercase' }}>Your will says…</p>
+              </div>
+              <div style={{ background: '#1a1a1a', padding: '14px 20px' }}>
+                <p className="font-dm" style={{ color: '#B5A692', fontSize: '11px', fontWeight: 600, letterSpacing: '0.16em', textTransform: 'uppercase' }}>Your letter says…</p>
               </div>
             </div>
-          </div>
 
+            {/* Table rows */}
+            <div style={{ border: '1px solid #e8e4de', borderTop: 'none', borderRadius: '0 0 16px 16px', overflow: 'hidden', background: '#fff' }}>
+              {comparisons.map(({ will, letter }, i) => (
+                <div key={i} className="comparison-row">
+                  <div className="comparison-cell will-cell">
+                    <p className="font-cormorant" style={{ color: '#8a7f78', fontSize: '17px', lineHeight: 1.5, fontStyle: 'italic' }}>{will}</p>
+                  </div>
+                  <div className="comparison-cell" style={{ background: '#fdfcfb' }}>
+                    <p className="font-cormorant" style={{ color: '#1a1a1a', fontSize: '17px', lineHeight: 1.5, fontStyle: 'italic', fontWeight: 500 }}>{letter}</p>
+                  </div>
+                </div>
+              ))}
+            </div>
+
+            {/* Below table — closes the loop the ad opened */}
+            <div style={{ marginTop: '24px', padding: '20px 24px', background: '#1a1a1a', borderRadius: '14px' }}>
+              <p className="font-cormorant" style={{ color: '#f0ece6', fontSize: '20px', lineHeight: 1.6, fontStyle: 'italic', marginBottom: '10px' }}>
+                "I kept putting it off for three years. Finished it in one sitting. I don&apos;t know why I waited so long."
+              </p>
+              <p className="font-dm" style={{ color: '#B5A692', fontSize: '11px', fontWeight: 600, letterSpacing: '0.14em', textTransform: 'uppercase' }}>
+                — From our community
+              </p>
+            </div>
+
+          </div>
         </div>
       </section>
 
-      <div className="border-t border-[#2a2a2a] py-6 px-4">
-        <div className="max-w-5xl mx-auto flex flex-col sm:flex-row items-center justify-center gap-6 sm:gap-12">
-          {[['2,800+', 'families served'], ['30 min', 'to complete'], ['100%', 'private & secure']].map(([num, label]) => (
-            <div key={label} className="text-center">
-              <p className="text-white font-bold text-lg" style={{ fontFamily: 'Georgia, serif' }}>{num}</p>
-              <p className="text-[#4a4a4a] text-xs">{label}</p>
-            </div>
+      {/* Stats bar */}
+      <div style={{ borderTop: '1px solid #e8e4de', padding: '20px 24px', position: 'relative', zIndex: 1 }}>
+        <div style={{ maxWidth: '1100px', margin: '0 auto', display: 'flex', alignItems: 'center', justifyContent: 'center', gap: '32px' }}>
+          {[
+            ['2,800+', 'families served'],
+            ['30 min', 'to complete'],
+            ['100%', 'private & secure'],
+          ].map(([num, label], i) => (
+            <React.Fragment key={label}>
+              <div style={{ textAlign: 'center' }}>
+                <p className="font-cormorant" style={{ color: '#1a1a1a', fontWeight: 600, fontSize: '20px', lineHeight: 1 }}>{num}</p>
+                <p className="font-dm" style={{ color: '#8a7f78', fontSize: '11px', marginTop: '4px', letterSpacing: '0.06em' }}>{label}</p>
+              </div>
+              {i < 2 && <div className="stat-divider" />}
+            </React.Fragment>
           ))}
         </div>
       </div>
