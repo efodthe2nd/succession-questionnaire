@@ -2,6 +2,7 @@
 
 import React, { useState } from 'react'
 import { useRouter } from 'next/navigation'
+import ReactPixel from 'react-facebook-pixel'
 
 export default function SqueezePageVariant3() {
   const router = useRouter()
@@ -28,6 +29,7 @@ export default function SqueezePageVariant3() {
         setLoading(false)
         return
       }
+      ReactPixel.track('Lead')
       router.push(`/login?email=${encodeURIComponent(email.trim())}&from=squeeze`)
     } catch {
       setError('Network error. Please try again.')
