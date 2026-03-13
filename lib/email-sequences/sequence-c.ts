@@ -3,7 +3,6 @@
 // 4 emails over 7 days
 // Trigger: current_section_index >= 3, status = 'in_progress', no activity 4+ hrs
 
-// Section names map — index matches sectionIndex in questions.ts
 export const SECTION_NAMES: Record<number, string> = {
   1: 'First Things First',
   2: 'Guidance For Stewardship',
@@ -13,15 +12,14 @@ export const SECTION_NAMES: Record<number, string> = {
   6: 'Pivotal Experiences In My Life',
   7: 'My Legacy',
   8: 'Final Thoughts',
-  9: 'Tone & Voice',
+  9: 'Tone and Voice',
 }
 
-// What comes NEXT after each section — used to tease what they haven't answered
 const NEXT_SECTION_TEASE: Record<number, string> = {
   3: 'your beliefs and the values you want to pass down',
-  4: 'the stories about your family — your spouse, your children, the people who shaped you',
+  4: 'the stories about your family, your spouse, your children, the people who shaped you',
   5: 'the pivotal experiences that made you who you are',
-  6: 'your legacy — what you want to be remembered for',
+  6: 'your legacy and what you want to be remembered for',
   7: 'your final thoughts and the last words you want them to carry',
   8: 'the tone and voice of your letter',
 }
@@ -30,11 +28,17 @@ export interface SequenceCContext {
   stoppedAtSection: number
   stoppedAtSectionName: string
   nextSectionTease: string
+  email: string
+  unsubscribeToken: string
 }
 
-// ─── HTML helpers (shared pattern) ───────────────────────────────────────────
+// ─── Shared helpers ───────────────────────────────────────────────────────────
 
-function emailShell(content: string): string {
+function buildUnsubscribeUrl(email: string, token: string): string {
+  return `https://www.successionstory.now/api/unsubscribe?email=${encodeURIComponent(email)}&token=${encodeURIComponent(token)}`
+}
+
+function emailShell(content: string, unsubscribeUrl: string): string {
   return `<!DOCTYPE html>
 <html lang="en">
 <head>
@@ -66,7 +70,7 @@ function emailShell(content: string): string {
               <p style="margin:0 0 12px;font-size:13px;color:#B5A692;font-style:italic;">Your legacy, written for you.</p>
               <p style="margin:0;font-size:11px;color:#555555;">
                 You're receiving this because you started the Succession Story questionnaire.
-                <br/><a href="https://www.successionstory.now/unsubscribe" style="color:#555555;">Unsubscribe</a>
+                <br/><a href="${unsubscribeUrl}" style="color:#555555;">Unsubscribe</a>
               </p>
             </td>
           </tr>
@@ -111,50 +115,58 @@ function savedBadge(sectionName: string): string {
 
 // ─── Email generators ─────────────────────────────────────────────────────────
 
+// Email 1 — Day 1. Remind them where they stopped. Show them what is still ahead.
 function email1(ctx: SequenceCContext): string {
+  const unsubUrl = buildUnsubscribeUrl(ctx.email, ctx.unsubscribeToken)
   return emailShell(`
     ${h2('You were halfway through something important.')}
     ${savedBadge(ctx.stoppedAtSectionName)}
-    ${p(`You made it through <strong>${ctx.stoppedAtSectionName}</strong>. That's not nothing — that section asks real questions. The kind most people avoid.`)}
+    ${p(`You made it through <strong>${ctx.stoppedAtSectionName}</strong>. That section asks the questions most people avoid their whole lives.`)}
     ${p(`What comes next is ${ctx.nextSectionTease}. Those are the answers your family will read most closely.`)}
-    ${p('Everything you\'ve written is saved. You pick up exactly where you left off — no starting over.')}
-    ${ctaButton('Continue Where I Left Off →')}
-    ${p('<em style="color:#8a7f78;font-size:14px;">No payment until your letter is written and you\'re happy with it.</em>')}
-  `)
+    ${p('Everything you wrote is saved. You pick up exactly where you left off.')}
+    ${ctaButton('Continue Where I Left Off')}
+    ${p('<em style="color:#8a7f78;font-size:14px;">No payment until your letter is written and you are happy with it.</em>')}
+  `, unsubUrl)
 }
 
+// Email 2 — Day 2. The questions they haven't answered yet. Make it specific.
 function email2(ctx: SequenceCContext): string {
+  const unsubUrl = buildUnsubscribeUrl(ctx.email, ctx.unsubscribeToken)
   return emailShell(`
-    ${h2(`The questions you haven't answered yet are the ones your family will want most.`)}
+    ${h2('The questions you have not answered are the ones they will want most.')}
     ${p(`You stopped at <strong>${ctx.stoppedAtSectionName}</strong>.`)}
     ${p(`Still ahead: ${ctx.nextSectionTease}.`)}
-    ${p('These are the questions most people say they wish their parents had answered. Not the financial ones. The personal ones. The ones that say who you are, not just what you own.')}
+    ${p('Those are the questions most people say they wish their parents had answered. Not the financial ones. The personal ones. The ones that say who you are, not just what you own.')}
     ${p('Your answers so far are still there. Fifteen minutes is probably all you need to finish.')}
-    ${ctaButton('Finish the Questionnaire →')}
-  `)
+    ${ctaButton('Finish the Questionnaire')}
+  `, unsubUrl)
 }
 
+// Email 3 — Day 4. Social proof. Normalise the feeling of completion.
 function email3(ctx: SequenceCContext): string {
+  const unsubUrl = buildUnsubscribeUrl(ctx.email, ctx.unsubscribeToken)
   return emailShell(`
-    ${h2('"The hardest part was starting. Once I was in it, I couldn\'t stop."')}
-    ${p('That\'s what most people tell us after they finish.')}
-    ${p('You already did the hard part. You started. You answered real questions. You got to <strong>' + ctx.stoppedAtSectionName + '</strong> before life pulled you away.')}
-    ${p('The people who finish consistently say the same thing: they didn\'t expect to feel the way they felt reading their own letter. Like hearing yourself clearly for the first time.')}
+    ${h2('"The hardest part was starting. Once I was in it, I could not stop."')}
+    ${p('That is what most people tell us after they finish.')}
+    ${p(`You already did the hard part. You started. You answered real questions. You made it to <strong>${ctx.stoppedAtSectionName}</strong> before life got in the way.`)}
+    ${p('The people who finish consistently say the same thing: they did not expect to feel the way they felt reading their own letter. Like hearing yourself clearly for the first time.')}
     ${p('Your answers are saved. Come back when you have fifteen quiet minutes.')}
-    ${ctaButton('Pick Up Where I Left Off →')}
+    ${ctaButton('Pick Up Where I Left Off')}
     ${p('<em style="color:#8a7f78;font-size:14px;">Free to finish. Pay only when your letter is ready.</em>')}
-  `)
+  `, unsubUrl)
 }
 
+// Email 4 — Day 7. Last one. No pressure. Leave the door wide open.
 function email4(ctx: SequenceCContext): string {
+  const unsubUrl = buildUnsubscribeUrl(ctx.email, ctx.unsubscribeToken)
   return emailShell(`
-    ${h2('Your progress is still here. Come back when you\'re ready.')}
-    ${p('This is the last email we\'ll send about your questionnaire.')}
-    ${p(`You made it to <strong>${ctx.stoppedAtSectionName}</strong>. That work isn\'t lost. Your account stays open and your answers stay saved indefinitely.`)}
-    ${p('Whenever the time feels right — tomorrow, next week, whenever — just log back in and continue. The letter will be there waiting to be written.')}
-    ${ctaButton('Return to My Questionnaire →')}
-    ${p('<em style="color:#8a7f78;font-size:14px;">We\'re glad you started. The rest is yours to finish whenever you\'re ready.</em>')}
-  `)
+    ${h2('Your progress is still here. Come back when you are ready.')}
+    ${p('This is the last email we will send about your questionnaire.')}
+    ${p(`You made it to <strong>${ctx.stoppedAtSectionName}</strong>. That work is not lost. Your account stays open and your answers stay saved.`)}
+    ${p('Whenever the time feels right, tomorrow, next week, whenever, just log back in and continue. The letter will be there waiting to be written.')}
+    ${ctaButton('Return to My Questionnaire')}
+    ${p('<em style="color:#8a7f78;font-size:14px;">We are glad you started. The rest is yours to finish whenever you are ready.</em>')}
+  `, unsubUrl)
 }
 
 // ─── Step config ──────────────────────────────────────────────────────────────
@@ -162,30 +174,30 @@ function email4(ctx: SequenceCContext): string {
 export const SEQUENCE_C_STEPS = [
   {
     step: 1,
-    delayHours: 24,  // 1 day after inactivity detected
-    subject: (ctx: SequenceCContext) =>
+    delayHours: 24,
+    subject: (_ctx: SequenceCContext) =>
       `You were halfway through something important.`,
     getHTML: email1,
   },
   {
     step: 2,
     delayHours: 48,
-    subject: (ctx: SequenceCContext) =>
-      `The questions you haven't answered yet are the ones they'll want most.`,
+    subject: (_ctx: SequenceCContext) =>
+      `The questions you have not answered are the ones they will want most.`,
     getHTML: email2,
   },
   {
     step: 3,
-    delayHours: 96, // Day 4
-    subject: (ctx: SequenceCContext) =>
+    delayHours: 96,
+    subject: (_ctx: SequenceCContext) =>
       `"The hardest part was starting." You already did that.`,
     getHTML: email3,
   },
   {
     step: 4,
-    delayHours: 168, // Day 7
-    subject: (ctx: SequenceCContext) =>
-      `Your progress is saved. Come back when you're ready.`,
+    delayHours: 168,
+    subject: (_ctx: SequenceCContext) =>
+      `Your progress is saved. Come back when you are ready.`,
     getHTML: email4,
   },
 ]
@@ -193,7 +205,9 @@ export const SEQUENCE_C_STEPS = [
 // ─── Context builder ──────────────────────────────────────────────────────────
 
 export function buildSequenceCContext(
-  currentSectionIndex: number
+  currentSectionIndex: number,
+  email: string,
+  unsubscribeToken: string
 ): SequenceCContext {
   const sectionName =
     SECTION_NAMES[currentSectionIndex] ?? `Section ${currentSectionIndex}`
@@ -205,5 +219,7 @@ export function buildSequenceCContext(
     stoppedAtSection: currentSectionIndex,
     stoppedAtSectionName: sectionName,
     nextSectionTease: nextTease,
+    email,
+    unsubscribeToken,
   }
 }

@@ -74,7 +74,6 @@ async function enrollSequenceATargets() {
   for (const submission of data) {
     if (!submission.submitted_at) continue
 
-    // Must be at least 1hr old
     const hoursSince = (Date.now() - new Date(submission.submitted_at).getTime()) / 36e5
     if (hoursSince < 1) continue
 
@@ -82,7 +81,6 @@ async function enrollSequenceATargets() {
     const email = userData?.user?.email
     if (!email) continue
 
-    // Skip if already enrolled
     const { data: existing } = await supabaseAdmin
       .from('email_sequence_state')
       .select('id')
@@ -129,8 +127,9 @@ async function processSequenceA() {
       continue
     }
 
-    // Stop if paid
     const metadata = entry.metadata ? JSON.parse(entry.metadata) : {}
+
+    // Stop if paid
     if (metadata.submission_id) {
       const { data: sub } = await supabaseAdmin
         .from('submissions')
@@ -144,15 +143,21 @@ async function processSequenceA() {
       }
     }
 
-    // Fetch answers for personalisation
-    let personalisation = extractPersonalisation([])
+    // Fetch answers and build personalisation with email + unsubscribe token
+    let answers: { question_id: string; answer_text: string }[] = []
     if (metadata.submission_id) {
-      const { data: answers } = await supabaseAdmin
+      const { data: fetched } = await supabaseAdmin
         .from('answers')
         .select('question_id, answer_text')
         .eq('submission_id', metadata.submission_id)
-      if (answers?.length) personalisation = extractPersonalisation(answers)
+      if (fetched?.length) answers = fetched
     }
+
+    const personalisation = extractPersonalisation(
+      answers,
+      entry.email,
+      entry.unsubscribe_token
+    )
 
     try {
       await sendEmail(
@@ -216,7 +221,7 @@ async function processSequenceB() {
       continue
     }
 
-    // Stop if they've started
+    // Stop if they've started the questionnaire
     const { data: userData } = await supabaseAdmin.auth.admin.listUsers()
     const user = userData?.users?.find(u => u.email === entry.email)
     if (user) {
@@ -236,7 +241,7 @@ async function processSequenceB() {
       await sendEmail(
         entry.email,
         stepConfig.subject,
-        stepConfig.getHTML(),
+        stepConfig.getHTML(entry.email, entry.unsubscribe_token),
         `Visit https://www.successionstory.now/login to start your Succession Story.`
       )
       console.log(`[Cron/B] Step ${stepConfig.step} → ${entry.email}`)
@@ -256,7 +261,6 @@ async function processSequenceB() {
 // ─── SEQUENCE C ───────────────────────────────────────────────────────────────
 
 async function enrollSequenceCTargets() {
-  // Find in-progress submissions, section >= 3, inactive for 4+ hours, not enrolled
   const fourHoursAgo = new Date(Date.now() - 4 * 36e5).toISOString()
 
   const { data, error } = await supabaseAdmin
@@ -273,7 +277,6 @@ async function enrollSequenceCTargets() {
     const email = userData?.user?.email
     if (!email) continue
 
-    // Skip if already enrolled in C
     const { data: existing } = await supabaseAdmin
       .from('email_sequence_state')
       .select('id')
@@ -282,7 +285,6 @@ async function enrollSequenceCTargets() {
       .maybeSingle()
     if (existing) continue
 
-    // First email 24hrs after inactivity started (updated_at)
     const nextSendAt = new Date(
       new Date(submission.updated_at).getTime() +
         SEQUENCE_C_STEPS[0].delayHours * 36e5
@@ -342,7 +344,7 @@ async function processSequenceC() {
     }
 
     const stoppedAt = metadata.stopped_at_section ?? 4
-    const ctx = buildSequenceCContext(stoppedAt)
+    const ctx = buildSequenceCContext(stoppedAt, entry.email, entry.unsubscribe_token)
 
     try {
       await sendEmail(
@@ -373,7 +375,6 @@ export async function GET(req: NextRequest) {
   }
 
   try {
-    // Run all three sequences
     await enrollSequenceATargets()
     await processSequenceA()
 

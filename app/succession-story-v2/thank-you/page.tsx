@@ -1,240 +1,85 @@
-"use client";
+'use client';
 
-import { useEffect, useRef, useState } from "react";
-import Image from "next/image";
-import Link from "next/link";
+import Link from 'next/link';
 
 export default function ThankYouPage() {
-  const videoRef = useRef<HTMLVideoElement>(null);
-  const [isVideoPlaying, setIsVideoPlaying] = useState(false);
-
-  // Auto-play video when it comes into view
-  useEffect(() => {
-    const video = videoRef.current;
-    if (!video) return;
-
-    const observerOptions = {
-      root: null,
-      rootMargin: "0px",
-      threshold: 0.3,
-    };
-
-    const observer = new IntersectionObserver((entries) => {
-      entries.forEach((entry) => {
-        if (entry.isIntersecting && !isVideoPlaying) {
-          video.play().catch(() => {
-            // Autoplay was prevented, user will need to click
-          });
-        }
-      });
-    }, observerOptions);
-
-    observer.observe(video);
-
-    return () => {
-      observer.disconnect();
-    };
-  }, [isVideoPlaying]);
-
-  const handlePlayClick = () => {
-    if (videoRef.current) {
-      videoRef.current.play();
-      setIsVideoPlaying(true);
-    }
-  };
-
   return (
-    <div className="min-h-screen bg-gradient-to-br from-purple-50 via-white to-pink-50 font-sans">
-      {/* Header */}
-      <header className="w-full py-4 px-4 md:px-8 bg-white border-b border-gray-100">
-        <div className="max-w-7xl mx-auto flex justify-center">
-          <Link
-            href="/succession-story-v2"
-            className="text-xl font-serif font-semibold text-gray-900"
-          >
-            Succession Story
-          </Link>
-        </div>
-      </header>
+    <div className="min-h-screen bg-black flex flex-col items-center justify-center px-4 relative overflow-hidden">
+      {/* Background image */}
+      <div
+        className="absolute inset-0 bg-cover bg-center opacity-30"
+        style={{ backgroundImage: "url('/bg-succession.png')" }}
+      />
 
-      <main className="max-w-4xl mx-auto px-4 py-12 md:py-16">
-        {/* Success Message */}
-        <div className="text-center mb-12">
-          <div className="w-20 h-20 mx-auto mb-6 bg-gradient-to-r from-purple-600 to-pink-500 rounded-full flex items-center justify-center">
-            <svg
-              className="w-10 h-10 text-white"
-              fill="none"
-              stroke="currentColor"
-              viewBox="0 0 24 24"
-            >
-              <path
-                strokeLinecap="round"
-                strokeLinejoin="round"
-                strokeWidth={2}
-                d="M5 13l4 4L19 7"
-              />
+      {/* Dark overlay */}
+      <div className="absolute inset-0 bg-black opacity-60" />
+
+      {/* Logo */}
+      <div className="fixed top-8 left-8 z-20">
+        <p className="text-white text-sm tracking-wide font-medium">Succession Story</p>
+      </div>
+
+      {/* Main Content */}
+      <div className="relative z-10 w-full max-w-lg text-center">
+
+        {/* Checkmark */}
+        <div className="mb-8 flex justify-center">
+          <div className="w-20 h-20 rounded-full border-2 border-[#B5A692] flex items-center justify-center">
+            <svg className="w-10 h-10 text-[#B5A692]" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+              <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M5 13l4 4L19 7" />
             </svg>
           </div>
-          <h1 className="font-serif text-3xl md:text-4xl lg:text-5xl text-gray-900 mb-4">
-            Welcome to the Succession Story Family!
-          </h1>
-          <p className="text-gray-600 text-lg max-w-2xl mx-auto">
-            Your order is confirmed. Check your email for login details to start
-            creating your legacy letter.
-          </p>
         </div>
 
-        {/* What Happens Next Video Section */}
-        <section className="mb-16">
-          <h2 className="font-serif text-2xl md:text-3xl text-gray-900 text-center mb-6">
-            What Happens Next?
-          </h2>
-          <div className="relative aspect-video rounded-2xl overflow-hidden shadow-xl bg-gray-900">
-            <video
-              ref={videoRef}
-              loop
-              playsInline
-              controls
-              preload="auto"
-              className="absolute inset-0 w-full h-full object-cover"
-              onPlay={() => setIsVideoPlaying(true)}
-              onPause={() => setIsVideoPlaying(false)}
-            >
-              <source src="/video_bottom.mp4" type="video/mp4" />
-            </video>
-            {!isVideoPlaying && (
-              <div
-                className="absolute inset-0 flex items-center justify-center cursor-pointer bg-black/30"
-                onClick={handlePlayClick}
-              >
-                <div className="w-20 h-20 bg-white rounded-full flex items-center justify-center hover:scale-110 transition-transform shadow-xl">
-                  <svg
-                    className="w-10 h-10 text-purple-600 ml-1"
-                    fill="currentColor"
-                    viewBox="0 0 24 24"
-                  >
-                    <path d="M8 5v14l11-7z" />
-                  </svg>
-                </div>
+        {/* Headline — meets them in relief, not transaction */}
+        <h1 className="text-4xl md:text-5xl font-heading font-bold mb-4 leading-tight">
+          <span className="text-white">You said what </span>
+          <span className="text-[#B5A692]">needed to be said.</span>
+        </h1>
+
+        {/* Sub — validates the emotional weight of what they just did */}
+        <p className="text-white/70 text-base md:text-lg mb-3 max-w-md mx-auto leading-relaxed">
+          Most people never get here. You did.
+        </p>
+
+        {/* Delivery expectation — specific, reassuring */}
+        <p className="text-white/50 text-sm md:text-base mb-10 max-w-sm mx-auto leading-relaxed">
+          We&apos;re writing your letter now. It will arrive in your inbox within 24 hours — written in your voice, ready to keep forever.
+        </p>
+
+        {/* What to do next — one action only */}
+        <div className="mb-10 bg-white/5 border border-white/10 rounded-2xl px-6 py-5 max-w-sm mx-auto text-left">
+          <p className="text-[#B5A692] text-xs font-semibold tracking-widest uppercase mb-3">What happens next</p>
+          <div className="space-y-3">
+            {[
+              ['Check your email', 'Your letter arrives within 24 hours.'],
+              ['Review it', 'Make sure it sounds like you.'],
+              ['Store it somewhere safe', 'With your will, or somewhere they\'ll find it.'],
+            ].map(([title, detail]) => (
+              <div key={title} className="flex items-start gap-3">
+                <span className="text-[#B5A692] text-xs mt-1 shrink-0">✦</span>
+                <p className="text-white/60 text-sm leading-relaxed">
+                  <span className="text-white/90 font-medium">{title} —</span> {detail}
+                </p>
               </div>
-            )}
+            ))}
           </div>
-        </section>
+        </div>
 
-        {/* Founder Card Section */}
-        <section className="bg-white rounded-2xl shadow-lg overflow-hidden">
-          <div className="grid md:grid-cols-2 gap-0">
-            {/* Founder Image */}
-            <div className="relative aspect-square md:aspect-auto">
-              <Image
-                src="/founder.jpg"
-                alt="Romy Frazier, Esq. - Founder"
-                fill
-                className="object-cover"
-              />
-            </div>
-
-            {/* Founder Note */}
-            <div className="p-6 md:p-8 lg:p-10 flex flex-col justify-center">
-              <h3 className="font-serif text-2xl md:text-3xl text-gray-900 mb-4">
-                A Note from the Founder
-              </h3>
-              <p className="text-gray-600 leading-relaxed italic mb-6">
-                &quot;Thank you for trusting us with something so meaningful. As a
-                succession attorney, I&apos;ve seen firsthand how legal documents
-                alone can leave families with questions and doubts. Your
-                Succession Story will fill that gap — giving your loved ones the
-                clarity and connection they deserve.
-              </p>
-              <p className="text-gray-600 leading-relaxed italic mb-6">
-                I&apos;m honored to help you create something that will be treasured
-                for generations.&quot;
-              </p>
-              <div className="flex items-center gap-4">
-                <div>
-                  <p className="font-semibold text-gray-900">Romy Frazier, Esq.</p>
-                  <p className="text-sm text-gray-500">
-                    Founder, Succession Story
-                  </p>
-                </div>
-              </div>
-            </div>
-          </div>
-        </section>
-
-        {/* Next Steps */}
-        <section className="mt-12 bg-purple-50 rounded-2xl p-6 md:p-8">
-          <h3 className="font-serif text-xl md:text-2xl text-gray-900 mb-6 text-center">
-            Your Next Steps
-          </h3>
-          <div className="grid md:grid-cols-3 gap-6">
-            <div className="text-center">
-              <div className="w-12 h-12 mx-auto mb-4 bg-gradient-to-r from-purple-600 to-pink-500 rounded-full flex items-center justify-center text-white font-bold">
-                1
-              </div>
-              <h4 className="font-semibold text-gray-900 mb-2">Check Your Email</h4>
-              <p className="text-sm text-gray-600">
-                Look for your login credentials (check spam too!)
-              </p>
-            </div>
-            <div className="text-center">
-              <div className="w-12 h-12 mx-auto mb-4 bg-gradient-to-r from-purple-600 to-pink-500 rounded-full flex items-center justify-center text-white font-bold">
-                2
-              </div>
-              <h4 className="font-semibold text-gray-900 mb-2">Log In</h4>
-              <p className="text-sm text-gray-600">
-                Access your Succession Story dashboard
-              </p>
-            </div>
-            <div className="text-center">
-              <div className="w-12 h-12 mx-auto mb-4 bg-gradient-to-r from-purple-600 to-pink-500 rounded-full flex items-center justify-center text-white font-bold">
-                3
-              </div>
-              <h4 className="font-semibold text-gray-900 mb-2">Start Writing</h4>
-              <p className="text-sm text-gray-600">
-                Complete the guided questionnaire
-              </p>
-            </div>
-          </div>
-
-          <div className="mt-8 text-center">
-            <Link
-              href="/login"
-              className="inline-block bg-gradient-to-r from-purple-600 to-pink-500 text-white font-semibold text-lg px-8 py-4 rounded-xl hover:opacity-90 transition-opacity shadow-lg"
-            >
-              Go to Login
-            </Link>
-          </div>
-        </section>
-
-        {/* Support Section */}
-        <section className="mt-12 text-center">
-          <p className="text-gray-600">
-            Questions? We&apos;re here to help.
-          </p>
-          <a
-            href="mailto:support@successionstory.com"
-            className="text-purple-600 font-semibold hover:underline"
-          >
-            support@successionstory.com
-          </a>
-        </section>
-      </main>
+        {/* CTA */}
+        <Link
+          href="/"
+          className="inline-block px-12 py-3.5 bg-transparent border border-white/30 text-white/70 rounded-full text-sm font-medium hover:border-white hover:text-white transition-all duration-300"
+        >
+          Return Home
+        </Link>
+      </div>
 
       {/* Footer */}
-      <footer className="bg-gray-900 text-white/70 py-8 px-4 mt-16">
-        <div className="max-w-6xl mx-auto text-center">
-          <h3 className="text-xl font-serif text-white mb-4">Succession Story</h3>
-          <p className="text-sm text-white/50 max-w-2xl mx-auto italic">
-            Succession Story does not provide legal advice, does not create or
-            modify any estate plan, and does not affect or override any will,
-            trust, or other legal documents.
-          </p>
-          <p className="text-xs text-white/40 mt-4">
-            © 2026 Succession Story. All rights reserved.
-          </p>
-        </div>
-      </footer>
+      <div className="fixed bottom-8 left-0 right-0 flex justify-center gap-8 text-white/40 text-sm z-20">
+        <a href="/terms" className="hover:text-[#B5A692] transition-colors">Terms</a>
+        <a href="/privacy" className="hover:text-[#B5A692] transition-colors">Privacy</a>
+      </div>
     </div>
   );
 }
