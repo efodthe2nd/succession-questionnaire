@@ -12,32 +12,27 @@ export async function GET(req: NextRequest) {
   const email = searchParams.get('email')
 
   if (!token || !email) {
-    return NextResponse.redirect('https://www.successionstory.now')
+    return NextResponse.redirect('https://www.successionstory.now/unsubscribed')
   }
 
-  // Verify token matches
   const { data, error } = await supabaseAdmin
     .from('email_sequence_state')
     .select('id, unsubscribe_token')
     .eq('email', email)
 
   if (error || !data?.length) {
-    return NextResponse.redirect('https://www.successionstory.now')
+    return NextResponse.redirect('https://www.successionstory.now/unsubscribed')
   }
 
   const validEntry = data.find(e => e.unsubscribe_token === token)
   if (!validEntry) {
-    return NextResponse.redirect('https://www.successionstory.now')
+    return NextResponse.redirect('https://www.successionstory.now/unsubscribed')
   }
 
-  // Opt out of all sequences for this email
   await supabaseAdmin
     .from('email_sequence_state')
     .update({ opted_out: true })
     .eq('email', email)
 
-  // Redirect to a simple confirmation
-  return NextResponse.redirect(
-    'https://www.successionstory.now/unsubscribed'
-  )
+  return NextResponse.redirect('https://www.successionstory.now/unsubscribed')
 }

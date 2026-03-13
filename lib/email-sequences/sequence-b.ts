@@ -48,7 +48,7 @@ function emailShell(content: string, unsubscribeUrl: string, footerNote: string)
               <p style="margin: 0; font-size: 11px; color: #555555;">
                 ${footerNote}
                 <br/>
-                <a href="<%asm_group_unsubscribe_raw_url%>" style="color: #555555;">Unsubscribe</a>
+                <a href="${unsubscribeUrl}" style="color: #555555;">Unsubscribe</a>
               </p>
             </td>
           </tr>
