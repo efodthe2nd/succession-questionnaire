@@ -34,6 +34,10 @@ async function sendEmail(to: string, subject: string, html: string, text: string
     subject,
     html,
     text,
+    asm: {
+      groupId: 29233,
+      groupsToDisplay: [29233],
+    }
   })
 }
 
