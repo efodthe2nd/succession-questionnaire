@@ -1,7 +1,6 @@
 'use client'
 
 import React, { useState } from 'react'
-import ReactPixel from 'react-facebook-pixel'
 import { useRouter } from 'next/navigation'
 
 export default function SqueezePageVariant1() {
@@ -29,7 +28,9 @@ export default function SqueezePageVariant1() {
         setLoading(false)
         return
       }
-      ReactPixel.track('Lead') // ✅ fires only on confirmed success
+      // Dynamic import here too — no static import at top of file
+      const { default: ReactPixel } = await import('react-facebook-pixel')
+      ReactPixel.track('Lead')
       router.push(`/login?email=${encodeURIComponent(email.trim())}&from=squeeze`)
     } catch {
       setError('Network error. Please try again.')

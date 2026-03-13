@@ -2,7 +2,6 @@
 
 import React, { useState } from 'react'
 import { useRouter } from 'next/navigation'
-import ReactPixel from 'react-facebook-pixel'
 
 export default function SqueezePageVariant3() {
   const router = useRouter()
@@ -21,7 +20,7 @@ export default function SqueezePageVariant3() {
       const res = await fetch('/api/leads/capture', {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
-        body: JSON.stringify({ email: email.trim(), source: 'variant-3-fear' }),
+        body: JSON.stringify({ email: email.trim(), source: 'variant-1-regret' }),
       })
       const data = await res.json()
       if (!res.ok) {
@@ -29,6 +28,8 @@ export default function SqueezePageVariant3() {
         setLoading(false)
         return
       }
+      // Dynamic import here too — no static import at top of file
+      const { default: ReactPixel } = await import('react-facebook-pixel')
       ReactPixel.track('Lead')
       router.push(`/login?email=${encodeURIComponent(email.trim())}&from=squeeze`)
     } catch {
