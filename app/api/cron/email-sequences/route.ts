@@ -33,11 +33,7 @@ async function sendEmail(to: string, subject: string, html: string, text: string
     from: { email: SENDGRID_FROM_EMAIL, name: 'Succession Story' },
     subject,
     html,
-    text,
-    asm: {
-      groupId: 29233,
-      groupsToDisplay: [29233],
-    }
+    text
   })
 }
 
