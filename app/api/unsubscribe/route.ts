@@ -38,6 +38,6 @@ export async function GET(req: NextRequest) {
 
   // Redirect to a simple confirmation
   return NextResponse.redirect(
-    'https://www.successionstory.now?unsubscribed=true'
+    'https://www.successionstory.now/unsubscribed'
   )
 }
