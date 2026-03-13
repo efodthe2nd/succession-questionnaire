@@ -28,9 +28,10 @@ export default function SqueezePageVariant2() {
         setLoading(false)
         return
       }
-      // Dynamic import here too — no static import at top of file
-      const { default: ReactPixel } = await import('react-facebook-pixel')
-      ReactPixel.track('Lead')
+      // Use global fbq directly — no package needed
+      if (typeof window !== 'undefined' && (window as any).fbq) {
+        ;(window as any).fbq('track', 'Lead')
+      }
       router.push(`/login?email=${encodeURIComponent(email.trim())}&from=squeeze`)
     } catch {
       setError('Network error. Please try again.')
