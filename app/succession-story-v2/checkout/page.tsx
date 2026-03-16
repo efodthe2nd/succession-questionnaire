@@ -268,7 +268,7 @@ export default function CheckoutPage() {
 
               {[
                 ['01', 'We write your letter', 'Using everything you shared — in your voice, your words, your values.'],
-                ['02', 'You receive it by email', 'Usually within minutes. Yours to keep, share, or print forever.'],
+                ['02', 'You receive it by email', 'Usually within 24 hours. Yours to keep, share, or print forever.'],
                 ['03', 'Your family keeps it', 'The letter they\'ll search for. The one they\'ll actually find.'],
               ].map(([num, title, desc]) => (
                 <div key={num} className="what-happens-item">
