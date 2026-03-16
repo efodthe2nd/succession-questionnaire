@@ -28,7 +28,6 @@ export default function SqueezePageVariant2() {
         setLoading(false)
         return
       }
-      // Use global fbq directly — no package needed
       if (typeof window !== 'undefined' && (window as any).fbq) {
         ;(window as any).fbq('track', 'Lead')
       }
@@ -40,18 +39,15 @@ export default function SqueezePageVariant2() {
   }
 
   const comparisons = [
-    {
-      will: 'Who gets the house.',
-      letter: 'Why you bought it in the first place.',
-    },
-    {
-      will: 'Who gets the money.',
-      letter: 'What you hope they do with it.',
-    },
-    {
-      will: 'Who gets custody.',
-      letter: 'What kind of person you hope they become.',
-    },
+    { will: 'Who gets the house.', letter: 'Why you bought it in the first place.' },
+    { will: 'Who gets the money.', letter: 'What you hope they do with it.' },
+    { will: 'Who gets custody.', letter: 'What kind of person you hope they become.' },
+  ]
+
+  const bullets = [
+    'Legal documents transfer assets. They don\'t transfer meaning.',
+    'Answer guided questions in your own words — at your own pace.',
+    'We write the finished letter. You pay only when it\'s ready.',
   ]
 
   return (
@@ -143,12 +139,8 @@ export default function SqueezePageVariant2() {
         }
         .comparison-row:last-child { border-bottom: none; }
 
-        .comparison-cell {
-          padding: 18px 20px;
-        }
-        .comparison-cell.will-cell {
-          border-right: 1px solid #e8e4de;
-        }
+        .comparison-cell { padding: 18px 20px; }
+        .comparison-cell.will-cell { border-right: 1px solid #e8e4de; }
 
         .stat-divider {
           width: 1px; height: 28px;
@@ -160,6 +152,22 @@ export default function SqueezePageVariant2() {
           pointer-events: none; z-index: 0;
           opacity: 0.025;
           background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='300' height='300'%3E%3Cfilter id='noise'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='300' height='300' filter='url(%23noise)' opacity='1'/%3E%3C/svg%3E");
+        }
+
+        /* ─── MOBILE-ONLY OVERRIDES ─── */
+        /* Bullets hidden above form on mobile — shown below form instead */
+        .bullets-desktop { display: flex; }
+        .bullets-mobile  { display: none; }
+
+        /* Subtext compressed on mobile */
+        .sub-text-mobile { display: none; }
+        .sub-text-desktop { display: block; }
+
+        @media (max-width: 640px) {
+          .bullets-desktop { display: none; }
+          .bullets-mobile  { display: flex; }
+          .sub-text-mobile  { display: block; }
+          .sub-text-desktop { display: none; }
         }
       `}</style>
 
@@ -190,26 +198,27 @@ export default function SqueezePageVariant2() {
               <span style={{ color: '#B5A692', fontSize: '11px', fontWeight: 600, letterSpacing: '0.2em', textTransform: 'uppercase' }}>Free to start</span>
             </div>
 
-            {/* Headline — continues the why thread from the ad */}
+            {/* Headline */}
             <h1 className="fade-2 font-cormorant" style={{ color: '#1a1a1a', fontSize: 'clamp(34px, 5vw, 50px)', lineHeight: 1.15, marginBottom: '16px', fontWeight: 500 }}>
               Your will is signed.<br />
               <em style={{ color: '#B5A692' }}>Your why isn&apos;t written yet.</em>
             </h1>
 
-            {/* Sub — names the gap. Makes them feel what's still missing. */}
-            <p className="fade-3 font-dm" style={{ color: '#5a5450', fontSize: '17px', lineHeight: 1.7, marginBottom: '28px', maxWidth: '440px' }}>
+            {/* Sub — DESKTOP: full paragraph */}
+            <p className="fade-3 font-dm sub-text-desktop" style={{ color: '#5a5450', fontSize: '17px', lineHeight: 1.7, marginBottom: '28px', maxWidth: '440px' }}>
               Assets go to the right people. But your kids still won&apos;t know
               why you worked so hard, what you actually believe, or what you
               want them to remember when life gets hard.
             </p>
 
-            {/* Benefits — reframed around ease, not process */}
-            <ul className="fade-4" style={{ listStyle: 'none', padding: 0, margin: '0 0 32px', display: 'flex', flexDirection: 'column', gap: '12px' }}>
-              {[
-                'Legal documents transfer assets. They don\'t transfer meaning.',
-                'Answer guided questions in your own words — at your own pace.',
-                'We write the finished letter. You pay only when it\'s ready.',
-              ].map((item) => (
+            {/* Sub — MOBILE: one punchy line only */}
+            <p className="fade-3 font-dm sub-text-mobile" style={{ color: '#5a5450', fontSize: '16px', lineHeight: 1.6, marginBottom: '24px' }}>
+              Your kids will get your assets. They won&apos;t get your why — unless you write it down.
+            </p>
+
+            {/* Bullets — DESKTOP: above form */}
+            <ul className="fade-4 bullets-desktop" style={{ listStyle: 'none', padding: 0, margin: '0 0 32px', flexDirection: 'column', gap: '12px' }}>
+              {bullets.map((item) => (
                 <li key={item} className="font-dm" style={{ display: 'flex', alignItems: 'flex-start', gap: '12px', color: '#3a3530', fontSize: '15px', lineHeight: 1.6 }}>
                   <span style={{ color: '#B5A692', marginTop: '3px', flexShrink: 0, fontSize: '14px' }}>✦</span>
                   {item}
@@ -217,7 +226,7 @@ export default function SqueezePageVariant2() {
               ))}
             </ul>
 
-            {/* Email capture */}
+            {/* Email capture — immediately after headline on mobile */}
             <div className="fade-5" style={{ maxWidth: '420px', display: 'flex', flexDirection: 'column', gap: '10px' }}>
               <input
                 type="email"
@@ -233,22 +242,27 @@ export default function SqueezePageVariant2() {
               )}
               <button onClick={handleSubmit} disabled={loading} className="cta-btn">
                 {loading ? (
-                  <>
-                    <span className="spin" />
-                    Creating your account...
-                  </>
+                  <><span className="spin" />Creating your account...</>
                 ) : 'Write my letter →'}
               </button>
               <p className="font-dm" style={{ color: '#b0a89e', fontSize: '12px', textAlign: 'center', marginTop: '2px' }}>
                 Free to start. No credit card required.
               </p>
             </div>
+
+            {/* Bullets — MOBILE: below form, gives them something to read after they've seen the CTA */}
+            <ul className="bullets-mobile" style={{ listStyle: 'none', padding: 0, margin: '28px 0 0', flexDirection: 'column', gap: '12px' }}>
+              {bullets.map((item) => (
+                <li key={item} className="font-dm" style={{ display: 'flex', alignItems: 'flex-start', gap: '12px', color: '#3a3530', fontSize: '14px', lineHeight: 1.6 }}>
+                  <span style={{ color: '#B5A692', marginTop: '3px', flexShrink: 0, fontSize: '13px' }}>✦</span>
+                  {item}
+                </li>
+              ))}
+            </ul>
           </div>
 
           {/* RIGHT — Will vs Letter comparison table */}
           <div className="fade-6">
-
-            {/* Table header */}
             <div style={{ display: 'grid', gridTemplateColumns: '1fr 1fr', marginBottom: '0', borderRadius: '16px 16px 0 0', overflow: 'hidden', border: '1px solid #e8e4de', borderBottom: 'none' }}>
               <div style={{ background: '#ede9e3', padding: '14px 20px', borderRight: '1px solid #e8e4de' }}>
                 <p className="font-dm" style={{ color: '#8a7f78', fontSize: '11px', fontWeight: 600, letterSpacing: '0.16em', textTransform: 'uppercase' }}>Your will says…</p>
@@ -258,7 +272,6 @@ export default function SqueezePageVariant2() {
               </div>
             </div>
 
-            {/* Table rows */}
             <div style={{ border: '1px solid #e8e4de', borderTop: 'none', borderRadius: '0 0 16px 16px', overflow: 'hidden', background: '#fff' }}>
               {comparisons.map(({ will, letter }, i) => (
                 <div key={i} className="comparison-row">
@@ -272,7 +285,6 @@ export default function SqueezePageVariant2() {
               ))}
             </div>
 
-            {/* Below table — closes the loop the ad opened */}
             <div style={{ marginTop: '24px', padding: '20px 24px', background: '#1a1a1a', borderRadius: '14px' }}>
               <p className="font-cormorant" style={{ color: '#f0ece6', fontSize: '20px', lineHeight: 1.6, fontStyle: 'italic', marginBottom: '10px' }}>
                 "I kept putting it off for three years. Finished it in one sitting. I don&apos;t know why I waited so long."
@@ -281,8 +293,8 @@ export default function SqueezePageVariant2() {
                 — From our community
               </p>
             </div>
-
           </div>
+
         </div>
       </section>
 
