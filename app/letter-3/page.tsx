@@ -20,7 +20,7 @@ export default function SqueezePageVariant3() {
       const res = await fetch('/api/leads/capture', {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
-        body: JSON.stringify({ email: email.trim(), source: 'variant-1-regret' }),
+        body: JSON.stringify({ email: email.trim(), source: 'variant-1-fear' }),
       })
       const data = await res.json()
       if (!res.ok) {
@@ -28,7 +28,6 @@ export default function SqueezePageVariant3() {
         setLoading(false)
         return
       }
-      // Use global fbq directly — no package needed
       if (typeof window !== 'undefined' && (window as any).fbq) {
         ;(window as any).fbq('track', 'Lead')
       }
@@ -106,10 +105,7 @@ export default function SqueezePageVariant3() {
           transition: background 0.2s, transform 0.15s;
           letter-spacing: 0.03em;
         }
-        .cta-btn:hover:not(:disabled) {
-          background: #c9b9a5;
-          transform: translateY(-1px);
-        }
+        .cta-btn:hover:not(:disabled) { background: #c9b9a5; transform: translateY(-1px); }
         .cta-btn:disabled { opacity: 0.4; cursor: not-allowed; }
 
         .spin {
@@ -138,10 +134,7 @@ export default function SqueezePageVariant3() {
         .disappears-item:nth-child(2) { animation-delay: 1.05s; }
         .disappears-item:nth-child(3) { animation-delay: 1.25s; }
 
-        .stat-divider {
-          width: 1px; height: 28px;
-          background: #2a2520;
-        }
+        .stat-divider { width: 1px; height: 28px; background: #2a2520; }
 
         .vignette {
           position: fixed; inset: 0;
@@ -155,77 +148,85 @@ export default function SqueezePageVariant3() {
           opacity: 0.04;
           background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='300' height='300'%3E%3Cfilter id='noise'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='300' height='300' filter='url(%23noise)' opacity='1'/%3E%3C/svg%3E");
         }
+
+        /* ─── MOBILE OVERRIDES ─── */
+        /* The "What disappears" block and relief box move below form on mobile */
+        .disappears-section-desktop { display: block; }
+        .disappears-section-mobile  { display: none; }
+        .relief-box-desktop { display: block; }
+        .relief-box-mobile  { display: none; }
+
+        @media (max-width: 640px) {
+          .disappears-section-desktop { display: none; }
+          .disappears-section-mobile  { display: block; }
+          .relief-box-desktop { display: none; }
+          .relief-box-mobile  { display: block; }
+        }
       `}</style>
 
       <div className="vignette" />
       <div className="grain" />
 
-      {/* Top accent */}
       <div style={{ width: '100%', height: '2px', background: 'linear-gradient(90deg, transparent, #B5A692 30%, #B5A692 70%, transparent)', position: 'relative', zIndex: 1 }} />
 
-      {/* Nav */}
       <nav style={{ position: 'relative', zIndex: 1, padding: '18px 24px', display: 'flex', alignItems: 'center', justifyContent: 'space-between', maxWidth: '1100px', margin: '0 auto', width: '100%', boxSizing: 'border-box' }}>
         <p className="font-cormorant" style={{ color: '#f0ece6', fontSize: '18px', fontWeight: 500, letterSpacing: '0.05em', animation: 'flicker 8s infinite' }}>
           Succession <span style={{ color: '#B5A692' }}>Story</span>
         </p>
-        <p className="font-dm" style={{ color: '#3d3730', fontSize: '12px', letterSpacing: '0.08em' }}>
-          Trusted by 2,800+ families
-        </p>
+        <p className="font-dm" style={{ color: '#3d3730', fontSize: '12px', letterSpacing: '0.08em' }}>Trusted by 2,800+ families</p>
       </nav>
 
-      {/* Main */}
       <section style={{ flex: 1, display: 'flex', alignItems: 'center', justifyContent: 'center', padding: '32px 20px 48px', position: 'relative', zIndex: 1 }}>
         <div style={{ maxWidth: '1100px', width: '100%', margin: '0 auto', display: 'grid', gridTemplateColumns: 'repeat(auto-fit, minmax(320px, 1fr))', gap: '72px', alignItems: 'start' }}>
 
           {/* LEFT */}
           <div>
-
-            {/* Eyebrow */}
             <div className="fade-1 font-dm" style={{ marginBottom: '20px' }}>
               <span style={{ color: '#B5A692', fontSize: '11px', fontWeight: 600, letterSpacing: '0.22em', textTransform: 'uppercase' }}>Free to start</span>
             </div>
 
-            {/* VOC blockquote — exact line from the ad, no restart */}
+            {/* VOC blockquote — stays above fold, it's the best hook */}
             <div className="fade-2" style={{ borderLeft: '3px solid #B5A692', paddingLeft: '24px', marginBottom: '10px' }}>
               <p className="font-cormorant" style={{ color: '#f0ece6', fontSize: 'clamp(28px, 4.5vw, 44px)', lineHeight: 1.2, fontStyle: 'italic', marginBottom: '12px' }}>
                 &ldquo;I know she loved me.<br />
                 But I don&apos;t know if<br />
                 she <em style={{ color: '#B5A692' }}>liked</em> me.&rdquo;
               </p>
-              {/* "said by" not "written by" — credibility holds */}
               <p className="font-dm" style={{ color: '#3d3730', fontSize: '13px', letterSpacing: '0.03em' }}>
                 — Said by a daughter, six months after her mother&apos;s funeral
               </p>
             </div>
 
-            {/* Pivot — fear to agency, one line */}
+            {/* Pivot line */}
             <p className="fade-3 font-cormorant" style={{ color: '#8a7f78', fontSize: 'clamp(19px, 2.8vw, 24px)', fontStyle: 'italic', margin: '28px 0 20px', lineHeight: 1.5 }}>
               Your kids don&apos;t have to wonder.<br />
               <span style={{ color: '#B5A692' }}>Write it down before you can&apos;t.</span>
             </p>
 
-            {/* What disappears — concrete, not abstract */}
-            <p className="fade-3 font-dm" style={{ color: '#5a5450', fontSize: '13px', fontWeight: 600, letterSpacing: '0.16em', textTransform: 'uppercase', marginBottom: '4px' }}>
-              What disappears without a letter
-            </p>
-            <div className="fade-4" style={{ marginBottom: '32px' }}>
-              {disappears.map(({ thing }) => (
-                <div key={thing} className="disappears-item">
-                  <span style={{ color: '#B5A692', flexShrink: 0, fontSize: '10px', marginTop: '5px' }}>✦</span>
-                  <p className="font-cormorant" style={{ color: '#a09488', fontSize: '19px', fontStyle: 'italic', lineHeight: 1.5 }}>{thing}</p>
-                </div>
-              ))}
+            {/* "What disappears" — DESKTOP: above form */}
+            <div className="disappears-section-desktop">
+              <p className="fade-3 font-dm" style={{ color: '#5a5450', fontSize: '13px', fontWeight: 600, letterSpacing: '0.16em', textTransform: 'uppercase', marginBottom: '4px' }}>
+                What disappears without a letter
+              </p>
+              <div className="fade-4" style={{ marginBottom: '32px' }}>
+                {disappears.map(({ thing }) => (
+                  <div key={thing} className="disappears-item">
+                    <span style={{ color: '#B5A692', flexShrink: 0, fontSize: '10px', marginTop: '5px' }}>✦</span>
+                    <p className="font-cormorant" style={{ color: '#a09488', fontSize: '19px', fontStyle: 'italic', lineHeight: 1.5 }}>{thing}</p>
+                  </div>
+                ))}
+              </div>
             </div>
 
-            {/* Relief box — collapses effort objection, no fake question count */}
-            <div className="fade-4" style={{ padding: '18px 20px', border: '1px solid #2e2a26', borderRadius: '12px', marginBottom: '28px', background: '#141210' }}>
+            {/* Relief box — DESKTOP: above form */}
+            <div className="relief-box-desktop fade-4" style={{ padding: '18px 20px', border: '1px solid #2e2a26', borderRadius: '12px', marginBottom: '28px', background: '#141210' }}>
               <p className="font-dm" style={{ color: '#6a6058', fontSize: '14px', lineHeight: 1.7 }}>
                 That&apos;s not in the will. It&apos;s not in the photos.<br />
                 <span style={{ color: '#c9b9a5' }}>You talk. We write. Your family keeps it forever.</span>
               </p>
             </div>
 
-            {/* Email capture */}
+            {/* Form — immediately after pivot on mobile */}
             <div className="fade-5" style={{ maxWidth: '420px', display: 'flex', flexDirection: 'column', gap: '10px' }}>
               <input
                 type="email"
@@ -236,54 +237,61 @@ export default function SqueezePageVariant3() {
                 disabled={loading}
                 className="input-field"
               />
-              {error && (
-                <p className="font-dm" style={{ color: '#c0392b', fontSize: '13px' }}>{error}</p>
-              )}
-              {/* First-person, outcome-framed CTA */}
+              {error && <p className="font-dm" style={{ color: '#c0392b', fontSize: '13px' }}>{error}</p>}
               <button onClick={handleSubmit} disabled={loading} className="cta-btn">
-                {loading ? (
-                  <>
-                    <span className="spin" />
-                    Creating your account...
-                  </>
-                ) : 'Write my letter →'}
+                {loading ? (<><span className="spin" />Creating your account...</>) : 'Write my letter →'}
               </button>
               <p className="font-dm" style={{ color: '#3d3730', fontSize: '12px', textAlign: 'center', marginTop: '2px' }}>
                 Free to start. No credit card required.
               </p>
             </div>
+
+            {/* "What disappears" — MOBILE: below form */}
+            <div className="disappears-section-mobile" style={{ marginTop: '32px' }}>
+              <p className="font-dm" style={{ color: '#5a5450', fontSize: '13px', fontWeight: 600, letterSpacing: '0.16em', textTransform: 'uppercase', marginBottom: '4px' }}>
+                What disappears without a letter
+              </p>
+              <div>
+                {disappears.map(({ thing }) => (
+                  <div key={thing} className="disappears-item">
+                    <span style={{ color: '#B5A692', flexShrink: 0, fontSize: '10px', marginTop: '5px' }}>✦</span>
+                    <p className="font-cormorant" style={{ color: '#a09488', fontSize: '18px', fontStyle: 'italic', lineHeight: 1.5 }}>{thing}</p>
+                  </div>
+                ))}
+              </div>
+            </div>
+
+            {/* Relief box — MOBILE: below form */}
+            <div className="relief-box-mobile" style={{ padding: '18px 20px', border: '1px solid #2e2a26', borderRadius: '12px', marginTop: '20px', background: '#141210' }}>
+              <p className="font-dm" style={{ color: '#6a6058', fontSize: '14px', lineHeight: 1.7 }}>
+                That&apos;s not in the will. It&apos;s not in the photos.<br />
+                <span style={{ color: '#c9b9a5' }}>You talk. We write. Your family keeps it forever.</span>
+              </p>
+            </div>
           </div>
 
-          {/* RIGHT — VOC quotes as emotional proof */}
+          {/* RIGHT — VOC quotes */}
           <div className="fade-6" style={{ display: 'flex', flexDirection: 'column', gap: '16px' }}>
-
             <p className="font-dm" style={{ color: '#3d3730', fontSize: '11px', fontWeight: 600, letterSpacing: '0.2em', textTransform: 'uppercase', marginBottom: '4px' }}>
               From families who found letters — and those who didn&apos;t
             </p>
 
-            {/* Quote 1 — found a letter */}
             <div style={{ background: '#141210', border: '1px solid #2e2a26', borderRadius: '16px', padding: '24px' }}>
               <p className="font-cormorant" style={{ color: '#d4c8bb', fontSize: '20px', fontStyle: 'italic', lineHeight: 1.65, marginBottom: '14px' }}>
                 &ldquo;I recently found a letter I&apos;d forgotten my dad had written. It&apos;s full of things he almost never said — how proud he was, that he loved me. It&apos;s one of the most precious things I own.&rdquo;
               </p>
               <div style={{ height: '1px', background: '#2e2a26', marginBottom: '14px' }} />
-              <p className="font-dm" style={{ color: '#B5A692', fontSize: '11px', fontWeight: 600, letterSpacing: '0.14em', textTransform: 'uppercase' }}>
-                — From our community
-              </p>
+              <p className="font-dm" style={{ color: '#B5A692', fontSize: '11px', fontWeight: 600, letterSpacing: '0.14em', textTransform: 'uppercase' }}>— From our community</p>
             </div>
 
-            {/* Quote 2 — didn't find one */}
             <div style={{ background: '#141210', border: '1px solid #2e2a26', borderRadius: '16px', padding: '24px' }}>
               <p className="font-cormorant" style={{ color: '#706860', fontSize: '20px', fontStyle: 'italic', lineHeight: 1.65, marginBottom: '14px' }}>
                 &ldquo;I searched everywhere for a letter from my mom after she passed. There wasn&apos;t one. I know she loved me. But I don&apos;t know if she liked me.&rdquo;
               </p>
               <div style={{ height: '1px', background: '#2e2a26', marginBottom: '14px' }} />
-              <p className="font-dm" style={{ color: '#4a4540', fontSize: '11px', fontWeight: 600, letterSpacing: '0.14em', textTransform: 'uppercase' }}>
-                — From our community
-              </p>
+              <p className="font-dm" style={{ color: '#4a4540', fontSize: '11px', fontWeight: 600, letterSpacing: '0.14em', textTransform: 'uppercase' }}>— From our community</p>
             </div>
 
-            {/* One letter vs no letter contrast */}
             <div style={{ display: 'grid', gridTemplateColumns: '1fr 1fr', gap: '10px', marginTop: '4px' }}>
               <div style={{ background: '#141210', border: '1px solid #2e2a26', borderRadius: '12px', padding: '16px', textAlign: 'center' }}>
                 <p className="font-cormorant" style={{ color: '#B5A692', fontSize: '28px', fontWeight: 600, lineHeight: 1 }}>One letter.</p>
@@ -294,19 +302,14 @@ export default function SqueezePageVariant3() {
                 <p className="font-dm" style={{ color: '#3d3730', fontSize: '12px', marginTop: '6px', lineHeight: 1.5 }}>and they&apos;re left guessing who you really were</p>
               </div>
             </div>
-
           </div>
+
         </div>
       </section>
 
-      {/* Stats bar */}
       <div style={{ borderTop: '1px solid #1e1c1a', padding: '20px 24px', position: 'relative', zIndex: 1 }}>
         <div style={{ maxWidth: '1100px', margin: '0 auto', display: 'flex', alignItems: 'center', justifyContent: 'center', gap: '32px' }}>
-          {[
-            ['2,800+', 'families served'],
-            ['30 min', 'to complete'],
-            ['100%', 'private & secure'],
-          ].map(([num, label], i) => (
+          {[['2,800+', 'families served'], ['30 min', 'to complete'], ['100%', 'private & secure']].map(([num, label], i) => (
             <React.Fragment key={label}>
               <div style={{ textAlign: 'center' }}>
                 <p className="font-cormorant" style={{ color: '#f0ece6', fontWeight: 600, fontSize: '20px', lineHeight: 1 }}>{num}</p>

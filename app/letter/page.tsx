@@ -28,7 +28,6 @@ export default function SqueezePageVariant1() {
         setLoading(false)
         return
       }
-      // Use global fbq directly — no package needed
       if (typeof window !== 'undefined' && (window as any).fbq) {
         ;(window as any).fbq('track', 'Lead')
       }
@@ -38,6 +37,12 @@ export default function SqueezePageVariant1() {
       setLoading(false)
     }
   }
+
+  const bullets = [
+    'Answer guided questions — in your own words, at your own pace',
+    'We write your finished letter in your voice',
+    'Pay only when your letter is ready — not a cent before',
+  ]
 
   return (
     <main className="min-h-screen bg-[#f9f6f1] flex flex-col">
@@ -68,8 +73,7 @@ export default function SqueezePageVariant1() {
         .animate-fade-in-6  { animation: fadeIn 0.9s ease forwards; animation-delay: 0.8s;  opacity: 0; }
 
         .divider-line {
-          width: 40px;
-          height: 1px;
+          width: 40px; height: 1px;
           background: #B5A692;
           display: inline-block;
           vertical-align: middle;
@@ -123,10 +127,7 @@ export default function SqueezePageVariant1() {
           transition: background 0.2s, transform 0.15s;
           letter-spacing: 0.02em;
         }
-        .cta-btn:hover:not(:disabled) {
-          background: #2d2d2d;
-          transform: translateY(-1px);
-        }
+        .cta-btn:hover:not(:disabled) { background: #2d2d2d; transform: translateY(-1px); }
         .cta-btn:disabled { opacity: 0.5; cursor: not-allowed; }
 
         .spin {
@@ -151,71 +152,69 @@ export default function SqueezePageVariant1() {
           margin-bottom: 8px;
         }
 
-        .stat-divider {
-          width: 1px;
-          height: 28px;
-          background: #d4c8bb;
-        }
+        .stat-divider { width: 1px; height: 28px; background: #d4c8bb; }
 
-        /* Subtle paper texture overlay */
         .texture-overlay {
-          position: fixed;
-          inset: 0;
-          pointer-events: none;
-          z-index: 0;
+          position: fixed; inset: 0;
+          pointer-events: none; z-index: 0;
           opacity: 0.025;
           background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='300' height='300'%3E%3Cfilter id='noise'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='300' height='300' filter='url(%23noise)' opacity='1'/%3E%3C/svg%3E");
         }
+
+        /* ─── MOBILE OVERRIDES ─── */
+        .bullets-desktop { display: flex; }
+        .bullets-mobile  { display: none; }
+        .sub-desktop { display: block; }
+        .sub-mobile  { display: none; }
+
+        @media (max-width: 640px) {
+          .bullets-desktop { display: none; }
+          .bullets-mobile  { display: flex; }
+          .sub-desktop { display: none; }
+          .sub-mobile  { display: block; }
+        }
       `}</style>
 
-      {/* Texture overlay */}
       <div className="texture-overlay" />
-
-      {/* Top accent bar */}
       <div style={{ width: '100%', height: '3px', background: 'linear-gradient(90deg, #B5A692 0%, #d4c8bb 50%, #B5A692 100%)', position: 'relative', zIndex: 1 }} />
 
-      {/* Nav */}
       <nav style={{ position: 'relative', zIndex: 1, padding: '18px 24px', display: 'flex', alignItems: 'center', justifyContent: 'space-between', maxWidth: '1100px', margin: '0 auto', width: '100%', boxSizing: 'border-box' }}>
         <p className="font-cormorant" style={{ color: '#1a1a1a', fontSize: '17px', fontWeight: 500, letterSpacing: '0.04em' }}>
           Succession <span style={{ color: '#B5A692' }}>Story</span>
         </p>
-        <p className="font-dm" style={{ color: '#8a7f78', fontSize: '12px', letterSpacing: '0.08em' }}>
-          Trusted by 2,800+ families
-        </p>
+        <p className="font-dm" style={{ color: '#8a7f78', fontSize: '12px', letterSpacing: '0.08em' }}>Trusted by 2,800+ families</p>
       </nav>
 
-      {/* Main content */}
       <section style={{ flex: 1, display: 'flex', alignItems: 'center', justifyContent: 'center', padding: '32px 20px 48px', position: 'relative', zIndex: 1 }}>
         <div style={{ maxWidth: '1100px', width: '100%', margin: '0 auto', display: 'grid', gridTemplateColumns: 'repeat(auto-fit, minmax(320px, 1fr))', gap: '64px', alignItems: 'center' }}>
 
-          {/* LEFT — Emotional copy */}
+          {/* LEFT */}
           <div>
-            {/* Eyebrow */}
             <div className="animate-fade-up-1 font-dm" style={{ display: 'flex', alignItems: 'center', marginBottom: '20px' }}>
               <span className="divider-line" />
               <span style={{ color: '#B5A692', fontSize: '11px', fontWeight: 600, letterSpacing: '0.2em', textTransform: 'uppercase' }}>Free to start</span>
             </div>
 
-            {/* Headline — catches them mid-feeling from the ad */}
             <h1 className="animate-fade-up-2 font-cormorant" style={{ color: '#1a1a1a', fontSize: 'clamp(36px, 5vw, 52px)', lineHeight: 1.15, marginBottom: '16px', fontWeight: 500 }}>
               They'll search for a letter<br />
               from you.<br />
               <em style={{ color: '#B5A692' }}>Make sure they find one.</em>
             </h1>
 
-            {/* Sub — collapses the effort objection immediately */}
-            <p className="animate-fade-up-3 font-dm" style={{ color: '#5a5450', fontSize: '17px', lineHeight: 1.7, marginBottom: '32px', maxWidth: '440px' }}>
+            {/* Sub — desktop: full */}
+            <p className="animate-fade-up-3 font-dm sub-desktop" style={{ color: '#5a5450', fontSize: '17px', lineHeight: 1.7, marginBottom: '32px', maxWidth: '440px' }}>
               You talk. We write. Your family keeps it forever.<br />
               No writing ability needed. No appointments. No pressure.
             </p>
 
-            {/* Benefits — reframed around outcome not process */}
-            <ul className="animate-fade-up-4" style={{ listStyle: 'none', padding: 0, margin: '0 0 36px', display: 'flex', flexDirection: 'column', gap: '12px' }}>
-              {[
-                'Answer guided questions — in your own words, at your own pace',
-                'We write your finished letter in your voice',
-                'Pay only when your letter is ready — not a cent before',
-              ].map((item) => (
+            {/* Sub — mobile: compressed */}
+            <p className="animate-fade-up-3 font-dm sub-mobile" style={{ color: '#5a5450', fontSize: '16px', lineHeight: 1.6, marginBottom: '24px' }}>
+              You talk. We write. Your family keeps it forever.
+            </p>
+
+            {/* Bullets — desktop: above form */}
+            <ul className="animate-fade-up-4 bullets-desktop" style={{ listStyle: 'none', padding: 0, margin: '0 0 36px', flexDirection: 'column', gap: '12px' }}>
+              {bullets.map((item) => (
                 <li key={item} className="font-dm" style={{ display: 'flex', alignItems: 'flex-start', gap: '12px', color: '#3a3530', fontSize: '15px', lineHeight: 1.6 }}>
                   <span style={{ color: '#B5A692', marginTop: '3px', flexShrink: 0, fontSize: '14px' }}>✦</span>
                   {item}
@@ -223,7 +222,7 @@ export default function SqueezePageVariant1() {
               ))}
             </ul>
 
-            {/* Email capture */}
+            {/* Form — second thing on mobile */}
             <div className="animate-fade-up-5" style={{ maxWidth: '420px', display: 'flex', flexDirection: 'column', gap: '10px' }}>
               <input
                 type="email"
@@ -234,33 +233,32 @@ export default function SqueezePageVariant1() {
                 disabled={loading}
                 className="input-field"
               />
-              {error && (
-                <p className="font-dm" style={{ color: '#c0392b', fontSize: '13px' }}>{error}</p>
-              )}
-              {/* First-person CTA — outcome framed */}
+              {error && <p className="font-dm" style={{ color: '#c0392b', fontSize: '13px' }}>{error}</p>}
               <button onClick={handleSubmit} disabled={loading} className="cta-btn">
-                {loading ? (
-                  <>
-                    <span className="spin" />
-                    Creating your account...
-                  </>
-                ) : 'Write my letter →'}
+                {loading ? (<><span className="spin" />Creating your account...</>) : 'Write my letter →'}
               </button>
               <p className="font-dm" style={{ color: '#b0a89e', fontSize: '12px', textAlign: 'center', marginTop: '2px' }}>
                 Free to start. No credit card required.
               </p>
             </div>
+
+            {/* Bullets — mobile: below form */}
+            <ul className="bullets-mobile" style={{ listStyle: 'none', padding: 0, margin: '28px 0 0', flexDirection: 'column', gap: '12px' }}>
+              {bullets.map((item) => (
+                <li key={item} className="font-dm" style={{ display: 'flex', alignItems: 'flex-start', gap: '12px', color: '#3a3530', fontSize: '14px', lineHeight: 1.6 }}>
+                  <span style={{ color: '#B5A692', marginTop: '3px', flexShrink: 0, fontSize: '13px' }}>✦</span>
+                  {item}
+                </li>
+              ))}
+            </ul>
           </div>
 
           {/* RIGHT — Dark card: process + VOC quote */}
           <div className="animate-fade-in-6" style={{ display: 'flex', flexDirection: 'column', gap: '20px' }}>
-
-            {/* Process card */}
             <div className="card-dark">
               <p className="font-dm" style={{ color: '#B5A692', fontSize: '10px', fontWeight: 700, letterSpacing: '0.22em', textTransform: 'uppercase', marginBottom: '20px' }}>
                 What happens after you sign up
               </p>
-
               <div>
                 {[
                   ['01', 'Check your email for your login details'],
@@ -275,7 +273,6 @@ export default function SqueezePageVariant1() {
               </div>
             </div>
 
-            {/* VOC quote card — the emotional anchor from the ad */}
             <div style={{ background: '#fff', border: '1px solid #e8e4de', borderRadius: '16px', padding: '28px 28px 24px' }}>
               <span className="quote-mark">"</span>
               <p className="font-cormorant" style={{ color: '#2a2520', fontSize: '19px', lineHeight: 1.6, fontStyle: 'italic', marginBottom: '16px' }}>
@@ -285,19 +282,14 @@ export default function SqueezePageVariant1() {
                 — From our community
               </p>
             </div>
-
           </div>
+
         </div>
       </section>
 
-      {/* Stats bar */}
       <div style={{ borderTop: '1px solid #e8e4de', padding: '20px 24px', position: 'relative', zIndex: 1 }}>
         <div style={{ maxWidth: '1100px', margin: '0 auto', display: 'flex', alignItems: 'center', justifyContent: 'center', gap: '32px' }}>
-          {[
-            ['2,800+', 'families served'],
-            ['30 min', 'to complete'],
-            ['100%', 'private & secure'],
-          ].map(([num, label], i) => (
+          {[['2,800+', 'families served'], ['30 min', 'to complete'], ['100%', 'private & secure']].map(([num, label], i) => (
             <React.Fragment key={label}>
               <div style={{ textAlign: 'center' }}>
                 <p className="font-cormorant" style={{ color: '#1a1a1a', fontWeight: 600, fontSize: '20px', lineHeight: 1 }}>{num}</p>
