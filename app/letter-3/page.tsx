@@ -20,7 +20,7 @@ export default function SqueezePageVariant3() {
       const res = await fetch('/api/leads/capture', {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
-        body: JSON.stringify({ email: email.trim(), source: 'variant-1-fear' }),
+        body: JSON.stringify({ email: email.trim(), source: 'variant-3-fear' }),
       })
       const data = await res.json()
       if (!res.ok) {
@@ -37,12 +37,6 @@ export default function SqueezePageVariant3() {
       setLoading(false)
     }
   }
-
-  const disappears = [
-    { thing: 'Why you made the hardest choices you made.' },
-    { thing: 'What you actually believe — not what you showed.' },
-    { thing: 'What you want them to remember when life gets hard.' },
-  ]
 
   return (
     <main className="min-h-screen flex flex-col" style={{ background: '#0f0e0d' }}>
@@ -62,17 +56,17 @@ export default function SqueezePageVariant3() {
         }
         @keyframes flicker {
           0%, 100% { opacity: 1; }
-          92%       { opacity: 1; }
-          93%       { opacity: 0.85; }
-          94%       { opacity: 1; }
+          92%  { opacity: 1; }
+          93%  { opacity: 0.85; }
+          94%  { opacity: 1; }
         }
 
         .fade-1 { animation: fadeUp 0.8s ease forwards; animation-delay: 0.05s; opacity: 0; }
-        .fade-2 { animation: fadeUp 0.8s ease forwards; animation-delay: 0.2s;  opacity: 0; }
-        .fade-3 { animation: fadeUp 0.8s ease forwards; animation-delay: 0.38s; opacity: 0; }
-        .fade-4 { animation: fadeUp 0.8s ease forwards; animation-delay: 0.54s; opacity: 0; }
-        .fade-5 { animation: fadeUp 0.8s ease forwards; animation-delay: 0.7s;  opacity: 0; }
-        .fade-6 { animation: fadeIn 1s ease forwards;   animation-delay: 0.8s;  opacity: 0; }
+        .fade-2 { animation: fadeUp 0.8s ease forwards; animation-delay: 0.18s; opacity: 0; }
+        .fade-3 { animation: fadeUp 0.8s ease forwards; animation-delay: 0.32s; opacity: 0; }
+        .fade-4 { animation: fadeUp 0.8s ease forwards; animation-delay: 0.46s; opacity: 0; }
+        .fade-5 { animation: fadeUp 0.8s ease forwards; animation-delay: 0.60s; opacity: 0; }
+        .fade-6 { animation: fadeIn 1s ease forwards;   animation-delay: 0.72s; opacity: 0; }
 
         .input-field {
           width: 100%;
@@ -120,20 +114,6 @@ export default function SqueezePageVariant3() {
         }
         @keyframes spin { to { transform: rotate(360deg); } }
 
-        .disappears-item {
-          display: flex;
-          align-items: flex-start;
-          gap: 14px;
-          padding: 16px 0;
-          border-bottom: 1px solid #1e1c1a;
-          animation: fadeUp 0.7s ease forwards;
-          opacity: 0;
-        }
-        .disappears-item:last-child { border-bottom: none; }
-        .disappears-item:nth-child(1) { animation-delay: 0.85s; }
-        .disappears-item:nth-child(2) { animation-delay: 1.05s; }
-        .disappears-item:nth-child(3) { animation-delay: 1.25s; }
-
         .stat-divider { width: 1px; height: 28px; background: #2a2520; }
 
         .vignette {
@@ -149,19 +129,11 @@ export default function SqueezePageVariant3() {
           background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='300' height='300'%3E%3Cfilter id='noise'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='300' height='300' filter='url(%23noise)' opacity='1'/%3E%3C/svg%3E");
         }
 
-        /* ─── MOBILE OVERRIDES ─── */
-        /* The "What disappears" block and relief box move below form on mobile */
-        .disappears-section-desktop { display: block; }
-        .disappears-section-mobile  { display: none; }
-        .relief-box-desktop { display: block; }
-        .relief-box-mobile  { display: none; }
-
-        @media (max-width: 640px) {
-          .disappears-section-desktop { display: none; }
-          .disappears-section-mobile  { display: block; }
-          .relief-box-desktop { display: none; }
-          .relief-box-mobile  { display: block; }
+        .voc-row {
+          padding: 20px 0;
+          border-bottom: 1px solid #1e1c1a;
         }
+        .voc-row:last-child { border-bottom: none; }
       `}</style>
 
       <div className="vignette" />
@@ -185,49 +157,27 @@ export default function SqueezePageVariant3() {
               <span style={{ color: '#B5A692', fontSize: '11px', fontWeight: 600, letterSpacing: '0.22em', textTransform: 'uppercase' }}>Free to start</span>
             </div>
 
-            {/* VOC blockquote — stays above fold, it's the best hook */}
-            <div className="fade-2" style={{ borderLeft: '3px solid #B5A692', paddingLeft: '24px', marginBottom: '10px' }}>
-              <p className="font-cormorant" style={{ color: '#f0ece6', fontSize: 'clamp(28px, 4.5vw, 44px)', lineHeight: 1.2, fontStyle: 'italic', marginBottom: '12px' }}>
-                &ldquo;I know she loved me.<br />
-                But I don&apos;t know if<br />
-                she <em style={{ color: '#B5A692' }}>liked</em> me.&rdquo;
-              </p>
-              <p className="font-dm" style={{ color: '#3d3730', fontSize: '13px', letterSpacing: '0.03em' }}>
-                — Said by a daughter, six months after her mother&apos;s funeral
-              </p>
-            </div>
+            {/* Headline — you still have the chance. use it. */}
+            <h1 className="fade-2 font-cormorant" style={{ color: '#f0ece6', fontSize: 'clamp(34px, 5vw, 52px)', lineHeight: 1.15, marginBottom: '20px', fontWeight: 500 }}>
+              You still have<br />
+              the chance to say it.<br />
+              <em style={{ color: '#B5A692' }}>Most people wait too long.</em>
+            </h1>
 
-            {/* Pivot line */}
-            <p className="fade-3 font-cormorant" style={{ color: '#8a7f78', fontSize: 'clamp(19px, 2.8vw, 24px)', fontStyle: 'italic', margin: '28px 0 20px', lineHeight: 1.5 }}>
-              Your kids don&apos;t have to wonder.<br />
-              <span style={{ color: '#B5A692' }}>Write it down before you can&apos;t.</span>
+            {/* Sub — names what disappears if they don't act, then opens the door */}
+            <p className="fade-3 font-dm" style={{ color: '#6a6058', fontSize: '16px', lineHeight: 1.75, marginBottom: '10px', maxWidth: '420px' }}>
+              The things that matter most — what you believe, what shaped you,
+              what you want them to carry forward — aren&apos;t in any document.
+              They live in you. And they leave when you do.
+            </p>
+            <p className="fade-3 font-dm" style={{ color: '#c9b9a5', fontSize: '16px', lineHeight: 1.75, marginBottom: '32px', maxWidth: '420px' }}>
+              30 minutes. Guided questions. We write it for you.
+              Free to start — because this shouldn&apos;t be something
+              you put off one more day.
             </p>
 
-            {/* "What disappears" — DESKTOP: above form */}
-            <div className="disappears-section-desktop">
-              <p className="fade-3 font-dm" style={{ color: '#5a5450', fontSize: '13px', fontWeight: 600, letterSpacing: '0.16em', textTransform: 'uppercase', marginBottom: '4px' }}>
-                What disappears without a letter
-              </p>
-              <div className="fade-4" style={{ marginBottom: '32px' }}>
-                {disappears.map(({ thing }) => (
-                  <div key={thing} className="disappears-item">
-                    <span style={{ color: '#B5A692', flexShrink: 0, fontSize: '10px', marginTop: '5px' }}>✦</span>
-                    <p className="font-cormorant" style={{ color: '#a09488', fontSize: '19px', fontStyle: 'italic', lineHeight: 1.5 }}>{thing}</p>
-                  </div>
-                ))}
-              </div>
-            </div>
-
-            {/* Relief box — DESKTOP: above form */}
-            <div className="relief-box-desktop fade-4" style={{ padding: '18px 20px', border: '1px solid #2e2a26', borderRadius: '12px', marginBottom: '28px', background: '#141210' }}>
-              <p className="font-dm" style={{ color: '#6a6058', fontSize: '14px', lineHeight: 1.7 }}>
-                That&apos;s not in the will. It&apos;s not in the photos.<br />
-                <span style={{ color: '#c9b9a5' }}>You talk. We write. Your family keeps it forever.</span>
-              </p>
-            </div>
-
-            {/* Form — immediately after pivot on mobile */}
-            <div className="fade-5" style={{ maxWidth: '420px', display: 'flex', flexDirection: 'column', gap: '10px' }}>
+            {/* Form */}
+            <div className="fade-4" style={{ maxWidth: '420px', display: 'flex', flexDirection: 'column', gap: '10px', marginBottom: '36px' }}>
               <input
                 type="email"
                 placeholder="Enter your email address"
@@ -246,61 +196,75 @@ export default function SqueezePageVariant3() {
               </p>
             </div>
 
-            {/* "What disappears" — MOBILE: below form */}
-            <div className="disappears-section-mobile" style={{ marginTop: '32px' }}>
-              <p className="font-dm" style={{ color: '#5a5450', fontSize: '13px', fontWeight: 600, letterSpacing: '0.16em', textTransform: 'uppercase', marginBottom: '4px' }}>
-                What disappears without a letter
+            {/* How it works */}
+            <div className="fade-5">
+              <p className="font-dm" style={{ color: '#B5A692', fontSize: '11px', fontWeight: 600, letterSpacing: '0.18em', textTransform: 'uppercase', marginBottom: '14px' }}>
+                How it works
               </p>
-              <div>
-                {disappears.map(({ thing }) => (
-                  <div key={thing} className="disappears-item">
-                    <span style={{ color: '#B5A692', flexShrink: 0, fontSize: '10px', marginTop: '5px' }}>✦</span>
-                    <p className="font-cormorant" style={{ color: '#a09488', fontSize: '18px', fontStyle: 'italic', lineHeight: 1.5 }}>{thing}</p>
+              {[
+                ['Answer guided questions', 'In your own words. At your own pace. No writing skill needed.'],
+                ['We write your letter', 'We turn your answers into a finished letter — in your voice.'],
+                ['Pay only when it\'s ready', 'Read it first. Love it first. Then decide.'],
+              ].map(([title, desc]) => (
+                <div key={title} style={{ display: 'flex', gap: '14px', marginBottom: '16px' }}>
+                  <span style={{ color: '#B5A692', fontSize: '10px', marginTop: '5px', flexShrink: 0 }}>✦</span>
+                  <div>
+                    <p className="font-dm" style={{ color: '#c9b9a5', fontSize: '14px', fontWeight: 600, marginBottom: '3px' }}>{title}</p>
+                    <p className="font-dm" style={{ color: '#5a5450', fontSize: '13px', lineHeight: 1.6 }}>{desc}</p>
                   </div>
-                ))}
-              </div>
-            </div>
-
-            {/* Relief box — MOBILE: below form */}
-            <div className="relief-box-mobile" style={{ padding: '18px 20px', border: '1px solid #2e2a26', borderRadius: '12px', marginTop: '20px', background: '#141210' }}>
-              <p className="font-dm" style={{ color: '#6a6058', fontSize: '14px', lineHeight: 1.7 }}>
-                That&apos;s not in the will. It&apos;s not in the photos.<br />
-                <span style={{ color: '#c9b9a5' }}>You talk. We write. Your family keeps it forever.</span>
-              </p>
+                </div>
+              ))}
             </div>
           </div>
 
-          {/* RIGHT — VOC quotes */}
-          <div className="fade-6" style={{ display: 'flex', flexDirection: 'column', gap: '16px' }}>
-            <p className="font-dm" style={{ color: '#3d3730', fontSize: '11px', fontWeight: 600, letterSpacing: '0.2em', textTransform: 'uppercase', marginBottom: '4px' }}>
+          {/* RIGHT — VOC: people who ran out of time, people who didn't */}
+          <div className="fade-6">
+            <p className="font-dm" style={{ color: '#3d3730', fontSize: '11px', fontWeight: 600, letterSpacing: '0.2em', textTransform: 'uppercase', marginBottom: '20px' }}>
               From families who found letters — and those who didn&apos;t
             </p>
 
-            <div style={{ background: '#141210', border: '1px solid #2e2a26', borderRadius: '16px', padding: '24px' }}>
-              <p className="font-cormorant" style={{ color: '#d4c8bb', fontSize: '20px', fontStyle: 'italic', lineHeight: 1.65, marginBottom: '14px' }}>
-                &ldquo;I recently found a letter I&apos;d forgotten my dad had written. It&apos;s full of things he almost never said — how proud he was, that he loved me. It&apos;s one of the most precious things I own.&rdquo;
+            {/* VOC 1 — the cancer mom who would have written 1000 letters */}
+            <div className="voc-row">
+              <p className="font-cormorant" style={{ color: '#d4c8bb', fontSize: '19px', fontStyle: 'italic', lineHeight: 1.65, marginBottom: '10px' }}>
+                &ldquo;I lost my mom to cancer. She wasn&apos;t able to write
+                or talk at the end. If she had known, she would have
+                written me 1,000 letters — I am 100% sure of that.&rdquo;
               </p>
-              <div style={{ height: '1px', background: '#2e2a26', marginBottom: '14px' }} />
-              <p className="font-dm" style={{ color: '#B5A692', fontSize: '11px', fontWeight: 600, letterSpacing: '0.14em', textTransform: 'uppercase' }}>— From our community</p>
+              <p className="font-dm" style={{ color: '#4a4540', fontSize: '11px', fontWeight: 600, letterSpacing: '0.14em', textTransform: 'uppercase' }}>
+                — From our community
+              </p>
             </div>
 
-            <div style={{ background: '#141210', border: '1px solid #2e2a26', borderRadius: '16px', padding: '24px' }}>
-              <p className="font-cormorant" style={{ color: '#706860', fontSize: '20px', fontStyle: 'italic', lineHeight: 1.65, marginBottom: '14px' }}>
-                &ldquo;I searched everywhere for a letter from my mom after she passed. There wasn&apos;t one. I know she loved me. But I don&apos;t know if she liked me.&rdquo;
+            {/* VOC 2 — the daughter who still has her dad's text messages */}
+            <div className="voc-row">
+              <p className="font-cormorant" style={{ color: '#d4c8bb', fontSize: '19px', fontStyle: 'italic', lineHeight: 1.65, marginBottom: '10px' }}>
+                &ldquo;I currently still have his text messages on my phone.
+                I cannot believe that I will never get
+                a text message from him again.&rdquo;
               </p>
-              <div style={{ height: '1px', background: '#2e2a26', marginBottom: '14px' }} />
-              <p className="font-dm" style={{ color: '#4a4540', fontSize: '11px', fontWeight: 600, letterSpacing: '0.14em', textTransform: 'uppercase' }}>— From our community</p>
+              <p className="font-dm" style={{ color: '#4a4540', fontSize: '11px', fontWeight: 600, letterSpacing: '0.14em', textTransform: 'uppercase' }}>
+                — From our community
+              </p>
             </div>
 
-            <div style={{ display: 'grid', gridTemplateColumns: '1fr 1fr', gap: '10px', marginTop: '4px' }}>
-              <div style={{ background: '#141210', border: '1px solid #2e2a26', borderRadius: '12px', padding: '16px', textAlign: 'center' }}>
-                <p className="font-cormorant" style={{ color: '#B5A692', fontSize: '28px', fontWeight: 600, lineHeight: 1 }}>One letter.</p>
-                <p className="font-dm" style={{ color: '#5a5450', fontSize: '12px', marginTop: '6px', lineHeight: 1.5 }}>keeps you present long after you&apos;re gone</p>
-              </div>
-              <div style={{ background: '#141210', border: '1px solid #2e2a26', borderRadius: '12px', padding: '16px', textAlign: 'center' }}>
-                <p className="font-cormorant" style={{ color: '#3d3730', fontSize: '28px', fontWeight: 600, lineHeight: 1 }}>No letter.</p>
-                <p className="font-dm" style={{ color: '#3d3730', fontSize: '12px', marginTop: '6px', lineHeight: 1.5 }}>and they&apos;re left guessing who you really were</p>
-              </div>
+            {/* VOC 3 — the found letter, the pivot to hope */}
+            <div className="voc-row">
+              <p className="font-cormorant" style={{ color: '#d4c8bb', fontSize: '19px', fontStyle: 'italic', lineHeight: 1.65, marginBottom: '10px' }}>
+                &ldquo;I found a letter I&apos;d forgotten my dad had written.
+                It&apos;s full of things he almost never said.
+                It&apos;s one of the most precious things I own now.&rdquo;
+              </p>
+              <p className="font-dm" style={{ color: '#B5A692', fontSize: '11px', fontWeight: 600, letterSpacing: '0.14em', textTransform: 'uppercase' }}>
+                — From our community
+              </p>
+            </div>
+
+            {/* Closing — urgency with agency, not fear */}
+            <div style={{ marginTop: '24px', padding: '20px 24px', background: '#141210', border: '1px solid #2e2a26', borderRadius: '14px' }}>
+              <p className="font-cormorant" style={{ color: '#f0ece6', fontSize: '19px', lineHeight: 1.65, fontStyle: 'italic' }}>
+                You have the chance to write it today.{' '}
+                <span style={{ color: '#B5A692' }}>Don&apos;t be the person who meant to.</span>
+              </p>
             </div>
           </div>
 

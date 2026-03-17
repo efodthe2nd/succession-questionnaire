@@ -38,19 +38,13 @@ export default function SqueezePageVariant1() {
     }
   }
 
-  const bullets = [
-    'Answer guided questions — in your own words, at your own pace',
-    'We write your finished letter in your voice',
-    'Pay only when your letter is ready — not a cent before',
-  ]
-
   return (
     <main className="min-h-screen bg-[#f9f6f1] flex flex-col">
       <style>{`
         @import url('https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,400;0,500;0,600;1,400;1,500&family=DM+Sans:wght@300;400;500&display=swap');
 
         .font-cormorant { font-family: 'Cormorant Garamond', Georgia, serif; }
-        .font-dm { font-family: 'DM Sans', sans-serif; }
+        .font-dm        { font-family: 'DM Sans', sans-serif; }
 
         @keyframes fadeUp {
           from { opacity: 0; transform: translateY(18px); }
@@ -60,17 +54,13 @@ export default function SqueezePageVariant1() {
           from { opacity: 0; }
           to   { opacity: 1; }
         }
-        @keyframes subtlePulse {
-          0%, 100% { opacity: 1; }
-          50%       { opacity: 0.7; }
-        }
 
-        .animate-fade-up-1  { animation: fadeUp 0.7s ease forwards; animation-delay: 0.05s; opacity: 0; }
-        .animate-fade-up-2  { animation: fadeUp 0.7s ease forwards; animation-delay: 0.2s;  opacity: 0; }
-        .animate-fade-up-3  { animation: fadeUp 0.7s ease forwards; animation-delay: 0.35s; opacity: 0; }
-        .animate-fade-up-4  { animation: fadeUp 0.7s ease forwards; animation-delay: 0.5s;  opacity: 0; }
-        .animate-fade-up-5  { animation: fadeUp 0.7s ease forwards; animation-delay: 0.65s; opacity: 0; }
-        .animate-fade-in-6  { animation: fadeIn 0.9s ease forwards; animation-delay: 0.8s;  opacity: 0; }
+        .fade-1 { animation: fadeUp 0.7s ease forwards; animation-delay: 0.05s; opacity: 0; }
+        .fade-2 { animation: fadeUp 0.7s ease forwards; animation-delay: 0.18s; opacity: 0; }
+        .fade-3 { animation: fadeUp 0.7s ease forwards; animation-delay: 0.32s; opacity: 0; }
+        .fade-4 { animation: fadeUp 0.7s ease forwards; animation-delay: 0.46s; opacity: 0; }
+        .fade-5 { animation: fadeUp 0.7s ease forwards; animation-delay: 0.60s; opacity: 0; }
+        .fade-6 { animation: fadeIn 0.9s ease forwards; animation-delay: 0.72s; opacity: 0; }
 
         .divider-line {
           width: 40px; height: 1px;
@@ -79,22 +69,6 @@ export default function SqueezePageVariant1() {
           vertical-align: middle;
           margin-right: 10px;
         }
-
-        .card-dark {
-          background: #1a1a1a;
-          border-radius: 20px;
-          padding: 2.5rem;
-          box-shadow: 0 24px 60px rgba(0,0,0,0.18);
-        }
-
-        .step-row {
-          display: flex;
-          align-items: flex-start;
-          gap: 14px;
-          padding: 14px 0;
-          border-bottom: 1px solid #2a2a2a;
-        }
-        .step-row:last-child { border-bottom: none; }
 
         .input-field {
           width: 100%;
@@ -142,16 +116,6 @@ export default function SqueezePageVariant1() {
         }
         @keyframes spin { to { transform: rotate(360deg); } }
 
-        .quote-mark {
-          font-family: 'Cormorant Garamond', Georgia, serif;
-          font-size: 72px;
-          line-height: 0.6;
-          color: #B5A692;
-          opacity: 0.4;
-          display: block;
-          margin-bottom: 8px;
-        }
-
         .stat-divider { width: 1px; height: 28px; background: #d4c8bb; }
 
         .texture-overlay {
@@ -161,18 +125,11 @@ export default function SqueezePageVariant1() {
           background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='300' height='300'%3E%3Cfilter id='noise'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='300' height='300' filter='url(%23noise)' opacity='1'/%3E%3C/svg%3E");
         }
 
-        /* ─── MOBILE OVERRIDES ─── */
-        .bullets-desktop { display: flex; }
-        .bullets-mobile  { display: none; }
-        .sub-desktop { display: block; }
-        .sub-mobile  { display: none; }
-
-        @media (max-width: 640px) {
-          .bullets-desktop { display: none; }
-          .bullets-mobile  { display: flex; }
-          .sub-desktop { display: none; }
-          .sub-mobile  { display: block; }
+        .voc-row {
+          padding: 20px 0;
+          border-bottom: 1px solid #e8e4de;
         }
+        .voc-row:last-child { border-bottom: none; }
       `}</style>
 
       <div className="texture-overlay" />
@@ -186,44 +143,35 @@ export default function SqueezePageVariant1() {
       </nav>
 
       <section style={{ flex: 1, display: 'flex', alignItems: 'center', justifyContent: 'center', padding: '32px 20px 48px', position: 'relative', zIndex: 1 }}>
-        <div style={{ maxWidth: '1100px', width: '100%', margin: '0 auto', display: 'grid', gridTemplateColumns: 'repeat(auto-fit, minmax(320px, 1fr))', gap: '64px', alignItems: 'center' }}>
+        <div style={{ maxWidth: '1100px', width: '100%', margin: '0 auto', display: 'grid', gridTemplateColumns: 'repeat(auto-fit, minmax(320px, 1fr))', gap: '64px', alignItems: 'start' }}>
 
           {/* LEFT */}
           <div>
-            <div className="animate-fade-up-1 font-dm" style={{ display: 'flex', alignItems: 'center', marginBottom: '20px' }}>
+            <div className="fade-1 font-dm" style={{ display: 'flex', alignItems: 'center', marginBottom: '20px' }}>
               <span className="divider-line" />
               <span style={{ color: '#B5A692', fontSize: '11px', fontWeight: 600, letterSpacing: '0.2em', textTransform: 'uppercase' }}>Free to start</span>
             </div>
 
-            <h1 className="animate-fade-up-2 font-cormorant" style={{ color: '#1a1a1a', fontSize: 'clamp(36px, 5vw, 52px)', lineHeight: 1.15, marginBottom: '16px', fontWeight: 500 }}>
-              They'll search for a letter<br />
-              from you.<br />
-              <em style={{ color: '#B5A692' }}>Make sure they find one.</em>
+            {/* Headline — the words are already there. the barrier is just getting them out. */}
+            <h1 className="fade-2 font-cormorant" style={{ color: '#1a1a1a', fontSize: 'clamp(34px, 5vw, 52px)', lineHeight: 1.15, marginBottom: '20px', fontWeight: 500 }}>
+              You already know<br />
+              what you want to say.<br />
+              <em style={{ color: '#B5A692' }}>We&apos;ll help you say it.</em>
             </h1>
 
-            {/* Sub — desktop: full */}
-            <p className="animate-fade-up-3 font-dm sub-desktop" style={{ color: '#5a5450', fontSize: '17px', lineHeight: 1.7, marginBottom: '32px', maxWidth: '440px' }}>
-              You talk. We write. Your family keeps it forever.<br />
-              No writing ability needed. No appointments. No pressure.
+            {/* Sub — names the real barrier: not knowing what to say isn't the problem. sitting down is. */}
+            <p className="fade-3 font-dm" style={{ color: '#5a5450', fontSize: '16px', lineHeight: 1.75, marginBottom: '10px', maxWidth: '420px' }}>
+              The values. The hard-won lessons. What you want them
+              to carry when life gets difficult. It&apos;s already inside you.
+            </p>
+            <p className="fade-3 font-dm" style={{ color: '#3a3530', fontSize: '16px', lineHeight: 1.75, marginBottom: '32px', maxWidth: '420px' }}>
+              You just need someone to ask the right questions —
+              and turn your answers into the letter your kids will
+              keep for the rest of their lives.
             </p>
 
-            {/* Sub — mobile: compressed */}
-            <p className="animate-fade-up-3 font-dm sub-mobile" style={{ color: '#5a5450', fontSize: '16px', lineHeight: 1.6, marginBottom: '24px' }}>
-              You talk. We write. Your family keeps it forever.
-            </p>
-
-            {/* Bullets — desktop: above form */}
-            <ul className="animate-fade-up-4 bullets-desktop" style={{ listStyle: 'none', padding: 0, margin: '0 0 36px', flexDirection: 'column', gap: '12px' }}>
-              {bullets.map((item) => (
-                <li key={item} className="font-dm" style={{ display: 'flex', alignItems: 'flex-start', gap: '12px', color: '#3a3530', fontSize: '15px', lineHeight: 1.6 }}>
-                  <span style={{ color: '#B5A692', marginTop: '3px', flexShrink: 0, fontSize: '14px' }}>✦</span>
-                  {item}
-                </li>
-              ))}
-            </ul>
-
-            {/* Form — second thing on mobile */}
-            <div className="animate-fade-up-5" style={{ maxWidth: '420px', display: 'flex', flexDirection: 'column', gap: '10px' }}>
+            {/* Form */}
+            <div className="fade-4" style={{ maxWidth: '420px', display: 'flex', flexDirection: 'column', gap: '10px', marginBottom: '36px' }}>
               <input
                 type="email"
                 placeholder="Enter your email address"
@@ -242,44 +190,87 @@ export default function SqueezePageVariant1() {
               </p>
             </div>
 
-            {/* Bullets — mobile: below form */}
-            <ul className="bullets-mobile" style={{ listStyle: 'none', padding: 0, margin: '28px 0 0', flexDirection: 'column', gap: '12px' }}>
-              {bullets.map((item) => (
-                <li key={item} className="font-dm" style={{ display: 'flex', alignItems: 'flex-start', gap: '12px', color: '#3a3530', fontSize: '14px', lineHeight: 1.6 }}>
-                  <span style={{ color: '#B5A692', marginTop: '3px', flexShrink: 0, fontSize: '13px' }}>✦</span>
-                  {item}
-                </li>
+            {/* How it works */}
+            <div className="fade-5">
+              <p className="font-dm" style={{ color: '#B5A692', fontSize: '11px', fontWeight: 600, letterSpacing: '0.18em', textTransform: 'uppercase', marginBottom: '14px' }}>
+                How it works
+              </p>
+              {[
+                ['We ask. You answer.', 'Guided questions draw out what matters most — in your own words, at your own pace.'],
+                ['We write it for you.', 'We turn your answers into a finished letter that sounds exactly like you.'],
+                ['Pay only when it\'s ready.', 'Read it first. Love it first. Then decide.'],
+              ].map(([title, desc]) => (
+                <div key={title} style={{ display: 'flex', gap: '14px', marginBottom: '16px' }}>
+                  <span style={{ color: '#B5A692', fontSize: '10px', marginTop: '5px', flexShrink: 0 }}>✦</span>
+                  <div>
+                    <p className="font-dm" style={{ color: '#1a1a1a', fontSize: '14px', fontWeight: 600, marginBottom: '3px' }}>{title}</p>
+                    <p className="font-dm" style={{ color: '#8a7f78', fontSize: '13px', lineHeight: 1.6 }}>{desc}</p>
+                  </div>
+                </div>
               ))}
-            </ul>
+            </div>
           </div>
 
-          {/* RIGHT — Dark card: process + VOC quote */}
-          <div className="animate-fade-in-6" style={{ display: 'flex', flexDirection: 'column', gap: '20px' }}>
-            <div className="card-dark">
-              <p className="font-dm" style={{ color: '#B5A692', fontSize: '10px', fontWeight: 700, letterSpacing: '0.22em', textTransform: 'uppercase', marginBottom: '20px' }}>
-                What happens after you sign up
-              </p>
-              <div>
-                {[
-                  ['01', 'Check your email for your login details'],
-                  ['02', 'Answer guided questions — your words, your voice, your pace'],
-                  ['03', 'We write your finished letter. You pay only when it\'s ready.'],
-                ].map(([num, text]) => (
-                  <div key={num} className="step-row">
-                    <span className="font-cormorant" style={{ color: '#B5A692', fontSize: '18px', flexShrink: 0, marginTop: '1px', fontWeight: 500 }}>{num}</span>
-                    <p className="font-dm" style={{ color: '#a09890', fontSize: '14px', lineHeight: 1.65 }}>{text}</p>
-                  </div>
-                ))}
-              </div>
-            </div>
+          {/* RIGHT — VOC: people who had words inside them but never got them out */}
+          <div className="fade-6">
+            <p className="font-dm" style={{ color: '#B5A692', fontSize: '11px', fontWeight: 600, letterSpacing: '0.18em', textTransform: 'uppercase', marginBottom: '20px' }}>
+              From people who found the words — and those who ran out of time
+            </p>
 
-            <div style={{ background: '#fff', border: '1px solid #e8e4de', borderRadius: '16px', padding: '28px 28px 24px' }}>
-              <span className="quote-mark">"</span>
-              <p className="font-cormorant" style={{ color: '#2a2520', fontSize: '19px', lineHeight: 1.6, fontStyle: 'italic', marginBottom: '16px' }}>
-                I searched everywhere for a letter from my mom after she passed. There wasn't one.
+            {/* VOC 1 — found the letter, recognised the person in it */}
+            <div className="voc-row">
+              <p className="font-cormorant" style={{ color: '#2a2520', fontSize: '19px', lineHeight: 1.65, fontStyle: 'italic', marginBottom: '10px' }}>
+                &ldquo;I recently found a letter my dad had written.
+                It&apos;s full of things he almost never said out loud —
+                how proud he was, that he loved me.
+                It&apos;s one of the most precious things I own.&rdquo;
               </p>
               <p className="font-dm" style={{ color: '#B5A692', fontSize: '11px', fontWeight: 600, letterSpacing: '0.14em', textTransform: 'uppercase' }}>
                 — From our community
+              </p>
+            </div>
+
+            {/* VOC 2 — the regret of unsaid things */}
+            <div className="voc-row">
+              <p className="font-cormorant" style={{ color: '#2a2520', fontSize: '19px', lineHeight: 1.65, fontStyle: 'italic', marginBottom: '10px' }}>
+                &ldquo;His passing was so sudden. I never got to truly tell him
+                how much I cared. I didn&apos;t say sorry enough.
+                I wish I could have looked him in the eye one more time.&rdquo;
+              </p>
+              <p className="font-dm" style={{ color: '#8a7f78', fontSize: '11px', fontWeight: 600, letterSpacing: '0.14em', textTransform: 'uppercase' }}>
+                — From our community
+              </p>
+            </div>
+
+            {/* VOC 3 — the one who finally did it */}
+            <div className="voc-row">
+              <p className="font-cormorant" style={{ color: '#2a2520', fontSize: '19px', lineHeight: 1.65, fontStyle: 'italic', marginBottom: '10px' }}>
+                &ldquo;I kept putting it off for three years.
+                Finished it in one sitting.
+                I don&apos;t know why I waited so long.&rdquo;
+              </p>
+              <p className="font-dm" style={{ color: '#B5A692', fontSize: '11px', fontWeight: 600, letterSpacing: '0.14em', textTransform: 'uppercase' }}>
+                — From our community
+              </p>
+            </div>
+
+            {/* VOC 4 — the note on the counter */}
+            <div className="voc-row">
+              <p className="font-cormorant" style={{ color: '#2a2520', fontSize: '19px', lineHeight: 1.65, fontStyle: 'italic', marginBottom: '10px' }}>
+                &ldquo;My dad and I used to leave notes for each other.
+                I saved every one. It&apos;s so nice to go back
+                and see his handwriting. His words.&rdquo;
+              </p>
+              <p className="font-dm" style={{ color: '#8a7f78', fontSize: '11px', fontWeight: 600, letterSpacing: '0.14em', textTransform: 'uppercase' }}>
+                — From our community
+              </p>
+            </div>
+
+            {/* Closing */}
+            <div style={{ marginTop: '24px', padding: '20px 24px', background: '#1a1a1a', borderRadius: '14px' }}>
+              <p className="font-cormorant" style={{ color: '#f0ece6', fontSize: '19px', lineHeight: 1.65, fontStyle: 'italic' }}>
+                You already have what it takes to write this letter.{' '}
+                <span style={{ color: '#B5A692' }}>We just help you get it out.</span>
               </p>
             </div>
           </div>
