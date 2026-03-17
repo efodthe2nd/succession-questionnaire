@@ -20,7 +20,7 @@ export default function SqueezePageVariant2() {
       const res = await fetch('/api/leads/capture', {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
-        body: JSON.stringify({ email: email.trim(), source: 'variant-1-regret' }),
+        body: JSON.stringify({ email: email.trim(), source: 'variant-2-unfinished' }),
       })
       const data = await res.json()
       if (!res.ok) {
@@ -37,18 +37,6 @@ export default function SqueezePageVariant2() {
       setLoading(false)
     }
   }
-
-  const comparisons = [
-    { will: 'Who gets the house.', letter: 'Why you bought it in the first place.' },
-    { will: 'Who gets the money.', letter: 'What you hope they do with it.' },
-    { will: 'Who gets custody.', letter: 'What kind of person you hope they become.' },
-  ]
-
-  const bullets = [
-    'Legal documents transfer assets. They don\'t transfer meaning.',
-    'Answer guided questions in your own words — at your own pace.',
-    'We write the finished letter. You pay only when it\'s ready.',
-  ]
 
   return (
     <main className="min-h-screen bg-[#f9f6f1] flex flex-col">
@@ -68,11 +56,11 @@ export default function SqueezePageVariant2() {
         }
 
         .fade-1 { animation: fadeUp 0.7s ease forwards; animation-delay: 0.05s; opacity: 0; }
-        .fade-2 { animation: fadeUp 0.7s ease forwards; animation-delay: 0.2s;  opacity: 0; }
-        .fade-3 { animation: fadeUp 0.7s ease forwards; animation-delay: 0.35s; opacity: 0; }
-        .fade-4 { animation: fadeUp 0.7s ease forwards; animation-delay: 0.5s;  opacity: 0; }
-        .fade-5 { animation: fadeUp 0.7s ease forwards; animation-delay: 0.65s; opacity: 0; }
-        .fade-6 { animation: fadeIn 0.9s ease forwards; animation-delay: 0.75s; opacity: 0; }
+        .fade-2 { animation: fadeUp 0.7s ease forwards; animation-delay: 0.18s; opacity: 0; }
+        .fade-3 { animation: fadeUp 0.7s ease forwards; animation-delay: 0.32s; opacity: 0; }
+        .fade-4 { animation: fadeUp 0.7s ease forwards; animation-delay: 0.46s; opacity: 0; }
+        .fade-5 { animation: fadeUp 0.7s ease forwards; animation-delay: 0.60s; opacity: 0; }
+        .fade-6 { animation: fadeIn 0.9s ease forwards; animation-delay: 0.72s; opacity: 0; }
 
         .divider-line {
           width: 40px; height: 1px;
@@ -113,10 +101,7 @@ export default function SqueezePageVariant2() {
           transition: background 0.2s, transform 0.15s;
           letter-spacing: 0.02em;
         }
-        .cta-btn:hover:not(:disabled) {
-          background: #2d2d2d;
-          transform: translateY(-1px);
-        }
+        .cta-btn:hover:not(:disabled) { background: #2d2d2d; transform: translateY(-1px); }
         .cta-btn:disabled { opacity: 0.5; cursor: not-allowed; }
 
         .spin {
@@ -131,21 +116,7 @@ export default function SqueezePageVariant2() {
         }
         @keyframes spin { to { transform: rotate(360deg); } }
 
-        .comparison-row {
-          display: grid;
-          grid-template-columns: 1fr 1fr;
-          gap: 0;
-          border-bottom: 1px solid #e8e4de;
-        }
-        .comparison-row:last-child { border-bottom: none; }
-
-        .comparison-cell { padding: 18px 20px; }
-        .comparison-cell.will-cell { border-right: 1px solid #e8e4de; }
-
-        .stat-divider {
-          width: 1px; height: 28px;
-          background: #d4c8bb;
-        }
+        .stat-divider { width: 1px; height: 28px; background: #d4c8bb; }
 
         .texture-overlay {
           position: fixed; inset: 0;
@@ -154,80 +125,52 @@ export default function SqueezePageVariant2() {
           background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='300' height='300'%3E%3Cfilter id='noise'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='300' height='300' filter='url(%23noise)' opacity='1'/%3E%3C/svg%3E");
         }
 
-        /* ─── MOBILE-ONLY OVERRIDES ─── */
-        /* Bullets hidden above form on mobile — shown below form instead */
-        .bullets-desktop { display: flex; }
-        .bullets-mobile  { display: none; }
-
-        /* Subtext compressed on mobile */
-        .sub-text-mobile { display: none; }
-        .sub-text-desktop { display: block; }
-
-        @media (max-width: 640px) {
-          .bullets-desktop { display: none; }
-          .bullets-mobile  { display: flex; }
-          .sub-text-mobile  { display: block; }
-          .sub-text-desktop { display: none; }
+        .voc-row {
+          padding: 20px 0;
+          border-bottom: 1px solid #e8e4de;
         }
+        .voc-row:last-child { border-bottom: none; }
       `}</style>
 
       <div className="texture-overlay" />
-
-      {/* Top accent bar */}
       <div style={{ width: '100%', height: '3px', background: 'linear-gradient(90deg, #B5A692 0%, #d4c8bb 50%, #B5A692 100%)', position: 'relative', zIndex: 1 }} />
 
-      {/* Nav */}
       <nav style={{ position: 'relative', zIndex: 1, padding: '18px 24px', display: 'flex', alignItems: 'center', justifyContent: 'space-between', maxWidth: '1100px', margin: '0 auto', width: '100%', boxSizing: 'border-box' }}>
         <p className="font-cormorant" style={{ color: '#1a1a1a', fontSize: '17px', fontWeight: 500, letterSpacing: '0.04em' }}>
           Succession <span style={{ color: '#B5A692' }}>Story</span>
         </p>
-        <p className="font-dm" style={{ color: '#8a7f78', fontSize: '12px', letterSpacing: '0.08em' }}>
-          Trusted by 2,800+ families
-        </p>
+        <p className="font-dm" style={{ color: '#8a7f78', fontSize: '12px', letterSpacing: '0.08em' }}>Trusted by 2,800+ families</p>
       </nav>
 
-      {/* Main content */}
       <section style={{ flex: 1, display: 'flex', alignItems: 'center', justifyContent: 'center', padding: '32px 20px 48px', position: 'relative', zIndex: 1 }}>
         <div style={{ maxWidth: '1100px', width: '100%', margin: '0 auto', display: 'grid', gridTemplateColumns: 'repeat(auto-fit, minmax(320px, 1fr))', gap: '64px', alignItems: 'start' }}>
 
-          {/* LEFT — Emotional copy + form */}
+          {/* LEFT */}
           <div>
-            {/* Eyebrow */}
             <div className="fade-1 font-dm" style={{ display: 'flex', alignItems: 'center', marginBottom: '20px' }}>
               <span className="divider-line" />
               <span style={{ color: '#B5A692', fontSize: '11px', fontWeight: 600, letterSpacing: '0.2em', textTransform: 'uppercase' }}>Free to start</span>
             </div>
 
-            {/* Headline */}
-            <h1 className="fade-2 font-cormorant" style={{ color: '#1a1a1a', fontSize: 'clamp(34px, 5vw, 50px)', lineHeight: 1.15, marginBottom: '16px', fontWeight: 500 }}>
-              Your will is signed.<br />
-              <em style={{ color: '#B5A692' }}>Your why isn&apos;t written yet.</em>
+            {/* Headline — direct continuation of the ad */}
+            <h1 className="fade-2 font-cormorant" style={{ color: '#1a1a1a', fontSize: 'clamp(34px, 5vw, 52px)', lineHeight: 1.15, marginBottom: '20px', fontWeight: 500 }}>
+              You&apos;ve been meaning<br />
+              to write it for years.<br />
+              <em style={{ color: '#B5A692' }}>Here&apos;s how you finally do.</em>
             </h1>
 
-            {/* Sub — DESKTOP: full paragraph */}
-            <p className="fade-3 font-dm sub-text-desktop" style={{ color: '#5a5450', fontSize: '17px', lineHeight: 1.7, marginBottom: '28px', maxWidth: '440px' }}>
-              Assets go to the right people. But your kids still won&apos;t know
-              why you worked so hard, what you actually believe, or what you
-              want them to remember when life gets hard.
+            {/* Sub — names the fear, then immediately resolves it */}
+            <p className="fade-3 font-dm" style={{ color: '#5a5450', fontSize: '16px', lineHeight: 1.75, marginBottom: '10px', maxWidth: '420px' }}>
+              Most people search for a letter from their parents after they&apos;re gone.
+              Most of the time, there isn&apos;t one.
+            </p>
+            <p className="fade-3 font-dm" style={{ color: '#3a3530', fontSize: '16px', lineHeight: 1.75, marginBottom: '32px', maxWidth: '420px' }}>
+              You talk. We write. 30 minutes — and your kids have
+              something they&apos;ll keep for the rest of their lives.
             </p>
 
-            {/* Sub — MOBILE: one punchy line only */}
-            <p className="fade-3 font-dm sub-text-mobile" style={{ color: '#5a5450', fontSize: '16px', lineHeight: 1.6, marginBottom: '24px' }}>
-              Your kids will get your assets. They won&apos;t get your why — unless you write it down.
-            </p>
-
-            {/* Bullets — DESKTOP: above form */}
-            <ul className="fade-4 bullets-desktop" style={{ listStyle: 'none', padding: 0, margin: '0 0 32px', flexDirection: 'column', gap: '12px' }}>
-              {bullets.map((item) => (
-                <li key={item} className="font-dm" style={{ display: 'flex', alignItems: 'flex-start', gap: '12px', color: '#3a3530', fontSize: '15px', lineHeight: 1.6 }}>
-                  <span style={{ color: '#B5A692', marginTop: '3px', flexShrink: 0, fontSize: '14px' }}>✦</span>
-                  {item}
-                </li>
-              ))}
-            </ul>
-
-            {/* Email capture — immediately after headline on mobile */}
-            <div className="fade-5" style={{ maxWidth: '420px', display: 'flex', flexDirection: 'column', gap: '10px' }}>
+            {/* Form — on both mobile and desktop, right after the two paragraphs */}
+            <div className="fade-4" style={{ maxWidth: '420px', display: 'flex', flexDirection: 'column', gap: '10px', marginBottom: '36px' }}>
               <input
                 type="email"
                 placeholder="Enter your email address"
@@ -237,60 +180,91 @@ export default function SqueezePageVariant2() {
                 disabled={loading}
                 className="input-field"
               />
-              {error && (
-                <p className="font-dm" style={{ color: '#c0392b', fontSize: '13px' }}>{error}</p>
-              )}
+              {error && <p className="font-dm" style={{ color: '#c0392b', fontSize: '13px' }}>{error}</p>}
               <button onClick={handleSubmit} disabled={loading} className="cta-btn">
-                {loading ? (
-                  <><span className="spin" />Creating your account...</>
-                ) : 'Write my letter →'}
+                {loading ? (<><span className="spin" />Creating your account...</>) : 'Write my letter →'}
               </button>
               <p className="font-dm" style={{ color: '#b0a89e', fontSize: '12px', textAlign: 'center', marginTop: '2px' }}>
                 Free to start. No credit card required.
               </p>
             </div>
 
-            {/* Bullets — MOBILE: below form, gives them something to read after they've seen the CTA */}
-            <ul className="bullets-mobile" style={{ listStyle: 'none', padding: 0, margin: '28px 0 0', flexDirection: 'column', gap: '12px' }}>
-              {bullets.map((item) => (
-                <li key={item} className="font-dm" style={{ display: 'flex', alignItems: 'flex-start', gap: '12px', color: '#3a3530', fontSize: '14px', lineHeight: 1.6 }}>
-                  <span style={{ color: '#B5A692', marginTop: '3px', flexShrink: 0, fontSize: '13px' }}>✦</span>
-                  {item}
-                </li>
-              ))}
-            </ul>
-          </div>
-
-          {/* RIGHT — Will vs Letter comparison table */}
-          <div className="fade-6">
-            <div style={{ display: 'grid', gridTemplateColumns: '1fr 1fr', marginBottom: '0', borderRadius: '16px 16px 0 0', overflow: 'hidden', border: '1px solid #e8e4de', borderBottom: 'none' }}>
-              <div style={{ background: '#ede9e3', padding: '14px 20px', borderRight: '1px solid #e8e4de' }}>
-                <p className="font-dm" style={{ color: '#8a7f78', fontSize: '11px', fontWeight: 600, letterSpacing: '0.16em', textTransform: 'uppercase' }}>Your will says…</p>
-              </div>
-              <div style={{ background: '#1a1a1a', padding: '14px 20px' }}>
-                <p className="font-dm" style={{ color: '#B5A692', fontSize: '11px', fontWeight: 600, letterSpacing: '0.16em', textTransform: 'uppercase' }}>Your letter says…</p>
-              </div>
-            </div>
-
-            <div style={{ border: '1px solid #e8e4de', borderTop: 'none', borderRadius: '0 0 16px 16px', overflow: 'hidden', background: '#fff' }}>
-              {comparisons.map(({ will, letter }, i) => (
-                <div key={i} className="comparison-row">
-                  <div className="comparison-cell will-cell">
-                    <p className="font-cormorant" style={{ color: '#8a7f78', fontSize: '17px', lineHeight: 1.5, fontStyle: 'italic' }}>{will}</p>
-                  </div>
-                  <div className="comparison-cell" style={{ background: '#fdfcfb' }}>
-                    <p className="font-cormorant" style={{ color: '#1a1a1a', fontSize: '17px', lineHeight: 1.5, fontStyle: 'italic', fontWeight: 500 }}>{letter}</p>
+            {/* How it works — below form on all screens */}
+            <div className="fade-5">
+              <p className="font-dm" style={{ color: '#B5A692', fontSize: '11px', fontWeight: 600, letterSpacing: '0.18em', textTransform: 'uppercase', marginBottom: '14px' }}>
+                How it works
+              </p>
+              {[
+                ['Answer guided questions', 'In your own words. At your own pace. No writing skill needed.'],
+                ['We write your letter', 'We turn your answers into a finished letter — in your voice.'],
+                ['Pay only when it\'s ready', 'Read it first. Love it first. Then decide.'],
+              ].map(([title, desc]) => (
+                <div key={title} style={{ display: 'flex', gap: '14px', marginBottom: '16px' }}>
+                  <span style={{ color: '#B5A692', fontSize: '10px', marginTop: '5px', flexShrink: 0 }}>✦</span>
+                  <div>
+                    <p className="font-dm" style={{ color: '#1a1a1a', fontSize: '14px', fontWeight: 600, marginBottom: '3px' }}>{title}</p>
+                    <p className="font-dm" style={{ color: '#8a7f78', fontSize: '13px', lineHeight: 1.6 }}>{desc}</p>
                   </div>
                 </div>
               ))}
             </div>
+          </div>
 
-            <div style={{ marginTop: '24px', padding: '20px 24px', background: '#1a1a1a', borderRadius: '14px' }}>
-              <p className="font-cormorant" style={{ color: '#f0ece6', fontSize: '20px', lineHeight: 1.6, fontStyle: 'italic', marginBottom: '10px' }}>
-                "I kept putting it off for three years. Finished it in one sitting. I don&apos;t know why I waited so long."
+          {/* RIGHT — VOC quotes, real words from the research */}
+          <div className="fade-6">
+            <p className="font-dm" style={{ color: '#B5A692', fontSize: '11px', fontWeight: 600, letterSpacing: '0.18em', textTransform: 'uppercase', marginBottom: '20px' }}>
+              From people who searched — and people who found one
+            </p>
+
+            <div className="voc-row">
+              <p className="font-cormorant" style={{ color: '#2a2520', fontSize: '19px', lineHeight: 1.65, fontStyle: 'italic', marginBottom: '10px' }}>
+                &ldquo;I recently found a letter I&apos;d forgotten my dad had written.
+                It&apos;s full of things he almost never said — how proud he was,
+                that he loved me. It&apos;s one of the most precious things I own.&rdquo;
               </p>
               <p className="font-dm" style={{ color: '#B5A692', fontSize: '11px', fontWeight: 600, letterSpacing: '0.14em', textTransform: 'uppercase' }}>
                 — From our community
+              </p>
+            </div>
+
+            <div className="voc-row">
+              <p className="font-cormorant" style={{ color: '#2a2520', fontSize: '19px', lineHeight: 1.65, fontStyle: 'italic', marginBottom: '10px' }}>
+                &ldquo;I searched high and low for a letter from my mom when
+                she passed. I came up empty.&rdquo;
+              </p>
+              <p className="font-dm" style={{ color: '#8a7f78', fontSize: '11px', fontWeight: 600, letterSpacing: '0.14em', textTransform: 'uppercase' }}>
+                — From our community
+              </p>
+            </div>
+
+            <div className="voc-row">
+              <p className="font-cormorant" style={{ color: '#2a2520', fontSize: '19px', lineHeight: 1.65, fontStyle: 'italic', marginBottom: '10px' }}>
+                &ldquo;I kept putting it off for three years.
+                Finished it in one sitting.
+                I don&apos;t know why I waited so long.&rdquo;
+              </p>
+              <p className="font-dm" style={{ color: '#B5A692', fontSize: '11px', fontWeight: 600, letterSpacing: '0.14em', textTransform: 'uppercase' }}>
+                — From our community
+              </p>
+            </div>
+
+            <div className="voc-row">
+              <p className="font-cormorant" style={{ color: '#2a2520', fontSize: '19px', lineHeight: 1.65, fontStyle: 'italic', marginBottom: '10px' }}>
+                &ldquo;I lost my mom to cancer. I say all the time how I wish
+                she left me a letter. If she knew, she would have written
+                me 1,000 letters — I am 100% sure of that.&rdquo;
+              </p>
+              <p className="font-dm" style={{ color: '#8a7f78', fontSize: '11px', fontWeight: 600, letterSpacing: '0.14em', textTransform: 'uppercase' }}>
+                — From our community
+              </p>
+            </div>
+
+            {/* Closing — agency framing, not fear */}
+            <div style={{ marginTop: '24px', padding: '20px 24px', background: '#1a1a1a', borderRadius: '14px' }}>
+              <p className="font-cormorant" style={{ color: '#f0ece6', fontSize: '19px', lineHeight: 1.65, fontStyle: 'italic' }}>
+                The letter they&apos;ll search for after you&apos;re gone —
+                you can write it today.{' '}
+                <span style={{ color: '#B5A692' }}>30 minutes. Free to start.</span>
               </p>
             </div>
           </div>
@@ -298,14 +272,10 @@ export default function SqueezePageVariant2() {
         </div>
       </section>
 
-      {/* Stats bar */}
+      {/* Stats */}
       <div style={{ borderTop: '1px solid #e8e4de', padding: '20px 24px', position: 'relative', zIndex: 1 }}>
         <div style={{ maxWidth: '1100px', margin: '0 auto', display: 'flex', alignItems: 'center', justifyContent: 'center', gap: '32px' }}>
-          {[
-            ['2,800+', 'families served'],
-            ['30 min', 'to complete'],
-            ['100%', 'private & secure'],
-          ].map(([num, label], i) => (
+          {[['2,800+', 'families served'], ['30 min', 'to complete'], ['100%', 'private & secure']].map(([num, label], i) => (
             <React.Fragment key={label}>
               <div style={{ textAlign: 'center' }}>
                 <p className="font-cormorant" style={{ color: '#1a1a1a', fontWeight: 600, fontSize: '20px', lineHeight: 1 }}>{num}</p>
