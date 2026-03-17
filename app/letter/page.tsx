@@ -165,7 +165,7 @@ export default function SqueezePageVariant1() {
               to carry when life gets difficult. It&apos;s already inside you.
             </p>
             <p className="fade-3 font-dm" style={{ color: '#3a3530', fontSize: '16px', lineHeight: 1.75, marginBottom: '32px', maxWidth: '420px' }}>
-              You just need someone to ask the right questions —
+              You just need someone to ask the right questions
               and turn your answers into the letter your kids will
               keep for the rest of their lives.
             </p>

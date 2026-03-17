@@ -166,8 +166,8 @@ export default function SqueezePageVariant3() {
 
             {/* Sub — names what disappears if they don't act, then opens the door */}
             <p className="fade-3 font-dm" style={{ color: '#6a6058', fontSize: '16px', lineHeight: 1.75, marginBottom: '10px', maxWidth: '420px' }}>
-              The things that matter most — what you believe, what shaped you,
-              what you want them to carry forward — aren&apos;t in any document.
+              The things that matter most, what you believe, what shaped you,
+              what you want them to carry forward, aren&apos;t in any document.
               They live in you. And they leave when you do.
             </p>
             <p className="fade-3 font-dm" style={{ color: '#c9b9a5', fontSize: '16px', lineHeight: 1.75, marginBottom: '32px', maxWidth: '420px' }}>

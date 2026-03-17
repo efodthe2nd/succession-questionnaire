@@ -165,7 +165,7 @@ export default function SqueezePageVariant2() {
               Most of the time, there isn&apos;t one.
             </p>
             <p className="fade-3 font-dm" style={{ color: '#3a3530', fontSize: '16px', lineHeight: 1.75, marginBottom: '32px', maxWidth: '420px' }}>
-              You talk. We write. 30 minutes — and your kids have
+              You talk. We write. 30 minutes and your kids have
               something they&apos;ll keep for the rest of their lives.
             </p>
 
