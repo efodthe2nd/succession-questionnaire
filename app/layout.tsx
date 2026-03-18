@@ -11,6 +11,7 @@ import type { Metadata } from "next";
 import "./globals.css";
 import AuthCallbackHandler from "@/components/AuthCallbackHandler";
 import FacebookPixel from "@/components/FacebookPixel";
+import Script from 'next/script';
 
 const lora = Lora({
   subsets: ["latin"],
@@ -75,10 +76,26 @@ export default function RootLayout({
       suppressHydrationWarning
       className={`${lora.variable} ${poppins.variable} ${antic.variable} ${overTheRainbow.variable} ${handlee.variable} ${caveat.variable} ${kalam.variable}`}
     >
+      <head>
+        {/* Google Analytics */}
+        <Script
+          src="https://www.googletagmanager.com/gtag/js?id=G-LPNMBTNFFG"
+          strategy="afterInteractive"
+        />
+        <Script id="ga-init" strategy="afterInteractive">
+          {`
+            window.dataLayer = window.dataLayer || [];
+            function gtag(){dataLayer.push(arguments);}
+            gtag('js', new Date());
+            gtag('config', 'G-LPNMBTNFFG');
+          `}
+        </Script>
+      </head>
       <body className="font-body">
         <FacebookPixel />
         <AuthCallbackHandler />
         {children}
+
       </body>
     </html>
   );
