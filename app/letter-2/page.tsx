@@ -379,7 +379,7 @@ export default function SqueezePageVariant2() {
         <div className="fade-2" style={{ marginBottom: '20px' }}>
           <div style={{ background: '#1a1a1a', borderRadius: '16px', overflow: 'hidden', aspectRatio: '16/9', display: 'flex', alignItems: 'center', justifyContent: 'center' }}>
               <video src="/video.mp4" controls poster="/romy-poster.jpg"
-                style={{ width:'100%', height:'100%', objectFit:'cover' }} playsInline />
+                style={{ width:'100%', height:'100%', objectFit:'cover' }} playsInline autoPlay={true} />
             {/* <div style={{ textAlign: 'center', padding: '32px 24px' }}>
               <div style={{ width: '56px', height: '56px', borderRadius: '50%', background: '#B5A692', display: 'flex', alignItems: 'center', justifyContent: 'center', margin: '0 auto 16px' }}>
                 <svg width="22" height="22" viewBox="0 0 24 24" fill="#1a1a1a"><path d="M8 5v14l11-7z"/></svg>
