@@ -69,8 +69,12 @@ export default function SqueezePageVariant2() {
   const router = useRouter()
   const [email, setEmail] = useState('')
   const [loading, setLoading] = useState(false)
+  const [showContact, setShowContact] = useState(false)
   const [error, setError] = useState('')
   const [openFaq, setOpenFaq] = useState<number | null>(null)
+  const [contactName, setContactName] = useState('')
+  const [contactMsg, setContactMsg] = useState('')
+  const [contactSent, setContactSent] = useState(false)
 
   const handleSubmit = async () => {
     if (!email.trim()) {
@@ -274,8 +278,8 @@ export default function SqueezePageVariant2() {
         <p style={{ fontFamily: 'Cormorant Garamond, Georgia, serif', color: '#1a1a1a', fontSize: '17px', fontWeight: 500, letterSpacing: '0.04em' }}>
           Succession <span style={{ color: '#B5A692' }}>Story</span>
         </p>
-        <a
-          href="mailto:davidefod@gmail.com?subject=Question about Succession Story&body=Hi, I have a question about..."
+        <button
+          onClick={() => setShowContact(true)}
           style={{
             fontFamily: 'DM Sans, sans-serif', color: '#8a7f78', fontSize: '11px',
             letterSpacing: '0.04em', textDecoration: 'none', display: 'flex',
@@ -289,7 +293,7 @@ export default function SqueezePageVariant2() {
               d="M3 8l7.89 5.26a2 2 0 002.22 0L21 8M5 19h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v10a2 2 0 002 2z" />
           </svg>
           Need help?
-        </a>
+        </button>
       </nav>
 
       {/* Trust strip — avatars + stars + family count */}
@@ -331,27 +335,163 @@ export default function SqueezePageVariant2() {
       </div>
 
       {/* Sticky help button — bottom right, appears after scroll */}
-      <a
-        href="mailto:davidefod@gmail.com?subject=Question about Succession Story&body=Hi, I have a question about Succession Story..."
+      <button
+        onClick={() => setShowContact(true)}
         style={{
           position: 'fixed', bottom: '24px', right: '20px', zIndex: 100,
           display: 'flex', alignItems: 'center', gap: '8px',
           background: '#1a1a1a', color: '#B5A692',
           fontFamily: 'DM Sans, sans-serif', fontSize: '13px', fontWeight: 600,
-          padding: '12px 18px', borderRadius: '50px',
-          textDecoration: 'none', letterSpacing: '0.02em',
+          padding: '12px 18px', borderRadius: '50px', border: 'none',
+          cursor: 'pointer', letterSpacing: '0.02em',
           boxShadow: '0 4px 24px rgba(0,0,0,0.18)',
-          transition: 'transform 0.2s, background 0.2s',
         }}
-        onMouseEnter={e => (e.currentTarget.style.transform = 'translateY(-2px)')}
-        onMouseLeave={e => (e.currentTarget.style.transform = 'translateY(0)')}
       >
         <svg width="15" height="15" fill="none" stroke="currentColor" viewBox="0 0 24 24">
           <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2}
             d="M8.228 9c.549-1.165 2.03-2 3.772-2 2.21 0 4 1.343 4 3 0 1.4-1.278 2.575-3.006 2.907-.542.104-.994.54-.994 1.093m0 3h.01M21 12a9 9 0 11-18 0 9 9 0 0118 0z" />
         </svg>
         Have a question?
-      </a>
+      </button>
+
+      {showContact && (
+        <div
+          onClick={() => { setShowContact(false); setContactSent(false); setContactName(''); setContactMsg('') }}
+          style={{
+            position: 'fixed', inset: 0, zIndex: 200,
+            background: 'rgba(0,0,0,0.5)',
+            display: 'flex', alignItems: 'flex-end', justifyContent: 'center',
+            padding: '0 0 0 0',
+          }}
+        >
+          <div
+            onClick={e => e.stopPropagation()}
+            style={{
+              background: '#f9f6f1', borderRadius: '20px 20px 0 0',
+              padding: '28px 24px 40px', width: '100%', maxWidth: '600px',
+              boxShadow: '0 -8px 40px rgba(0,0,0,0.15)',
+            }}
+          >
+            {/* Handle bar */}
+            <div style={{ width: '36px', height: '4px', background: '#d4c8bb', borderRadius: '2px', margin: '0 auto 24px' }} />
+ 
+            {!contactSent ? (
+              <>
+                <p style={{ fontFamily: 'Cormorant Garamond, Georgia, serif', color: '#1a1a1a', fontSize: '22px', fontWeight: 500, marginBottom: '6px', lineHeight: 1.3 }}>
+                  Have a question?
+                </p>
+                <p style={{ fontFamily: 'DM Sans, sans-serif', color: '#8a7f78', fontSize: '13px', marginBottom: '20px', lineHeight: 1.6 }}>
+                  Send us a message and we'll get back to you shortly.
+                </p>
+ 
+                <div style={{ display: 'flex', flexDirection: 'column', gap: '12px' }}>
+                  <input
+                    type="text"
+                    placeholder="Your name (optional)"
+                    value={contactName}
+                    onChange={e => setContactName(e.target.value)}
+                    style={{
+                      width: '100%', padding: '14px 16px',
+                      border: '1.5px solid #d4c8bb', background: '#fff',
+                      color: '#1a1a1a', borderRadius: '10px', fontSize: '15px',
+                      fontFamily: 'DM Sans, sans-serif', outline: 'none',
+                      boxSizing: 'border-box' as const,
+                    }}
+                  />
+                  <textarea
+                    placeholder="What would you like to know?"
+                    value={contactMsg}
+                    onChange={e => setContactMsg(e.target.value)}
+                    rows={4}
+                    style={{
+                      width: '100%', padding: '14px 16px',
+                      border: '1.5px solid #d4c8bb', background: '#fff',
+                      color: '#1a1a1a', borderRadius: '10px', fontSize: '15px',
+                      fontFamily: 'DM Sans, sans-serif', outline: 'none',
+                      resize: 'none', boxSizing: 'border-box' as const,
+                    }}
+                  />
+ 
+                  {/* Email address — visible and copyable */}
+                  <div style={{ display: 'flex', alignItems: 'center', gap: '10px', padding: '12px 16px', background: '#fff', border: '1px solid #e8e4de', borderRadius: '10px' }}>
+                    <svg width="14" height="14" fill="none" stroke="#B5A692" viewBox="0 0 24 24">
+                      <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={1.8}
+                        d="M3 8l7.89 5.26a2 2 0 002.22 0L21 8M5 19h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v10a2 2 0 002 2z" />
+                    </svg>
+                    <p style={{ fontFamily: 'DM Sans, sans-serif', color: '#5a5450', fontSize: '13px', flex: 1 }}>
+                      Or email us directly: <strong style={{ color: '#1a1a1a', userSelect: 'all' }}>davidefod@gmail.com</strong>
+                    </p>
+                  </div>
+ 
+                  <button
+                    onClick={() => {
+                      if (!contactMsg.trim()) return
+                      const subject = encodeURIComponent('Question about Succession Story')
+                      const body = encodeURIComponent(
+                        (contactName ? `Name: ${contactName}
+ 
+` : '') + `Message: ${contactMsg}`
+                      )
+                      window.open(
+                        `https://mail.google.com/mail/?view=cm&to=davidefod@gmail.com&su=${subject}&body=${body}`,
+                        '_blank'
+                      )
+                      setContactSent(true)
+                    }}
+                    disabled={!contactMsg.trim()}
+                    style={{
+                      width: '100%', padding: '16px',
+                      background: contactMsg.trim() ? '#1a1a1a' : '#e8e4de',
+                      color: contactMsg.trim() ? '#B5A692' : '#b0a89e',
+                      fontFamily: 'DM Sans, sans-serif', fontWeight: 600,
+                      fontSize: '15px', border: 'none', borderRadius: '10px',
+                      cursor: contactMsg.trim() ? 'pointer' : 'not-allowed',
+                      letterSpacing: '0.02em',
+                    }}
+                  >
+                    Send message →
+                  </button>
+ 
+                  <button
+                    onClick={() => setShowContact(false)}
+                    style={{
+                      background: 'none', border: 'none', cursor: 'pointer',
+                      fontFamily: 'DM Sans, sans-serif', color: '#b0a89e',
+                      fontSize: '13px', padding: '4px',
+                    }}
+                  >
+                    Cancel
+                  </button>
+                </div>
+              </>
+            ) : (
+              <div style={{ textAlign: 'center', padding: '16px 0 8px' }}>
+                <div style={{ width: '48px', height: '48px', borderRadius: '50%', background: '#1a1a1a', display: 'flex', alignItems: 'center', justifyContent: 'center', margin: '0 auto 16px' }}>
+                  <svg width="22" height="22" fill="none" stroke="#B5A692" viewBox="0 0 24 24">
+                    <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M5 13l4 4L19 7" />
+                  </svg>
+                </div>
+                <p style={{ fontFamily: 'Cormorant Garamond, Georgia, serif', color: '#1a1a1a', fontSize: '22px', fontWeight: 500, marginBottom: '8px' }}>
+                  Message sent
+                </p>
+                <p style={{ fontFamily: 'DM Sans, sans-serif', color: '#8a7f78', fontSize: '14px', lineHeight: 1.6, marginBottom: '24px' }}>
+                  We'll get back to you shortly at the email you used.
+                </p>
+                <button
+                  onClick={() => { setShowContact(false); setContactSent(false); setContactName(''); setContactMsg('') }}
+                  style={{
+                    background: '#1a1a1a', color: '#B5A692', border: 'none',
+                    padding: '14px 32px', borderRadius: '10px', cursor: 'pointer',
+                    fontFamily: 'DM Sans, sans-serif', fontWeight: 600, fontSize: '14px',
+                  }}
+                >
+                  Done
+                </button>
+              </div>
+            )}
+          </div>
+        </div>
+      )}
 
       <div style={{ position: 'relative', zIndex: 1, maxWidth: '600px', margin: '0 auto', width: '100%', padding: '0 20px 64px' }}>
 
