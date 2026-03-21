@@ -57,9 +57,21 @@ export async function POST(req: NextRequest) {
     }
 
     // 5. Send our welcome email with credentials
-    await sendWelcomeEmail({ to: cleanEmail, password })
+    // 5. Send our welcome email with credentials
+const emailSent = await sendWelcomeEmail({ to: cleanEmail, password })
 
-    return NextResponse.json({ success: true })
+// 6. Update funnel_stage and email_sent_at
+if (emailSent) {
+  await supabaseAdmin
+    .from('leads')
+    .update({
+      funnel_stage: 'email_sent',
+      email_sent_at: new Date().toISOString(),
+    })
+    .eq('email', cleanEmail)
+}
+
+return NextResponse.json({ success: true })
 
   } catch (err) {
     console.error('[leads/capture] Unexpected error:', err)
