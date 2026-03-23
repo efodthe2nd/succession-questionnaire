@@ -100,11 +100,8 @@ function quote(text: string): string {
     </div>`
 }
 
-function highlight(text: string): string {
-  return `
-    <div style="background-color:#f8f6f2;padding:20px 24px;border-radius:8px;margin:0 0 24px;">
-      <p style="margin:0;font-size:16px;line-height:1.6;color:#1a1a1a;">${text}</p>
-    </div>`
+function signOff(name: string): string {
+  return `<p style="margin:24px 0 0;font-size:16px;line-height:1.6;color:#4a4a4a;">Warmly,<br/><strong>${name}</strong></p>`
 }
 
 function buildUnsubscribeUrl(email: string, token: string): string {
@@ -118,10 +115,10 @@ function email1(p_: SequenceAPersonalisation): string {
   const familyLine = buildFamilyLine(p_)
   const unsubUrl = buildUnsubscribeUrl(p_.email, p_.unsubscribeToken)
   return emailShell(`
-    ${h2('Everything is ready. Your letter is not written yet.')}
-    ${p(`You answered every question. You told us about ${familyLine}. You went all the way through.`)}
-    ${p('The letter is not written yet because that part requires your payment. That is the only thing standing between your family and what you came here to give them.')}
-    ${p('$97. Your answers are saved. We write the moment you confirm.')}
+    ${p(`You answered every question. You shared your thoughts about ${familyLine}. Everything is ready.`)}
+    ${p('But your letter is not written yet.')}
+    ${p(`The only thing left is to confirm your payment, and we'll turn your answers into the letter your family will treasure.`)}
+    ${p('$97. Your answers are saved, and we\'ll take care of the rest.')}
     ${ctaButton('Write My Letter Now')}
     ${p('<em style="color:#8a7f78;">30-day money-back guarantee. No questions asked.</em>')}
   `, unsubUrl, "You're receiving this because you completed the Succession Story questionnaire.")
@@ -129,13 +126,13 @@ function email1(p_: SequenceAPersonalisation): string {
 
 // Email 2 — Day 2. Reframe the effort they already invested.
 function email2(p_: SequenceAPersonalisation): string {
-  const signOff = p_.signOffName ?? 'Friend'
+  const signOffName = p_.signOffName ?? 'Friend'
   const unsubUrl = buildUnsubscribeUrl(p_.email, p_.unsubscribeToken)
   return emailShell(`
-    ${h2(`${signOff}, the hard part is already done.`)}
     ${p('Most people think about doing something like this for years. They sit with the intention. They never act on it.')}
     ${p('You acted on it. You answered every section. Every question.')}
     ${p('The only remaining step is unlocking the letter we write from your answers. That is it. Nothing more to fill in. Nothing more to think through.')}
+    ${p('Let us take it from here. Your letter is ready to be written.')}
     ${ctaButton('Get My Letter')}
     ${p('<em style="color:#8a7f78;">$97. 30-day money-back guarantee. No questions asked.</em>')}
   `, unsubUrl, "You're receiving this because you completed the Succession Story questionnaire.")
@@ -148,10 +145,10 @@ function email3(p_: SequenceAPersonalisation): string {
     : 'what you value most'
   const unsubUrl = buildUnsubscribeUrl(p_.email, p_.unsubscribeToken)
   return emailShell(`
-    ${h2(`You said the most important thing you can pass down is ${value}.`)}
-    ${p('That is not in your will. It is not in your estate plan. It does not transfer automatically.')}
-    ${p('It transfers through a letter. Your letter. Written in your voice, from the answers you already gave.')}
-    ${highlight(`<strong>Your answer, word for word:</strong><br/><br/><em>"${p_.coreValue ?? value}"</em>`)}
+    ${p(`You told us the most important thing you want to pass down is ${value}.`)}
+    ${p('That is not in your will. It is not in your estate plan. It\'s in your words.')}
+    ${p('Your letter will carry your voice, your values, and your wisdom. It\'s ready to be written from the answers you\'ve already shared.')}
+    ${quote(p_.coreValue ?? value)}
     ${p('That deserves to be read by the people it was meant for.')}
     ${ctaButton('Send Them This')}
   `, unsubUrl, "You're receiving this because you completed the Succession Story questionnaire.")
@@ -162,11 +159,10 @@ function email4(p_: SequenceAPersonalisation): string {
   const legacy = p_.legacyStatement ?? 'leave something meaningful behind'
   const unsubUrl = buildUnsubscribeUrl(p_.email, p_.unsubscribeToken)
   return emailShell(`
-    ${h2('You already wrote what you want your legacy to be.')}
     ${p('When we asked what you hoped to leave behind, you wrote:')}
     ${quote(legacy)}
-    ${p('That is the letter. That is what your family will carry forward.')}
-    ${p('We cannot write it out for them until you complete your purchase. Everything else is done. This is the final step.')}
+    ${p('That\'s your legacy. That\'s what your family will carry forward.')}
+    ${p('We\'re ready to turn your words into the letter they\'ll hold onto forever. Make sure they hear you.')}
     ${ctaButton('Finish What You Started')}
   `, unsubUrl, "You're receiving this because you completed the Succession Story questionnaire.")
 }
@@ -179,44 +175,47 @@ function email5(p_: SequenceAPersonalisation): string {
     : 'the people you love'
   const unsubUrl = buildUnsubscribeUrl(p_.email, p_.unsubscribeToken)
   return emailShell(`
-    ${h2(`You said you want ${childLine} to ${wish}.`)}
+    ${p(`You said you want ${childLine} to ${wish}.`)}
     ${p('That wish is sitting in your questionnaire right now. Undelivered.')}
-    ${p('A Succession Story takes that wish and everything else you shared and turns it into something they can hold. Read. Come back to.')}
-    ${p('Not a memory of you. A message from you. The difference matters.')}
+    ${p('Your Succession Story takes that wish and everything else you shared and turns it into something they can hold. Read. Come back to.')}
+    ${p('Not a memory of you.<br/>A message from you.<br/>The difference matters.')}
     ${ctaButton('Deliver This Message')}
     ${p('<em style="color:#8a7f78;">Your answers expire in 48 hours if your account stays inactive.</em>')}
   `, unsubUrl, "You're receiving this because you completed the Succession Story questionnaire.")
 }
 
-// Email 6 — Day 6. Hard deadline. Expiry is real.
+// Email 6 — Day 6. Price increase urgency. Personal note from Romy.
 function email6(p_: SequenceAPersonalisation): string {
-  const childLine = p_.childNames.length > 0
-    ? p_.childNames.join(', ')
-    : 'your family'
   const unsubUrl = buildUnsubscribeUrl(p_.email, p_.unsubscribeToken)
   return emailShell(`
-    ${h2('Your answers expire tomorrow.')}
-    ${p(`${childLine} do not know this letter exists.`)}
-    ${p('They do not know you answered every question. They do not know you thought carefully about what to say to each of them. They will not know any of it unless this letter gets written.')}
-    ${p('Tomorrow your submission is cleared from our system if it stays unpaid. Starting fresh means starting over.')}
-    ${ctaButton('Complete Before Tomorrow')}
+    ${p('I want to give you a little advance notice about something, because you deserve more than a last-minute rush.')}
+    ${p('On Friday, Succession Story\'s founding member price of $97 increases to the standard price of $197.')}
+    ${p('I\'ve kept it at $97 since we launched because I wanted our earliest members, those who believed in this before anyone else did, have access at a price that felt easy to say yes to.')}
+    ${p('If you\'ve been thinking about creating your Succession Story, now is the time.')}
+    ${p('After Friday it will still be worth every penny at $197. But right now, it\'s worth every penny at $97.')}
+    ${ctaButton('Finish My Story Now')}
+    ${p('If you have any questions before you continue, simply reply to this email. I read every one.')}
+    ${signOff('Romy')}
     ${p('<em style="color:#8a7f78;">$97. Everything you wrote, preserved and delivered as your finished Succession Story.</em>')}
   `, unsubUrl, "You're receiving this because you completed the Succession Story questionnaire.")
 }
 
-// Email 7 — Day 7. Last one. Leave the door open. End with their own words.
+// Email 7 — Day 7. Final day. Price urgency. Last chance. Signed by Romy Frazier.
 function email7(p_: SequenceAPersonalisation): string {
   const advice = p_.advice ?? 'Chase your dreams with courage'
-  const signOff = p_.signOffName ?? 'You'
+  const signOffName = p_.signOffName ?? 'You'
   const unsubUrl = buildUnsubscribeUrl(p_.email, p_.unsubscribeToken)
   return emailShell(`
-    ${h2('Last one from us.')}
     ${p('When we asked what advice you would give the people you love, you wrote:')}
     ${quote(advice)}
-    ${p(`${signOff} wrote that. It is sitting in our system, undelivered.`)}
-    ${p('We will not keep emailing you. Your account stays open. When the time feels right, your answers are saved and we will write your letter the moment you are ready.')}
-    ${ctaButton('Complete My Succession Story')}
-    ${p('<em style="color:#8a7f78;font-size:14px;">This is the last email we will send. Your letter is still yours to finish.</em>')}
+    ${p(`${signOffName} wrote that. It is sitting in our system, undelivered.`)}
+    ${p('Today is the last day to create your Succession Story at the founding member price of $97.')}
+    ${p('At midnight tonight, the price moves to $197 and it will stay there.')}
+    ${p('If you have been waiting for the right moment: this is a moment.<br/>Not a perfect one. Just a real one.')}
+    ${ctaButton('My Succession Story for $97, Today Only')}
+    ${p('Whatever you decide, I\'m grateful you\'ve let me into your inbox. That means something to me.')}
+    ${signOff('Romy Frazier, Esq.<br/>Founder, Succession Story')}
+    ${p('<em style="color:#8a7f78;font-size:14px;">P.S. If you miss tonight\'s deadline and still want to create your Succession Story, it will be there for you at $197. The price changes. The need doesn\'t.</em>')}
   `, unsubUrl, "You're receiving this because you completed the Succession Story questionnaire.")
 }
 
@@ -239,14 +238,14 @@ export const SEQUENCE_A_STEPS = [
     step: 1,
     delayHours: 24,
     subject: (_p: SequenceAPersonalisation) =>
-      `Your answers are saved. Your letter is not written yet.`,
+      `Your answers are saved. We are ready to write your story for you.`,
     getHTML: email1,
   },
   {
     step: 2,
     delayHours: 48,
     subject: (p_: SequenceAPersonalisation) =>
-      `${p_.signOffName ?? 'Friend'}, the hard part is already done.`,
+      `${p_.signOffName ?? 'Friend'}, you've done your part. Let us handle the rest.`,
     getHTML: email2,
   },
   {
@@ -260,28 +259,28 @@ export const SEQUENCE_A_STEPS = [
     step: 4,
     delayHours: 96,
     subject: (_p: SequenceAPersonalisation) =>
-      `You already wrote what you want your legacy to be.`,
+      `Your legacy is ready to be written.`,
     getHTML: email4,
   },
   {
     step: 5,
     delayHours: 120,
     subject: (_p: SequenceAPersonalisation) =>
-      `Your family does not know this letter exists.`,
+      `Your family doesn't know this letter exists.`,
     getHTML: email5,
   },
   {
     step: 6,
     delayHours: 144,
     subject: (_p: SequenceAPersonalisation) =>
-      `Your answers expire tomorrow.`,
+      `A heads up before Friday.`,
     getHTML: email6,
   },
   {
     step: 7,
     delayHours: 168,
     subject: (_p: SequenceAPersonalisation) =>
-      `Last one from us.`,
+      `Today is the last day.`,
     getHTML: email7,
   },
 ]

@@ -133,11 +133,11 @@ function email1(ctx: SequenceCContext): string {
 function email2(ctx: SequenceCContext): string {
   const unsubUrl = buildUnsubscribeUrl(ctx.email, ctx.unsubscribeToken)
   return emailShell(`
-    ${h2('The questions you have not answered are the ones they will want most.')}
+    ${h2("The questions you have not answered are the ones they will want most.")}
     ${p(`You stopped at <strong>${ctx.stoppedAtSectionName}</strong>.`)}
     ${p(`Still ahead: ${ctx.nextSectionTease}.`)}
-    ${p('Those are the questions most people say they wish their parents had answered. Not the financial ones. The personal ones. The ones that say who you are, not just what you own.')}
-    ${p('Your answers so far are still there. Fifteen minutes is probably all you need to finish.')}
+    ${p("Those are the questions most people say they wish their parents had answered. Not the financial ones. The personal ones. The ones that say who you are, not just what you own.")}
+    ${p("Your answers so far are still there. Fifteen minutes is probably all you need to finish.")}
     ${ctaButton('Finish the Questionnaire')}
   `, unsubUrl)
 }
@@ -149,8 +149,8 @@ function email3(ctx: SequenceCContext): string {
     ${h2('"The hardest part was starting. Once I was in it, I could not stop."')}
     ${p('That is what most people tell us after they finish.')}
     ${p(`You already did the hard part. You started. You answered real questions. You made it to <strong>${ctx.stoppedAtSectionName}</strong> before life got in the way.`)}
-    ${p('The people who finish consistently say the same thing: they did not expect to feel the way they felt reading their own letter. Like hearing yourself clearly for the first time.')}
-    ${p('Your answers are saved. Come back when you have fifteen quiet minutes.')}
+    ${p("The people who finish consistently say the same thing: they did not expect to feel the way they felt reading their own letter. Like hearing yourself clearly for the first time.")}
+    ${p("Your answers are saved. Come back when you have fifteen quiet minutes.")}
     ${ctaButton('Pick Up Where I Left Off')}
     ${p('<em style="color:#8a7f78;font-size:14px;">Free to finish. Pay only when your letter is ready.</em>')}
   `, unsubUrl)

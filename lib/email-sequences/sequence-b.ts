@@ -66,7 +66,7 @@ function generateSequenceBEmail1HTML(email: string, token: string): string {
   const unsubUrl = buildUnsubscribeUrl(email, token)
   return emailShell(`
     <h2 style="margin: 0 0 20px; font-size: 24px; color: #1a1a1a; font-weight: normal;">
-      You signed up. The letter is not written yet.
+      You signed up. Let's start your story.
     </h2>
     <p style="margin: 0 0 16px; font-size: 16px; line-height: 1.6; color: #4a4a4a;">
       Something in this idea landed for you. The thought of leaving something behind that actually says what you mean. Most people carry that thought for years and never act on it.
@@ -100,8 +100,11 @@ function generateSequenceBEmail2HTML(email: string, token: string): string {
   return emailShell(`
     <h2 style="margin: 0 0 24px; font-size: 24px; color: #1a1a1a; font-weight: normal;">
       Your will says <em>who</em> gets the house.<br/>
-      It does not say <em>why you bought it.</em>
+      It doesn't say <em>why</em> you bought it.
     </h2>
+    <p style="margin: 0 0 24px; font-size: 16px; line-height: 1.6; color: #4a4a4a;">
+      Your will says who gets the house. It doesn't say why you trust them with it. It doesn't say why you bought it.
+    </p>
     <p style="margin: 0 0 24px; font-size: 16px; line-height: 1.6; color: #4a4a4a;">
       Legal documents transfer assets. They do not transfer meaning. The values you have lived by, the stories that shaped you, the message you want your family to carry forward. None of that fits in a will.
     </p>
@@ -141,7 +144,7 @@ function generateSequenceBEmail3HTML(email: string, token: string): string {
   return emailShell(`
     <div style="border-left: 4px solid #B5A692; padding: 16px 24px; margin: 0 0 28px; background-color: #f8f6f2; border-radius: 0 8px 8px 0;">
       <p style="margin: 0 0 8px; font-size: 22px; line-height: 1.4; color: #1a1a1a; font-style: italic;">
-        &ldquo;I know she loved me. But I don&apos;t know if she <em>liked</em> me.&rdquo;
+        &ldquo;I know she loved me. But I don&apos;t know if she liked me.&rdquo;
       </p>
       <p style="margin: 0; font-size: 13px; color: #8a7f78;">
         Written by a daughter, six months after her mother's funeral
@@ -151,10 +154,10 @@ function generateSequenceBEmail3HTML(email: string, token: string): string {
       That line stays with us.
     </p>
     <p style="margin: 0 0 16px; font-size: 16px; line-height: 1.6; color: #4a4a4a;">
-      Not because it is dramatic. Because it is so ordinary. Most families carry this question. Most parents have no idea, because they assumed love was enough. It is not. Not without words.
+      Not because it is dramatic. Because it is so ordinary. Most families carry this question. Most parents assume love is enough. It's not. Not without the words to say it.
     </p>
     <p style="margin: 0 0 30px; font-size: 16px; line-height: 1.6; color: #4a4a4a;">
-      Your account is still here. The questionnaire takes 30 minutes. Do not let your children wonder.
+      The questionnaire takes 30 minutes. Don't let your children wonder.
     </p>
     <table role="presentation" style="width: 100%; border-collapse: collapse;">
       <tr>
@@ -172,22 +175,43 @@ function generateSequenceBEmail3HTML(email: string, token: string): string {
   `, unsubUrl, "You're receiving this because you created a free account at Succession Story.")
 }
 
-// ─── Email 4 — Day 7. Last one. Pull back. Leave the door open. ──────────────
+// ─── Email 4 — Day 7. "The thing about someday." Personal story from Romy. ──────────────
 
 function generateSequenceBEmail4HTML(email: string, token: string): string {
   const unsubUrl = buildUnsubscribeUrl(email, token)
   return emailShell(`
     <h2 style="margin: 0 0 20px; font-size: 22px; color: #1a1a1a; font-weight: normal;">
-      This is the last email we will send.
+      The thing about &ldquo;someday&rdquo;
     </h2>
     <p style="margin: 0 0 16px; font-size: 16px; line-height: 1.6; color: #4a4a4a;">
-      We will not keep nudging you. That is not what this is.
+      &ldquo;I'll do it someday.&rdquo;
     </p>
     <p style="margin: 0 0 16px; font-size: 16px; line-height: 1.6; color: #4a4a4a;">
-      Your account is still active. Your login still works. If the time ever feels right, tomorrow, next month, whenever, the questionnaire will be there.
+      I've said it. You've probably said it. We all have things we mean to do when life slows down, when the kids are settled, when things feel less busy.
+    </p>
+    <p style="margin: 0 0 16px; font-size: 16px; line-height: 1.6; color: #4a4a4a;">
+      But here is what twenty years of sitting with families has taught me:
+    </p>
+    <p style="margin: 0 0 16px; font-size: 16px; line-height: 1.6; color: #1a1a1a; font-style: italic;">
+      Life does not slow down. It simply changes shape.
+    </p>
+    <p style="margin: 0 0 16px; font-size: 16px; line-height: 1.6; color: #4a4a4a;">
+      The business of raising children becomes the business of grandchildren. The demands of building something become the demands of sustaining it. And the things we mean to do someday have a quiet way of becoming the things we never quite got to.
+    </p>
+    <p style="margin: 0 0 16px; font-size: 16px; line-height: 1.6; color: #4a4a4a;">
+      You are not too busy to do this. You are exactly busy enough to need to do it now.
+    </p>
+    <p style="margin: 0 0 16px; font-size: 16px; line-height: 1.6; color: #4a4a4a;">
+      Succession Story takes less than an hour. It asks nothing of you except honesty. And what it gives your family &mdash; clarity, connection, the sound of your voice when they need it most &mdash; cannot be replicated by anything else you could do today.
+    </p>
+    <p style="margin: 0 0 30px; font-size: 16px; line-height: 1.6; color: #4a4a4a;">
+      Someday is a beautiful word. Today is a better one.
     </p>
     <p style="margin: 0 0 30px; font-size: 16px; line-height: 1.6; color: #4a4a4a;">
       Thirty minutes. Your words. Your voice. We handle the rest.
+    </p>
+    <p style="margin: 0 0 24px; font-size: 16px; line-height: 1.6; color: #4a4a4a;">
+      Warmly,<br/><strong>Romy</strong>
     </p>
     <table role="presentation" style="width: 100%; border-collapse: collapse;">
       <tr>
@@ -210,13 +234,13 @@ function generateSequenceBEmail4HTML(email: string, token: string): string {
 export const SEQUENCE_B_STEPS = [
   {
     step: 1,
-    subject: "You signed up. The letter is not written yet.",
+    subject: "You signed up. Let's start your story.",
     delayHours: 24,
     getHTML: generateSequenceBEmail1HTML,
   },
   {
     step: 2,
-    subject: "Your will says who. It does not say why.",
+    subject: "Your will says who. It doesn't say why.",
     delayHours: 72,
     getHTML: generateSequenceBEmail2HTML,
   },
@@ -228,7 +252,7 @@ export const SEQUENCE_B_STEPS = [
   },
   {
     step: 4,
-    subject: "This is the last email we will send.",
+    subject: 'The thing about "someday"',
     delayHours: 168,
     getHTML: generateSequenceBEmail4HTML,
   },
