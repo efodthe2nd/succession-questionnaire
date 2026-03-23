@@ -41,7 +41,7 @@ export default function LandingPage() {
   useEffect(() => {
     // Video autoplay and unmute logic
     const video = document.getElementById(
-      "autoscroll-video"
+      "autoscroll-video",
     ) as HTMLVideoElement;
     const overlay = document.getElementById("video-overlay");
     if (!video || !overlay) return;
@@ -199,10 +199,11 @@ export default function LandingPage() {
               Your Succession Story explains the <i id="iuf45e">Why</i>.
             </h1>
             <p className="mt-6 max-w-2xl mx-auto text-base md:text-lg text-white/90">
-              A priceless companion to your will or trust. Create a legacy
-              letter to tell your family what they need to hear when you&apos;re
-              not here to answer their questions. We write your heartfelt
-              message in minutes, in your voice.
+              The most successful people complete their estate plan and then
+              stop. But a will only says what happens to your assets. It never
+              explains why you built what you built, what you believe, or what
+              you want your family to carry forward. Succession Story gives you
+              that voice — written for you, in 30 minutes.
             </p>
             <a
               href="#founder-offer"
@@ -243,9 +244,6 @@ export default function LandingPage() {
             </p>
           </div>
         </section>
-
-        {/* Embedded Checkout Section */}
-        <EmbeddedCheckoutSection />
 
         {/* The Missing Piece Section */}
         <section id="the-missing-piece" className="py-16 md:py-24 bg-ivory">
@@ -837,6 +835,9 @@ export default function LandingPage() {
           </div>
         </section>
 
+        {/* Embedded Checkout Section */}
+        <EmbeddedCheckoutSection />
+
         {/* Founder Offer Section */}
         <section id="founder-offer" className="py-16 md:py-24 bg-white">
           <div className="max-w-6xl mx-auto px-4">
@@ -914,21 +915,14 @@ export default function LandingPage() {
                 </div>
 
                 <div id="price-block" className="my-8">
-                  <p id="i7g94o" className="text-lg md:text-xl text-charcoal/70">
+                  <p
+                    id="i7g94o"
+                    className="text-lg md:text-xl text-charcoal/70"
+                  >
                     Founder Price:
                   </p>
                   <p className="text-5xl md:text-5xl font-bold text-charcoal">
-                    <span className="line-through text-3xl text-charcoal/50 mr-2">$197</span>
                     $97
-                  </p>
-                </div>
-
-                <div
-                  id="urgency-block"
-                  className="bg-taupe/20 text-charcoal py-3 md:py-4 px-4 md:px-6 rounded-lg mb-8"
-                >
-                  <p className="text-base md:text-lg font-semibold">
-                    ⏰ Only 20 early access spots remaining
                   </p>
                 </div>
 
