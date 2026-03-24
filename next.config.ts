@@ -5,7 +5,6 @@ const nextConfig = {
   },
   // Empty turbopack config to use Turbopack without webpack
   turbopack: {},
-  optimizeFonts: false,
   images: {
     remotePatterns: [
       {
