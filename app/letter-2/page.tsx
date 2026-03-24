@@ -4,18 +4,8 @@ import React, { useState, useEffect } from 'react'
 import { useRouter } from 'next/navigation'
 
 // ─── ANALYTICS SETUP ───────────────────────────────────────────────
-// 1. Google Analytics 4
-//    - Go to analytics.google.com → create property → get Measurement ID (G-XXXXXXXXXX)
-//    - Replace 'G-XXXXXXXXXX' below with your real ID
-//    - OR add NEXT_PUBLIC_GA_ID to your Vercel environment variables
-//
-// 2. Microsoft Clarity (FREE heatmaps + session recordings — highly recommended)
-//    - Go to clarity.microsoft.com → create project → get Project ID
-//    - Replace 'CLARITY_PROJECT_ID' below with your real ID
-//    - OR add NEXT_PUBLIC_CLARITY_ID to your Vercel environment variables
-//
-// Both tools are free. Clarity will show you EXACTLY where people scroll,
-// click, and drop off. Install both.
+// Google Analytics 4: add NEXT_PUBLIC_GA_ID to Vercel env vars
+// Microsoft Clarity: add NEXT_PUBLIC_CLARITY_ID to Vercel env vars
 // ───────────────────────────────────────────────────────────────────
 
 const GA_ID = process.env.NEXT_PUBLIC_GA_ID || 'G-XXXXXXXXXX'
@@ -23,7 +13,6 @@ const CLARITY_ID = process.env.NEXT_PUBLIC_CLARITY_ID || 'CLARITY_PROJECT_ID'
 
 function Analytics() {
   useEffect(() => {
-    // ── Google Analytics 4 ──
     if (GA_ID && GA_ID !== 'G-XXXXXXXXXX') {
       const gaScript = document.createElement('script')
       gaScript.src = `https://www.googletagmanager.com/gtag/js?id=${GA_ID}`
@@ -40,7 +29,6 @@ function Analytics() {
       document.head.appendChild(gaInline)
     }
 
-    // ── Microsoft Clarity ──
     if (CLARITY_ID && CLARITY_ID !== 'CLARITY_PROJECT_ID') {
       const clarityScript = document.createElement('script')
       clarityScript.innerHTML = `
@@ -57,12 +45,15 @@ function Analytics() {
   return null
 }
 
-// Helper to fire GA events from within the page
 function trackEvent(eventName: string, params?: Record<string, string>) {
   if (typeof window !== 'undefined' && (window as any).gtag) {
     ;(window as any).gtag('event', eventName, params)
   }
 }
+
+// ─── YOUTUBE VIDEO EMBED ───────────────────────────────────────────
+// Drop your YouTube video ID here (e.g. 'dQw4w9WgXcQ' from the URL)
+const YOUTUBE_VIDEO_ID = 'hma2VrOJjZg'
 // ───────────────────────────────────────────────────────────────────
 
 export default function SqueezePageVariant2() {
@@ -84,7 +75,6 @@ export default function SqueezePageVariant2() {
     setLoading(true)
     setError('')
 
-    // Track form submission attempt
     trackEvent('form_submit_attempt', { location: 'squeeze_page' })
 
     try {
@@ -103,7 +93,6 @@ export default function SqueezePageVariant2() {
         ;(window as any).fbq('track', 'Lead')
       }
 
-      // Track successful lead capture
       trackEvent('lead_captured', { source: 'variant-2-unfinished' })
 
       router.push(`/login?email=${encodeURIComponent(email.trim())}&from=squeeze`)
@@ -115,7 +104,7 @@ export default function SqueezePageVariant2() {
 
   const testimonials = [
     {
-      quote: "I recently found a letter I'd forgotten my dad had written. It's full of things he almost never said — how proud he was, that he loved me. It's one of the most precious things I own.",
+      quote: "I recently found a letter I'd forgotten my dad had written. It's full of things he almost never said, how proud he was, that he loved me. It's one of the most precious things I own.",
       attribution: 'From our community',
       positive: true,
     },
@@ -125,7 +114,7 @@ export default function SqueezePageVariant2() {
       positive: true,
     },
     {
-      quote: "I searched high and low for a letter from my mom when she passed. I came up empty. If she had known, she would have written me 1,000 letters — I am 100% sure of that.",
+      quote: "I searched high and low for a letter from my mom when she passed. I came up empty. If she had known, she would have written me 1,000 letters. I am 100% sure of that.",
       attribution: 'From our community',
       positive: false,
     },
@@ -140,7 +129,7 @@ export default function SqueezePageVariant2() {
     {
       img: 'https://storage.googleapis.com/uxpilot-auth.appspot.com/b6928b1ff3-5f14b58975b1d2ee8653.png',
       alt: 'handwritten letter excerpt on cream paper',
-      excerpt: '"To my children: The business was never about the money. The main goal was to employ people — to create work that families could count on, year after year. That responsibility shaped every decision I made."',
+      excerpt: '"To my children: The business was never about the money. The main goal was to employ people, to create work that families could count on, year after year. That responsibility shaped every decision I made."',
     },
     {
       img: 'https://storage.googleapis.com/uxpilot-auth.appspot.com/edfa5d937f-76da4d6ffa1e2ba295bf.png',
@@ -150,27 +139,26 @@ export default function SqueezePageVariant2() {
     {
       img: 'https://storage.googleapis.com/uxpilot-auth.appspot.com/78f547d41e-360d242a7e8bd017efb5.png',
       alt: 'elegant handwritten note on stationery',
-      excerpt: '"She taught me about generosity. She bought me my graduation dress — the price tag was more than every other dress in my closet combined. She was the richest person I knew."',
+      excerpt: '"She taught me about generosity. She bought me my graduation dress, the price tag was more than every other dress in my closet combined. She was the richest person I knew."',
     },
     {
       img: 'https://storage.googleapis.com/uxpilot-auth.appspot.com/65d8b3b6e3-08a7c89f663e9d7d2c99.png',
       alt: 'personal letter on fine paper',
-      excerpt: '"Remember the summers at the lake house. It is more than a property. It is where we became us. Keep taking the kids there and measuring their height on the bark of the oak tree — like we did with you."',
+      excerpt: '"Remember the summers at the lake house. It is more than a property. It is where we became us. Keep taking the kids there and measuring their height on the bark of the oak tree, like we did with you."',
     },
   ]
 
   const faqs = [
-    { q: 'What happens in the first 5 minutes after I sign up?', a: "You'll receive a secure login link in your inbox immediately. Once you click it, you can begin answering your first guided questions right away. There's no complex setup — just your story, at your own pace." },
+    { q: 'What happens in the first 5 minutes after I sign up?', a: "You'll receive a secure login link in your inbox immediately. Once you click it, you can begin answering your first guided questions right away. There's no complex setup, just your story, at your own pace." },
     { q: 'How soon will I see a draft of my letter?', a: 'As soon as you finish the questionnaire, we begin crafting your letter. Most families see their draft ready for review within 15 to 30 minutes of completing their answers.' },
     { q: "What if I'm not ready to finish everything today?", a: "That's perfectly fine. Your progress is saved in real-time. Answer two questions today, finish the rest next week. You move at whatever pace feels right." },
-    { q: 'What exactly is a legacy letter?', a: "A legacy letter is a personal message from you to the people you love — written in your voice. Not a legal document. Not a will. Just the things that matter most: what shaped you, what you believe, what you want them to carry forward when life gets hard." },
-    { q: 'How is this different from a will?', a: "A will distributes your assets. A legacy letter passes on your meaning. Your kids will know who gets the house — but without a letter, they may never know why you bought it, what you sacrificed for them, or what you actually believe. A will is for lawyers. A letter is for your family." },
-    { q: 'Do I have to be a good writer?', a: "No. You never write a single word. We ask you guided questions. You answer in your own words — as if you're talking to someone you trust. We take your answers and write the finished letter for you, in your voice." },
-    { q: 'How long does it take?', a: "Most people finish the questionnaire in 30 minutes or less. You can do it in one sitting, or save your progress and come back. There's no deadline." },
-    { q: 'Is this AI-generated?', a: "Your letter is built entirely from your own words and answers. The result reads like you — because it is you. We use your responses to craft something personal and specific, not a generic template." },
+    { q: 'What exactly is a legacy letter?', a: "A legacy letter is a personal message from you to the people you love, written in your voice. Not a legal document. Not a will. Just the things that matter most: what shaped you, what you believe, what you want them to carry forward when life gets hard." },
+    { q: 'How is this different from a will?', a: "A will distributes your assets. A legacy letter passes on your meaning. Your kids will know who gets the house, but without a letter, they may never know why you bought it, what you sacrificed for them, or what you actually believe. A will is for lawyers. A letter is for your family." },
+    { q: 'Do I have to be a good writer?', a: "No. You never write a single word. We ask you guided questions. You answer in your own words, as if you're talking to someone you trust. We take your answers and write the finished letter for you, in your voice." },
+    { q: 'How long does it take?', a: "You can do it in one sitting or save your progress and come back. There's no deadline." },
+    { q: 'Is this AI-generated?', a: "Your letter is built entirely from your own words and answers. The result reads like you, because it is you. We use your responses to craft something personal and specific, not a generic template." },
     { q: 'Is my information private?', a: "Yes. Your answers and your letter are completely private. We never share your information with anyone. Your letter belongs to you." },
     { q: "What if I don't love the letter?", a: "You don't pay until you've read it and decided it's right. If it doesn't feel like you, we'll revise it. Still not happy? Full refund, no questions asked." },
-    { q: 'How much does it cost?', a: "Starting is completely free. You only pay $97 when your letter is ready and you've decided you love it. One-time payment — no subscriptions, no hidden fees." },
     { q: 'Can I write letters for more than one person?', a: "Yes. Many people write individual letters to each child or grandchild. Once you've completed your first letter, you can start another at any time." },
   ]
 
@@ -207,7 +195,7 @@ export default function SqueezePageVariant2() {
           letterSpacing: '0.02em',
         }}
       >
-        {loading ? 'Creating your account...' : "Start my family's letter →"}
+        {loading ? 'Creating your account...' : "Start my family's letter"}
       </button>
       <p style={{ color: '#b0a89e', fontSize: '12px', textAlign: 'center', fontFamily: 'DM Sans, sans-serif', marginTop: '2px' }}>
         We'll send your login link to this email. We never share it with anyone.
@@ -217,7 +205,6 @@ export default function SqueezePageVariant2() {
 
   return (
     <main style={{ minHeight: '100vh', background: '#f9f6f1', display: 'flex', flexDirection: 'column' }}>
-      {/* Analytics — loads GA4 + Clarity */}
       <Analytics />
 
       <style>{`
@@ -268,6 +255,34 @@ export default function SqueezePageVariant2() {
           border-color: #B5A692 !important;
           outline: none;
         }
+
+        /* YouTube embed — lazy loads only on click, no tracking params */
+        .yt-facade {
+          position: relative;
+          width: 100%;
+          aspect-ratio: 16/9;
+          background: #1a1a1a;
+          border-radius: 16px;
+          overflow: hidden;
+          cursor: pointer;
+        }
+        .yt-facade img {
+          width: 100%; height: 100%; object-fit: cover; display: block;
+        }
+        .yt-play-btn {
+          position: absolute; inset: 0;
+          display: flex; align-items: center; justify-content: center;
+        }
+        .yt-play-btn svg {
+          width: 72px; height: 72px; filter: drop-shadow(0 2px 12px rgba(0,0,0,0.4));
+          transition: transform 0.2s;
+        }
+        .yt-facade:hover .yt-play-btn svg { transform: scale(1.08); }
+        .yt-iframe {
+          width: 100%; height: 100%;
+          border: none; border-radius: 16px;
+          aspect-ratio: 16/9;
+        }
       `}</style>
 
       <div className="texture-overlay" />
@@ -284,6 +299,7 @@ export default function SqueezePageVariant2() {
             fontFamily: 'DM Sans, sans-serif', color: '#8a7f78', fontSize: '11px',
             letterSpacing: '0.04em', textDecoration: 'none', display: 'flex',
             alignItems: 'center', gap: '5px', transition: 'color 0.2s',
+            background: 'none', border: 'none', cursor: 'pointer',
           }}
           onMouseEnter={e => (e.currentTarget.style.color = '#B5A692')}
           onMouseLeave={e => (e.currentTarget.style.color = '#8a7f78')}
@@ -296,10 +312,9 @@ export default function SqueezePageVariant2() {
         </button>
       </nav>
 
-      {/* Trust strip — avatars + stars + family count */}
+      {/* Trust strip */}
       <div style={{ position: 'relative', zIndex: 1, maxWidth: '600px', margin: '0 auto', width: '100%', padding: '0 20px 4px', display: 'flex', flexDirection: 'column', alignItems: 'center', gap: '8px' }}>
         <div style={{ display: 'flex', alignItems: 'center', gap: '10px' }}>
-          {/* Overlapping avatars */}
           <div style={{ display: 'flex' }}>
             {[
               'https://i.pravatar.cc/40?img=47',
@@ -319,7 +334,6 @@ export default function SqueezePageVariant2() {
               </div>
             ))}
           </div>
-          {/* Stars */}
           <div style={{ display: 'flex', gap: '2px', marginLeft: '4px' }}>
             {[...Array(5)].map((_, i) => (
               <svg key={i} width="15" height="15" viewBox="0 0 20 20" fill="#f5a623">
@@ -328,13 +342,12 @@ export default function SqueezePageVariant2() {
             ))}
           </div>
         </div>
-        {/* Count line */}
         <p style={{ fontFamily: 'DM Sans, sans-serif', color: '#5a5450', fontSize: '12px', letterSpacing: '0.02em' }}>
           Trusted by <strong style={{ color: '#1a1a1a' }}>2,800+ families</strong> who've secured their legacy
         </p>
       </div>
 
-      {/* Sticky help button — bottom right, appears after scroll */}
+      {/* Sticky help button */}
       <button
         onClick={() => setShowContact(true)}
         style={{
@@ -354,6 +367,7 @@ export default function SqueezePageVariant2() {
         Have a question?
       </button>
 
+      {/* Contact modal */}
       {showContact && (
         <div
           onClick={() => { setShowContact(false); setContactSent(false); setContactName(''); setContactMsg('') }}
@@ -361,7 +375,6 @@ export default function SqueezePageVariant2() {
             position: 'fixed', inset: 0, zIndex: 200,
             background: 'rgba(0,0,0,0.5)',
             display: 'flex', alignItems: 'flex-end', justifyContent: 'center',
-            padding: '0 0 0 0',
           }}
         >
           <div
@@ -372,9 +385,8 @@ export default function SqueezePageVariant2() {
               boxShadow: '0 -8px 40px rgba(0,0,0,0.15)',
             }}
           >
-            {/* Handle bar */}
             <div style={{ width: '36px', height: '4px', background: '#d4c8bb', borderRadius: '2px', margin: '0 auto 24px' }} />
- 
+
             {!contactSent ? (
               <>
                 <p style={{ fontFamily: 'Cormorant Garamond, Georgia, serif', color: '#1a1a1a', fontSize: '22px', fontWeight: 500, marginBottom: '6px', lineHeight: 1.3 }}>
@@ -383,7 +395,7 @@ export default function SqueezePageVariant2() {
                 <p style={{ fontFamily: 'DM Sans, sans-serif', color: '#8a7f78', fontSize: '13px', marginBottom: '20px', lineHeight: 1.6 }}>
                   Send us a message and we'll get back to you shortly.
                 </p>
- 
+
                 <div style={{ display: 'flex', flexDirection: 'column', gap: '12px' }}>
                   <input
                     type="text"
@@ -411,29 +423,26 @@ export default function SqueezePageVariant2() {
                       resize: 'none', boxSizing: 'border-box' as const,
                     }}
                   />
- 
-                  {/* Email address — visible and copyable */}
+
                   <div style={{ display: 'flex', alignItems: 'center', gap: '10px', padding: '12px 16px', background: '#fff', border: '1px solid #e8e4de', borderRadius: '10px' }}>
                     <svg width="14" height="14" fill="none" stroke="#B5A692" viewBox="0 0 24 24">
                       <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={1.8}
                         d="M3 8l7.89 5.26a2 2 0 002.22 0L21 8M5 19h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v10a2 2 0 002 2z" />
                     </svg>
                     <p style={{ fontFamily: 'DM Sans, sans-serif', color: '#5a5450', fontSize: '13px', flex: 1 }}>
-                      Or email us directly: <strong style={{ color: '#1a1a1a', userSelect: 'all' }}>davidefod@gmail.com</strong>
+                      Or email us directly: <strong style={{ color: '#1a1a1a', userSelect: 'all' }}>hello@successionstory.now</strong>
                     </p>
                   </div>
- 
+
                   <button
                     onClick={() => {
                       if (!contactMsg.trim()) return
                       const subject = encodeURIComponent('Question about Succession Story')
                       const body = encodeURIComponent(
-                        (contactName ? `Name: ${contactName}
- 
-` : '') + `Message: ${contactMsg}`
+                        (contactName ? `Name: ${contactName}\n\n` : '') + `Message: ${contactMsg}`
                       )
                       window.open(
-                        `https://mail.google.com/mail/?view=cm&to=davidefod@gmail.com&su=${subject}&body=${body}`,
+                        `https://mail.google.com/mail/?view=cm&to=hello@successionstory.now&su=${subject}&body=${body}`,
                         '_blank'
                       )
                       setContactSent(true)
@@ -449,9 +458,9 @@ export default function SqueezePageVariant2() {
                       letterSpacing: '0.02em',
                     }}
                   >
-                    Send message →
+                    Send message
                   </button>
- 
+
                   <button
                     onClick={() => setShowContact(false)}
                     style={{
@@ -475,7 +484,7 @@ export default function SqueezePageVariant2() {
                   Message sent
                 </p>
                 <p style={{ fontFamily: 'DM Sans, sans-serif', color: '#8a7f78', fontSize: '14px', lineHeight: 1.6, marginBottom: '24px' }}>
-                  We'll get back to you shortly at the email you used.
+                  We'll get back to you shortly.
                 </p>
                 <button
                   onClick={() => { setShowContact(false); setContactSent(false); setContactName(''); setContactMsg('') }}
@@ -497,70 +506,99 @@ export default function SqueezePageVariant2() {
 
         {/* ── 1. HEADLINE ── */}
         <div className="fade-1" style={{ textAlign: 'center', padding: '28px 0 24px' }}>
-          <div style={{ display: 'flex', alignItems: 'center', justifyContent: 'center', marginBottom: '18px', gap: '10px' }}>
-            <div style={{ width: '32px', height: '1px', background: '#B5A692' }} />
-            <span style={{ fontFamily: 'DM Sans, sans-serif', color: '#B5A692', fontSize: '11px', fontWeight: 600, letterSpacing: '0.2em', textTransform: 'uppercase' }}>Free to start</span>
-            <div style={{ width: '32px', height: '1px', background: '#B5A692' }} />
-          </div>
           <h1 style={{ fontFamily: 'Cormorant Garamond, Georgia, serif', color: '#1a1a1a', fontSize: 'clamp(32px, 8vw, 48px)', lineHeight: 1.15, fontWeight: 500, marginBottom: '18px' }}>
             Give your kids the one thing<br />
             they&apos;ll search for<br />
             <em style={{ color: '#B5A692' }}>after you&apos;re gone.</em>
           </h1>
           <p style={{ fontFamily: 'DM Sans, sans-serif', color: '#5a5450', fontSize: '16px', lineHeight: 1.75, marginBottom: '8px', maxWidth: '480px', margin: '0 auto 8px' }}>
-            A personal letter — written in your voice, from your answers — that tells your family who you really were, what you believed, and why you made the choices you made.
+            A personal letter, written in your voice, from your answers, that tells your family who you really were, what you believed, and why you made the choices you made.
           </p>
           <p style={{ fontFamily: 'DM Sans, sans-serif', color: '#8a7f78', fontSize: '14px', lineHeight: 1.6, margin: '8px auto 0', maxWidth: '380px' }}>
-            30 minutes. No writing skill needed. Free to start.
+            No writing skill needed.
           </p>
         </div>
 
-        {/* ── 2. VSL ── */}
-        <div className="fade-2" style={{ marginBottom: '20px' }}>
-          <div style={{ background: '#1a1a1a', borderRadius: '16px', overflow: 'hidden', aspectRatio: '16/9', display: 'flex', alignItems: 'center', justifyContent: 'center' }}>
-              <video src="/video.mp4" controls poster="/romy-poster.jpg"
-                style={{ width:'100%', height:'100%', objectFit:'cover' }} playsInline autoPlay={true} />
-            {/* <div style={{ textAlign: 'center', padding: '32px 24px' }}>
-              <div style={{ width: '56px', height: '56px', borderRadius: '50%', background: '#B5A692', display: 'flex', alignItems: 'center', justifyContent: 'center', margin: '0 auto 16px' }}>
-                <svg width="22" height="22" viewBox="0 0 24 24" fill="#1a1a1a"><path d="M8 5v14l11-7z"/></svg>
+        {/* ── 2. TESTIMONIALS — immediately after headline ── */}
+        <div className="fade-2" style={{ marginBottom: '32px' }}>
+          <p style={{ fontFamily: 'DM Sans, sans-serif', color: '#B5A692', fontSize: '11px', fontWeight: 600, letterSpacing: '0.18em', textTransform: 'uppercase', marginBottom: '16px', textAlign: 'center' }}>
+            From families who found letters, and those who didn't
+          </p>
+          <div style={{ display: 'flex', flexDirection: 'column', gap: '12px' }}>
+            {testimonials.map((t, i) => (
+              <div key={i} className="testimonial-card">
+                <p style={{ fontFamily: 'Cormorant Garamond, Georgia, serif', color: '#2a2520', fontSize: '18px', lineHeight: 1.65, fontStyle: 'italic', marginBottom: '12px' }}>
+                  &ldquo;{t.quote}&rdquo;
+                </p>
+                <p style={{ fontFamily: 'DM Sans, sans-serif', color: t.positive ? '#B5A692' : '#b0a89e', fontSize: '11px', fontWeight: 600, letterSpacing: '0.14em', textTransform: 'uppercase' }}>
+                  {t.attribution}
+                </p>
               </div>
-              <p style={{ fontFamily: 'Cormorant Garamond, Georgia, serif', color: '#f0ece6', fontSize: '18px', fontStyle: 'italic', lineHeight: 1.5, marginBottom: '6px' }}>
-                A message from Romy Frazier, Esq.
-              </p>
-              <p style={{ fontFamily: 'DM Sans, sans-serif', color: '#B5A692', fontSize: '12px', letterSpacing: '0.08em' }}>Succession Attorney & Founder</p>
-              <p style={{ fontFamily: 'DM Sans, sans-serif', color: '#4a4540', fontSize: '11px', marginTop: '8px' }}>Video coming soon</p>
-            </div> */}
+            ))}
           </div>
-        </div>
-
-        {/* ── 3. FOUNDER BIO ── */}
-        <div className="fade-2" style={{ display: 'flex', alignItems: 'center', gap: '14px', padding: '16px 20px', background: '#fff', border: '1px solid #e8e4de', borderRadius: '12px', marginBottom: '28px' }}>
-          <div style={{ width: '48px', height: '48px', borderRadius: '50%', background: '#e8e4de', flexShrink: 0, overflow: 'hidden' }}>
-            <img src="/founder.jpg" alt="Romy Frazier" style={{ width: '48px', height: '48px', borderRadius: '50%', objectFit: 'cover' }} />
-          </div>
-          <div>
-            <p style={{ fontFamily: 'DM Sans, sans-serif', color: '#1a1a1a', fontSize: '13px', fontWeight: 600, marginBottom: '3px' }}>Romy Frazier, Esq.</p>
-            <p style={{ fontFamily: 'DM Sans, sans-serif', color: '#8a7f78', fontSize: '12px', lineHeight: 1.55 }}>
-              Succession attorney. After years watching families search for words never written, she built the tool she wished had existed.
+          <div style={{ marginTop: '12px', padding: '22px 24px', background: '#1a1a1a', borderRadius: '14px' }}>
+            <p style={{ fontFamily: 'Cormorant Garamond, Georgia, serif', color: '#f0ece6', fontSize: '19px', lineHeight: 1.65, fontStyle: 'italic' }}>
+              The letter they&apos;ll search for after you&apos;re gone.{' '}
+              <span style={{ color: '#B5A692' }}>You can write it today.</span>
             </p>
           </div>
         </div>
 
-        {/* ── 4. FORM #1 ── */}
-        <div className="fade-3" style={{ marginBottom: '40px' }}>
+        {/* ── 3. FORM #1 — right after testimonials ── */}
+        <div className="fade-3" style={{ marginBottom: '48px' }}>
           <FormBlock id="form-top" />
         </div>
 
+        {/* ── 4. LETTER SAMPLES ── */}
+        <div className="fade-3" style={{ marginBottom: '48px' }}>
+          <p style={{ fontFamily: 'DM Sans, sans-serif', color: '#B5A692', fontSize: '11px', fontWeight: 600, letterSpacing: '0.18em', textTransform: 'uppercase', marginBottom: '10px', textAlign: 'center' }}>
+            What a legacy letter sounds like
+          </p>
+          <h2 style={{ fontFamily: 'Cormorant Garamond, Georgia, serif', color: '#1a1a1a', fontSize: 'clamp(22px, 5vw, 30px)', fontWeight: 500, lineHeight: 1.25, textAlign: 'center', marginBottom: '6px' }}>
+            Real letters. Real families.
+          </h2>
+          <p style={{ fontFamily: 'DM Sans, sans-serif', color: '#8a7f78', fontSize: '13px', textAlign: 'center', marginBottom: '24px', lineHeight: 1.6 }}>
+            Blurred to protect privacy. Every word is real.
+          </p>
+
+          <div style={{ display: 'flex', flexDirection: 'column', gap: '16px' }}>
+            {letterSamples.map((letter, i) => (
+              <div key={i} className="letter-card">
+                <img
+                  src={letter.img}
+                  alt={letter.alt}
+                  loading="lazy"
+                  style={{ width: '100%', height: '180px', objectFit: 'cover', filter: 'blur(2px)', display: 'block' }}
+                />
+                <div style={{ padding: '18px 20px' }}>
+                  <p style={{ fontFamily: 'Cormorant Garamond, Georgia, serif', color: '#3a3530', fontSize: '17px', lineHeight: 1.7, fontStyle: 'italic' }}>
+                    {letter.excerpt}
+                  </p>
+                </div>
+              </div>
+            ))}
+          </div>
+
+          {/* CTA after samples */}
+          <div style={{ marginTop: '28px' }}>
+            <p style={{ fontFamily: 'Cormorant Garamond, Georgia, serif', color: '#1a1a1a', fontSize: '20px', fontStyle: 'italic', textAlign: 'center', marginBottom: '20px', lineHeight: 1.45 }}>
+              Your letter is already inside you.<br />
+              <span style={{ color: '#B5A692' }}>We just help you get it out.</span>
+            </p>
+            <FormBlock id="form-letters" />
+          </div>
+        </div>
+
         {/* ── 5. HOW IT WORKS ── */}
-        <div className="fade-3" style={{ marginBottom: '40px' }}>
+        <div className="fade-4" style={{ marginBottom: '40px' }}>
           <p style={{ fontFamily: 'DM Sans, sans-serif', color: '#B5A692', fontSize: '11px', fontWeight: 600, letterSpacing: '0.18em', textTransform: 'uppercase', marginBottom: '16px', textAlign: 'center' }}>
             How it works
           </p>
           <div style={{ background: '#fff', border: '1px solid #e8e4de', borderRadius: '14px', overflow: 'hidden' }}>
             {[
-              ['01', 'We ask. You answer.', 'Guided questions draw out what matters most — in your own words, at your own pace.'],
+              ['01', 'We ask. You answer.', 'Guided questions draw out what matters most, in your own words, at your own pace.'],
               ['02', 'We write it for you.', 'We turn your answers into a finished letter that sounds exactly like you.'],
-              ['03', 'Pay only when it\'s ready.', 'Read it. Love it. Then decide. Not a cent before.'],
+              ['03', 'Read it. Then decide.', 'You see the finished letter before anything else. Your story, your call.'],
             ].map(([num, title, desc], i) => (
               <div key={num} style={{ display: 'flex', gap: '16px', padding: '18px 20px', borderBottom: i < 2 ? '1px solid #e8e4de' : 'none' }}>
                 <span style={{ fontFamily: 'Cormorant Garamond, Georgia, serif', color: '#B5A692', fontSize: '18px', fontWeight: 500, flexShrink: 0, marginTop: '2px' }}>{num}</span>
@@ -575,7 +613,7 @@ export default function SqueezePageVariant2() {
 
         {/* ── 6. STATS ── */}
         <div className="fade-4" style={{ display: 'flex', alignItems: 'center', justifyContent: 'center', gap: '24px', marginBottom: '40px', padding: '20px', background: '#fff', border: '1px solid #e8e4de', borderRadius: '14px' }}>
-          {[['2,800+', 'families served'], ['30 min', 'to complete'], ['100%', 'private']].map(([num, label], i) => (
+          {[['2,800+', 'families served'], ['One sitting', 'start to finish'], ['100%', 'private']].map(([num, label], i) => (
             <React.Fragment key={label}>
               <div style={{ textAlign: 'center' }}>
                 <p style={{ fontFamily: 'Cormorant Garamond, Georgia, serif', color: '#1a1a1a', fontWeight: 600, fontSize: '20px', lineHeight: 1 }}>{num}</p>
@@ -586,80 +624,29 @@ export default function SqueezePageVariant2() {
           ))}
         </div>
 
-        {/* ── 7. TESTIMONIALS ── */}
+        {/* ── 7. VIDEO + ROMY BIO ── */}
         <div className="fade-4" style={{ marginBottom: '40px' }}>
-          <p style={{ fontFamily: 'DM Sans, sans-serif', color: '#B5A692', fontSize: '11px', fontWeight: 600, letterSpacing: '0.18em', textTransform: 'uppercase', marginBottom: '16px', textAlign: 'center' }}>
-            From families who found letters — and those who didn't
-          </p>
-          <div style={{ display: 'flex', flexDirection: 'column', gap: '12px' }}>
-            {testimonials.map((t, i) => (
-              <div key={i} className="testimonial-card">
-                <p style={{ fontFamily: 'Cormorant Garamond, Georgia, serif', color: '#2a2520', fontSize: '18px', lineHeight: 1.65, fontStyle: 'italic', marginBottom: '12px' }}>
-                  &ldquo;{t.quote}&rdquo;
-                </p>
-                <p style={{ fontFamily: 'DM Sans, sans-serif', color: t.positive ? '#B5A692' : '#b0a89e', fontSize: '11px', fontWeight: 600, letterSpacing: '0.14em', textTransform: 'uppercase' }}>
-                  — {t.attribution}
-                </p>
-              </div>
-            ))}
-          </div>
-          <div style={{ marginTop: '12px', padding: '22px 24px', background: '#1a1a1a', borderRadius: '14px' }}>
-            <p style={{ fontFamily: 'Cormorant Garamond, Georgia, serif', color: '#f0ece6', fontSize: '19px', lineHeight: 1.65, fontStyle: 'italic' }}>
-              The letter they&apos;ll search for after you&apos;re gone —
-              you can write it today.{' '}
-              <span style={{ color: '#B5A692' }}>30 minutes. Free to start.</span>
-            </p>
+          {/* YouTube facade: loads thumbnail, only embeds iframe on click = much faster */}
+          <YouTubeFacade videoId={YOUTUBE_VIDEO_ID} />
+
+          {/* Romy bio — first person */}
+          <div style={{ display: 'flex', alignItems: 'center', gap: '14px', padding: '16px 20px', background: '#fff', border: '1px solid #e8e4de', borderRadius: '12px', marginTop: '16px' }}>
+            <div style={{ width: '48px', height: '48px', borderRadius: '50%', background: '#e8e4de', flexShrink: 0, overflow: 'hidden' }}>
+              <img src="/founder.jpg" alt="Romy Frazier" style={{ width: '48px', height: '48px', borderRadius: '50%', objectFit: 'cover' }} />
+            </div>
+            <div>
+              <p style={{ fontFamily: 'DM Sans, sans-serif', color: '#1a1a1a', fontSize: '13px', fontWeight: 600, marginBottom: '3px' }}>Romy Frazier, Esq.</p>
+              <p style={{ fontFamily: 'DM Sans, sans-serif', color: '#8a7f78', fontSize: '12px', lineHeight: 1.55 }}>
+                I'm a succession attorney. After years watching families search for words that were never written, I built the tool I wished had existed.
+              </p>
+            </div>
           </div>
         </div>
 
-        {/* ── 8. FORM #2 ── */}
-        <div className="fade-4" style={{ marginBottom: '56px' }}>
-          <FormBlock id="form-mid" />
-        </div>
-
-        {/* ── 9. LETTER SAMPLES — shows the product, creates desire ── */}
-        <div className="fade-4" style={{ marginBottom: '56px' }}>
-          <p style={{ fontFamily: 'DM Sans, sans-serif', color: '#B5A692', fontSize: '11px', fontWeight: 600, letterSpacing: '0.18em', textTransform: 'uppercase', marginBottom: '10px', textAlign: 'center' }}>
-            What a legacy letter sounds like
-          </p>
-          <h2 style={{ fontFamily: 'Cormorant Garamond, Georgia, serif', color: '#1a1a1a', fontSize: 'clamp(22px, 5vw, 30px)', fontWeight: 500, lineHeight: 1.25, textAlign: 'center', marginBottom: '6px' }}>
-            Real letters. Real families.
-          </h2>
-          <p style={{ fontFamily: 'DM Sans, sans-serif', color: '#8a7f78', fontSize: '13px', textAlign: 'center', marginBottom: '24px', lineHeight: 1.6 }}>
-            Blurred to protect privacy — every word is real.
-          </p>
-
-          <div style={{ display: 'flex', flexDirection: 'column', gap: '16px' }}>
-            {letterSamples.map((letter, i) => (
-              <div key={i} className="letter-card">
-                <img
-                  src={letter.img}
-                  alt={letter.alt}
-                  style={{ width: '100%', height: '180px', objectFit: 'cover', filter: 'blur(2px)', display: 'block' }}
-                />
-                <div style={{ padding: '18px 20px' }}>
-                  <p style={{ fontFamily: 'Cormorant Garamond, Georgia, serif', color: '#3a3530', fontSize: '17px', lineHeight: 1.7, fontStyle: 'italic' }}>
-                    {letter.excerpt}
-                  </p>
-                </div>
-              </div>
-            ))}
-          </div>
-
-          {/* CTA directly after samples — desire peaks here */}
-          <div style={{ marginTop: '28px' }}>
-            <p style={{ fontFamily: 'Cormorant Garamond, Georgia, serif', color: '#1a1a1a', fontSize: '20px', fontStyle: 'italic', textAlign: 'center', marginBottom: '20px', lineHeight: 1.45 }}>
-              Your letter is already inside you.<br />
-              <span style={{ color: '#B5A692' }}>We just help you get it out.</span>
-            </p>
-            <FormBlock id="form-letters" />
-          </div>
-        </div>
-
-        {/* ── 10. FAQ ── */}
+        {/* ── 8. FAQ ── */}
         <div className="fade-5">
           <p style={{ fontFamily: 'DM Sans, sans-serif', color: '#B5A692', fontSize: '11px', fontWeight: 600, letterSpacing: '0.2em', textTransform: 'uppercase', marginBottom: '10px', textAlign: 'center' }}>
-            Questions & answers
+            Questions and answers
           </p>
           <h2 style={{ fontFamily: 'Cormorant Garamond, Georgia, serif', color: '#1a1a1a', fontSize: 'clamp(24px, 5vw, 32px)', fontWeight: 500, lineHeight: 1.2, textAlign: 'center', marginBottom: '24px' }}>
             Everything you need to know
@@ -704,10 +691,11 @@ export default function SqueezePageVariant2() {
             ))}
           </div>
 
-          {/* ── 11. FORM #4 — bottom catch ── */}
+          {/* ── 9. FINAL FORM ── */}
           <div style={{ marginTop: '32px' }}>
             <p style={{ fontFamily: 'Cormorant Garamond, Georgia, serif', color: '#1a1a1a', fontSize: '22px', fontStyle: 'italic', textAlign: 'center', marginBottom: '20px', lineHeight: 1.4 }}>
-              Still unsure? Start free — you don&apos;t pay<br />until you&apos;ve read your letter and loved it.
+              The letter your family will carry with them forever.<br />
+              <span style={{ color: '#B5A692' }}>Write it today.</span>
             </p>
             <FormBlock id="form-bottom" />
           </div>
@@ -715,5 +703,39 @@ export default function SqueezePageVariant2() {
 
       </div>
     </main>
+  )
+}
+
+// ─── YOUTUBE FACADE COMPONENT ─────────────────────────────────────
+// Renders a thumbnail + play button. Only loads the actual YouTube
+// iframe when user clicks — dramatically faster page load.
+function YouTubeFacade({ videoId }: { videoId: string }) {
+  const [clicked, setClicked] = useState(false)
+  const thumbnailUrl = `https://img.youtube.com/vi/${videoId}/maxresdefault.jpg`
+
+  if (clicked) {
+    return (
+      <iframe
+        className="yt-iframe"
+        src={`https://www.youtube.com/embed/${videoId}?autoplay=1&rel=0`}
+
+        title="Romy Frazier — Succession Story"
+        allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
+        allowFullScreen
+        style={{ width: '100%', aspectRatio: '16/9', border: 'none', borderRadius: '16px', display: 'block' }}
+      />
+    )
+  }
+
+  return (
+    <div className="yt-facade" onClick={() => setClicked(true)}>
+      <img src={thumbnailUrl} alt="Play video" />
+      <div className="yt-play-btn">
+        <svg viewBox="0 0 68 48" xmlns="http://www.w3.org/2000/svg">
+          <path d="M66.5 7.7c-.8-2.9-2.9-5.1-5.8-5.9C55.8 0 34 0 34 0S12.2 0 7.3 1.8C4.4 2.6 2.3 4.8 1.5 7.7 0 12.7 0 24 0 24s0 11.3 1.5 16.3c.8 2.9 2.9 5.1 5.8 5.9C12.2 48 34 48 34 48s21.8 0 26.7-1.8c2.9-.8 5-3 5.8-5.9C68 35.3 68 24 68 24s0-11.3-1.5-16.3z" fill="#ff0000"/>
+          <path d="M45 24L27 14v20" fill="#fff"/>
+        </svg>
+      </div>
+    </div>
   )
 }
