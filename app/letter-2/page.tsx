@@ -2,6 +2,7 @@
 
 import React, { useState, useEffect } from 'react'
 import { useRouter } from 'next/navigation'
+import Image from 'next/image'
 
 // ─── ANALYTICS SETUP ───────────────────────────────────────────────
 // Google Analytics 4: add NEXT_PUBLIC_GA_ID to Vercel env vars
@@ -330,7 +331,7 @@ export default function SqueezePageVariant2() {
                 position: 'relative', zIndex: 5 - i,
                 background: '#e8e4de',
               }}>
-                <img src={src} alt="" style={{ width: '100%', height: '100%', objectFit: 'cover' }} />
+                <Image src={src} alt="" style={{ width: '100%', height: '100%', objectFit: 'cover' }} />
               </div>
             ))}
           </div>
@@ -564,7 +565,7 @@ export default function SqueezePageVariant2() {
           <div style={{ display: 'flex', flexDirection: 'column', gap: '16px' }}>
             {letterSamples.map((letter, i) => (
               <div key={i} className="letter-card">
-                <img
+                <Image
                   src={letter.img}
                   alt={letter.alt}
                   loading="lazy"
@@ -632,7 +633,7 @@ export default function SqueezePageVariant2() {
           {/* Romy bio — first person */}
           <div style={{ display: 'flex', alignItems: 'center', gap: '14px', padding: '16px 20px', background: '#fff', border: '1px solid #e8e4de', borderRadius: '12px', marginTop: '16px' }}>
             <div style={{ width: '48px', height: '48px', borderRadius: '50%', background: '#e8e4de', flexShrink: 0, overflow: 'hidden' }}>
-              <img src="/founder.jpg" alt="Romy Frazier" style={{ width: '48px', height: '48px', borderRadius: '50%', objectFit: 'cover' }} />
+              <Image src="/founder.jpg" alt="Romy Frazier" style={{ width: '48px', height: '48px', borderRadius: '50%', objectFit: 'cover' }} />
             </div>
             <div>
               <p style={{ fontFamily: 'DM Sans, sans-serif', color: '#1a1a1a', fontSize: '13px', fontWeight: 600, marginBottom: '3px' }}>Romy Frazier, Esq.</p>
@@ -729,7 +730,7 @@ function YouTubeFacade({ videoId }: { videoId: string }) {
 
   return (
     <div className="yt-facade" onClick={() => setClicked(true)}>
-      <img src={thumbnailUrl} alt="Play video" />
+      <Image src={thumbnailUrl} alt="Play video" />
       <div className="yt-play-btn">
         <svg viewBox="0 0 68 48" xmlns="http://www.w3.org/2000/svg">
           <path d="M66.5 7.7c-.8-2.9-2.9-5.1-5.8-5.9C55.8 0 34 0 34 0S12.2 0 7.3 1.8C4.4 2.6 2.3 4.8 1.5 7.7 0 12.7 0 24 0 24s0 11.3 1.5 16.3c.8 2.9 2.9 5.1 5.8 5.9C12.2 48 34 48 34 48s21.8 0 26.7-1.8c2.9-.8 5-3 5.8-5.9C68 35.3 68 24 68 24s0-11.3-1.5-16.3z" fill="#ff0000"/>
