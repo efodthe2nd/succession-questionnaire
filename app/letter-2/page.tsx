@@ -1444,7 +1444,7 @@ function YouTubeFacade({ videoId }: { videoId: string }) {
 
   return (
     <div className="yt-facade" onClick={() => setClicked(true)}>
-      <Image src={thumbnailUrl} alt="Play video" />
+      <Image src={thumbnailUrl} alt="Play video" width={560} height={315} />
       <div className="yt-play-btn">
         <svg viewBox="0 0 68 48" xmlns="http://www.w3.org/2000/svg">
           <path
