@@ -177,19 +177,19 @@ export default function SqueezePageVariant2() {
           width: '100%', padding: '16px 20px',
           border: '1.5px solid #d4c8bb', background: '#fff', color: '#1a1a1a',
           borderRadius: '10px', fontSize: '16px',
-          fontFamily: 'DM Sans, sans-serif',
+          fontFamily: 'var(--font-dm-sans), sans-serif',
           outline: 'none', boxSizing: 'border-box' as const,
           transition: 'border-color 0.2s',
         }}
       />
-      {error && <p style={{ color: '#c0392b', fontSize: '13px', fontFamily: 'DM Sans, sans-serif' }}>{error}</p>}
+      {error && <p style={{ color: '#c0392b', fontSize: '13px', fontFamily: 'var(--font-dm-sans), sans-serif' }}>{error}</p>}
       <button
         onClick={handleSubmit}
         disabled={loading}
         style={{
           width: '100%', padding: '17px',
           background: '#1a1a1a', color: '#B5A692',
-          fontFamily: 'DM Sans, sans-serif', fontWeight: 600,
+          fontFamily: 'var(--font-dm-sans), sans-serif', fontWeight: 600,
           fontSize: '16px', border: 'none', borderRadius: '10px',
           cursor: loading ? 'not-allowed' : 'pointer',
           opacity: loading ? 0.5 : 1,
@@ -198,7 +198,7 @@ export default function SqueezePageVariant2() {
       >
         {loading ? 'Creating your account...' : "Start my family's letter"}
       </button>
-      <p style={{ color: '#b0a89e', fontSize: '12px', textAlign: 'center', fontFamily: 'DM Sans, sans-serif', marginTop: '2px' }}>
+      <p style={{ color: '#b0a89e', fontSize: '12px', textAlign: 'center', fontFamily: 'var(--font-dm-sans), sans-serif', marginTop: '2px' }}>
         We'll send your login link to this email. We never share it with anyone.
       </p>
     </div>
@@ -209,7 +209,6 @@ export default function SqueezePageVariant2() {
       <Analytics />
 
       <style>{`
-        @import url('https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,400;0,500;0,600;1,400;1,500&family=DM+Sans:wght@300;400;500;600&display=swap');
         * { box-sizing: border-box; }
 
         @keyframes fadeUp {
@@ -291,13 +290,13 @@ export default function SqueezePageVariant2() {
 
       {/* Nav */}
       <nav style={{ position: 'relative', zIndex: 1, padding: '14px 20px', display: 'flex', alignItems: 'center', justifyContent: 'space-between', maxWidth: '600px', margin: '0 auto', width: '100%' }}>
-        <p style={{ fontFamily: 'Cormorant Garamond, Georgia, serif', color: '#1a1a1a', fontSize: '17px', fontWeight: 500, letterSpacing: '0.04em' }}>
+        <p style={{ fontFamily: 'var(--font-cormorant), Georgia, serif', color: '#1a1a1a', fontSize: '17px', fontWeight: 500, letterSpacing: '0.04em' }}>
           Succession <span style={{ color: '#B5A692' }}>Story</span>
         </p>
         <button
           onClick={() => setShowContact(true)}
           style={{
-            fontFamily: 'DM Sans, sans-serif', color: '#8a7f78', fontSize: '11px',
+            fontFamily: 'var(--font-dm-sans), sans-serif', color: '#8a7f78', fontSize: '11px',
             letterSpacing: '0.04em', textDecoration: 'none', display: 'flex',
             alignItems: 'center', gap: '5px', transition: 'color 0.2s',
             background: 'none', border: 'none', cursor: 'pointer',
@@ -343,7 +342,7 @@ export default function SqueezePageVariant2() {
             ))}
           </div>
         </div>
-        <p style={{ fontFamily: 'DM Sans, sans-serif', color: '#5a5450', fontSize: '12px', letterSpacing: '0.02em' }}>
+        <p style={{ fontFamily: 'var(--font-dm-sans), sans-serif', color: '#5a5450', fontSize: '12px', letterSpacing: '0.02em' }}>
           Trusted by <strong style={{ color: '#1a1a1a' }}>2,800+ families</strong> who've secured their legacy
         </p>
       </div>
@@ -355,7 +354,7 @@ export default function SqueezePageVariant2() {
           position: 'fixed', bottom: '24px', right: '20px', zIndex: 100,
           display: 'flex', alignItems: 'center', gap: '8px',
           background: '#1a1a1a', color: '#B5A692',
-          fontFamily: 'DM Sans, sans-serif', fontSize: '13px', fontWeight: 600,
+          fontFamily: 'var(--font-dm-sans), sans-serif', fontSize: '13px', fontWeight: 600,
           padding: '12px 18px', borderRadius: '50px', border: 'none',
           cursor: 'pointer', letterSpacing: '0.02em',
           boxShadow: '0 4px 24px rgba(0,0,0,0.18)',
@@ -390,10 +389,10 @@ export default function SqueezePageVariant2() {
 
             {!contactSent ? (
               <>
-                <p style={{ fontFamily: 'Cormorant Garamond, Georgia, serif', color: '#1a1a1a', fontSize: '22px', fontWeight: 500, marginBottom: '6px', lineHeight: 1.3 }}>
+                <p style={{ fontFamily: 'var(--font-cormorant), Georgia, serif', color: '#1a1a1a', fontSize: '22px', fontWeight: 500, marginBottom: '6px', lineHeight: 1.3 }}>
                   Have a question?
                 </p>
-                <p style={{ fontFamily: 'DM Sans, sans-serif', color: '#8a7f78', fontSize: '13px', marginBottom: '20px', lineHeight: 1.6 }}>
+                <p style={{ fontFamily: 'var(--font-dm-sans), sans-serif', color: '#8a7f78', fontSize: '13px', marginBottom: '20px', lineHeight: 1.6 }}>
                   Send us a message and we'll get back to you shortly.
                 </p>
 
@@ -407,7 +406,7 @@ export default function SqueezePageVariant2() {
                       width: '100%', padding: '14px 16px',
                       border: '1.5px solid #d4c8bb', background: '#fff',
                       color: '#1a1a1a', borderRadius: '10px', fontSize: '15px',
-                      fontFamily: 'DM Sans, sans-serif', outline: 'none',
+                      fontFamily: 'var(--font-dm-sans), sans-serif', outline: 'none',
                       boxSizing: 'border-box' as const,
                     }}
                   />
@@ -420,7 +419,7 @@ export default function SqueezePageVariant2() {
                       width: '100%', padding: '14px 16px',
                       border: '1.5px solid #d4c8bb', background: '#fff',
                       color: '#1a1a1a', borderRadius: '10px', fontSize: '15px',
-                      fontFamily: 'DM Sans, sans-serif', outline: 'none',
+                      fontFamily: 'var(--font-dm-sans), sans-serif', outline: 'none',
                       resize: 'none', boxSizing: 'border-box' as const,
                     }}
                   />
@@ -430,7 +429,7 @@ export default function SqueezePageVariant2() {
                       <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={1.8}
                         d="M3 8l7.89 5.26a2 2 0 002.22 0L21 8M5 19h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v10a2 2 0 002 2z" />
                     </svg>
-                    <p style={{ fontFamily: 'DM Sans, sans-serif', color: '#5a5450', fontSize: '13px', flex: 1 }}>
+                    <p style={{ fontFamily: 'var(--font-dm-sans), sans-serif', color: '#5a5450', fontSize: '13px', flex: 1 }}>
                       Or email us directly: <strong style={{ color: '#1a1a1a', userSelect: 'all' }}>hello@successionstory.now</strong>
                     </p>
                   </div>
@@ -453,7 +452,7 @@ export default function SqueezePageVariant2() {
                       width: '100%', padding: '16px',
                       background: contactMsg.trim() ? '#1a1a1a' : '#e8e4de',
                       color: contactMsg.trim() ? '#B5A692' : '#b0a89e',
-                      fontFamily: 'DM Sans, sans-serif', fontWeight: 600,
+                      fontFamily: 'var(--font-dm-sans), sans-serif', fontWeight: 600,
                       fontSize: '15px', border: 'none', borderRadius: '10px',
                       cursor: contactMsg.trim() ? 'pointer' : 'not-allowed',
                       letterSpacing: '0.02em',
@@ -466,7 +465,7 @@ export default function SqueezePageVariant2() {
                     onClick={() => setShowContact(false)}
                     style={{
                       background: 'none', border: 'none', cursor: 'pointer',
-                      fontFamily: 'DM Sans, sans-serif', color: '#b0a89e',
+                      fontFamily: 'var(--font-dm-sans), sans-serif', color: '#b0a89e',
                       fontSize: '13px', padding: '4px',
                     }}
                   >
@@ -481,10 +480,10 @@ export default function SqueezePageVariant2() {
                     <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M5 13l4 4L19 7" />
                   </svg>
                 </div>
-                <p style={{ fontFamily: 'Cormorant Garamond, Georgia, serif', color: '#1a1a1a', fontSize: '22px', fontWeight: 500, marginBottom: '8px' }}>
+                <p style={{ fontFamily: 'var(--font-cormorant), Georgia, serif', color: '#1a1a1a', fontSize: '22px', fontWeight: 500, marginBottom: '8px' }}>
                   Message sent
                 </p>
-                <p style={{ fontFamily: 'DM Sans, sans-serif', color: '#8a7f78', fontSize: '14px', lineHeight: 1.6, marginBottom: '24px' }}>
+                <p style={{ fontFamily: 'var(--font-dm-sans), sans-serif', color: '#8a7f78', fontSize: '14px', lineHeight: 1.6, marginBottom: '24px' }}>
                   We'll get back to you shortly.
                 </p>
                 <button
@@ -492,7 +491,7 @@ export default function SqueezePageVariant2() {
                   style={{
                     background: '#1a1a1a', color: '#B5A692', border: 'none',
                     padding: '14px 32px', borderRadius: '10px', cursor: 'pointer',
-                    fontFamily: 'DM Sans, sans-serif', fontWeight: 600, fontSize: '14px',
+                    fontFamily: 'var(--font-dm-sans), sans-serif', fontWeight: 600, fontSize: '14px',
                   }}
                 >
                   Done
@@ -507,38 +506,38 @@ export default function SqueezePageVariant2() {
 
         {/* ── 1. HEADLINE ── */}
         <div className="fade-1" style={{ textAlign: 'center', padding: '28px 0 24px' }}>
-          <h1 style={{ fontFamily: 'Cormorant Garamond, Georgia, serif', color: '#1a1a1a', fontSize: 'clamp(32px, 8vw, 48px)', lineHeight: 1.15, fontWeight: 500, marginBottom: '18px' }}>
+          <h1 style={{ fontFamily: 'var(--font-cormorant), Georgia, serif', color: '#1a1a1a', fontSize: 'clamp(32px, 8vw, 48px)', lineHeight: 1.15, fontWeight: 500, marginBottom: '18px' }}>
             Give your kids the one thing<br />
             they&apos;ll search for<br />
             <em style={{ color: '#B5A692' }}>after you&apos;re gone.</em>
           </h1>
-          <p style={{ fontFamily: 'DM Sans, sans-serif', color: '#5a5450', fontSize: '16px', lineHeight: 1.75, marginBottom: '8px', maxWidth: '480px', margin: '0 auto 8px' }}>
+          <p style={{ fontFamily: 'var(--font-dm-sans), sans-serif', color: '#5a5450', fontSize: '16px', lineHeight: 1.75, marginBottom: '8px', maxWidth: '480px', margin: '0 auto 8px' }}>
             A personal letter, written in your voice, from your answers, that tells your family who you really were, what you believed, and why you made the choices you made.
           </p>
-          <p style={{ fontFamily: 'DM Sans, sans-serif', color: '#8a7f78', fontSize: '14px', lineHeight: 1.6, margin: '8px auto 0', maxWidth: '380px' }}>
+          <p style={{ fontFamily: 'var(--font-dm-sans), sans-serif', color: '#8a7f78', fontSize: '14px', lineHeight: 1.6, margin: '8px auto 0', maxWidth: '380px' }}>
             No writing skill needed.
           </p>
         </div>
 
         {/* ── 2. TESTIMONIALS — immediately after headline ── */}
         <div className="fade-2" style={{ marginBottom: '32px' }}>
-          <p style={{ fontFamily: 'DM Sans, sans-serif', color: '#B5A692', fontSize: '11px', fontWeight: 600, letterSpacing: '0.18em', textTransform: 'uppercase', marginBottom: '16px', textAlign: 'center' }}>
+          <p style={{ fontFamily: 'var(--font-dm-sans), sans-serif', color: '#B5A692', fontSize: '11px', fontWeight: 600, letterSpacing: '0.18em', textTransform: 'uppercase', marginBottom: '16px', textAlign: 'center' }}>
             From families who found letters, and those who didn't
           </p>
           <div style={{ display: 'flex', flexDirection: 'column', gap: '12px' }}>
             {testimonials.map((t, i) => (
               <div key={i} className="testimonial-card">
-                <p style={{ fontFamily: 'Cormorant Garamond, Georgia, serif', color: '#2a2520', fontSize: '18px', lineHeight: 1.65, fontStyle: 'italic', marginBottom: '12px' }}>
+                <p style={{ fontFamily: 'var(--font-cormorant), Georgia, serif', color: '#2a2520', fontSize: '18px', lineHeight: 1.65, fontStyle: 'italic', marginBottom: '12px' }}>
                   &ldquo;{t.quote}&rdquo;
                 </p>
-                <p style={{ fontFamily: 'DM Sans, sans-serif', color: t.positive ? '#B5A692' : '#b0a89e', fontSize: '11px', fontWeight: 600, letterSpacing: '0.14em', textTransform: 'uppercase' }}>
+                <p style={{ fontFamily: 'var(--font-dm-sans), sans-serif', color: t.positive ? '#B5A692' : '#b0a89e', fontSize: '11px', fontWeight: 600, letterSpacing: '0.14em', textTransform: 'uppercase' }}>
                   {t.attribution}
                 </p>
               </div>
             ))}
           </div>
           <div style={{ marginTop: '12px', padding: '22px 24px', background: '#1a1a1a', borderRadius: '14px' }}>
-            <p style={{ fontFamily: 'Cormorant Garamond, Georgia, serif', color: '#f0ece6', fontSize: '19px', lineHeight: 1.65, fontStyle: 'italic' }}>
+            <p style={{ fontFamily: 'var(--font-cormorant), Georgia, serif', color: '#f0ece6', fontSize: '19px', lineHeight: 1.65, fontStyle: 'italic' }}>
               The letter they&apos;ll search for after you&apos;re gone.{' '}
               <span style={{ color: '#B5A692' }}>You can write it today.</span>
             </p>
@@ -552,13 +551,13 @@ export default function SqueezePageVariant2() {
 
         {/* ── 4. LETTER SAMPLES ── */}
         <div className="fade-3" style={{ marginBottom: '48px' }}>
-          <p style={{ fontFamily: 'DM Sans, sans-serif', color: '#B5A692', fontSize: '11px', fontWeight: 600, letterSpacing: '0.18em', textTransform: 'uppercase', marginBottom: '10px', textAlign: 'center' }}>
+          <p style={{ fontFamily: 'var(--font-dm-sans), sans-serif', color: '#B5A692', fontSize: '11px', fontWeight: 600, letterSpacing: '0.18em', textTransform: 'uppercase', marginBottom: '10px', textAlign: 'center' }}>
             What a legacy letter sounds like
           </p>
-          <h2 style={{ fontFamily: 'Cormorant Garamond, Georgia, serif', color: '#1a1a1a', fontSize: 'clamp(22px, 5vw, 30px)', fontWeight: 500, lineHeight: 1.25, textAlign: 'center', marginBottom: '6px' }}>
+          <h2 style={{ fontFamily: 'var(--font-cormorant), Georgia, serif', color: '#1a1a1a', fontSize: 'clamp(22px, 5vw, 30px)', fontWeight: 500, lineHeight: 1.25, textAlign: 'center', marginBottom: '6px' }}>
             Real letters. Real families.
           </h2>
-          <p style={{ fontFamily: 'DM Sans, sans-serif', color: '#8a7f78', fontSize: '13px', textAlign: 'center', marginBottom: '24px', lineHeight: 1.6 }}>
+          <p style={{ fontFamily: 'var(--font-dm-sans), sans-serif', color: '#8a7f78', fontSize: '13px', textAlign: 'center', marginBottom: '24px', lineHeight: 1.6 }}>
             Blurred to protect privacy. Every word is real.
           </p>
 
@@ -572,7 +571,7 @@ export default function SqueezePageVariant2() {
                   style={{ width: '100%', height: '180px', objectFit: 'cover', filter: 'blur(2px)', display: 'block' }}
                 />
                 <div style={{ padding: '18px 20px' }}>
-                  <p style={{ fontFamily: 'Cormorant Garamond, Georgia, serif', color: '#3a3530', fontSize: '17px', lineHeight: 1.7, fontStyle: 'italic' }}>
+                  <p style={{ fontFamily: 'var(--font-cormorant), Georgia, serif', color: '#3a3530', fontSize: '17px', lineHeight: 1.7, fontStyle: 'italic' }}>
                     {letter.excerpt}
                   </p>
                 </div>
@@ -582,7 +581,7 @@ export default function SqueezePageVariant2() {
 
           {/* CTA after samples */}
           <div style={{ marginTop: '28px' }}>
-            <p style={{ fontFamily: 'Cormorant Garamond, Georgia, serif', color: '#1a1a1a', fontSize: '20px', fontStyle: 'italic', textAlign: 'center', marginBottom: '20px', lineHeight: 1.45 }}>
+            <p style={{ fontFamily: 'var(--font-cormorant), Georgia, serif', color: '#1a1a1a', fontSize: '20px', fontStyle: 'italic', textAlign: 'center', marginBottom: '20px', lineHeight: 1.45 }}>
               Your letter is already inside you.<br />
               <span style={{ color: '#B5A692' }}>We just help you get it out.</span>
             </p>
@@ -592,7 +591,7 @@ export default function SqueezePageVariant2() {
 
         {/* ── 5. HOW IT WORKS ── */}
         <div className="fade-4" style={{ marginBottom: '40px' }}>
-          <p style={{ fontFamily: 'DM Sans, sans-serif', color: '#B5A692', fontSize: '11px', fontWeight: 600, letterSpacing: '0.18em', textTransform: 'uppercase', marginBottom: '16px', textAlign: 'center' }}>
+          <p style={{ fontFamily: 'var(--font-dm-sans), sans-serif', color: '#B5A692', fontSize: '11px', fontWeight: 600, letterSpacing: '0.18em', textTransform: 'uppercase', marginBottom: '16px', textAlign: 'center' }}>
             How it works
           </p>
           <div style={{ background: '#fff', border: '1px solid #e8e4de', borderRadius: '14px', overflow: 'hidden' }}>
@@ -602,10 +601,10 @@ export default function SqueezePageVariant2() {
               ['03', 'Read it. Then decide.', 'You see the finished letter before anything else. Your story, your call.'],
             ].map(([num, title, desc], i) => (
               <div key={num} style={{ display: 'flex', gap: '16px', padding: '18px 20px', borderBottom: i < 2 ? '1px solid #e8e4de' : 'none' }}>
-                <span style={{ fontFamily: 'Cormorant Garamond, Georgia, serif', color: '#B5A692', fontSize: '18px', fontWeight: 500, flexShrink: 0, marginTop: '2px' }}>{num}</span>
+                <span style={{ fontFamily: 'var(--font-cormorant), Georgia, serif', color: '#B5A692', fontSize: '18px', fontWeight: 500, flexShrink: 0, marginTop: '2px' }}>{num}</span>
                 <div>
-                  <p style={{ fontFamily: 'DM Sans, sans-serif', color: '#1a1a1a', fontSize: '14px', fontWeight: 600, marginBottom: '3px' }}>{title}</p>
-                  <p style={{ fontFamily: 'DM Sans, sans-serif', color: '#8a7f78', fontSize: '13px', lineHeight: 1.6 }}>{desc}</p>
+                  <p style={{ fontFamily: 'var(--font-dm-sans), sans-serif', color: '#1a1a1a', fontSize: '14px', fontWeight: 600, marginBottom: '3px' }}>{title}</p>
+                  <p style={{ fontFamily: 'var(--font-dm-sans), sans-serif', color: '#8a7f78', fontSize: '13px', lineHeight: 1.6 }}>{desc}</p>
                 </div>
               </div>
             ))}
@@ -617,8 +616,8 @@ export default function SqueezePageVariant2() {
           {[['2,800+', 'families served'], ['One sitting', 'start to finish'], ['100%', 'private']].map(([num, label], i) => (
             <React.Fragment key={label}>
               <div style={{ textAlign: 'center' }}>
-                <p style={{ fontFamily: 'Cormorant Garamond, Georgia, serif', color: '#1a1a1a', fontWeight: 600, fontSize: '20px', lineHeight: 1 }}>{num}</p>
-                <p style={{ fontFamily: 'DM Sans, sans-serif', color: '#8a7f78', fontSize: '11px', marginTop: '4px', letterSpacing: '0.04em' }}>{label}</p>
+                <p style={{ fontFamily: 'var(--font-cormorant), Georgia, serif', color: '#1a1a1a', fontWeight: 600, fontSize: '20px', lineHeight: 1 }}>{num}</p>
+                <p style={{ fontFamily: 'var(--font-dm-sans), sans-serif', color: '#8a7f78', fontSize: '11px', marginTop: '4px', letterSpacing: '0.04em' }}>{label}</p>
               </div>
               {i < 2 && <div className="stat-divider" />}
             </React.Fragment>
@@ -636,8 +635,8 @@ export default function SqueezePageVariant2() {
               <Image src="/founder.jpg" alt="Romy Frazier" style={{ width: '48px', height: '48px', borderRadius: '50%', objectFit: 'cover' }} />
             </div>
             <div>
-              <p style={{ fontFamily: 'DM Sans, sans-serif', color: '#1a1a1a', fontSize: '13px', fontWeight: 600, marginBottom: '3px' }}>Romy Frazier, Esq.</p>
-              <p style={{ fontFamily: 'DM Sans, sans-serif', color: '#8a7f78', fontSize: '12px', lineHeight: 1.55 }}>
+              <p style={{ fontFamily: 'var(--font-dm-sans), sans-serif', color: '#1a1a1a', fontSize: '13px', fontWeight: 600, marginBottom: '3px' }}>Romy Frazier, Esq.</p>
+              <p style={{ fontFamily: 'var(--font-dm-sans), sans-serif', color: '#8a7f78', fontSize: '12px', lineHeight: 1.55 }}>
                 I'm a succession attorney. After years watching families search for words that were never written, I built the tool I wished had existed.
               </p>
             </div>
@@ -646,10 +645,10 @@ export default function SqueezePageVariant2() {
 
         {/* ── 8. FAQ ── */}
         <div className="fade-5">
-          <p style={{ fontFamily: 'DM Sans, sans-serif', color: '#B5A692', fontSize: '11px', fontWeight: 600, letterSpacing: '0.2em', textTransform: 'uppercase', marginBottom: '10px', textAlign: 'center' }}>
+          <p style={{ fontFamily: 'var(--font-dm-sans), sans-serif', color: '#B5A692', fontSize: '11px', fontWeight: 600, letterSpacing: '0.2em', textTransform: 'uppercase', marginBottom: '10px', textAlign: 'center' }}>
             Questions and answers
           </p>
-          <h2 style={{ fontFamily: 'Cormorant Garamond, Georgia, serif', color: '#1a1a1a', fontSize: 'clamp(24px, 5vw, 32px)', fontWeight: 500, lineHeight: 1.2, textAlign: 'center', marginBottom: '24px' }}>
+          <h2 style={{ fontFamily: 'var(--font-cormorant), Georgia, serif', color: '#1a1a1a', fontSize: 'clamp(24px, 5vw, 32px)', fontWeight: 500, lineHeight: 1.2, textAlign: 'center', marginBottom: '24px' }}>
             Everything you need to know
           </h2>
 
@@ -663,7 +662,7 @@ export default function SqueezePageVariant2() {
                     trackEvent('faq_opened', { question: faq.q.substring(0, 50) })
                   }}
                 >
-                  <p style={{ fontFamily: 'DM Sans, sans-serif', color: '#1a1a1a', fontSize: '14px', fontWeight: 500, lineHeight: 1.5 }}>
+                  <p style={{ fontFamily: 'var(--font-dm-sans), sans-serif', color: '#1a1a1a', fontSize: '14px', fontWeight: 500, lineHeight: 1.5 }}>
                     {faq.q}
                   </p>
                   <div style={{
@@ -684,7 +683,7 @@ export default function SqueezePageVariant2() {
                   paddingBottom: openFaq === i ? '16px' : '0',
                   transition: 'max-height 0.35s ease, opacity 0.3s ease, padding-bottom 0.3s ease',
                 }}>
-                  <p style={{ fontFamily: 'DM Sans, sans-serif', color: '#5a5450', fontSize: '14px', lineHeight: 1.75 }}>
+                  <p style={{ fontFamily: 'var(--font-dm-sans), sans-serif', color: '#5a5450', fontSize: '14px', lineHeight: 1.75 }}>
                     {faq.a}
                   </p>
                 </div>
@@ -694,7 +693,7 @@ export default function SqueezePageVariant2() {
 
           {/* ── 9. FINAL FORM ── */}
           <div style={{ marginTop: '32px' }}>
-            <p style={{ fontFamily: 'Cormorant Garamond, Georgia, serif', color: '#1a1a1a', fontSize: '22px', fontStyle: 'italic', textAlign: 'center', marginBottom: '20px', lineHeight: 1.4 }}>
+            <p style={{ fontFamily: 'var(--font-cormorant), Georgia, serif', color: '#1a1a1a', fontSize: '22px', fontStyle: 'italic', textAlign: 'center', marginBottom: '20px', lineHeight: 1.4 }}>
               The letter your family will carry with them forever.<br />
               <span style={{ color: '#B5A692' }}>Write it today.</span>
             </p>

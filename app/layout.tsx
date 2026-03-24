@@ -6,12 +6,29 @@ import {
   Handlee,
   Caveat,
   Kalam,
+  Cormorant_Garamond,
+  DM_Sans,
 } from "next/font/google";
 import type { Metadata } from "next";
 import "./globals.css";
 import AuthCallbackHandler from "@/components/AuthCallbackHandler";
 import FacebookPixel from "@/components/FacebookPixel";
 import Script from 'next/script';
+
+const cormorant = Cormorant_Garamond({
+  subsets: ['latin'],
+  weight: ['400', '500', '600'],
+  style: ['normal', 'italic'],
+  variable: '--font-cormorant',
+  display: 'swap',
+})
+
+const dmSans = DM_Sans({
+  subsets: ['latin'],
+  weight: ['300', '400', '500', '600'],
+  variable: '--font-dm-sans',
+  display: 'swap',
+})
 
 const lora = Lora({
   subsets: ["latin"],
@@ -74,7 +91,7 @@ export default function RootLayout({
     <html
       lang="en"
       suppressHydrationWarning
-      className={`${lora.variable} ${poppins.variable} ${antic.variable} ${overTheRainbow.variable} ${handlee.variable} ${caveat.variable} ${kalam.variable}`}
+      className={`${lora.variable} ${poppins.variable} ${antic.variable} ${overTheRainbow.variable} ${handlee.variable} ${caveat.variable} ${kalam.variable} ${cormorant.variable} ${dmSans.variable}`}
     >
       <head>
         {/* Google Analytics */}
