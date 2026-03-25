@@ -57,6 +57,97 @@ function trackEvent(eventName: string, params?: Record<string, string>) {
 const YOUTUBE_VIDEO_ID = "hma2VrOJjZg";
 // ───────────────────────────────────────────────────────────────────
 
+// ─── OUTSIDE the main component ───────────────────────────────────
+function FormBlock({
+  id,
+  email,
+  loading,
+  error,
+  onEmailChange,
+  onSubmit,
+  onFocus,
+}: {
+  id: string;
+  email: string;
+  loading: boolean;
+  error: string;
+  onEmailChange: (val: string) => void;
+  onSubmit: () => void;
+  onFocus: (id: string) => void;
+}) {
+  return (
+    <div
+      id={id}
+      style={{ display: "flex", flexDirection: "column", gap: "10px" }}
+    >
+      <input
+        type="email"
+        placeholder="Enter your email address"
+        value={email}
+        onChange={(e) => onEmailChange(e.target.value)}
+        onKeyDown={(e) => e.key === "Enter" && onSubmit()}
+        onFocus={() => onFocus(id)}
+        disabled={loading}
+        style={{
+          width: "100%",
+          padding: "16px 20px",
+          border: "1.5px solid #d4c8bb",
+          background: "#fff",
+          color: "#1a1a1a",
+          borderRadius: "10px",
+          fontSize: "16px",
+          fontFamily: "var(--font-dm-sans), sans-serif",
+          outline: "none",
+          boxSizing: "border-box" as const,
+          transition: "border-color 0.2s",
+        }}
+      />
+      {error && (
+        <p
+          style={{
+            color: "#c0392b",
+            fontSize: "13px",
+            fontFamily: "var(--font-dm-sans), sans-serif",
+          }}
+        >
+          {error}
+        </p>
+      )}
+      <button
+        onClick={onSubmit}
+        disabled={loading}
+        style={{
+          width: "100%",
+          padding: "17px",
+          background: "#1a1a1a",
+          color: "#B5A692",
+          fontFamily: "var(--font-dm-sans), sans-serif",
+          fontWeight: 600,
+          fontSize: "16px",
+          border: "none",
+          borderRadius: "10px",
+          cursor: loading ? "not-allowed" : "pointer",
+          opacity: loading ? 0.5 : 1,
+          letterSpacing: "0.02em",
+        }}
+      >
+        {loading ? "Creating your account..." : "Start my family's letter"}
+      </button>
+      <p
+        style={{
+          color: "#b0a89e",
+          fontSize: "12px",
+          textAlign: "center",
+          fontFamily: "var(--font-dm-sans), sans-serif",
+          marginTop: "2px",
+        }}
+      >
+        We'll send your login link to this email. We never share it with anyone.
+      </p>
+    </div>
+  );
+}
+
 export default function SqueezePageVariant2() {
   const router = useRouter();
   const [email, setEmail] = useState("");
@@ -206,81 +297,6 @@ export default function SqueezePageVariant2() {
       a: "Yes. Many people write individual letters to each child or grandchild. Once you've completed your first letter, you can start another at any time.",
     },
   ];
-
-  const FormBlock = ({ id }: { id: string }) => (
-    <div
-      id={id}
-      style={{ display: "flex", flexDirection: "column", gap: "10px" }}
-    >
-      <input
-        type="email"
-        placeholder="Enter your email address"
-        value={email}
-        onChange={(e) => {
-          setEmail(e.target.value);
-          setError("");
-        }}
-        onKeyDown={(e) => e.key === "Enter" && handleSubmit()}
-        onFocus={() => trackEvent("form_focus", { form_id: id })}
-        disabled={loading}
-        style={{
-          width: "100%",
-          padding: "16px 20px",
-          border: "1.5px solid #d4c8bb",
-          background: "#fff",
-          color: "#1a1a1a",
-          borderRadius: "10px",
-          fontSize: "16px",
-          fontFamily: "var(--font-dm-sans), sans-serif",
-          outline: "none",
-          boxSizing: "border-box" as const,
-          transition: "border-color 0.2s",
-        }}
-      />
-      {error && (
-        <p
-          style={{
-            color: "#c0392b",
-            fontSize: "13px",
-            fontFamily: "var(--font-dm-sans), sans-serif",
-          }}
-        >
-          {error}
-        </p>
-      )}
-      <button
-        onClick={handleSubmit}
-        disabled={loading}
-        style={{
-          width: "100%",
-          padding: "17px",
-          background: "#1a1a1a",
-          color: "#B5A692",
-          fontFamily: "var(--font-dm-sans), sans-serif",
-          fontWeight: 600,
-          fontSize: "16px",
-          border: "none",
-          borderRadius: "10px",
-          cursor: loading ? "not-allowed" : "pointer",
-          opacity: loading ? 0.5 : 1,
-          letterSpacing: "0.02em",
-        }}
-      >
-        {loading ? "Creating your account..." : "Start my family's letter"}
-      </button>
-      <p
-        style={{
-          color: "#b0a89e",
-          fontSize: "12px",
-          textAlign: "center",
-          fontFamily: "var(--font-dm-sans), sans-serif",
-          marginTop: "2px",
-        }}
-      >
-        We'll send your login link to this email. We never share it with anyone.
-      </p>
-    </div>
-  );
 
   return (
     <main
@@ -897,7 +913,18 @@ export default function SqueezePageVariant2() {
 
         {/* ── 3. FORM #1 — right after testimonials ── */}
         <div className="fade-3" style={{ marginBottom: "48px" }}>
-          <FormBlock id="form-top" />
+          <FormBlock
+            id="form-top"
+            email={email}
+            loading={loading}
+            error={error}
+            onEmailChange={(val) => {
+              setEmail(val);
+              setError("");
+            }}
+            onSubmit={handleSubmit}
+            onFocus={(id) => trackEvent("form_focus", { form_id: id })}
+          />
         </div>
 
         {/* ── 4. LETTER SAMPLES ── */}
@@ -997,7 +1024,18 @@ export default function SqueezePageVariant2() {
                 We just help you get it out.
               </span>
             </p>
-            <FormBlock id="form-letters" />
+            <FormBlock
+              id="form-letters"
+              email={email}
+              loading={loading}
+              error={error}
+              onEmailChange={(val) => {
+                setEmail(val);
+                setError("");
+              }}
+              onSubmit={handleSubmit}
+              onFocus={(id) => trackEvent("form_focus", { form_id: id })}
+            />
           </div>
         </div>
 
@@ -1170,12 +1208,12 @@ export default function SqueezePageVariant2() {
               }}
             >
               <Image
-  src="/founder.jpg"
-  alt="Romy Frazier"
-  width={48}
-  height={48}
-  style={{ borderRadius: '50%', objectFit: 'cover' }}
-/>
+                src="/founder.jpg"
+                alt="Romy Frazier"
+                width={48}
+                height={48}
+                style={{ borderRadius: "50%", objectFit: "cover" }}
+              />
             </div>
             <div>
               <p
@@ -1327,7 +1365,18 @@ export default function SqueezePageVariant2() {
               <br />
               <span style={{ color: "#B5A692" }}>Write it today.</span>
             </p>
-            <FormBlock id="form-bottom" />
+            <FormBlock
+              id="form-bottom"
+              email={email}
+              loading={loading}
+              error={error}
+              onEmailChange={(val) => {
+                setEmail(val);
+                setError("");
+              }}
+              onSubmit={handleSubmit}
+              onFocus={(id) => trackEvent("form_focus", { form_id: id })}
+            />
           </div>
         </div>
       </div>
