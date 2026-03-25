@@ -7,7 +7,7 @@ const supabaseAdmin = createClient(
   process.env.SUPABASE_SERVICE_ROLE_KEY!,
 );
 
-const QUESTIONNAIRE_URL = `${process.env.NEXT_PUBLIC_SITE_URL}/questionnaire`;
+const QUESTIONNAIRE_URL = `${process.env.NEXT_PUBLIC_SITE_URL}/auth/callback`;
 
 export async function POST(req: NextRequest) {
   try {

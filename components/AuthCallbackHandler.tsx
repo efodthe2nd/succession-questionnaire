@@ -1,97 +1,76 @@
-'use client';
+'use client'
 
-import { useEffect, useState } from 'react';
-import { useRouter, usePathname } from 'next/navigation';
-import { createClient } from '@/lib/supabase';
+import { useEffect, useState } from 'react'
+import { useRouter, usePathname } from 'next/navigation'
+import { createClient } from '@/lib/supabase'
 
 /**
  * AuthCallbackHandler
  *
- * This component handles auth callbacks from Supabase magic links.
- * It detects when the app loads with recovery tokens in the URL hash
- * (e.g., #access_token=...&type=recovery) and redirects to /set-password.
- *
- * Place this component in the root layout to handle callbacks on any page.
+ * Stripped down. Magic links now go to /auth/callback directly.
+ * This component only handles:
+ * 1. Recovery links that land on random pages
+ * 2. Auth errors (expired links)
  */
 export default function AuthCallbackHandler() {
-  const router = useRouter();
-  const pathname = usePathname();
-  const supabase = createClient();
-  const [error, setError] = useState<{ code: string; description: string } | null>(null);
+  const router = useRouter()
+  const pathname = usePathname()
+  const supabase = createClient()
+  const [error, setError] = useState<{ code: string; description: string } | null>(null)
 
   useEffect(() => {
-    // Check URL hash for recovery tokens or errors
     const handleHashChange = async () => {
-      // Only process on client side
-      if (typeof window === 'undefined') return;
+      if (typeof window === 'undefined') return
 
-      const hash = window.location.hash;
-      if (!hash) return;
+      const hash = window.location.hash
+      if (!hash) return
 
-      console.log('[AuthCallbackHandler] Detected hash:', hash);
+      const hashParams = new URLSearchParams(hash.substring(1))
+      const errorCode = hashParams.get('error_code')
+      const errorDescription = hashParams.get('error_description')
+      const type = hashParams.get('type')
+      const accessToken = hashParams.get('access_token')
 
-      // Parse hash parameters
-      const hashParams = new URLSearchParams(hash.substring(1));
-
-      // Check for errors in the hash (e.g., expired link)
-      const errorCode = hashParams.get('error_code');
-      const errorDescription = hashParams.get('error_description');
-
+      // Handle errors
       if (errorCode) {
-        console.log('[AuthCallbackHandler] Error detected:', errorCode);
-        // Clear the hash from URL
-        window.history.replaceState(null, '', pathname);
-
-        // Show error state
+        window.history.replaceState(null, '', pathname)
         setError({
           code: errorCode,
           description: errorDescription?.replace(/\+/g, ' ') || 'An error occurred',
-        });
-        return;
+        })
+        return
       }
 
-      // Check if this is a recovery flow
-      const type = hashParams.get('type');
-      const accessToken = hashParams.get('access_token');
-
+      // Recovery flow
       if (type === 'recovery' && accessToken) {
-        console.log('[AuthCallbackHandler] Recovery flow detected, redirecting to /set-password');
-
-        // Redirect to set-password page immediately
-        // The tokens in the hash will be processed by Supabase on the new page
-        // We pass the hash along so Supabase can process it
-        console.log('[AuthCallbackHandler] BEFORE redirect to /set-password');
-        window.location.href = '/set-password' + hash;
-        console.log('[AuthCallbackHandler] AFTER redirect to /set-password');
-        return;
+        window.location.href = '/set-password' + hash
+        return
       }
-    };
 
-    // Run on mount
-    handleHashChange();
+      // Magic links should never land here anymore (they go to /auth/callback)
+      // But just in case, handle them gracefully
+      if (type === 'magiclink' && accessToken) {
+        window.location.replace('/auth/callback' + hash)
+        return
+      }
+    }
 
-    // Listen for auth state changes (backup mechanism)
+    handleHashChange()
+
     const { data: { subscription } } = supabase.auth.onAuthStateChange(
       async (event, session) => {
-        console.log('[AuthCallbackHandler] Full event:', event, session);
-        // Check if this is a PASSWORD_RECOVERY event
         if (event === 'PASSWORD_RECOVERY' && session) {
-          console.log('[AuthCallbackHandler] PASSWORD_RECOVERY event, redirecting');
-          // Clear hash and redirect to set-password
-          if (typeof window !== 'undefined') {
-            window.history.replaceState(null, '', pathname);
-          }
-          router.push('/set-password');
+          window.history.replaceState(null, '', pathname)
+          router.push('/set-password')
         }
       }
-    );
+    )
 
     return () => {
-      subscription.unsubscribe();
-    };
-  }, [supabase, router, pathname]);
+      subscription.unsubscribe()
+    }
+  }, [supabase, router, pathname])
 
-  // Show error overlay if there's an auth error
   if (error) {
     return (
       <div className="fixed inset-0 bg-black/90 flex items-center justify-center z-50 p-4">
@@ -101,39 +80,31 @@ export default function AuthCallbackHandler() {
               <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M12 9v2m0 4h.01m-6.938 4h13.856c1.54 0 2.502-1.667 1.732-3L13.732 4c-.77-1.333-2.694-1.333-3.464 0L3.34 16c-.77 1.333.192 3 1.732 3z" />
             </svg>
           </div>
-
           <h2 className="text-2xl font-heading font-bold text-white mb-2">
             Link Expired
           </h2>
-
           <p className="text-white/70 mb-6">
             {error.code === 'otp_expired'
-              ? 'This password reset link has expired or has already been used.'
+              ? 'This link has expired or has already been used.'
               : error.description}
           </p>
-
           <p className="text-white/50 text-sm mb-6">
             Please contact support at{' '}
-            <a href="mailto:successionstory.now@gmail.com" className="text-[#B5A692] hover:underline">
-              successionstory.now@gmail.com
+            <a href="mailto:hello@successionstory.now" className="text-[#B5A692] hover:underline">
+              hello@successionstory.now
             </a>{' '}
             to request a new link.
           </p>
-
           <button
-            onClick={() => {
-              setError(null);
-              router.push('/');
-            }}
+            onClick={() => { setError(null); router.push('/') }}
             className="px-8 py-3 bg-white text-black rounded-lg font-semibold hover:bg-gray-100 transition-all"
           >
             Return Home
           </button>
         </div>
       </div>
-    );
+    )
   }
 
-  // This component doesn't render anything when there's no error
-  return null;
+  return null
 }
