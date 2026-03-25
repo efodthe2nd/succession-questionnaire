@@ -1,80 +1,86 @@
-import { NextRequest, NextResponse } from 'next/server'
-import { createClient } from '@supabase/supabase-js'
-import { sendWelcomeEmail, generatePassword } from '@/lib/email'
+import { NextRequest, NextResponse } from "next/server";
+import { createClient } from "@supabase/supabase-js";
+import { sendWelcomeEmail } from "@/lib/email";
 
 const supabaseAdmin = createClient(
   process.env.NEXT_PUBLIC_SUPABASE_URL!,
-  process.env.SUPABASE_SERVICE_ROLE_KEY!
-)
+  process.env.SUPABASE_SERVICE_ROLE_KEY!,
+);
+
+const QUESTIONNAIRE_URL = `${process.env.NEXT_PUBLIC_SITE_URL}/questionnaire`;
 
 export async function POST(req: NextRequest) {
   try {
-    const { email, source = 'variant-1' } = await req.json()
+    const { email, source = "variant-1" } = await req.json();
 
-    if (!email || typeof email !== 'string') {
-      return NextResponse.json({ error: 'Valid email required' }, { status: 400 })
+    if (!email || typeof email !== "string") {
+      return NextResponse.json({ error: "Valid email required" }, { status: 400 });
     }
 
-    const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/
+    const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
     if (!emailRegex.test(email)) {
-      return NextResponse.json({ error: 'Invalid email format' }, { status: 400 })
+      return NextResponse.json({ error: "Invalid email format" }, { status: 400 });
     }
 
-    const cleanEmail = email.toLowerCase().trim()
+    const cleanEmail = email.toLowerCase().trim();
 
     // 1. Save to leads table
     const { error: leadError } = await supabaseAdmin
-      .from('leads')
-      .upsert({ email: cleanEmail, source }, { onConflict: 'email' })
+      .from("leads")
+      .upsert({ email: cleanEmail, source }, { onConflict: "email" });
 
     if (leadError) {
-      console.error('[leads/capture] leads upsert error:', leadError)
+      console.error("[leads/capture] leads upsert error:", leadError);
     }
 
-    // 2. Generate a password
-    const password = generatePassword()
-
-    // 3. Create user with email_confirm: true and a real password
+    // 2. Create user if they don't exist
     const { error: signUpError } = await supabaseAdmin.auth.admin.createUser({
       email: cleanEmail,
-      password,
-      email_confirm: true, // ← no magic link, no confirmation email from Supabase
+      email_confirm: true,
       user_metadata: { source },
-    })
+    });
 
-    // 4. If user already exists, update their password so the email we send is valid
-    if (signUpError && signUpError.message.includes('already been registered')) {
-      const { error: listError, data: listData } = await supabaseAdmin.auth.admin.listUsers()
-      if (!listError) {
-        const existingUser = listData.users.find(u => u.email === cleanEmail)
-        if (existingUser) {
-          await supabaseAdmin.auth.admin.updateUserById(existingUser.id, { password })
-        }
-      }
-    } else if (signUpError) {
-      console.error('[leads/capture] createUser error:', signUpError)
-      return NextResponse.json({ error: 'Failed to create account' }, { status: 500 })
+    // Ignore "already registered" — user exists, that's fine
+    if (signUpError && !signUpError.message.includes("already been registered")) {
+      console.error("[leads/capture] createUser error:", signUpError);
+      return NextResponse.json({ error: "Failed to create account" }, { status: 500 });
     }
 
-    // 5. Send our welcome email with credentials
-    // 5. Send our welcome email with credentials
-const emailSent = await sendWelcomeEmail({ to: cleanEmail, password })
+    // 3. Generate magic link pointing directly to /questionnaire
+    const { data: linkData, error: linkError } =
+      await supabaseAdmin.auth.admin.generateLink({
+        type: "magiclink",
+        email: cleanEmail,
+        options: {
+          redirectTo: QUESTIONNAIRE_URL,
+        },
+      });
 
-// 6. Update funnel_stage and email_sent_at
-if (emailSent) {
-  await supabaseAdmin
-    .from('leads')
-    .update({
-      funnel_stage: 'email_sent',
-      email_sent_at: new Date().toISOString(),
-    })
-    .eq('email', cleanEmail)
-}
+    if (linkError || !linkData?.properties?.action_link) {
+      console.error("[leads/capture] generateLink error:", linkError);
+      // Fallback: send to login page if magic link fails
+      return NextResponse.json({ success: true, redirect: "/login" });
+    }
 
-return NextResponse.json({ success: true })
+    const magicLink = linkData.properties.action_link;
+
+    // 4. Update funnel stage
+    await supabaseAdmin
+      .from("leads")
+      .update({ funnel_stage: "email_sent" })
+      .eq("email", cleanEmail);
+
+    // 5. Fire welcome email in background — don't await it
+    // This no longer blocks the redirect
+    sendWelcomeEmail({ to: cleanEmail, magicLink }).catch((err) =>
+      console.error("[leads/capture] welcome email error:", err)
+    );
+
+    // 6. Return magic link to frontend — frontend redirects immediately
+    return NextResponse.json({ success: true, redirect: magicLink });
 
   } catch (err) {
-    console.error('[leads/capture] Unexpected error:', err)
-    return NextResponse.json({ error: 'Internal server error' }, { status: 500 })
+    console.error("[leads/capture] Unexpected error:", err);
+    return NextResponse.json({ error: "Internal server error" }, { status: 500 });
   }
 }

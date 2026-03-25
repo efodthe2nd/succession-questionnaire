@@ -99,9 +99,7 @@ export default function SqueezePageVariant2() {
 
       trackEvent("lead_captured", { source: "variant-2-unfinished" });
 
-      router.push(
-        `/login?email=${encodeURIComponent(email.trim())}&from=squeeze`,
-      );
+      window.location.href = data.redirect || "/questionnaire";
     } catch {
       setError("Network error. Please try again.");
       setLoading(false);
@@ -1172,15 +1170,12 @@ export default function SqueezePageVariant2() {
               }}
             >
               <Image
-                src="/founder.jpg"
-                alt="Romy Frazier"
-                style={{
-                  width: "48px",
-                  height: "48px",
-                  borderRadius: "50%",
-                  objectFit: "cover",
-                }}
-              />
+  src="/founder.jpg"
+  alt="Romy Frazier"
+  width={48}
+  height={48}
+  style={{ borderRadius: '50%', objectFit: 'cover' }}
+/>
             </div>
             <div>
               <p

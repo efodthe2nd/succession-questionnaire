@@ -48,6 +48,21 @@ export default function QuestionnairePage() {
   const currentQuestions = getQuestionsBySection(currentSectionIndex);
 
   useEffect(() => {
+  const trackStart = async () => {
+    const { data: { user } } = await supabase.auth.getUser()
+    if (!user?.email) return
+
+    fetch('/api/leads/track-questionnaire-start', {
+      method: 'POST',
+      headers: { 'Content-Type': 'application/json' },
+      body: JSON.stringify({ email: user.email }),
+    }).catch(err => console.error('[questionnaire] track start error:', err))
+  }
+
+  trackStart()
+}, [])
+
+  useEffect(() => {
     const handleMouseLeave = (e: MouseEvent) => {
       if (e.clientY <= 0) setShowExitIntent(true);
     };
@@ -136,16 +151,14 @@ export default function QuestionnairePage() {
 
     const answerText =
       typeof value === "string" ? value : JSON.stringify(value);
-    const { error } = await supabase
-      .from("answers")
-      .upsert(
-        {
-          submission_id: submissionId,
-          question_id: questionId,
-          answer_text: answerText,
-        },
-        { onConflict: "submission_id,question_id" },
-      );
+    const { error } = await supabase.from("answers").upsert(
+      {
+        submission_id: submissionId,
+        question_id: questionId,
+        answer_text: answerText,
+      },
+      { onConflict: "submission_id,question_id" },
+    );
 
     if (error) {
       console.error(
