@@ -252,51 +252,79 @@ export default function SqueezePageVariant2() {
   ];
 
   const faqs = [
-    {
-      q: "What happens in the first 5 minutes after I sign up?",
-      a: "You'll receive a secure login link in your inbox immediately. Once you click it, you can begin answering your first guided questions right away. There's no complex setup, just your story, at your own pace.",
-    },
-    {
-      q: "How soon will I see a draft of my letter?",
-      a: "As soon as you finish the questionnaire, we begin crafting your letter. Most families see their draft ready for review within 15 to 30 minutes of completing their answers.",
-    },
-    {
-      q: "What if I'm not ready to finish everything today?",
-      a: "That's perfectly fine. Your progress is saved in real-time. Answer two questions today, finish the rest next week. You move at whatever pace feels right.",
-    },
-    {
-      q: "What exactly is a legacy letter?",
-      a: "A legacy letter is a personal message from you to the people you love, written in your voice. Not a legal document. Not a will. Just the things that matter most: what shaped you, what you believe, what you want them to carry forward when life gets hard.",
-    },
-    {
-      q: "How is this different from a will?",
-      a: "A will distributes your assets. A legacy letter passes on your meaning. Your kids will know who gets the house, but without a letter, they may never know why you bought it, what you sacrificed for them, or what you actually believe. A will is for lawyers. A letter is for your family.",
-    },
-    {
-      q: "Do I have to be a good writer?",
-      a: "No. You never write a single word. We ask you guided questions. You answer in your own words, as if you're talking to someone you trust. We take your answers and write the finished letter for you, in your voice.",
-    },
-    {
-      q: "How long does it take?",
-      a: "You can do it in one sitting or save your progress and come back. There's no deadline.",
-    },
-    {
-      q: "Is this AI-generated?",
-      a: "Your letter is built entirely from your own words and answers. The result reads like you, because it is you. We use your responses to craft something personal and specific, not a generic template.",
-    },
-    {
-      q: "Is my information private?",
-      a: "Yes. Your answers and your letter are completely private. We never share your information with anyone. Your letter belongs to you.",
-    },
-    {
-      q: "What if I don't love the letter?",
-      a: "You don't pay until you've read it and decided it's right. If it doesn't feel like you, we'll revise it. Still not happy? Full refund, no questions asked.",
-    },
-    {
-      q: "Can I write letters for more than one person?",
-      a: "Yes. Many people write individual letters to each child or grandchild. Once you've completed your first letter, you can start another at any time.",
-    },
-  ];
+  {
+    q: "What exactly is a Succession Story?",
+    a: "It's a personal letter from you that captures the 'why' behind your decisions, the stories you want to preserve, the wisdom you've earned. Not just that you're leaving the house to them — but how you decided to trust them with it. Not just a bank account getting transferred — but the philosophy behind how you made your money compound. Think of it as the voice your trust never had.",
+  },
+  {
+    q: "Do I need a will or estate plan before I start?",
+    a: "No. A Succession Story stands completely on its own. While it makes a powerful companion to a formal estate plan, you don't need one to begin. Many of our members create their Succession Story first and find it clarifies their thinking when it comes time to work with an attorney. What you need is something to say — and if you're here, you already have that.",
+  },
+  {
+    q: "How is this different from my estate plan or will?",
+    a: "Your estate plan was drafted by attorneys to list and distribute your assets. Your life insurance simply lists beneficiaries. Your bank account will just be dollars transferred. Not one of those documents says a word about you. Not why you made the decisions you made. Not what the money cost you. Not what you believed, what you sacrificed, or what you hope for the people who are about to inherit your life's work. One handles the paperwork. The other handles everything your successors will actually need when the paperwork is done.",
+  },
+  {
+    q: "I already have a succession plan. Why do I need this?",
+    a: "Your succession plan tells your successors who leads and who receives what. It doesn't tell them why you made the decisions you made, what you want the culture to remain, what you would say on their first hard day without you, or what the wealth is actually for across generations. Legal documents transfer structure. Succession Story transfers meaning. They are not competing, they are completing each other.",
+  },
+  {
+    q: "Why not just write the letter myself or use ChatGPT?",
+    a: "You absolutely can write it yourself — and if you do, it will mean everything to your family. But most people face a blank page and don't know where to start. As for AI: it can write a letter, but it cannot ask the right questions. Our founder is an attorney who developed this questionnaire from years working directly with high-net-worth families navigating inheritance, business transition, and loss. We know what successors wish they'd been told. A human reviews your letter before it's delivered. An AI outputs a document. We help you leave a legacy.",
+  },
+  {
+    q: "Is this a legal document?",
+    a: "No. Succession Story has no legal effect and does not replace, modify, or override any will, trust, shareholder agreement, or estate plan. It is a personal and philosophical document — the kind that gives your legal documents context and your successors direction. For legal matters, always work with qualified counsel.",
+  },
+  {
+    q: "I'm not the kind of person who writes letters. Is this really for me?",
+    a: "It is built for you specifically. You do not have to write anything. You answer questions. We do the writing. Most who approach this with resistance tell us afterward that it felt like a conversation, not a composition. When they read the finished letter, they recognized themselves in it completely.",
+  },
+  {
+    q: "I have said what I needed to say to my children in person. Why write it down?",
+    a: "Because you will not always be there to say it again. A conversation cannot be retrieved. A letter can be returned to at the exact moment it is most needed — which is almost never the moment you expected. Your daughter reads it the day after your funeral. Your grandson reads it at twenty-two before his first major decision. The conversations were for the present. The letter is for every moment after.",
+  },
+  {
+    q: "My children are young. Is it worth doing this now?",
+    a: "Especially now. The families who benefit most are often the ones where children were young when a parent passed — they had the fewest memories and the most questions. Your letter becomes something they can grow into, returning to it at different stages of life and finding new meaning each time. There is no such thing as doing this too early.",
+  },
+  {
+    q: "I'm young and my life is still changing. Why would I do this now?",
+    a: "Because now is exactly when it matters most. A Succession Story is not a document for the end of life. It is a record of who you are right now, at this exact moment, for the people who need to know you most. If you wait, your child may not remember this version of you. Even you might not. This letter will. It takes under an hour. The next generation is worth an hour. So are you.",
+  },
+  {
+    q: "Will this help prevent conflict between my children after I'm gone?",
+    a: "It won't guarantee harmony — nothing can. But it removes the single most common cause of post-loss family conflict: the unanswered question. Most disputes aren't really about money. They're about feeling unseen, unloved, or confused about why things happened the way they did. When your family has your words, your actual reasoning, in your actual voice, there is far less room for assumption, resentment, or misunderstanding.",
+  },
+  {
+    q: "What if I have a blended family or complicated family dynamics?",
+    a: "This is exactly where a Succession Story earns its greatest value. In families with complexity — stepchildren, estrangements, unequal distributions, or long-held tensions — the silence that follows a loss can do real damage. Your letter doesn't need to resolve every conflict. It simply needs to explain your heart. When your family understands the love and intention behind your decisions, even difficult ones become easier to accept.",
+  },
+  {
+    q: "My children are financially educated. Do they still need a letter from me?",
+    a: "Financial education tells them how to manage wealth. Only you can tell them why it was built, what it cost, what it means, and what you hope they do with it beyond managing it. The families that sustain wealth across generations are not always the most financially sophisticated. They are the ones with the clearest shared understanding of what the wealth is for. That understanding comes from you. It cannot come from a financial advisor.",
+  },
+  {
+    q: "My grandchildren will carry their father's name, not mine. Will they know where the wealth came from?",
+    a: "Not unless you tell them. Assets transfer. Names and stories do not. Without a deliberate record, the origin of wealth fades within a generation. Succession Story gives your grandchildren something no inheritance document can: the experience of knowing you, where you came from, and what you built. They come from you too. This is how you make sure they know it.",
+  },
+  {
+    q: "My parents never talked about things like this and I turned out fine. Why does this generation need a letter?",
+    a: "Think about what you wished you had known about them. The questions you would have asked. The stories that died with them. You have the chance to provide a more complete version.",
+  },
+  {
+    q: "I want my children to understand the mindset that created this wealth, not just the wealth itself. How do I pass that down?",
+    a: "By writing it down before it dies with you. Your philosophy about risk, work, money, and what both are for lives inside you and goes nowhere unless you put it on paper. Succession Story surfaces that mindset deliberately. Your grandchildren may never build what you built. But if they understand how you thought, they will make better decisions with what you leave them. That is worth more than the assets themselves.",
+  },
+  {
+    q: "Why should I pay for something I could write myself?",
+    a: "You could. The question is whether you will. Most people who intend to write this on their own don't — not because they lack the ability, but because without structure and process, the intention stays an intention. The $97 is not for the writing. It is for the questions that unlock the writing, the process that organizes it, the human who reads it before it reaches you, and the certainty that it actually gets done. Let us do this for you.",
+  },
+  {
+    q: "I've been meaning to do something like this for years. What's actually stopping me?",
+    a: "Usually one of three things: not knowing where to start (our guided process solves this entirely), not having the time (most members finish in under an hour), or a quiet belief that it can wait. In twenty years of succession work, the most painful situations I've encountered are not the ones where the legal documents were imperfect. They are the ones where the person ran out of time before they said what needed to be said. This is the thing that cannot wait.",
+  },
+];
 
   return (
     <main
@@ -1348,7 +1376,74 @@ export default function SqueezePageVariant2() {
             ))}
           </div>
 
-          {/* ── 9. FINAL FORM ── */}
+          
+
+          {/* ── 9. ABOUT THE PROCESS ── */}
+          <div style={{ marginTop: "48px" }}>
+            <p
+              style={{
+                fontFamily: "var(--font-dm-sans), sans-serif",
+                color: "#B5A692",
+                fontSize: "11px",
+                fontWeight: 600,
+                letterSpacing: "0.2em",
+                textTransform: "uppercase",
+                marginBottom: "10px",
+                textAlign: "center",
+              }}
+            >
+              About the process
+            </p>
+            <h2
+              style={{
+                fontFamily: "var(--font-cormorant), Georgia, serif",
+                color: "#1a1a1a",
+                fontSize: "clamp(24px, 5vw, 32px)",
+                fontWeight: 500,
+                lineHeight: 1.2,
+                textAlign: "center",
+                marginBottom: "24px",
+              }}
+            >
+              Simple, guided, and entirely yours
+            </h2>
+
+            <div
+              style={{
+                background: "#fff",
+                border: "1px solid #e8e4de",
+                borderRadius: "16px",
+                padding: "0 20px",
+              }}
+            >
+              {[
+                {
+                  q: "How does it work?",
+                  a: "You work through our guided questionnaire — thoughtful prompts that help you reflect on your life, your values, your decisions, and the people you love. Many prompts have multiple choice answers you can simply select from a dropdown. For open-ended questions, you can type your answers or speak them using our voice-to-text option. Or skip them entirely. The more of your words and voice you give us, the more we can tailor your letter to you. We shape your answers into a beautifully written letter in your voice.",
+                },
+                {
+                  q: "How long does it take?",
+                  a: "Most people finish in under an hour. The same hour that disappears scrolling Reels. The same hour that passes without memory watching television. Spent here, it produces something your family will read for the rest of their lives. Some take a little longer because they find themselves reflecting more deeply than expected — which we consider a feature, not a delay. There is no deadline and no pressure. You can save your progress and return whenever you're ready.",
+                },
+                {
+                  q: "I'm not a writer. Can I still do this?",
+                  a: "Of course. This was built specifically with you in mind. You never face a blank page. Our guided tool walks you through curated questions and you simply answer what feels true. It's mostly multiple choice, and your spoken answers don't need to be polished or perfect. That's our job.",
+                },
+                {
+                  q: "Can I edit my letter after I receive it?",
+                  a: "Yes. Your Succession Story is yours to adjust, refine, and update as life changes. We encourage you to revisit it when significant things happen — a new grandchild, a change in your estate plan, or simply a moment when something new feels worth saying.",
+                },
+                {
+                  q: "Can you send the letter to my family for me?",
+                  a: "Yes. When your Succession Story is complete, you can provide us with the physical mailing addresses or email addresses of the people you want to receive it, along with the date you want it delivered. We handle everything from there. Some members schedule delivery immediately, choosing to give their family the gift of hearing it while they're still here to see what it means to them. Some schedule for a meaningful date — a child's wedding, a grandchild's eighteenth birthday, a significant anniversary. Some do both, sending a piece of it now and preserving the full letter for later.",
+                },
+              ].map((item, i, arr) => (
+                <ProcessItem key={i} item={item} isLast={i === arr.length - 1} />
+              ))}
+            </div>
+          </div>
+
+          {/* ── 10. FINAL FORM ── */}
           <div style={{ marginTop: "32px" }}>
             <p
               style={{
@@ -1387,6 +1482,8 @@ export default function SqueezePageVariant2() {
 // ─── YOUTUBE FACADE COMPONENT ─────────────────────────────────────
 // Renders a thumbnail + play button. Only loads the actual YouTube
 // iframe when user clicks — dramatically faster page load.
+
+
 function YouTubeFacade({ videoId }: { videoId: string }) {
   const [clicked, setClicked] = useState(false);
   const thumbnailUrl = `https://img.youtube.com/vi/${videoId}/maxresdefault.jpg`;
