@@ -50,6 +50,17 @@ function LoginForm() {
 
   useEffect(() => {
     const params = new URLSearchParams(window.location.search);
+    if (params.get("from") === "squeeze") {
+      // Fire CompleteRegistration when user lands on login from squeeze page
+      if (typeof window !== "undefined" && (window as any).fbq) {
+        (window as any).fbq("track", "CompleteRegistration");
+      }
+      // Also fire to GA
+      if (typeof window !== "undefined" && (window as any).gtag) {
+        (window as any).gtag("event", "complete_registration");
+      }
+    }
+  }, []);
 
   if (isRedirecting) {
     return (
