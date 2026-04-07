@@ -29,7 +29,7 @@ export async function POST(req: NextRequest) {
     // Get the host from headers to build the return URL
     const host = req.headers.get('host') || 'localhost:3000'
     const protocol = host.includes('localhost') ? 'http' : 'https'
-    const returnUrl = `${protocol}://${host}/succession-story-v2/thank-you?session_id={CHECKOUT_SESSION_ID}`
+    const returnUrl = `${protocol}://${host}/api/auth/stripe-success?session_id={CHECKOUT_SESSION_ID}`
 
     const sessionConfig: Stripe.Checkout.SessionCreateParams = {
       ui_mode: 'embedded',

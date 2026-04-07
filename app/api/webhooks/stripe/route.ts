@@ -104,8 +104,7 @@ export async function POST(request: NextRequest) {
       // Update leads table funnel stage
       await supabaseAdmin
         .from("leads")
-        .update({ funnel_stage: "paid" })
-        .eq("email", customerEmail);
+        .upsert({ email: customerEmail, funnel_stage: "paid" }, { onConflict: "email" });
 
       console.log("[Stripe Webhook] Successfully processed payment for:", customerEmail);
 

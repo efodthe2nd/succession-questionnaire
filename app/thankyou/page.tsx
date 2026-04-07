@@ -1,15 +1,8 @@
 'use client';
 
 import Link from 'next/link';
-import { useEffect } from 'react';
 
 export default function ThankYouPurchasePage() {
-  useEffect(() => {
-    if (typeof window !== 'undefined' && (window as any).fbq) {
-      (window as any).fbq('track', 'Purchase', { value: 97.00, currency: 'USD' })
-    }
-  }, [])
-
   return (
     <div className="min-h-screen bg-black flex flex-col items-center justify-center px-4 relative overflow-hidden">
       <div className="absolute inset-0 bg-cover bg-center opacity-30" style={{ backgroundImage: "url('/bg-succession.png')" }} />
