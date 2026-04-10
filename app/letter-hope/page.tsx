@@ -86,7 +86,7 @@ export default function LetterPage() {
         {/* Mid-page CTA */}
         <div className="fade-3" style={{ marginBottom: "48px" }}>
           <div className="cta-pulse" style={{ borderRadius: "10px" }}>
-            <CtaButton label="Write My Letter — Founding Member $167" trackId="mid" />
+            <CtaButton label="Write My Letter — Founding Member $17" trackId="mid" />
           </div>
           <TrustLine />
         </div>
@@ -105,7 +105,7 @@ export default function LetterPage() {
 
       {/* Mobile sticky bar */}
       <div className="sticky-mobile-cta">
-        <CtaButton label="Write My Letter — $167" trackId="sticky-mobile" />
+        <CtaButton label="Write My Letter — $17" trackId="sticky-mobile" />
       </div>
     </main>
   );

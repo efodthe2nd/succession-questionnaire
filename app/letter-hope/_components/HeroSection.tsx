@@ -16,7 +16,7 @@ export default function HeroSection() {
         <YouTubeFacade videoId={YOUTUBE_VIDEO_ID} />
       </div>
       <div className="cta-pulse" style={{ borderRadius: "10px", marginBottom: "8px" }}>
-        <CtaButton label="Write My Letter → $167" trackId="hero" />
+        <CtaButton label="Write My Letter → $17" trackId="hero" />
       </div>
       <p style={{ fontFamily: "var(--font-dm-sans), sans-serif", color: "#8a7f78", fontSize: "13px", marginTop: "10px" }}>
         No writing skill needed.

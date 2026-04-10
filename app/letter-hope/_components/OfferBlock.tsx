@@ -17,8 +17,8 @@ export default function OfferBlock() {
       <div className="offer-block">
         <div style={{ padding: "24px 24px 0" }}>
           <div style={{ display: "flex", alignItems: "baseline", gap: "10px", marginBottom: "4px" }}>
-            <p style={{ fontFamily: "var(--font-cormorant), Georgia, serif", color: "#1a1a1a", fontSize: "42px", fontWeight: 500, lineHeight: 1 }}>$167</p>
-            <p style={{ fontFamily: "var(--font-dm-sans), sans-serif", color: "#b0a89e", fontSize: "16px", textDecoration: "line-through" }}>$247</p>
+            <p style={{ fontFamily: "var(--font-cormorant), Georgia, serif", color: "#1a1a1a", fontSize: "42px", fontWeight: 500, lineHeight: 1 }}>$17</p>
+            <p style={{ fontFamily: "var(--font-dm-sans), sans-serif", color: "#b0a89e", fontSize: "16px", textDecoration: "line-through" }}>$97</p>
             <span style={{ background: "#1a1a1a", color: "#B5A692", fontFamily: "var(--font-dm-sans), sans-serif", fontSize: "10px", fontWeight: 700, letterSpacing: "0.1em", textTransform: "uppercase", padding: "3px 8px", borderRadius: "4px" }}>Founding Member</span>
           </div>
           <p style={{ fontFamily: "var(--font-dm-sans), sans-serif", color: "#8a7f78", fontSize: "12px", marginBottom: "20px" }}>One time · No subscription · No upsell</p>
@@ -30,7 +30,7 @@ export default function OfferBlock() {
               </div>
             ))}
           </div>
-          <CtaButton label="Write My Letter — $167" trackId="offer-block" />
+          <CtaButton label="Write My Letter — $17" trackId="offer-block" />
           <TrustLine />
         </div>
         <div style={{ display: "flex", alignItems: "flex-start", gap: "14px", padding: "20px 24px", background: "#f9f6f1", marginTop: "24px", borderTop: "1px solid #e8e4de" }}>

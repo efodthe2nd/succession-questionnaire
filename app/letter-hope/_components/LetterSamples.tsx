@@ -30,7 +30,7 @@ export default function LetterSamples() {
           Your letter is already inside you.<br />
           <span style={{ color: "#B5A692" }}>We just help you get it out.</span>
         </p>
-        <CtaButton label="Write My Letter — $167" trackId="after-samples" />
+        <CtaButton label="Write My Letter — $17" trackId="after-samples" />
         <TrustLine />
       </div>
     </div>

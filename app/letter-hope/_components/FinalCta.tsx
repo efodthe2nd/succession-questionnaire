@@ -10,7 +10,7 @@ export default function FinalCta() {
       <p style={{ fontFamily: "var(--font-cormorant), Georgia, serif", color: "#B5A692", fontSize: "20px", fontStyle: "italic", marginBottom: "20px" }}>
         Write it today.
       </p>
-      <CtaButton label="Write My Letter — $167" trackId="final" />
+      <CtaButton label="Write My Letter — $17" trackId="final" />
       <TrustLine />
     </div>
   );

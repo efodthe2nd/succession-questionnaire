@@ -2,7 +2,7 @@
 // import { trackEvent } from "./trackEvent";
 
 export default function CtaButton({
-  label = "Write My Letter — $167",
+  label = "Write My Letter — $17",
   trackId = "cta",
 }: {
   label?: string;
